@@ -29,15 +29,35 @@
 set -eu
 
 function info() {
-	echo "I: $@"
+	echo -e "I: $@"
 }
 
 function create_singularity_file() {
 	dh="$1"
 	name=${dh//\//-}
 	version_tag="$2"
-	mkdir -p sing
-	info "$dh $name $version_tag"
+	version_pure="${3:-$2}"
+	outdir="singularity/bids"
+	mkdir -p "$outdir"
+	singfile="$outdir/Singularity.$name-$version_pure"
+	info "$singfile \t from \t $dh:$version_tag"
+	cat >| "$singfile" <<EOF
+Bootstrap: docker
+From: $dh:$version_tag
+
+%post
+
+# Create commonly present root directories to avoid need in overlays not supported
+# on older systems
+mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
+
+%environment
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# TODO: somehow add   export USER="${USER:=`whoami`}" -- may be custom entry point?
+# TODO: Take advantage of the fact that it is a bids-app somehow?
+EOF
 }
 
 curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
@@ -45,13 +65,33 @@ curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/maste
 	| sed -e "s,',,g" \
 	| while read dh; do
 	j=$(curl -s -k https://registry.hub.docker.com/v1/repositories/$dh/tags)
-	versions=$(echo "$j" | jq -c '.[]["name"]' | sed -e 's,",,g' -ne '/^v*[0-9][-0-9.]*/p')
-	last_version=$(echo -e "$versions" |sort -nr |head -n 1)
-	if [ ! -z "$last_version" ]; then
-		pure_last_version=$(echo $last_version | sed -e 's,^v,,g')
-		# echo $dh $last_version
-		create_singularity_file "$dh" "$last_version"
-	else
+	versions=$(echo "$j" | jq -c '.[]["name"]' | sed -e 's,",,g' | sort -Vr)
+	nversions=$(echo "$versions" | wc -l)
+	if [ "$nversions" -gt 1 ]; then
+		# need to sort etc
+		# select only the ones which seems to be semantic and/or master/latest
+		# this one would print both version tag and the one with stripped leading vV
+		#  | sed -n -r 's/^(v*([0-9].*[0-9]\..*))/\1 \2/gp'
+		# This one would also allow for master and latest.
+		# \2 works in one case, \4 in the other ;)
+		#  | sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master|latest)$))/\1 \2\4/gp'
+		# sort -V is not disregarding v prefix, so we do store pure version and original tag in the same line
+		good_versions=$(echo "$versions" | sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
+		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
+	elif [ -z "$versions" ]; then
 		info $dh no version. Tags: $versions
+		continue
+	else
+		last_version="$versions"
+	fi
+
+	if [ ! -z "$last_version" ]; then
+		last_version_pure=${last_version%%@*}
+		last_version_tag=${last_version#*@}
+		# echo $dh $last_version
+		create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" # "all: ${good_versions//\n/ }"
+	else
+		echo "must not happen"
+		exit 1
 	fi
 done
