@@ -34,7 +34,8 @@ function info() {
 
 function create_singularity_file() {
 	dh="$1"
-	name=${dh//\//-}
+	#name=${dh//\//-}
+	name=${dh#*/}
 	version_tag="$2"
 	version_pure="${3:-$2}"
 	outdir="singularity/bids"
