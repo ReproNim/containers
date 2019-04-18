@@ -40,7 +40,7 @@ function create_singularity_file() {
 	version_pure="${3:-$2}"
 	outdir="singularity/bids"
 	mkdir -p "$outdir"
-	singfile="$outdir/Singularity.$name-$version_pure"
+	singfile="$outdir/Singularity.bids-$name-$version_pure"
 	info "$singfile \t from \t $dh:$version_tag"
 	cat >| "$singfile" <<EOF
 Bootstrap: docker
