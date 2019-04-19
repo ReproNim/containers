@@ -107,12 +107,11 @@ function get_image_for_singularity_file() {
 	singfile="$1"
 	imagefile=${singfile//Singularity./}
 	imagefilename=$(basename $imagefile)
-	name=${imagefilename##--*}
+	name=${imagefilename%%--*}
 	if [ ! -e "$imagefile" ]; then
 		info " geting image $imagefilename"
 		# use datalad to add/change a record
-		echo datalad containers-add \
-			 --name "$name" \
+		datalad containers-add "$name" \
 			 -i "$imagefile" \
 			 --call-fmt '{dspath}/scripts/singularity_cmd run {img} {cmd}' \
 			 -u shub://ReproNim/containers:$imagefilename
