@@ -44,7 +44,7 @@ and execute
 	#
 	# Execute desired preprocessing while creating a provenance record
 	# in git history
-	# TODO: WiP https://github.com/datalad/datalad-container/issues/72
+	# TODO: WiP https://github.com/datalad/datalad-container/pull/76
 	#       to be able to run that helper script we provide here
 	# TODO: use of {inputs} is awaiting
 	#       https://github.com/datalad/datalad-container/pull/60
