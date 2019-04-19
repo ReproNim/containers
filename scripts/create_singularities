@@ -109,10 +109,10 @@ function get_image_for_singularity_file() {
 	if [ ! -e "$imagefile" ]; then
 		info " geting image $imagefilename"
 		# use datalad to add/change a record
-		# {dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
+		# {img_dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
 		datalad containers-add "$name" \
 			 -i "$imagefile" \
-			 --call-fmt '{dspath}/scripts/singularity_cmd run {img} {cmd}' \
+			 --call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}' \
 			 -u shub://ReproNim/containers:$imagefilename
 		# TODO: later make it work with updating existing one. We will not be able to use
 		# containers-add --update since original URL is version specific. That is why it
