@@ -2,7 +2,11 @@
 #emacs: -*- mode: shell-script; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- 
 #ex: set sts=4 ts=4 sw=4 noet:
 #
-# A helper to run/exec singularity images with sanitization
+# A helper to run/exec singularity images with sanitization:
+#  - fake HOME with minimalistic .bashrc and .gitconfig
+#  - dedicated /tmp /var/tmp
+#  - cleansed environment variables
+# while bind mounting (and starting from) current directory.
 #
 # COPYRIGHT: Yaroslav Halchenko 2019
 #
@@ -44,4 +48,4 @@ tmpdir=$(mktemp -d --suffix=singtmp)
 info "created temp dir $tmpdir"
 trap "rm -fr '$tmpdir' && info 'removed temp dir $tmpdir'" exit
 
-singularity "$cmd" -e -c -W "$tmpdir" -H "$updir/binds/HOME" "$@"
+singularity "$cmd" -e -c -W "$tmpdir" -H "$updir/binds/HOME" -B $PWD --pwd "$PWD" "$@"
