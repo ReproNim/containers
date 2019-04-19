@@ -29,7 +29,7 @@
 set -eu
 
 function info() {
-	echo -e "I: $@"
+	echo -e "I: $@" >&2
 }
 
 function create_singularity_file() {
@@ -37,10 +37,11 @@ function create_singularity_file() {
 	#name=${dh//\//-}
 	name=${dh#*/}
 	version_tag="$2"
-	version_pure="${3:-$2}"
-	outdir="singularity/bids"
+	version_pure="$3"
+	family="$4"
+	outdir="singularity/$family"
 	mkdir -p "$outdir"
-	singfile="$outdir/Singularity.bids-$name-$version_pure"
+	singfile="$outdir/Singularity.$family-$name-$version_pure"
 	info "$singfile \t from \t $dh:$version_tag"
 	cat >| "$singfile" <<EOF
 Bootstrap: docker
@@ -61,10 +62,8 @@ export LC_ALL="en_US.UTF-8"
 EOF
 }
 
-curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
-	| awk '/^ *dh:/{print $2}' \
-	| sed -e "s,',,g" \
-	| while read dh; do
+function get_last_docker_version_tag() {
+	dh="$1"
 	j=$(curl -s -k https://registry.hub.docker.com/v1/repositories/$dh/tags)
 	versions=$(echo "$j" | jq -c '.[]["name"]' | sed -e 's,",,g' | sort -Vr)
 	nversions=$(echo "$versions" | wc -l)
@@ -81,18 +80,31 @@ curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/maste
 		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
 	elif [ -z "$versions" ]; then
 		info $dh no version. Tags: $versions
-		continue
+		return
 	else
 		last_version="$versions"
 	fi
+	echo "$last_version"
+}
 
+function generate_singularity_for_docker_image() {
+	dh="$1"
+	family="$2"
+	last_version=$(get_last_docker_version_tag "$dh")
 	if [ ! -z "$last_version" ]; then
 		last_version_pure=${last_version%%@*}
 		last_version_tag=${last_version#*@}
 		# echo $dh $last_version
-		create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" # "all: ${good_versions//\n/ }"
-	else
-		echo "must not happen"
-		exit 1
+		create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family" # "all: ${good_versions//\n/ }"
 	fi
+}
+
+curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
+	| awk '/^ *dh:/{print $2}' \
+	| sed -e "s,',,g" \
+	| while read dh; do
+	generate_singularity_for_docker_image "$dh" "bids"
 done
+
+# validator is not bids-app but we will stick it along with bids
+generate_singularity_for_docker_image "bids/validator" "bids"
