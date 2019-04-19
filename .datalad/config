@@ -3,4 +3,4 @@
 [datalad "containers.bids-validator"]
 	updateurl = shub://ReproNim/containers:bids-validator--1.2.3
 	image = singularity/bids/bids-validator--1.2.3
-	cmdexec = {dspath}/scripts/singularity_cmd run {img} {cmd}
+	cmdexec = scripts/singularity_cmd run {img} {cmd}
