@@ -102,11 +102,27 @@ EOF
 }
 
 function get_image_for_singularity_file() {
+	# TEMP
+	if ! echo $1 | grep -q bids-validator; then return; fi
 	singfile="$1"
-	imagefile=${singfile//Singularity/}
-	if [ -e "$imagefile" ]; then
+	imagefile=${singfile//Singularity./}
+	imagefilename=$(basename $imagefile)
+	name=${imagefilename##--*}
+	if [ ! -e "$imagefile" ]; then
+		info " geting image $imagefilename"
 		# use datalad to add/change a record
-		datalad containers-add
+		echo datalad containers-add \
+			 --name "$name" \
+			 -i "$imagefile" \
+			 --call-fmt '{dspath}/scripts/singularity_cmd run {img} {cmd}' \
+			 -u shub://ReproNim/containers:$imagefilename
+		# TODO: later make it work with updating existing one. We will not be able to use
+		# containers-add --update since original URL is version specific. That is why it
+		# also does not make much sense to create a image file without version. We better
+		# collect all versions available, so in case an execution of previous version is
+		# needed it could still be done "semi-manually".  May be just via adding
+		# -c datalad.containers.NAME.image variable pointing to the previous version of the
+		# container
 	fi
 }
 
@@ -119,7 +135,7 @@ function generate_singularity_for_docker_image() {
 		last_version_tag=${last_version#*@}
 		# echo $dh $last_version
 		singfile=$(create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family") # "all: ${good_versions//\n/ }"
-		# get_image_for_singularity_file "$singfile"
+		get_image_for_singularity_file "$singfile"
 	fi
 }
 
