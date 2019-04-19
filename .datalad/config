@@ -8,3 +8,7 @@
 	updateurl = shub://ReproNim/containers:bids-freesurfer--6.0.1-5
 	image = singularity/bids/bids-freesurfer--6.0.1-5
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-fmriprep"]
+	updateurl = shub://ReproNim/containers:bids-fmriprep--1.3.2
+	image = singularity/bids/bids-fmriprep--1.3.2
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
