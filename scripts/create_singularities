@@ -111,6 +111,7 @@ function get_image_for_singularity_file() {
 	if [ ! -e "$imagefile" ]; then
 		info " geting image $imagefilename"
 		# use datalad to add/change a record
+		# {dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
 		datalad containers-add "$name" \
 			 -i "$imagefile" \
 			 --call-fmt '{dspath}/scripts/singularity_cmd run {img} {cmd}' \

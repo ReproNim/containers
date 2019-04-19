@@ -38,12 +38,15 @@ and execute
 	datalad install -d . http://github.com/ReproNim/containers
 	# Populate with input data:
 	datalad install -d . -s ///labs/haxby/raiders data/bids
-	# Create a new output dataset
+	# Create a new output dataset. TODO: --cfg fmriprep
 	datalad create -d . data/fmriprep
 	#
 	# Execute desired preprocessing while creating a provenance record
 	# in git history
-	datalad containers-run containers/bids-fmriprep \
+	# TODO: WiP https://github.com/datalad/datalad-container/issues/72
+	#       to be able to run that helper script we provide here
+	datalad containers-run \
+		-n containers/bids-fmriprep \
 		--input	data/bids \
 		--output data/fmriprep \
 		data/bids {outputs} participant
