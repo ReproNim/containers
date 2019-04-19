@@ -11,8 +11,9 @@ The main purpose is to be able to include this repository as a
 subdataset within larger study (super)datasets to facilitate rapid and
 reproducible computation, while
 
-- retaining clear and unambigous association between data, code, and
-  computing environments using git/git-annex/DataLad;
+- adhering to [YODA principles] and retaining clear and unambiguous
+  association between data, code, and computing environments using
+  git/git-annex/DataLad;
 - executing in "sanitized" containerized environments:  no `$HOME` or
   system-wide `/tmp` is bind-mounted inside the containers, no
   environment variables from the host system made available inside.
@@ -45,6 +46,8 @@ and execute
 	# in git history
 	# TODO: WiP https://github.com/datalad/datalad-container/issues/72
 	#       to be able to run that helper script we provide here
+	# TODO: use of {inputs} is awaiting
+	#       https://github.com/datalad/datalad-container/pull/60
 	datalad containers-run \
 		-n containers/bids-fmriprep \
 		--input	data/bids \
@@ -56,5 +59,8 @@ and execute
 [git-annex]: http://git-annex.branchable.com
 [DataLad]: http://datalad.org
 [datalad containers-run]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-containers-run.html
+[YODA principles]: https://github.com/myyoda/poster/blob/master/ohbm2018.pdf
+
+[Singularity]: https://www.sylabs.io/singularity/
 [Singularity Hub]: https://singularity-hub.org
 [Singularity Hub Collection]: https://www.singularity-hub.org/collections/2761
