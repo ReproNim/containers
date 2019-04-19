@@ -4,3 +4,7 @@
 	updateurl = shub://ReproNim/containers:bids-validator--1.2.3
 	image = singularity/bids/bids-validator--1.2.3
 	cmdexec = scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-freesurfer"]
+	updateurl = shub://ReproNim/containers:bids-freesurfer--6.0.1-5
+	image = singularity/bids/bids-freesurfer--6.0.1-5
+	cmdexec = {dspath}/scripts/singularity_cmd run {img} {cmd}
