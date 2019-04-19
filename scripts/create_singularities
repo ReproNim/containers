@@ -102,8 +102,6 @@ EOF
 }
 
 function get_image_for_singularity_file() {
-	# TEMP
-	if ! echo $1 | grep -q bids-validator; then return; fi
 	singfile="$1"
 	imagefile=${singfile//Singularity./}
 	imagefilename=$(basename $imagefile)
@@ -134,7 +132,7 @@ function generate_singularity_for_docker_image() {
 		last_version_pure=${last_version%%@*}
 		last_version_tag=${last_version#*@}
 		# echo $dh $last_version
-		singfile=$(create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family") # "all: ${good_versions//\n/ }"
+		singfile=$(create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family")
 		get_image_for_singularity_file "$singfile"
 	fi
 }
@@ -143,6 +141,8 @@ curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/maste
 	| awk '/^ *dh:/{print $2}' \
 	| sed -e "s,',,g" \
 	| while read dh; do
+	# TEMP -- do only the images of primary interest ATM
+	echo $dh | grep -q -E '(validator|fmriprep|freesurfer)' && \
 	generate_singularity_for_docker_image "$dh" "bids"
 done
 
