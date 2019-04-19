@@ -32,35 +32,7 @@ function info() {
 	echo -e "I: $@" >&2
 }
 
-function create_singularity_file() {
-	dh="$1"
-	#name=${dh//\//-}
-	name=${dh#*/}
-	version_tag="$2"
-	version_pure="$3"
-	family="$4"
-	outdir="singularity/$family"
-	mkdir -p "$outdir"
-	singfile="$outdir/Singularity.$family-$name-$version_pure"
-	info "$singfile \t from \t $dh:$version_tag"
-	cat >| "$singfile" <<EOF
-Bootstrap: docker
-From: $dh:$version_tag
 
-%post
-
-# Create commonly present root directories to avoid need in overlays not supported
-# on older systems
-mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
-
-%environment
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-
-# TODO: somehow add   export USER="${USER:=`whoami`}" -- may be custom entry point?
-# TODO: Take advantage of the fact that it is a bids-app somehow?
-EOF
-}
 
 function get_last_docker_version_tag() {
 	dh="$1"
@@ -87,6 +59,57 @@ function get_last_docker_version_tag() {
 	echo "$last_version"
 }
 
+
+function get_familyname() {
+	dh="$1"
+	family="$2"
+	name=${dh#*/}
+	echo "$family-$name"
+}
+
+function create_singularity_file() {
+	dh="$1"
+	version_tag="$2"
+	version_pure="$3"
+	family="$4"
+	familyname=$(get_familyname "$dh" "$family")
+	image_name="${familyname}--${version_pure}"
+	outdir="singularity/$family"
+	mkdir -p "$outdir"
+	singfile="$outdir/Singularity.$image_name"
+	info "$singfile \t from \t $dh:$version_tag"
+	cat >| "$singfile" <<EOF
+#
+# Automagically prepared for ReproNim/containers distribution.
+# See http://github.com/ReproNim/containers for more info
+#
+Bootstrap: docker
+From: $dh:$version_tag
+
+%post
+
+# Create commonly present root directories to avoid need in overlays not supported
+# on older systems
+mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
+
+%environment
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# TODO: Take advantage of the fact that it is a bids-app somehow?
+EOF
+	echo "$singfile"
+}
+
+function get_image_for_singularity_file() {
+	singfile="$1"
+	imagefile=${singfile//Singularity/}
+	if [ -e "$imagefile" ]; then
+		# use datalad to add/change a record
+		datalad containers-add
+	fi
+}
+
 function generate_singularity_for_docker_image() {
 	dh="$1"
 	family="$2"
@@ -95,7 +118,8 @@ function generate_singularity_for_docker_image() {
 		last_version_pure=${last_version%%@*}
 		last_version_tag=${last_version#*@}
 		# echo $dh $last_version
-		create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family" # "all: ${good_versions//\n/ }"
+		singfile=$(create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family") # "all: ${good_versions//\n/ }"
+		# get_image_for_singularity_file "$singfile"
 	fi
 }
 
