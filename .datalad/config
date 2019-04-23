@@ -12,3 +12,7 @@
 	updateurl = shub://ReproNim/containers:bids-fmriprep--1.3.2
 	image = singularity/bids/bids-fmriprep--1.3.2
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-mriqc"]
+	updateurl = shub://ReproNim/containers:bids-mriqc--0.15.0
+	image = singularity/bids/bids-mriqc--0.15.0
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
