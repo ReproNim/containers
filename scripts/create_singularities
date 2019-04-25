@@ -147,7 +147,7 @@ curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/maste
 	| sed -e "s,',,g" \
 	| while read dh; do
 	# TEMP -- do only the images of primary interest ATM
-	echo $dh | grep -q -E '(validator|fmriprep|freesurfer|mriqc)' && \
+	echo $dh | grep -q -E '(validator|connectome|fmriprep|freesurfer|mriqc)' && \
 	generate_singularity_for_docker_image "$dh" "bids"
 done
 
