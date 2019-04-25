@@ -110,8 +110,8 @@ function get_image_for_singularity_file() {
 	imagefile=${singfile//Singularity./}
 	imagefilename=$(basename $imagefile)
 	name=${imagefilename%%--*}
-	if [ ! -e "$imagefile" ]; then
-		info " geting image $imagefilename"
+	if [ ! -e "$imagefile" ] && [ ! -L "$imagefile" ]; then
+		info " geting image $imagefile"
 		# use datalad to add/change a record
 		# {img_dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
 		datalad containers-add "$name" \
