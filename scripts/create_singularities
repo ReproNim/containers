@@ -68,6 +68,8 @@ function get_familyname() {
 	dh="$1"
 	family="$2"
 	name=${dh#*/}
+    # sanitize for datalad not allowing _ in the container names
+    name=${name//_/-}
 	echo "$family-$name"
 }
 
