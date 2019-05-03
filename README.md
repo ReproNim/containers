@@ -28,6 +28,15 @@ and execute
 
     TODO
 
+# Conventions
+
+## Container image files
+
+Singularity image files have `.sing` extension.  Since we are providing
+a custom filename to store the file at, we cannot guess the format of
+the container (e.g., either it is 
+[.sif](https://www.sylabs.io/2018/03/sif-containing-your-containers/)),
+so we just use uniform `.sing` extension.
 
 # A typical workflow
 
