@@ -2,17 +2,17 @@
 	id = b02e63c2-62c1-11e9-82b0-52540040489c
 [datalad "containers.bids-validator"]
 	updateurl = shub://ReproNim/containers:bids-validator--1.2.3
-	image = singularity/bids/bids-validator--1.2.3
+	image = images/bids/bids-validator--1.2.3.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-freesurfer"]
 	updateurl = shub://ReproNim/containers:bids-freesurfer--6.0.1-5
-	image = singularity/bids/bids-freesurfer--6.0.1-5
+	image = images/bids/bids-freesurfer--6.0.1-5.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-fmriprep"]
 	updateurl = shub://ReproNim/containers:bids-fmriprep--1.3.2
-	image = singularity/bids/bids-fmriprep--1.3.2
+	image = images/bids/bids-fmriprep--1.3.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-mriqc"]
 	updateurl = shub://ReproNim/containers:bids-mriqc--0.15.0
-	image = singularity/bids/bids-mriqc--0.15.0
+	image = images/bids/bids-mriqc--0.15.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
