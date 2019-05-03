@@ -28,6 +28,9 @@
 
 set -eu
 
+IMAGES_DIR="images"
+
+
 function info() {
 	echo -e "I: $@" >&2
 }
@@ -80,7 +83,7 @@ function create_singularity_file() {
 	family="$4"
 	familyname=$(get_familyname "$dh" "$family")
 	image_name="${familyname}--${version_pure}"
-	outdir="singularity/$family"
+	outdir="$IMAGES_DIR/$family"
 	mkdir -p "$outdir"
 	singfile="$outdir/Singularity.$image_name"
 	info "$singfile \t from \t $dh:$version_tag"
