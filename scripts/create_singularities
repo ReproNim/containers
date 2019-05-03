@@ -120,7 +120,7 @@ function get_image_for_singularity_file() {
 		info " geting image $imagefile"
 		# use datalad to add/change a record
 		# {img_dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
-		echo datalad containers-add "$name" \
+		datalad containers-add "$name" \
 			 -i "$imagefile" \
 			 --call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}' \
 			 -u shub://ReproNim/containers:$singtag \
