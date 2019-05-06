@@ -112,8 +112,8 @@ EOF
 
 function get_image_for_singularity_file() {
 	singfile="$1"
-	singtag="${singfile//Singularity./}" # Tag on singularity-hub
-	imagefile="$singtag.sing"
+	singtag="$(basename ${singfile//Singularity./})" # Tag on singularity-hub
+	imagefile="$(dirname $singfile)/$singtag.sing"
 	imagefilename=$(basename $imagefile)
 	name=${imagefilename%%--*}
 	if [ ! -e "$imagefile" ] && [ ! -L "$imagefile" ]; then
@@ -152,8 +152,6 @@ curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/maste
 	| awk '/^ *dh:/{print $2}' \
 	| sed -e "s,',,g" \
 	| while read dh; do
-	# TEMP -- do only the images of primary interest ATM
-	echo $dh | grep -q -E '(validator|connectome|fmriprep|freesurfer|mriqc)' && \
 	generate_singularity_for_docker_image "$dh" "bids"
 done
 
