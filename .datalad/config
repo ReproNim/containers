@@ -48,3 +48,7 @@
 	updateurl = shub://ReproNim/containers:bids-brainiak-srm--latest
 	image = images/bids/bids-brainiak-srm--latest.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-tracula"]
+	updateurl = shub://ReproNim/containers:bids-tracula--6.0.0.beta-0
+	image = images/bids/bids-tracula--6.0.0.beta-0.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
