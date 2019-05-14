@@ -40,3 +40,7 @@
 	updateurl = shub://ReproNim/containers:bids-niak--latest
 	image = images/bids/bids-niak--latest.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-oppni"]
+	updateurl = shub://ReproNim/containers:bids-oppni--0.7.0-1
+	image = images/bids/bids-oppni--0.7.0-1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
