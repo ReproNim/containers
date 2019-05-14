@@ -20,3 +20,7 @@
 	updateurl = shub://ReproNim/containers:bids-mrtrix3-connectome--0.4.1
 	image = images/bids/bids-mrtrix3-connectome--0.4.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-broccoli"]
+	updateurl = shub://ReproNim/containers:bids-broccoli--1.0.1
+	image = images/bids/bids-broccoli--1.0.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
