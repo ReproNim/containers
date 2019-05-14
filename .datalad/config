@@ -28,3 +28,7 @@
 	updateurl = shub://ReproNim/containers:bids-spm--0.0.15
 	image = images/bids/bids-spm--0.0.15.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-cpac"]
+	updateurl = shub://ReproNim/containers:bids-cpac--1.1.0_14
+	image = images/bids/bids-cpac--1.1.0_14.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
