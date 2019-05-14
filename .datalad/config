@@ -60,3 +60,7 @@
 	updateurl = shub://ReproNim/containers:bids-antscorticalthickness--2.2.0-1
 	image = images/bids/bids-antscorticalthickness--2.2.0-1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-dparsf"]
+	updateurl = shub://ReproNim/containers:bids-dparsf--4.3.12
+	image = images/bids/bids-dparsf--4.3.12.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
