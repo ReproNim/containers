@@ -64,3 +64,7 @@
 	updateurl = shub://ReproNim/containers:bids-dparsf--4.3.12
 	image = images/bids/bids-dparsf--4.3.12.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-afni-proc"]
+	updateurl = shub://ReproNim/containers:bids-afni-proc--0.0.2
+	image = images/bids/bids-afni-proc--0.0.2.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
