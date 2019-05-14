@@ -24,3 +24,7 @@
 	updateurl = shub://ReproNim/containers:bids-broccoli--1.0.1
 	image = images/bids/bids-broccoli--1.0.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-spm"]
+	updateurl = shub://ReproNim/containers:bids-spm--0.0.15
+	image = images/bids/bids-spm--0.0.15.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
