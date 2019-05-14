@@ -26,6 +26,11 @@
 #  THE SOFTWARE.
 #
 
+#
+# TODOs when get to refactor this prototype
+# - add options to
+#   - skip getting an image (datalad containers-add call)
+
 set -eu
 
 IMAGES_DIR="images"
@@ -55,7 +60,10 @@ function get_last_docker_version_tag() {
 		# \2 works in one case, \4 in the other ;)
 		#  | sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master|latest)$))/\1 \2\4/gp'
 		# sort -V is not disregarding v prefix, so we do store pure version and original tag in the same line
-		good_versions=$(echo "$versions" | sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
+		# Some release alpha releases, so probably would skip thos for now
+		good_versions=$(echo "$versions" \
+							| grep -v '[ab][0-9][0-9]*$' \
+							| sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
 		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
 	elif [ -z "$versions" ]; then
 		info $dh no version. Tags: $versions
@@ -122,6 +130,7 @@ function get_image_for_singularity_file() {
 		# {img_dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
 		datalad containers-add "$name" \
 			 -i "$imagefile" \
+			 --update \
 			 --call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}' \
 			 -u shub://ReproNim/containers:$singtag \
 		|| error "No image $imagefilename was found yet"
