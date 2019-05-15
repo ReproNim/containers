@@ -1,3 +1,5 @@
+export PS1="\[\e[33m\]\u\[\e[m\]:\[\e[35m\]\s\[\e[m\]\[\e[37m\]:\[\e[m\]\[\e[36m\]\w\[\e[m\]\n\\$ "
+
 if [ ! -z "$PS1" ]; then
     # include a marker into PS1 that we are in the singularity image
     # Since we are using git-annex for images, SINGULARITY_NAME would
@@ -19,6 +21,9 @@ if [ ! -z "$PS1" ]; then
         export PS1="singularity:$_name > $PS1"
     fi
 fi
+# Add new line before prompt to reduce clutter
+PS1="\n$PS1"
+
 
 # USER variable might not be defined in sanitized environment
 # but could be needed by some tools, e.g. FSL. See
