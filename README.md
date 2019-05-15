@@ -64,6 +64,24 @@ so we just use uniform `.sing` extension.
 		data/bids {outputs} participant
 
 
+## Environment variables
+
+A few environment variables (in addition to those consulted by datalad
+and datalad-container) are considered in the scripts of this
+repository:
+
+### `SINGULARITY_CMD`
+
+The default command (as "hardcoded" in [.datalad/config][]) is `run`
+so running the container executes its default "entry point".  Setting
+`SINGULARITY_CMD=exec` makes it possible to run an alternative command
+in them (e.g. `bash` for interactive sessions)::
+
+    SINGULARITY_CMD=exec datalad containers-run --explicit -n repronim-reproin bash
+
+and then have `datalad` record any of the introduced changes.  Such
+runs will not be reproducible but at least clearly annotated in what
+environment corresponding actions were taken.
 
 [git-annex]: http://git-annex.branchable.com
 [DataLad]: http://datalad.org

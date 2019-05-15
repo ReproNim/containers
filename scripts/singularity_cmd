@@ -40,7 +40,7 @@ function info() {
 thisdir=$(dirname $0| xargs readlink -f)
 updir=$(dirname "$thisdir")
 
-cmd="$1"; shift
+cmd="${SINGULARITY_CMD:-$1}"; shift
 
 if [ ! -z "${DATALAD_CONTAINER_NAME:-}" ]; then
 	export SINGULARITYENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
