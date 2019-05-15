@@ -72,3 +72,11 @@
 	updateurl = shub://ReproNim/containers:bids-rshrf--1.0.0
 	image = images/bids/bids-rshrf--1.0.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-example"]
+	updateurl = shub://ReproNim/containers:bids-example--0.0.7
+	image = images/bids/bids-example--0.0.7.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-magetbrain"]
+	updateurl = shub://ReproNim/containers:bids-magetbrain--0.3
+	image = images/bids/bids-magetbrain--0.3.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
