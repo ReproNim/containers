@@ -37,14 +37,42 @@ function info() {
 	: # echo -e "I: $@" >&2
 }
 
+function error() {
+	echo -e "E: $@" >&2
+	exit 1
+}
+
+function has_changes() {
+	git status -s | grep -q .
+}
+
+function singularity_version() {
+	singularity --version | sed -e 's,^[^0-9]*,,g'
+}
+
+# https://stackoverflow.com/a/24067243
+function version_gt() {
+	test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1";
+}
+
 thisdir=$(dirname $0| xargs readlink -f)
 updir=$(dirname "$thisdir")
 
 cmd="${SINGULARITY_CMD:-$1}"; shift
 
+# We might need to expand list of arguments
+args=("$@")
+
+#
+# Pass other useful variables inside the container
+#
 if [ ! -z "${DATALAD_CONTAINER_NAME:-}" ]; then
 	export SINGULARITYENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
 fi
+
+#
+# Prepare bind mounts
+#
 
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
@@ -52,4 +80,70 @@ tmpdir=$(mktemp -d --suffix=singtmp)
 info "created temp dir $tmpdir"
 trap "rm -fr '$tmpdir' && info 'removed temp dir $tmpdir'" exit
 
-singularity "$cmd" -e -c -W "$tmpdir" -H "$updir/binds/HOME" -B $PWD --pwd "$PWD" "$@"
+#
+# Prepare for storing bash history in cmd='shell' mode
+#
+# Will be non-empty if some post-run handling is needed
+FINAL_BASH_HISTORY=
+TEMP_BASH_HISTORY_LOCAL=
+if [ "$cmd" = "shell" ]; then
+	# should be outside of $tmpdir so we could copy it there before
+	# trap cleans things up
+	histstamp=$(git describe --always)-$(date -Iseconds)
+	TEMP_BASH_HISTORY_LOCAL=$(mktemp -t bash_history.$histstamp.XXXXXXXXX)
+	TEMP_BASH_HISTORY_FILENAME=$(basename $TEMP_BASH_HISTORY_LOCAL)
+	TEMP_BASH_HISTORY="$tmpdir/tmp/$TEMP_BASH_HISTORY_FILENAME"
+	# singularity 2.x seems to mess with HISTFILE - cannot pass through!
+	if version_gt 3 "$(singularity_version)"; then
+		error "Can manipulate bash history only with singularity >= 3"
+	fi
+	# Expose it to singularity environment
+	export SINGULARITYENV_HISTFILE="/tmp/$TEMP_BASH_HISTORY_FILENAME"
+	# We will copy it only if it was clean and new changes emerged
+	# Handle (save) protocol of interactive sessions
+	if ! has_changes ; then
+		# TODO: place at the top of the dataset!?
+		FINAL_BASH_HISTORY=".repronim/bash_histories/$histstamp"
+		# TODO: cleanup TEMP_BASH_HISTORY in case of crash?
+	else
+		echo "W: uncomitted changes present, 'shell' mode will NOT commit bash history."
+		echo "   You will find stored history at $TEMP_BASH_HISTORY_LOCAL"
+	fi
+	if [ "$#" -gt 1 ]; then
+		error "for 'shell' mode - do not provide any custom command. Got options: $@"
+	fi
+	cmd="exec"
+	args+=(bash)
+fi
+
+#
+# The actual invocation
+#
+singularity "$cmd" -e -c -W "$tmpdir" -H "$updir/binds/HOME" -B "$PWD" --pwd "$PWD" "${args[@]}"
+
+
+#
+# Handle possible digital objects to save/be added to be saved
+#
+if [ ! -z "$FINAL_BASH_HISTORY" ]; then
+	if ! has_changes ; then
+		# TODO: someone might want to just record his wonderings around, so
+		#       might be worth an option to force saving history only
+		echo "I: no changes to the tree detected. Bash history will not be saved."
+		echo "   You will find stored history at $TEMP_BASH_HISTORY_LOCAL"
+	else
+		mkdir -p "$(dirname $FINAL_BASH_HISTORY)"
+		mv "$TEMP_BASH_HISTORY" "$FINAL_BASH_HISTORY"
+		# due to https://github.com/datalad/datalad/issues/3421 saving entire directory of histories
+		datalad save \
+				-m "[REPRONIM/CONTAINERS]: bash history for the interactive session
+
+Actual changes might (or not, depending on the invocation) get committed in the next commit" \
+				"$(dirname $FINAL_BASH_HISTORY)"
+	fi
+fi
+
+if [ ! -z "$TEMP_BASH_HISTORY_LOCAL" ] && [ -e "$TEMP_BASH_HISTORY" ]; then
+	# So we did create it but did not move to be saved, so let's expose locally before it is wiped out
+	mv "$TEMP_BASH_HISTORY" "$TEMP_BASH_HISTORY_LOCAL"
+fi
