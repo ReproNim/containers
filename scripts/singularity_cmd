@@ -42,6 +42,10 @@ updir=$(dirname "$thisdir")
 
 cmd="$1"; shift
 
+if [ ! -z "${DATALAD_CONTAINER_NAME:-}" ]; then
+	export SINGULARITYENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
+fi
+
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
 tmpdir=$(mktemp -d --suffix=singtmp)
