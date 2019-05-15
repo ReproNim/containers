@@ -80,3 +80,7 @@
 	updateurl = shub://ReproNim/containers:bids-magetbrain--0.3
 	image = images/bids/bids-magetbrain--0.3.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.repronim-reproin"]
+	updateurl = shub://ReproNim/reproin:0.5.4
+	image = images/repronim/repronim-reproin--0.5.4.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
