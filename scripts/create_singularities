@@ -29,7 +29,7 @@
 #
 # TODOs when get to refactor this prototype
 # - add options to
-#   - skip getting an image (datalad containers-add call)
+#   - skip getting an image (datalad containers-add call) (--dry-run?)
 
 set -eu
 
@@ -66,7 +66,7 @@ function get_last_docker_version_tag() {
 							| sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
 		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
 	elif [ -z "$versions" ]; then
-		info $dh no version. Tags: $versions
+		info " $dh no version. Tags: $versions"
 		return
 	else
 		last_version="$versions"
@@ -76,12 +76,22 @@ function get_last_docker_version_tag() {
 
 
 function get_familyname() {
-	dh="$1"
+	repoid="$1"
 	family="$2"
-	name=${dh#*/}
+
+	name=${repoid#*/}
     # sanitize for datalad not allowing _ in the container names
     name=${name//_/-}
 	echo "$family-$name"
+}
+
+function get_imagename() {
+	repoid="$1"
+	family="$2"
+	versiontag="$3"
+
+	familyname=$(get_familyname "$repoid" "$family")
+	echo "${familyname}--${versiontag}"
 }
 
 function create_singularity_file() {
@@ -89,12 +99,12 @@ function create_singularity_file() {
 	version_tag="$2"
 	version_pure="$3"
 	family="$4"
-	familyname=$(get_familyname "$dh" "$family")
-	image_name="${familyname}--${version_pure}"
+
+	imagename=$(get_imagename "$dh" "$family" "$version_pure")
 	outdir="$IMAGES_DIR/$family"
 	mkdir -p "$outdir"
-	singfile="$outdir/Singularity.$image_name"
-	info "$singfile \t from \t $dh:$version_tag"
+	singfile="$outdir/Singularity.$imagename"
+	# info "$singfile \t from \t $dh:$version_tag"
 	cat >| "$singfile" <<EOF
 #
 # Automagically prepared for ReproNim/containers distribution.
@@ -118,21 +128,36 @@ EOF
 	echo "$singfile"
 }
 
-function get_image_for_singularity_file() {
-	singfile="$1"
-	singtag="$(basename ${singfile//Singularity./})" # Tag on singularity-hub
-	imagefile="$(dirname $singfile)/$singtag.sing"
-	imagefilename=$(basename $imagefile)
-	name=${imagefilename%%--*}
+function add_singularity_versioned_image() {
+	repoid="$1"
+	family="$2"
+	version_pure="$3"
+	# If image repo id is different (e.g. ReproNim/containers) from original
+	# repoid where we are getting image for (e.g. generating Singularity containers
+	# from Docker images) -- specify it as 4th arg
+	if [ "$#" -gt 3 ]; then
+		origrepoid="$4"
+	else
+		origrepoid="$repoid"
+	fi
+
+	imagedir="$IMAGES_DIR/$family"
+
+	familyname=$(get_familyname "$origrepoid" "$family")
+	imagename=$(get_imagename "$origrepoid" "$family" "$version_pure")
+
+	imagefilename="$imagename.sing"
+	imagefile="$imagedir/$imagefilename"
+	# name=${imagefilename%%--*}
 	if [ ! -e "$imagefile" ] && [ ! -L "$imagefile" ]; then
 		info " geting image $imagefile"
 		# use datalad to add/change a record
 		# {img_dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
-		datalad containers-add "$name" \
+		datalad containers-add "$familyname" \
 			 -i "$imagefile" \
 			 --update \
 			 --call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}' \
-			 -u shub://ReproNim/containers:$singtag \
+			 -u shub://$repoid:$version_pure \
 		|| error "No image $imagefilename was found yet"
 		# TODO: later make it work with updating existing one. We will not be able to use
 		# containers-add --update since original URL is version specific. That is why it
@@ -145,24 +170,59 @@ function get_image_for_singularity_file() {
 }
 
 function generate_singularity_for_docker_image() {
-	dh="$1"
+	dockerhubid="$1"
 	family="$2"
-	last_version=$(get_last_docker_version_tag "$dh")
+
+	info "$family <- docker $dockerhubid"
+	last_version=$(get_last_docker_version_tag "$dockerhubid")
+
 	if [ ! -z "$last_version" ]; then
 		last_version_pure=${last_version%%@*}
 		last_version_tag=${last_version#*@}
-		# echo $dh $last_version
-		singfile=$(create_singularity_file "$dh" "$last_version_tag" "$last_version_pure" "$family")
-		get_image_for_singularity_file "$singfile"
+
+		# echo $dockerhubid $last_version
+		singfile=$(create_singularity_file "$dockerhubid" "$last_version_tag" "$last_version_pure" "$family")
+		# version_tag="$(basename ${singfile//Singularity./})" # Tag on singularity-hub
+
+		add_singularity_versioned_image "ReproNim/containers" "$family" "$last_version_pure" "$dockerhubid"
 	fi
+}
+
+function add_singularity_image_from_collection() {
+	collection="$1"
+	githubid="$2"
+	family="$3"
+
+	# familyname=$(get_familyname "$githubid" "$family")
+
+	info "$family <- singularity $githubid"
+
+	# TODO: For now just using the version tag itself since did not encounter yet
+	# the custom ones like in case of dockers, but we might need to do the same here
+	# to get "version_pure"
+	version_tag="$(
+		curl -s "https://www.singularity-hub.org/collections/$collection" \
+		| grep "$githubid:[0-9]" \
+		| sed -e 's,^ *,,g' \
+		| sed -e 's,^[^ ]*:,,g' \
+		| sort -V -r \
+		| head -n 1)"
+	if [ -z "$version_tag" ]; then
+		info " no 'proper' version was found - skipping" # for the $githubid"
+		return
+	fi
+	add_singularity_versioned_image "$githubid" "$family" "$version_tag"
 }
 
 curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
 	| awk '/^ *dh:/{print $2}' \
 	| sed -e "s,',,g" \
-	| while read dh; do
-	generate_singularity_for_docker_image "$dh" "bids"
+	| while read dockerhubid; do
+	generate_singularity_for_docker_image "$dockerhubid" "bids"
 done
 
 # validator is not bids-app but we will stick it along with bids
 generate_singularity_for_docker_image "bids/validator" "bids"
+
+# "Native" Singularity images
+add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
