@@ -224,5 +224,12 @@ done
 # validator is not bids-app but we will stick it along with bids
 generate_singularity_for_docker_image "bids/validator" "bids"
 
-# "Native" Singularity images
+
+#
+# ReproNim
+#
+
+# "Native" Singularity image for ReproIn
 add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
+# Docker image for simple_workflow
+generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
