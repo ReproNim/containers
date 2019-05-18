@@ -22,11 +22,35 @@ All images are "registered" within the dataset for execution using
 [datalad containers-run], so it is trivial to list available
 containers:
 
-    TODO
+    $> datalad containers-list
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-validator--1.2.3.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-freesurfer--6.0.1-5.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmriprep--1.3.2.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-mriqc--0.15.0.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-mrtrix3-connectome--0.4.1.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-broccoli--1.0.1.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-spm--0.0.15.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-cpac--1.1.0_14.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-aa--0.2.0.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-niak--latest.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-oppni--0.7.0-1.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-brainiak-srm--latest.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-tracula--6.0.0.beta-0.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-baracus--1.1.2.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-antscorticalthickness--2.2.0-1.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-dparsf--4.3.12.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-afni-proc--0.0.2.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-rshrf--1.0.0.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-example--0.0.7.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-magetbrain--0.3.sing (file)
+    containers(ok): /home/yoh/proj/repronim/containers/images/repronim/repronim-reproin--0.5.4.sing (file)
+    action summary:
+      containers (ok: 21)
+
 
 and execute
 
-    TODO
+    
 
 # Conventions
 
