@@ -100,3 +100,7 @@
 	updateurl = shub://ReproNim/containers:bids-rs-signal-extract--0.1
 	image = images/bids/bids-rs-signal-extract--0.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-nipypelines"]
+	updateurl = shub://ReproNim/containers:bids-nipypelines--0.3.0
+	image = images/bids/bids-nipypelines--0.3.0.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
