@@ -84,3 +84,7 @@
 	updateurl = shub://ReproNim/reproin:0.5.4
 	image = images/repronim/repronim-reproin--0.5.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-ndmg"]
+	updateurl = shub://ReproNim/containers:bids-ndmg--0.1.0
+	image = images/bids/bids-ndmg--0.1.0.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
