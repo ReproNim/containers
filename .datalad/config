@@ -88,3 +88,7 @@
 	updateurl = shub://ReproNim/containers:bids-ndmg--0.1.0
 	image = images/bids/bids-ndmg--0.1.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-fibredensityandcrosssection"]
+	updateurl = shub://ReproNim/containers:bids-fibredensityandcrosssection--0.0.1
+	image = images/bids/bids-fibredensityandcrosssection--0.0.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
