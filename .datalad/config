@@ -96,3 +96,7 @@
 	updateurl = shub://ReproNim/containers:bids-mindboggle--0.0.4
 	image = images/bids/bids-mindboggle--0.0.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-rs-signal-extract"]
+	updateurl = shub://ReproNim/containers:bids-rs-signal-extract--0.1
+	image = images/bids/bids-rs-signal-extract--0.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
