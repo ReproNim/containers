@@ -108,3 +108,7 @@
 	updateurl = shub://ReproNim/containers:bids-hcppipelines--3.17.0-18
 	image = images/bids/bids-hcppipelines--3.17.0-18.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.repronim-simple-workflow"]
+	updateurl = shub://ReproNim/containers:repronim-simple-workflow--1.1.0
+	image = images/repronim/repronim-simple-workflow--1.1.0.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
