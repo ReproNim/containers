@@ -17,8 +17,8 @@
 	image = images/bids/bids-mriqc--0.15.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-mrtrix3-connectome"]
-	updateurl = shub://ReproNim/containers:bids-mrtrix3-connectome--0.4.1
-	image = images/bids/bids-mrtrix3-connectome--0.4.1.sing
+	updateurl = shub://ReproNim/containers:bids-mrtrix3-connectome--0.4.2
+	image = images/bids/bids-mrtrix3-connectome--0.4.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-broccoli"]
 	updateurl = shub://ReproNim/containers:bids-broccoli--1.0.1
