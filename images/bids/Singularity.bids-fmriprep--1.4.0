@@ -1,0 +1,18 @@
+#
+# Automagically prepared for ReproNim/containers distribution.
+# See http://github.com/ReproNim/containers for more info
+#
+Bootstrap: docker
+From: poldracklab/fmriprep:1.4.0
+
+%post
+
+# Create commonly present root directories to avoid need in overlays not supported
+# on older systems
+mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
+
+%environment
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# TODO: Take advantage of the fact that it is a bids-app somehow?
