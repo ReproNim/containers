@@ -9,8 +9,8 @@
 	image = images/bids/bids-freesurfer--6.0.1-5.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-fmriprep"]
-	updateurl = shub://ReproNim/containers:bids-fmriprep--1.3.2
-	image = images/bids/bids-fmriprep--1.3.2.sing
+	updateurl = shub://ReproNim/containers:bids-fmriprep--1.4.0
+	image = images/bids/bids-fmriprep--1.4.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-mriqc"]
 	updateurl = shub://ReproNim/containers:bids-mriqc--0.15.0
