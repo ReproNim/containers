@@ -37,8 +37,23 @@ function info() {
 	: # echo -e "I: $@" >&2
 }
 
+#
+# Generate $BHOME/.gitconfig if not present or missing required minimal user
+# info based on the current one
+#
+function pass_git_config() {
+	var="$1"
+	default="$2"
+
+	value=$(git config $var || echo "$default")
+	git config -f "$BHOME/.gitconfig" $var >/dev/null \
+		|| git config -f "$BHOME/.gitconfig" "$var" "$value"
+
+}
+
 thisdir=$(dirname $0| xargs readlink -f)
 updir=$(dirname "$thisdir")
+BHOME="$updir/binds/HOME"
 
 cmd="${SINGULARITY_CMD:-$1}"; shift
 
@@ -52,4 +67,7 @@ tmpdir=$(mktemp -d --suffix=singtmp)
 info "created temp dir $tmpdir"
 trap "rm -fr '$tmpdir' && info 'removed temp dir $tmpdir'" exit
 
-singularity "$cmd" -e -c -W "$tmpdir" -H "$updir/binds/HOME" -B $PWD --pwd "$PWD" "$@"
+pass_git_config "user.name" "ReproNim User"
+pass_git_config "user.email" "nobody@example.com"
+
+singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B $PWD --pwd "$PWD" "$@"
