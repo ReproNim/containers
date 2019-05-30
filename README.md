@@ -127,13 +127,7 @@ You can even now [datalad uninstall] sourcedata and even containers
 sub-datasets to save space - they will be retreavable at those exact versions later 
 on if you need to extend or redo your analysis.  
 
-Note: ATM aforementioned example awaits DataLad and datalad-containers releases to
-function as expected.
-
-	# TODO: WiP https://github.com/datalad/datalad-container/pull/76
-	#       to be able to run that helper script we provide here
-	# TODO: use of {inputs} is awaiting release of datalad and -containers
-	#       https://github.com/datalad/datalad-container/pull/60
+Note: aforementioned example requires DataLad >= 0.11.5 and datalad-containers >= 0.4.0
 	
 # Installation
 
