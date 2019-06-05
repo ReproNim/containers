@@ -70,4 +70,12 @@ trap "rm -fr '$tmpdir' && info 'removed temp dir $tmpdir'" exit
 pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 
-singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B $PWD --pwd "$PWD" "$@"
+if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
+	singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B $PWD --pwd "$PWD" "$@"
+else
+	docker run --privileged --rm \
+	-v $PWD:$PWD \
+	-w $PWD \
+	singularityware/singularity:latest \
+	"$cmd" -e -c -B $PWD --pwd $PWD "$@"
+fi
