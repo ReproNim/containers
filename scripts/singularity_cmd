@@ -75,7 +75,8 @@ if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 else
 	docker run --privileged --rm \
 	-v $PWD:$PWD \
+	-v $BHOME:$BHOME \
 	-w $PWD \
 	singularityware/singularity:latest \
-	"$cmd" -e -c -B $PWD --pwd $PWD "$@"
+	"$cmd" -e -c -B $PWD -H "$BHOME" --pwd "$PWD" "$@"
 fi
