@@ -74,9 +74,11 @@ if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 	singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B $PWD --pwd "$PWD" "$@"
 else
 	docker run --privileged --rm \
+	-e UID=$(id -u) \
+	-e GID=$(id -g) \
 	-v $PWD:$PWD \
 	-v $BHOME:$BHOME \
 	-w $PWD \
-	singularityware/singularity:latest \
+	mjtravers/singularity-shim:latest \
 	"$cmd" -e -c -B $PWD -H "$BHOME" --pwd "$PWD" "$@"
 fi

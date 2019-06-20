@@ -1,0 +1,10 @@
+FROM singularityware/singularity:latest
+
+RUN echo '#!/bin/bash' > /entrypoint.sh \
+    && echo 'addgroup -g $GID reproman' >> /entrypoint.sh \
+    && echo 'adduser -u $UID -G reproman -H -D reproman' >> /entrypoint.sh \
+    && echo 'SARGS="$@"' >> /entrypoint.sh \
+    && echo 'su reproman -c "/usr/local/bin/singularity $SARGS"' >> /entrypoint.sh \
+    && chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
