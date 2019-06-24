@@ -37,22 +37,22 @@ IMAGES_DIR="images"
 
 
 function debug() {
-	: # echo -e "D: $@" >&2
+	: # echo -e "D:" "$@" >&2
 }
 
 function info() {
-	echo -e "I: $@" >&2
+	echo -e "I:" "$@" >&2
 }
 
 function error() {
-	echo -e "E: $@" >&2
+	echo -e "E:" "$@" >&2
 }
 
 
 
 function get_last_docker_version_tag() {
 	dh="$1"
-	j=$(curl -s -k https://registry.hub.docker.com/v1/repositories/$dh/tags)
+	j=$(curl -s -k "https://registry.hub.docker.com/v1/repositories/$dh/tags")
 	versions=$(echo "$j" | jq -c '.[]["name"]' | sed -e 's,",,g' | sort -Vr)
 	nversions=$(echo "$versions" | wc -l)
 	if [ "$nversions" -gt 1 ]; then
@@ -187,7 +187,7 @@ function add_singularity_versioned_image() {
 
 function generate_singularity_for_docker_image() {
 	githubid="$1"
-	dockerhubid="$(echo "$githubid" | tr 'A-Z' 'a-z')"
+	dockerhubid="$(echo "$githubid" | tr '[:upper:]' '[:lower:]')"
 	family="$2"
 
 	info "$family <- docker $dockerhubid"
@@ -234,7 +234,7 @@ function add_singularity_image_from_collection() {
 curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
 	| awk '/^ *dh:/{print $2}' \
 	| sed -e "s,',,g" \
-	| while read dockerhubid; do
+	| while read -r dockerhubid; do
 	generate_singularity_for_docker_image "$dockerhubid" "bids"
 done
 
