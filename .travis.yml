@@ -1,0 +1,9 @@
+# ATM we are pure bash scripts but eventually might RF into Python
+language: python
+
+
+install:
+    - travis_retry sudo apt-get install singularity-container shellcheck bats 
+
+script:
+    - shellcheck scripts/create_singularities
