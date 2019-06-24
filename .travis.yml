@@ -1,0 +1,13 @@
+# ATM we are pure bash scripts but eventually might RF into Python
+language: python
+
+
+install:
+  # So we get all backports etc
+  - bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)
+  - travis_retry sudo apt-get update -qq
+  - travis_retry sudo apt-get install eatmydata  # to speedup some installations
+  - travis_retry sudo eatmydata apt-get install singularity-container shellcheck bats
+
+script:
+    - shellcheck scripts/create_singularities
