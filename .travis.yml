@@ -10,4 +10,4 @@ install:
   - travis_retry sudo eatmydata apt-get install singularity-container shellcheck bats
 
 script:
-    - shellcheck scripts/create_singularities
+    - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck
