@@ -1,6 +1,7 @@
 FROM singularityware/singularity:latest
 
 RUN printf '#!/bin/sh\n\
+        set -eu\n\
         addgroup -g $GID host-user\n\
         adduser -u $UID -G host-user -H -D host-user\n\
         sudo -u host-user /usr/local/bin/singularity "$@"\n\
