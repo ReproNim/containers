@@ -65,7 +65,7 @@ fi
 # Create a dedicated temporary directory to be removed upon completion
 tmpdir=$(mktemp -d --suffix=singtmp)
 info "created temp dir $tmpdir"
-trap "rm -fr '$tmpdir' && info 'removed temp dir $tmpdir'" exit
+trap 'rm -fr "$tmpdir" && info "removed temp dir $tmpdir"' exit
 
 pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
