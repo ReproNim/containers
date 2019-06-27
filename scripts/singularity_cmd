@@ -45,19 +45,19 @@ function pass_git_config() {
 	var="$1"
 	default="$2"
 
-	value=$(git config $var || echo "$default")
-	git config -f "$BHOME/.gitconfig" $var >/dev/null \
+	value=$(git config "$var" || echo "$default")
+	git config -f "$BHOME/.gitconfig" "$var" >/dev/null \
 		|| git config -f "$BHOME/.gitconfig" "$var" "$value"
 
 }
 
-thisdir=$(dirname $0| xargs readlink -f)
+thisdir=$(dirname "$0"| xargs readlink -f)
 updir=$(dirname "$thisdir")
 BHOME="$updir/binds/HOME"
 
 cmd="${SINGULARITY_CMD:-$1}"; shift
 
-if [ ! -z "${DATALAD_CONTAINER_NAME:-}" ]; then
+if [ -n "${DATALAD_CONTAINER_NAME:-}" ]; then
 	export SINGULARITYENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
 fi
 
@@ -71,7 +71,7 @@ pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 
 if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
-	singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B $PWD --pwd "$PWD" "$@"
+	singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B "$PWD" --pwd "$PWD" "$@"
 else
 	docker run --privileged --rm \
 	-e "UID=$(id -u)" \
