@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: alpine:latest
+
+%help
+This container simply outputs the command line arguments passed
+to it for testing purposes.
+
+%runscript
+    index=1
+    for arg in "$@"
+    do
+        echo "arg #$index=<$arg>"
+        index=$(($index+1))
+    done

@@ -1,0 +1,10 @@
+FROM singularityware/singularity:latest
+
+RUN printf '#!/bin/sh\n\
+        addgroup -g $GID host-user\n\
+        adduser -u $UID -G host-user -H -D host-user\n\
+        sudo -u host-user /usr/local/bin/singularity "$@"\n\
+    ' > /entrypoint.sh \
+    && chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
