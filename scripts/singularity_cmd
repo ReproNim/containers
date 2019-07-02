@@ -51,7 +51,7 @@ function pass_git_config() {
 
 }
 
-thisfile=$(python3 -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$0")
+thisfile=$(readlink -f "$0" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$0")
 thisdir=$(dirname "$thisfile")
 updir=$(dirname "$thisdir")
 BHOME="$updir/binds/HOME"
