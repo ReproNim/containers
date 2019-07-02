@@ -51,7 +51,8 @@ function pass_git_config() {
 
 }
 
-thisdir=$(dirname "$0"| xargs readlink -f)
+thisfile=$(readlink -f "$0" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$0")
+thisdir=$(dirname "$thisfile")
 updir=$(dirname "$thisdir")
 BHOME="$updir/binds/HOME"
 
@@ -63,7 +64,7 @@ fi
 
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
-tmpdir=$(mktemp -d --suffix=singtmp)
+tmpdir=$(mktemp -d -t singtmp.XXXXXX)
 info "created temp dir $tmpdir"
 trap 'rm -fr "$tmpdir" && info "removed temp dir $tmpdir"' exit
 
