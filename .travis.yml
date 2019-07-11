@@ -11,3 +11,4 @@ install:
 
 script:
     - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck
+    - bats -t scripts/tests
