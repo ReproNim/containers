@@ -15,8 +15,10 @@
 
 @test "verifying arguments passed to singularity_cmd Docker shim" {
     export REPRONIM_USE_DOCKER=1
+    # make sure that we have the singularity image
+    git annex get ./arg-test.simg
     run ../singularity_cmd \
-        exec arg-test.simg /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
+        exec ./arg-test.simg /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
     [ "$status" -eq 0 ]
     [ "${lines[0]}" = 'arg #1=<foo bar>' ]
     [ "${lines[1]}" = 'arg #2=<blah>' ]
