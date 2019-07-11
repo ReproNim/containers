@@ -11,4 +11,4 @@ install:
 
 script:
     - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck
-    - git clone -b enh-travis-bats --depth 1 http://github.com/yarikoptic/containers && cd containers && git fetch origin git-annex && git annex init && git remote add --fetch datalad.datasets.org http://datasets.datalad.org/repronim/containers/.git && git annex upgrade && git annex --debug get scripts/tests/*.simg && ls -l scripts/tests/
+    - git clone -b enh-travis-bats --depth 1 http://github.com/yarikoptic/containers && cd containers && git fetch origin git-annex && git annex init && git remote add --fetch datalad.datasets.org http://datasets.datalad.org/repronim/containers/.git && git annex upgrade && bats -t scripts/tests
