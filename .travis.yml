@@ -7,7 +7,11 @@ install:
   - bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)
   - travis_retry sudo apt-get update -qq
   - travis_retry sudo apt-get install eatmydata  # to speedup some installations
-  - travis_retry sudo eatmydata apt-get install singularity-container shellcheck bats
+  - travis_retry sudo eatmydata apt-get install singularity-container shellcheck bats git-annex-standalone
+  - git fetch origin git-annex 
+  - git remote add --fetch datalad.datasets.org http://datasets.datalad.org/repronim/containers/.git
+  - git annex upgrade  # we need v7 for the unlocked test img
 
 script:
     - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck
+    - bats -t scripts/tests
