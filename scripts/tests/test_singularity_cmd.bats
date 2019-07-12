@@ -19,6 +19,9 @@
     cd "$BATS_TEST_DIRNAME"
     git annex get "$img"
     cd ../..
+    # make sure that we have our shim docker image so its pulling does not
+    # leak into output of scripts/singularity_cmd
+    docker pull mjtravers/singularity-shim:latest
     
     export REPRONIM_USE_DOCKER=1
     run scripts/singularity_cmd \
