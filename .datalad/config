@@ -116,3 +116,7 @@
 	updateurl = shub://ReproNim/containers:arg-test
 	image = scripts/tests/arg-test.simg
 	cmdexec = singularity exec {img} {cmd}
+[datalad "containers.poldracklab-ds003-example"]
+	updateurl = shub://ReproNim/containers:poldracklab-ds003-example--0.0.3
+	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
