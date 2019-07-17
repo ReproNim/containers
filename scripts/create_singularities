@@ -241,6 +241,9 @@ done
 # validator is not bids-app but we will stick it along with bids
 generate_singularity_for_docker_image "bids/validator" "bids"
 
+#
+# Additional ones from Poldrack
+generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 
 #
 # ReproNim
