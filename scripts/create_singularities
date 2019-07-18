@@ -50,7 +50,7 @@ ARGS=( "${@}" )
 function check_if_of_interest() {
 	# Somehow if no arguments provided then ARGS variable can become unbound here
 	# so we define it with default value then
-	: ${ARGS:=}
+	: "${ARGS:=}"
 	if [ -z "$ARGS" ]; then
 		return 0
 	fi
