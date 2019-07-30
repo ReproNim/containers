@@ -13,5 +13,5 @@ install:
   - git annex upgrade  # we need v7 for the unlocked test img
 
 script:
-    - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck -e SC2236
+    - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck
     - bats -t scripts/tests
