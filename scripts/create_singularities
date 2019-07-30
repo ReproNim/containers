@@ -223,7 +223,7 @@ function generate_singularity_for_docker_image() {
 	info "$family <- docker $dockerhubid"
 	last_version=$(get_last_docker_version_tag "$dockerhubid")
 
-	if [ ! -z "$last_version" ]; then
+	if [ -n "$last_version" ]; then
 		last_version_pure=${last_version%%@*}
 		last_version_tag=${last_version#*@}
 
