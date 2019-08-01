@@ -72,7 +72,7 @@ pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 
 if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
-	singularity "$cmd" -e -c -W "$tmpdir" -H "$BHOME" -B "$PWD" --pwd "$PWD" "$@"
+	singularity "$cmd" -W "$tmpdir"  -e -c -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@"
 else
 	docker run --privileged --rm \
 	-e "UID=$(id -u)" \
