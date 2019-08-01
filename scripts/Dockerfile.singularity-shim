@@ -1,10 +1,18 @@
 FROM singularityware/singularity:latest
 
-RUN printf '#!/bin/sh\n\
+RUN printf '#!/bin/bash\n\
         set -eu\n\
-        addgroup -g $GID host-user\n\
-        adduser -u $UID -G host-user -H -D host-user\n\
-        sudo -u host-user /usr/local/bin/singularity "$@"\n\
+        USERNAME=$(sed -rn "s/^([^:]+):[^:]+:${UID}:.*/\\1/p" /etc/passwd)\n\
+        GROUPNAME=$(sed -rn "s/^([^:]+):[^:]+:${GID}:.*/\\1/p" /etc/group)\n\
+        if [ -z "$USERNAME" ]; then\n\
+	        USERNAME=host-user\n\
+            if [ -z "$GROUPNAME" ]; then\n\
+                GROUPNAME=host-user\n\
+                addgroup -g $GID host-user\n\
+            fi\n\
+            adduser -u $UID -G "$GROUPNAME" -H -D host-user\n\
+        fi\n\
+        sudo -u "$USERNAME" /usr/local/bin/singularity "$@"\n\
     ' > /entrypoint.sh \
     && chmod +x /entrypoint.sh
 

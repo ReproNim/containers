@@ -29,11 +29,39 @@
 #
 # TODOs when get to refactor this prototype
 # - add options to
-#   - skip getting an image (datalad containers-add call) (--dry-run?)
+#   ...
+
+# Description for invocation
+#  - you can specify a list of images, as their original docker/github ids
+#    which should be considered. E.g.
+#
+#    scripts/create_singularities poldracklab/ds003-example bids/validator
+#
+#    will consider only two images - one for poldracklab and another one
+#    bids/validator, the other ones will be reported skipped
 
 set -eu
 
 IMAGES_DIR="images"
+
+ARGS=( "${@}" )
+
+# A helper to select only specific images we would like to check/deal with
+function check_if_of_interest() {
+	# Somehow if no arguments provided then ARGS variable can become unbound here
+	# so we define it with default value then
+	: "${ARGS:=}"
+	if [ -z "$ARGS" ]; then
+		return 0
+	fi
+	for arg in "${ARGS[@]}"; do
+		if [ "$1" = "$arg" ]; then
+			return 0
+		fi
+	done
+	info "skip $1"
+	return 1
+}
 
 
 function debug() {
@@ -190,10 +218,12 @@ function generate_singularity_for_docker_image() {
 	dockerhubid="$(echo "$githubid" | tr '[:upper:]' '[:lower:]')"
 	family="$2"
 
+	check_if_of_interest "$githubid" || return 0
+
 	info "$family <- docker $dockerhubid"
 	last_version=$(get_last_docker_version_tag "$dockerhubid")
 
-	if [ ! -z "$last_version" ]; then
+	if [ -n "$last_version" ]; then
 		last_version_pure=${last_version%%@*}
 		last_version_tag=${last_version#*@}
 
@@ -209,6 +239,8 @@ function add_singularity_image_from_collection() {
 	collection="$1"
 	githubid="$2"
 	family="$3"
+
+	check_if_of_interest "$githubid" || return 0
 
 	# familyname=$(get_familyname "$githubid" "$family")
 
@@ -241,6 +273,9 @@ done
 # validator is not bids-app but we will stick it along with bids
 generate_singularity_for_docker_image "bids/validator" "bids"
 
+#
+# Additional ones from Poldrack
+generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 
 #
 # ReproNim

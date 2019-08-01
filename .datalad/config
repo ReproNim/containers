@@ -1,16 +1,16 @@
 [datalad "dataset"]
 	id = b02e63c2-62c1-11e9-82b0-52540040489c
 [datalad "containers.bids-validator"]
-	updateurl = shub://ReproNim/containers:bids-validator--1.2.3
-	image = images/bids/bids-validator--1.2.3.sing
+	updateurl = shub://ReproNim/containers:bids-validator--1.2.5
+	image = images/bids/bids-validator--1.2.5.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-freesurfer"]
 	updateurl = shub://ReproNim/containers:bids-freesurfer--6.0.1-5
 	image = images/bids/bids-freesurfer--6.0.1-5.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-fmriprep"]
-	updateurl = shub://ReproNim/containers:bids-fmriprep--1.4.0
-	image = images/bids/bids-fmriprep--1.4.0.sing
+	updateurl = shub://ReproNim/containers:bids-fmriprep--1.4.1
+	image = images/bids/bids-fmriprep--1.4.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-mriqc"]
 	updateurl = shub://ReproNim/containers:bids-mriqc--0.15.0
@@ -69,8 +69,8 @@
 	image = images/bids/bids-afni-proc--0.0.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-rshrf"]
-	updateurl = shub://ReproNim/containers:bids-rshrf--1.0.0
-	image = images/bids/bids-rshrf--1.0.0.sing
+	updateurl = shub://ReproNim/containers:bids-rshrf--1.0.1
+	image = images/bids/bids-rshrf--1.0.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-example"]
 	updateurl = shub://ReproNim/containers:bids-example--0.0.7
@@ -116,3 +116,7 @@
 	updateurl = shub://ReproNim/containers:arg-test
 	image = scripts/tests/arg-test.simg
 	cmdexec = singularity exec {img} {cmd}
+[datalad "containers.poldracklab-ds003-example"]
+	updateurl = shub://ReproNim/containers:poldracklab-ds003-example--0.0.3
+	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
