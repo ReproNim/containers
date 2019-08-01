@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Dummy docker command for OSX testing.  We handle the command lines that 
+# the tests use (and give the output the tests expect).
+
+if [ "$*" = "pull mjtravers/singularity-shim:latest" ]
+then
+    cat << EOF
+latest: Pulling from mjtravers/singularity-shim
+Digest: sha256:e906fda34b081178b0fbf89818da3509f958fcb7e6d36bd69204665fb7675d5d
+Status: Image is up to date for mjtravers/singularity-shim:latest
+docker.io/mjtravers/singularity-shim:latest
+EOF
+elif [ "$1" = "run" -a \
+       "$2" = "--privileged" -a \
+       "$3" = "--rm" -a \
+       "$4" = "-e" -a \
+       "$5" = "UID=501" -a \
+       "$6" = "-e" -a \
+       "$7" = "GID=20" -a \
+       "$8" = "-v" -a \
+       "${10}" = "-v" -a \
+       "${12}" = "-w" -a \
+       "${15}" = "exec" -a \
+       "${16}" = "-e" -a \
+       "${17}" = "-c" -a \
+       "${18}" = "-B" -a \
+       "${20}" = "-H" -a \
+       "${22}" = "--pwd" -a \
+       "${25}" = "/singularity" -a \
+       "${26}" = "foo bar" -a \
+       "${27}" = "blah" -a \
+       "${28}" = "45.5" -a \
+       "${29}" = "/dir" -a \
+       "${30}" = "bar;" -a \
+       "${31}" = "foo&" -a \
+       "${32}" = "\${foo}" ]
+then
+    cat << EOF
+arg #1=<foo bar>
+arg #2=<blah>
+arg #3=<45.5>
+arg #4=</dir>
+arg #5=<bar;>
+arg #6=<foo&>
+arg #7=<\${foo}>
+EOF
+else
+    echo "$0: unhandled command line" >&2
+    exit 1
+fi
+
+exit 0
