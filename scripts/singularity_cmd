@@ -71,8 +71,11 @@ trap 'rm -fr "$tmpdir" && info "removed temp dir $tmpdir"' exit
 pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 
+# Common arguments for the singularity run
+SARGS=( -e -c -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@" )
+
 if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
-	singularity "$cmd" -W "$tmpdir"  -e -c -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@"
+	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
 else
 	docker run --privileged --rm \
 	-e "UID=$(id -u)" \
@@ -81,5 +84,5 @@ else
 	-v "$BHOME:$BHOME" \
 	-w "$PWD" \
 	mjtravers/singularity-shim:latest \
-	"$cmd" -e -c -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@"
+	"$cmd" "${SARGS[@]}"
 fi
