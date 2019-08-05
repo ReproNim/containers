@@ -33,7 +33,24 @@ assert_equal () {
 	fi
 }
 
+assert_python_re_match () {
+	if ! python -c 'import re, sys; assert re.match(sys.argv[1], sys.argv[2], flags=re.DOTALL)' "$1" "$2"; then
+		fail "<<$2>>\ndid not match\n<<$1>>"
+	fi
+}
+
 assert_clean_exit () {
 	assert_equal "$status" 0
+}
+
+
+# Misc helpers
+
+pull_singularity_shim () {
+	# make sure that we have our shim docker image so its pulling does not
+	# leak into output of scripts/singularity_cmd
+	if ! docker pull mjtravers/singularity-shim:latest; then
+		skip "Failed to pull singularity shim"
+	fi
 }
 

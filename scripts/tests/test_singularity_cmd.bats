@@ -15,20 +15,20 @@
 
 load test_helpers
 
+arg_test_img="$BATS_TEST_DIRNAME/arg-test.simg"
+topdir="$BATS_TEST_DIRNAME/../.."
+
+cd "$BATS_TEST_DIRNAME"
+git annex get "$arg_test_img"
+
 
 @test "verifying arguments passed to singularity_cmd Docker shim" {
-    # make sure that we have the singularity image
-    img="$BATS_TEST_DIRNAME/arg-test.simg"
-    cd "$BATS_TEST_DIRNAME"
-    git annex get "$img"
-    cd ../..
-    # make sure that we have our shim docker image so its pulling does not
-    # leak into output of scripts/singularity_cmd
-    docker pull mjtravers/singularity-shim:latest
+	pull_singularity_shim
 
+	cd "$topdir"
     export REPRONIM_USE_DOCKER=1
     run scripts/singularity_cmd \
-        exec "$img" /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
+        exec "$arg_test_img" /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
 
     debug_run
 
@@ -48,29 +48,25 @@ load test_helpers
 	echo "content" > "$subdir/file"
 	debug "subdir: $subdir"
 
-	img="$BATS_TEST_DIRNAME/arg-test.simg"
-    cd "$BATS_TEST_DIRNAME"
-    git annex get "$img"
-    cd ../..
-	topd=$(pwd)
-
 	cd "$subdir"
-	target_out=( /tmp
+	# Our arg_test image has no /etc/localtime so singularity might complain
+	# about inability to bind mount that one
+	#  \S* to swallow ANSI coloring
+	target_out=( '(\S*WARNING:\S* skipping mount of /etc/localtime: no such file or directory\n)?/tmp'
 "$subdir"
 "$subdir/file"
 /var/tmp
 content )
 
-	# export REPRONIM_USE_DOCKER=1 # FAILS ATM!
+	# export REPRONIM_USE_DOCKER=1
 	if [ -n "${REPRONIM_USE_DOCKER:-}" ]; then
-		target_out=( "WARNING: skipping mount of /etc/localtime: no such file or directory" "${target_out[@]}" )
+		pull_singularity_shim
 	fi
-	run "$topd/scripts/singularity_cmd" exec "$img" sh -c "find /tmp /var/tmp && cat \"$subdir/file\""
+	run "$topdir/scripts/singularity_cmd" exec "$arg_test_img" sh -c "find /tmp /var/tmp && cat \"$subdir/file\""
 
 	debug_run
 
 	assert_clean_exit
-	# [ "${lines[*]}" = "${target_out[*]}" ]
-	assert_equal "${lines[*]}" "${target_out[*]}"
+	assert_python_re_match "${target_out[*]}" "${lines[*]}"
 	rm -rf "$subdir"  # cleanup
 }
