@@ -100,13 +100,24 @@ fi
 if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
 else
-	docker run --privileged --rm \
-	-e "UID=$(id -u)" \
-	-e "GID=$(id -g)" \
-	-v "$PWD:$PWD" \
-	-v "$updir:$updir" \
-	-v "$BHOME:$BHOME" \
-	-w "$PWD" \
-	mjtravers/singularity-shim:latest \
-	"$cmd" "${SARGS[@]}"
+	DARGS=(
+	--privileged
+	--rm
+	-e "UID=$(id -u)"
+	-e "GID=$(id -g)"
+	-v "$PWD:$PWD"
+	-v "$updir:$updir"
+	-v "$BHOME:$BHOME"
+	-w "$PWD")
+
+	# Bind mount present /etc/localtime inside the docker container to be
+	# passed into singularity env
+	if [ -e "/etc/localtime" ]; then
+		DARGS=( "${DARGS[@]}" -v /etc/localtime )
+	fi
+
+	docker run \
+		   "${DARGS[@]}" \
+		   mjtravers/singularity-shim:latest \
+		   "$cmd" "${SARGS[@]}"
 fi
