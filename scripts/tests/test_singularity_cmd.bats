@@ -37,3 +37,30 @@
     [ "${lines[5]}" = 'arg #6=<foo&>' ]
     [ "${lines[6]}" = 'arg #7=<${foo}>' ]
 }
+
+@test "verifying ability to singularity exec under /tmp/subdir" {
+	subdir=/tmp/$(mktemp -t "s i.XXXXXX" -u | sed -e 's,.*/,,g')
+	mkdir -p "$subdir"
+	echo "content" > "$subdir/file"
+
+	img="$BATS_TEST_DIRNAME/arg-test.simg"
+    cd "$BATS_TEST_DIRNAME"
+    git annex get "$img"
+    cd ../..
+	topd=$(pwd)
+
+	cd "$subdir"
+	# export REPRONIM_USE_DOCKER=1 # FAILS ATM!
+	run "$topd/scripts/singularity_cmd" exec "$img" sh -c "find /tmp /var/tmp && cat \"$subdir/file\""
+	rm -rf "$subdir"  # cleanup
+
+    echo "> lines=${lines[@]}" >&3
+    echo "> STATUS=$status" >&3
+
+    [ "$status" -eq 0 ]
+	[ "${lines[*]}" = "/tmp
+$subdir
+$subdir/file
+/var/tmp
+content" ]
+}
