@@ -42,13 +42,38 @@ git annex get "$arg_test_img"
     assert_equal "${lines[6]}"  'arg #7=<${foo}>'
 }
 
-@test "verifying ability to singularity exec under /tmp/subdir" {
-	subdir=/tmp/$(mktemp -t "s i.XXXXXX" -u | sed -e 's,.*/,,g')
-	mkdir -p "$subdir"
-	echo "content" > "$subdir/file"
-	debug "subdir: $subdir"
 
+@test "verifying ability to singularity exec under /tmp subdir" {
+	check_subdir "$(_mktemp_dir_under /tmp)"
+}
+
+@test "verifying ability to singularity exec under /tmp subdir (explicit use of docker)" {
+	export REPRONIM_USE_DOCKER=1
+	check_subdir "$(_mktemp_dir_under /tmp)"
+}
+
+@test "verifying ability to singularity exec under $HOME subdir" {
+	check_subdir "$(_mktemp_dir_under $HOME)"
+}
+
+@test "verifying ability to singularity exec under $HOME subdir (explicit use of docker)" {
+	export REPRONIM_USE_DOCKER=1
+	check_subdir "$(_mktemp_dir_under $HOME)"
+}
+
+
+_mktemp_dir_under () {
+	subdir="$1/$(mktemp -t "tmp dir.XXXXXX" -u | sed -e 's,.*/,,g')"
+	mkdir -p "$subdir"
+	debug "subdir: $subdir"
+	echo "$subdir"
+}
+
+check_subdir () {
+	subdir="$1"
 	cd "$subdir"
+	echo "content" > "$subdir/file"
+
 	# Our arg_test image has no /etc/localtime so singularity might complain
 	# about inability to bind mount that one
 	#  \S* to swallow ANSI coloring
@@ -58,15 +83,22 @@ git annex get "$arg_test_img"
 /var/tmp
 content )
 
-	# export REPRONIM_USE_DOCKER=1
 	if [ -n "${REPRONIM_USE_DOCKER:-}" ]; then
 		pull_singularity_shim
 	fi
-	run "$topdir/scripts/singularity_cmd" exec "$arg_test_img" sh -c "find /tmp /var/tmp && cat \"$subdir/file\""
+	run_cmd="find /tmp"
+	if [ "${subdir##/tmp}" = "$subdir" ]; then
+		# We are not under /tmp so find will not find our directory, add it explicitly to the list
+		# for find
+		run_cmd+=" \"$subdir\""
+	fi
+	run_cmd+=" /var/tmp && cat \"$subdir/file\""
+	run "$topdir/scripts/singularity_cmd" exec "$arg_test_img" sh -c "$run_cmd"
+
+	rm -rf "$subdir"  # cleanup asap
 
 	debug_run
 
 	assert_clean_exit
 	assert_python_re_match "${target_out[*]}" "${lines[*]}"
-	rm -rf "$subdir"  # cleanup
 }
