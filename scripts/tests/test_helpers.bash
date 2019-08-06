@@ -1,11 +1,11 @@
 # Messaging
 debug () {
-	[ -z "$DEBUG_BATS" ] || echo "  DEBUG: $@" >&3
+	[ -z "$DEBUG_BATS" ] || echo "	DEBUG: $@" >&3
 }
 
 debug_run () {
 	debug "> lines=${lines[@]}"
-    debug "> STATUS=$status"
+	debug "> STATUS=$status"
 }
 
 fail_msg () {

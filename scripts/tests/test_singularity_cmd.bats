@@ -26,20 +26,20 @@ git annex get "$arg_test_img"
 	pull_singularity_shim
 
 	cd "$topdir"
-    export REPRONIM_USE_DOCKER=1
-    run scripts/singularity_cmd \
-        exec "$arg_test_img" /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
+	export REPRONIM_USE_DOCKER=1
+	run scripts/singularity_cmd \
+		exec "$arg_test_img" /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
 
-    debug_run
+	debug_run
 
-    assert_clean_exit
-    assert_equal "${lines[0]}"  'arg #1=<foo bar>'
-    assert_equal "${lines[1]}"  'arg #2=<blah>'
-    assert_equal "${lines[2]}"  'arg #3=<45.5>'
-    assert_equal "${lines[3]}"  'arg #4=</dir>'
-    assert_equal "${lines[4]}"  'arg #5=<bar;>'
-    assert_equal "${lines[5]}"  'arg #6=<foo&>'
-    assert_equal "${lines[6]}"  'arg #7=<${foo}>'
+	assert_clean_exit
+	assert_equal "${lines[0]}"	'arg #1=<foo bar>'
+	assert_equal "${lines[1]}"	'arg #2=<blah>'
+	assert_equal "${lines[2]}"	'arg #3=<45.5>'
+	assert_equal "${lines[3]}"	'arg #4=</dir>'
+	assert_equal "${lines[4]}"	'arg #5=<bar;>'
+	assert_equal "${lines[5]}"	'arg #6=<foo&>'
+	assert_equal "${lines[6]}"	'arg #7=<${foo}>'
 }
 
 
