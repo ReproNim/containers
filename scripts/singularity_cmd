@@ -82,7 +82,7 @@ SARGS=( -e -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@" )
 # TODO: make it also check/depend on current version of singularity
 need_no_c=
 for d in "$PWD" "$updir"; do
-	if [ "${d##/tmp}" != "$d" ]; then
+	if [ "${d##/tmp/}" != "$d" ]; then
 		# we should create that one within our $tmpdir
 		info "Creating $d under $tmpdir"
 		mkdir -p "$tmpdir/$d" "$tmpdir/var/tmp"

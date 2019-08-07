@@ -87,7 +87,7 @@ content )
 		pull_singularity_shim
 	fi
 	run_cmd="find /tmp"
-	if [ "${subdir##/tmp}" = "$subdir" ]; then
+	if [ "${subdir##/tmp/}" = "$subdir" ]; then
 		# We are not under /tmp so find will not find our directory, add it explicitly to the list
 		# for find
 		run_cmd+=" \"$subdir\""
