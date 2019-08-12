@@ -54,3 +54,9 @@ pull_singularity_shim () {
 	fi
 }
 
+skip_if_travis_osx() {
+    if [ "$TRAVIS_OS_NAME" = osx ]
+    then
+        skip "$@"
+    fi
+}
