@@ -34,7 +34,7 @@
 set -eu
 
 function info() {
-	: # echo -e "I: $@" >&2
+	: #	echo -e "I: " "$@" >&2
 }
 
 #
@@ -72,17 +72,52 @@ pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 
 # Common arguments for the singularity run
-SARGS=( -e -c -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@" )
+SARGS=( -e -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@" )
 
+# Due to https://github.com/sylabs/singularity/issues/3949
+# which was fixed only in v3.3.0-rc.1-431-g40331a5b1
+# for now we need to avoid using `-c` in such cases and
+# just create those needed bind points manually and bind mount
+# /tmp manually (apparently -W is not in effect really without -c).
+# TODO: make it also check/depend on current version of singularity
+need_no_c=
+for d in "$PWD" "$updir"; do
+	if [ "${d##/tmp/}" != "$d" ]; then
+		# we should create that one within our $tmpdir
+		info "Creating $d under $tmpdir"
+		mkdir -p "$tmpdir/$d" "$tmpdir/var/tmp"
+		need_no_c=1
+	fi
+done
+
+if [ -z "$need_no_c" ]; then
+	SARGS=( -c "${SARGS[@]}" )
+else
+	SARGS=( -B "$tmpdir/tmp:/tmp" -B "$tmpdir/var/tmp:/var/tmp" "${SARGS[@]}" )
+fi
+
+# set -x
 if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
 else
-	docker run --privileged --rm \
-	-e "UID=$(id -u)" \
-	-e "GID=$(id -g)" \
-	-v "$PWD:$PWD" \
-	-v "$BHOME:$BHOME" \
-	-w "$PWD" \
-	mjtravers/singularity-shim:latest \
-	"$cmd" "${SARGS[@]}"
+	DARGS=(
+	--privileged
+	--rm
+	-e "UID=$(id -u)"
+	-e "GID=$(id -g)"
+	-v "$PWD:$PWD"
+	-v "$updir:$updir"
+	-v "$BHOME:$BHOME"
+	-w "$PWD")
+
+	# Bind mount present /etc/localtime inside the docker container to be
+	# passed into singularity env
+	if [ -e "/etc/localtime" ]; then
+		DARGS=( "${DARGS[@]}" -v /etc/localtime )
+	fi
+
+	docker run \
+		   "${DARGS[@]}" \
+		   mjtravers/singularity-shim:latest \
+		   "$cmd" "${SARGS[@]}"
 fi
