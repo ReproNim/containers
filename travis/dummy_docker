@@ -3,6 +3,14 @@
 # Dummy docker command for OSX testing.  We handle the command lines that 
 # the tests use (and give the output the tests expect).
 
+# If the script is running under BATS, FD 3 is open (for output that isn't 
+# caught by BATS and passes right through to the output).  If not, we need 
+# to open it.
+if ! ( echo >&3 ) 2> /dev/null
+then
+    exec 3>&2
+fi
+
 if [ "$*" = "pull mjtravers/singularity-shim:latest" ]
 then
     cat << EOF
@@ -46,7 +54,13 @@ arg #6=<foo&>
 arg #7=<\${foo}>
 EOF
 else
-    echo "$0: unhandled command line" >&2
+    echo "$0: unhandled command line:" >&3
+    i=1
+    for arg in "$@"
+    do
+        echo "    \$${i} = <$arg>" >&3
+        i=$(($i+1))
+    done
     exit 1
 fi
 

@@ -1,6 +1,9 @@
-FROM singularityware/singularity:latest
+FROM singularityware/singularity:v3.3.0-slim
 
-RUN printf '#!/bin/bash\n\
+RUN apk update \
+    && apk add bash sudo \
+    && rm -rf /var/cache/apk/* \
+    && printf '#!/bin/bash\n\
         set -eu\n\
         USERNAME=$(sed -rn "s/^([^:]+):[^:]+:${UID}:.*/\\1/p" /etc/passwd)\n\
         GROUPNAME=$(sed -rn "s/^([^:]+):[^:]+:${GID}:.*/\\1/p" /etc/group)\n\
@@ -10,9 +13,9 @@ RUN printf '#!/bin/bash\n\
                 GROUPNAME=host-user\n\
                 addgroup -g $GID host-user\n\
             fi\n\
-            adduser -u $UID -G "$GROUPNAME" -H -D host-user\n\
+            adduser -u $UID -G "$GROUPNAME" -D host-user\n\
         fi\n\
-        sudo -u "$USERNAME" /usr/local/bin/singularity "$@"\n\
+        sudo -u "$USERNAME" /usr/local/singularity/bin/singularity "$@"\n\
     ' > /entrypoint.sh \
     && chmod +x /entrypoint.sh
 

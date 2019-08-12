@@ -14,8 +14,8 @@ then
     sudo eatmydata apt-get install singularity-container shellcheck bats git-annex-standalone
 else
     # osx
-    brew install shellcheck
-    brew install git-annex
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install shellcheck
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install git-annex
     git clone https://github.com/sstephenson/bats.git ~/bats
     ( cd ~/bats ; sudo ./install.sh /usr/local )
     sudo cp travis/dummy_docker /usr/local/bin/docker
