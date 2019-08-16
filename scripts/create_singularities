@@ -95,7 +95,7 @@ function get_last_docker_version_tag() {
 		# Some release alpha releases, so probably would skip thos for now
 		good_versions=$(echo "$versions" \
 							| grep -v -e '[ab][0-9][0-9]*$' -e 'rc[0-9]*$' \
-							| sed -n -r 's/^([Vv]?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
+							| sed -n -r 's/^(([Vv]|version-)?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
 		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
 	elif [ -z "$versions" ]; then
 		info " $dh no version. Tags: $versions"
@@ -285,3 +285,6 @@ generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
 # Docker image for simple_workflow
 generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
+
+# neuronets
+generate_singularity_for_docker_image "neuronets/kwyk" "neuronets"
