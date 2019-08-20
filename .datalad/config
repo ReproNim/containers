@@ -121,6 +121,6 @@
 	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neuronets-kwyk"]
-	updateurl = shub://ReproNim/containers:neuronets-kwyk--version-0.2-gpu
-	image = images/neuronets/neuronets-kwyk--version-0.2-gpu.sing
+	updateurl = shub://ReproNim/containers:neuronets-kwyk--version-0.2-cpu
+	image = images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
