@@ -12,7 +12,7 @@ From: neuronets/kwyk:version-0.2-gpu
 mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
 
 %environment
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+export LANG="C.UTF-8"
+export LC_ALL="C.UTF-8"
 
 # TODO: Take advantage of the fact that it is a bids-app somehow?
