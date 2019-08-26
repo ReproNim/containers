@@ -23,15 +23,37 @@ All images are "registered" within the dataset for execution using
 containers:
 
     $> datalad containers-list
-    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-validator--1.2.3.sing (file)
-    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-freesurfer--6.0.1-5.sing (file)
-    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmriprep--1.3.2.sing (file)
-    containers(ok): /home/yoh/proj/repronim/containers/images/bids/bids-magetbrain--0.3.sing (file)
-	...
-    containers(ok): /home/yoh/proj/repronim/containers/images/repronim/repronim-reproin--0.5.4.sing (file)
-    action summary:
-      containers (ok: 21)
-
+    bids-validator -> images/bids/bids-validator--1.2.5.sing
+    bids-freesurfer -> images/bids/bids-freesurfer--6.0.1-5.sing
+    bids-fmriprep -> images/bids/bids-fmriprep--1.4.1.sing
+    bids-mriqc -> images/bids/bids-mriqc--0.15.1.sing
+    bids-mrtrix3-connectome -> images/bids/bids-mrtrix3-connectome--0.4.2.sing
+    bids-broccoli -> images/bids/bids-broccoli--1.0.1.sing
+    bids-spm -> images/bids/bids-spm--0.0.15.sing
+    bids-cpac -> images/bids/bids-cpac--1.1.0_14.sing
+    bids-aa -> images/bids/bids-aa--0.2.0.sing
+    bids-niak -> images/bids/bids-niak--latest.sing
+    bids-oppni -> images/bids/bids-oppni--0.7.0-1.sing
+    bids-brainiak-srm -> images/bids/bids-brainiak-srm--latest.sing
+    bids-tracula -> images/bids/bids-tracula--6.0.0.beta-0.sing
+    bids-baracus -> images/bids/bids-baracus--1.1.2.sing
+    bids-antscorticalthickness -> images/bids/bids-antscorticalthickness--2.2.0-1.sing
+    bids-dparsf -> images/bids/bids-dparsf--4.3.12.sing
+    bids-afni-proc -> images/bids/bids-afni-proc--0.0.2.sing
+    bids-rshrf -> images/bids/bids-rshrf--1.0.1.sing
+    bids-example -> images/bids/bids-example--0.0.7.sing
+    bids-magetbrain -> images/bids/bids-magetbrain--0.3.sing
+    repronim-reproin -> images/repronim/repronim-reproin--0.5.4.sing
+    bids-ndmg -> images/bids/bids-ndmg--0.1.0.sing
+    bids-fibredensityandcrosssection -> images/bids/bids-fibredensityandcrosssection--0.0.1.sing
+    bids-mindboggle -> images/bids/bids-mindboggle--0.0.4.sing
+    bids-rs-signal-extract -> images/bids/bids-rs-signal-extract--0.1.sing
+    bids-nipypelines -> images/bids/bids-nipypelines--0.3.0.sing
+    bids-hcppipelines -> images/bids/bids-hcppipelines--3.17.0-18.sing
+    repronim-simple-workflow -> images/repronim/repronim-simple-workflow--1.1.0.sing
+    arg-test -> scripts/tests/arg-test.simg
+    poldracklab-ds003-example -> images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+    neuronets-kwyk -> images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
 
 and execute either via `datalad containers-run` (which would also take care
 about getting them first if not present):
@@ -87,6 +109,15 @@ in interactive sessions:
     singularity:repronim-reproin--0.5.4 > yoh@hopa:/home/yoh/proj/repronim/containers$ heudiconv --version
     0.5.4
 
+### Singularity via Docker
+
+On non-Linux systems, or if `REPRONIM_USE_DOCKER` environment variable is set to a non-empty value,
+[scripts/singularity_cmd]() will use [Docker] shim image (in privileged mode) to run
+singularity within it.  All necessary paths will be bind mounted as with a regular direct execution using
+singularity.
+
+### Interactive sessions
+
 See [WiP PR #9](https://github.com/ReproNim/containers/pull/9) to
 establish "reproducible interactive sessions" with the help of that script.
 
@@ -135,9 +166,8 @@ It is a DataLad dataset, so you can either just [git clone] or [datalad install]
 You will need to have [git annex] available to retrieve any images. And you will 
 need DataLad and [datalad-container] extension installed for [datalad container-run].
 Since Singularity is Linux-only application, it will be "functional" only on 
-Linux. There is a [WiP #3](https://github.com/ReproNim/containers/issues/3) to 
-establish seamless execution of those Singularity images on systems which 
-supports [Docker].
+Linux. On OSX (and possibly Windows), if you have Docker installed, singularity
+images will be executed through the provided docker shim image.
 
 ## Environment variables
 
@@ -164,7 +194,12 @@ environment corresponding actions were taken.
 [datalad get]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-get.html
 [datalad run]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-run.html
 [datalad rerun]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-rerun.html
+[datalad install]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-install.html
 [datalad uninstall]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-uninstall.html
+
+[git clone]: https://git-scm.com/docs/git-clone
+
+[Docker]: http://docker.com
 
 [YODA principles]: https://github.com/myyoda/poster/blob/master/ohbm2018.pdf
 
