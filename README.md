@@ -134,7 +134,7 @@ so we just use uniform `.sing` extension.
 # A typical workflow
 
 Here is an outline of a simple analysis workflow, where we will adhere to
-[YODA] principles where each component should contain all necessary for its
+[YODA principles] where each component should contain all necessary for its
 "reproduction" history and components
 
 	# Create fmriprep'ed dataset
@@ -169,7 +169,7 @@ on if you need to extend or redo your analysis.
 
 It is a DataLad dataset, so you can either just [git clone] or [datalad install] it.
 You will need to have [git annex] available to retrieve any images. And you will 
-need DataLad and [datalad-container] extension installed for [datalad container-run].
+need DataLad and [datalad-container] extension installed for [datalad containers-run].
 Since Singularity is Linux-only application, it will be "functional" only on 
 Linux. On OSX (and possibly Windows), if you have Docker installed, singularity
 images will be executed through the provided docker shim image.
@@ -182,7 +182,7 @@ repository:
 
 ### `SINGULARITY_CMD`
 
-The default command (as "hardcoded" in [.datalad/config][]) is `run`
+The default command (as "hardcoded" in [.datalad/config]()) is `run`
 so running the container executes its default "entry point".  Setting
 `SINGULARITY_CMD=exec` makes it possible to run an alternative command
 in them (e.g. `bash` for interactive sessions)::
