@@ -158,7 +158,12 @@ You can even now [datalad uninstall] sourcedata and even containers
 sub-datasets to save space - they will be retreavable at those exact versions later 
 on if you need to extend or redo your analysis.  
 
-Note: aforementioned example requires DataLad >= 0.11.5 and datalad-containers >= 0.4.0
+#### Notes:
+
+- aforementioned example requires DataLad >= 0.11.5 and datalad-containers >= 0.4.0
+- for more eleborate example with use of [reproman] to parallelize execution on
+  remote resources, see [ReproNim/reproman PR#438](https://github.com/ReproNim/reproman/pull/438)
+
 	
 # Installation
 
@@ -200,6 +205,7 @@ environment corresponding actions were taken.
 [git clone]: https://git-scm.com/docs/git-clone
 
 [Docker]: http://docker.com
+[reproman]: http://reproman.repronim.org
 
 [YODA principles]: https://github.com/myyoda/poster/blob/master/ohbm2018.pdf
 
