@@ -141,34 +141,65 @@ so we just use uniform `.sing` extension.
 
 Here is an outline of a simple analysis workflow, where we will adhere to
 [YODA principles] where each component should contain all necessary for its
-"reproduction" history and components
+"reproduction" history and components:
 
-	# Create fmriprep'ed dataset
-	datalad create -d data/raiders-fmriprep
-	cd data/raiders-fmriprep
-	# Install our containers collection:
-	datalad install -d . http://github.com/ReproNim/containers
-	# Populate with input data:
-	datalad install -d . -s ///labs/haxby/raiders sourcedata
-	# Execute desired preprocessing while creating a provenance record
-	# in git history
-	datalad containers-run \
-		-n containers/bids-fmriprep \
-		--input	sourcedata \
-		--output . \
-		'{inputs}' '{outputs}' participant
+	# Create a dataset to contain mriqc output
+    datalad create -d data/ds000003-qc -c text2git
+    cd data/ds000003-qc
+    # Install our containers collection:
+    datalad install -d . http://github.com/ReproNim/containers
+    # Install input data:
+    datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
+    # Execute desired preprocessing while creating a provenance record
+    # in git history
+    datalad containers-run \
+            -n containers/bids-mriqc \
+            --input sourcedata \
+            --output . \
+            '{inputs}' '{outputs}' participant group
 
 and now you have a dataset which has a git record on how these data
-was created, and could be redone later in time (by anyone) using [datalad rerun].
-You can even now [datalad uninstall] sourcedata and even containers 
-sub-datasets to save space - they will be retreavable at those exact versions later 
-on if you need to extend or redo your analysis.  
+was created:
+ 
+    (git) .../ds000003-qc[master] $ git show --quiet
+    commit 5f0fbcbfe84bb8aa32c4400a0838bc41ff1c88e0 (HEAD -> master)
+    Author: Yaroslav Halchenko <debian@onerussian.com>
+    Date:   Sat Aug 31 05:29:31 2019 -0400
+    
+    [DATALAD RUNCMD] containers/scripts/singularity_cmd run c...
+    
+    === Do not change lines below ===
+    {
+     "chain": [],
+     "cmd": "containers/scripts/singularity_cmd run containers/images/bids/bids-mriqc--0.15.1.sing '{inputs}' '{outputs}' participant group",
+     "dsid": "f367440c-cbcf-11e9-9ad2-002590f97d84",
+     "exit": 0,
+     "extra_inputs": [
+      "containers/images/bids/bids-mriqc--0.15.1.sing"
+     ],
+     "inputs": [
+      "sourcedata"
+     ],
+     "outputs": [
+      "."
+     ],
+     "pwd": "."
+    }
+    ^^^ Do not change lines above ^^^
+ 
+This record could later be reused (by anyone) using [datalad rerun] to rerun
+this computation using exactly the same version(s) of input data and the 
+singularity container. You can even now [datalad uninstall] sourcedata and even containers 
+sub-datasets to save space - they will be retrievable at those exact versions later 
+on if you need to extend or redo your analysis.
 
 #### Notes:
 
-- aforementioned example requires DataLad >= 0.11.5 and datalad-containers >= 0.4.0
+- aforementioned example requires DataLad >= 0.11.5 and datalad-containers >= 0.4.0;
 - for more eleborate example with use of [reproman] to parallelize execution on
-  remote resources, see [ReproNim/reproman PR#438](https://github.com/ReproNim/reproman/pull/438)
+  remote resources, see [ReproNim/reproman PR#438](https://github.com/ReproNim/reproman/pull/438);
+- a copy of the dataset is made available from [`///repronim/ds000003-qc`](http://datasets.datalad.org/?dir=/repronim/ds000003-qc)
+  and [https://github.com/ReproNim/ds000003-qc]().
 
 	
 # Installation
