@@ -5,55 +5,61 @@ repository) with a collection of popular computational tools provided
 within ready to use containerized environments.  At the moment it
 provides only [Singularity] images.  Versions of all images are tracked using
 [git-annex] with content of the images provided from a dedicated
-[Singularity Hub Collection] or other original collections.
+[Singularity Hub Collection] and http://datasets.datalad.org (AKA `///` of 
+DataLad) or other original collections.
 
-The main purpose is to be able to include this repository as a
-subdataset within larger study (super)datasets to facilitate rapid and
-reproducible computation, while
+The aims for this project is
 
-- adhering to [YODA principles] and retaining clear and unambiguous
+- to be able to include this repository as a
+  subdataset within larger study (super)datasets to facilitate rapid and
+  reproducible computation, while
+  adhering to [YODA principles] and retaining clear and unambiguous
   association between data, code, and computing environments using
   git/git-annex/DataLad;
-- executing in "sanitized" containerized environments:  no `$HOME` or
+- to assist with containers execution in "sanitized" environments:  no `$HOME` or
   system-wide `/tmp` is bind-mounted inside the containers, no
-  environment variables from the host system made available inside.
+  environment variables from the host system made available inside;
+- make Singularity images transparently usable on non-Linux (OSX) systems via
+  [Docker].
+
+![ReproNim/containers as a YODA building block](https://raw.githubusercontent.com/ReproNim/containers-artwork/master/repronim-containers-yoda_30dpi.png)
 
 All images are "registered" within the dataset for execution using
 [datalad containers-run], so it is trivial to list available
 containers:
 
     $> datalad containers-list
-    bids-validator -> images/bids/bids-validator--1.2.5.sing
-    bids-freesurfer -> images/bids/bids-freesurfer--6.0.1-5.sing
+    arg-test -> scripts/tests/arg-test.simg
+    bids-aa -> images/bids/bids-aa--0.2.0.sing
+    bids-afni-proc -> images/bids/bids-afni-proc--0.0.2.sing
+    bids-antscorticalthickness -> images/bids/bids-antscorticalthickness--2.2.0-1.sing
+    bids-baracus -> images/bids/bids-baracus--1.1.2.sing
+    bids-brainiak-srm -> images/bids/bids-brainiak-srm--latest.sing
+    bids-broccoli -> images/bids/bids-broccoli--1.0.1.sing
+    bids-cpac -> images/bids/bids-cpac--1.1.0_14.sing
+    bids-dparsf -> images/bids/bids-dparsf--4.3.12.sing
+    bids-example -> images/bids/bids-example--0.0.7.sing
+    bids-fibredensityandcrosssection -> images/bids/bids-fibredensityandcrosssection--0.0.1.sing
     bids-fmriprep -> images/bids/bids-fmriprep--1.4.1.sing
+    bids-freesurfer -> images/bids/bids-freesurfer--6.0.1-5.sing
+    bids-hcppipelines -> images/bids/bids-hcppipelines--3.17.0-18.sing
+    bids-magetbrain -> images/bids/bids-magetbrain--0.3.sing
+    bids-mindboggle -> images/bids/bids-mindboggle--0.0.4.sing
     bids-mriqc -> images/bids/bids-mriqc--0.15.1.sing
     bids-mrtrix3-connectome -> images/bids/bids-mrtrix3-connectome--0.4.2.sing
-    bids-broccoli -> images/bids/bids-broccoli--1.0.1.sing
-    bids-spm -> images/bids/bids-spm--0.0.15.sing
-    bids-cpac -> images/bids/bids-cpac--1.1.0_14.sing
-    bids-aa -> images/bids/bids-aa--0.2.0.sing
-    bids-niak -> images/bids/bids-niak--latest.sing
-    bids-oppni -> images/bids/bids-oppni--0.7.0-1.sing
-    bids-brainiak-srm -> images/bids/bids-brainiak-srm--latest.sing
-    bids-tracula -> images/bids/bids-tracula--6.0.0.beta-0.sing
-    bids-baracus -> images/bids/bids-baracus--1.1.2.sing
-    bids-antscorticalthickness -> images/bids/bids-antscorticalthickness--2.2.0-1.sing
-    bids-dparsf -> images/bids/bids-dparsf--4.3.12.sing
-    bids-afni-proc -> images/bids/bids-afni-proc--0.0.2.sing
-    bids-rshrf -> images/bids/bids-rshrf--1.0.1.sing
-    bids-example -> images/bids/bids-example--0.0.7.sing
-    bids-magetbrain -> images/bids/bids-magetbrain--0.3.sing
-    repronim-reproin -> images/repronim/repronim-reproin--0.5.4.sing
     bids-ndmg -> images/bids/bids-ndmg--0.1.0.sing
-    bids-fibredensityandcrosssection -> images/bids/bids-fibredensityandcrosssection--0.0.1.sing
-    bids-mindboggle -> images/bids/bids-mindboggle--0.0.4.sing
-    bids-rs-signal-extract -> images/bids/bids-rs-signal-extract--0.1.sing
+    bids-niak -> images/bids/bids-niak--latest.sing
     bids-nipypelines -> images/bids/bids-nipypelines--0.3.0.sing
-    bids-hcppipelines -> images/bids/bids-hcppipelines--3.17.0-18.sing
-    repronim-simple-workflow -> images/repronim/repronim-simple-workflow--1.1.0.sing
-    arg-test -> scripts/tests/arg-test.simg
-    poldracklab-ds003-example -> images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+    bids-oppni -> images/bids/bids-oppni--0.7.0-1.sing
+    bids-rshrf -> images/bids/bids-rshrf--1.0.1.sing
+    bids-rs-signal-extract -> images/bids/bids-rs-signal-extract--0.1.sing
+    bids-spm -> images/bids/bids-spm--0.0.15.sing
+    bids-tracula -> images/bids/bids-tracula--6.0.0.beta-0.sing
+    bids-validator -> images/bids/bids-validator--1.2.5.sing
     neuronets-kwyk -> images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
+    poldracklab-ds003-example -> images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+    repronim-reproin -> images/repronim/repronim-reproin--0.5.4.sing
+    repronim-simple-workflow -> images/repronim/repronim-simple-workflow--1.1.0.sing
 
 and execute either via `datalad containers-run` (which would also take care
 about getting them first if not present):
@@ -192,6 +198,26 @@ in them (e.g. `bash` for interactive sessions)::
 and then have `datalad` record any of the introduced changes.  Such
 runs will not be reproducible but at least clearly annotated in what
 environment corresponding actions were taken.
+
+# Acknowledgements
+
+## Grants
+
+Development of this project and [datalad-container] extension was supported by the ReproNim project 
+([NIH 1P41EB019936-01A1](https://projectreporter.nih.gov/project_info_description.cfm?projectnumber=1P41EB019936-01A1)).
+DataLad development was supported by a US-German collaboration in computational neuroscience (CRCNS) "DataGit: converging catalogues, warehouses, and deployment logistics into a federated 'data distribution'" (Halchenko/Hanke), co-funded by the US National Science Foundation ([NSF 1429999](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1429999)) and the German Federal Ministry of Education and Research (BMBF 01GQ1411). Additional support is provided by the German federal state of Saxony-Anhalt and the European Regional Development Fund, Project: Center for Behavioral Brain Sciences, Imaging Platform.
+
+## Copyrighted works
+
+All container images are collections of various projects governed by the 
+corresponding copyrights/licenses.  Some are not completely FOSS and might
+require additional license(s) to be obtained and provided (e.g. FreeSurfer 
+license for `fmriprep`).
+
+### `artwork/repronim-containers-yoda_*`
+
+Based on the artwork Copyright 2018-2019 Michael Hanke, from 
+[myyoda/poster](https://github.com/myyoda/poster), distributed under [CC BY](https://creativecommons.org/licenses/by/4.0/).
 
 [git-annex]: http://git-annex.branchable.com
 [DataLad]: http://datalad.org
