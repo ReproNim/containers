@@ -150,7 +150,7 @@ Here is an outline of a simple analysis workflow, where we will adhere to
 		-n containers/bids-fmriprep \
 		--input	sourcedata \
 		--output . \
-		{inputs} {outputs} participant
+		'{inputs}' '{outputs}' participant
 
 and now you have a dataset which has a git record on how these data
 was created, and could be redone later in time (by anyone) using [datalad rerun].
