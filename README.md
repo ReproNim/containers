@@ -174,7 +174,7 @@ on if you need to extend or redo your analysis.
 # Installation
 
 It is a DataLad dataset, so you can either just [git clone] or [datalad install] it.
-You will need to have [git annex] available to retrieve any images. And you will 
+You will need to have [git-annex] available to retrieve any images. And you will 
 need DataLad and [datalad-container] extension installed for [datalad containers-run].
 Since Singularity is Linux-only application, it will be "functional" only on 
 Linux. On OSX (and possibly Windows), if you have Docker installed, singularity
