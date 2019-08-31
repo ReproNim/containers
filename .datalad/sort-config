@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -eu
+cd $(dirname "$0")
+
+rm -f config-out; 
+
+git config -f config --list | sort | \
+while read l; do
+    git config -f config-out --add "${l%=*}" "${l#*=}"; 
+done; 
+
+mv config-out config
