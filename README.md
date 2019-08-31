@@ -221,6 +221,7 @@ Based on the artwork Copyright 2018-2019 Michael Hanke, from
 
 [git-annex]: http://git-annex.branchable.com
 [DataLad]: http://datalad.org
+[datalad-container]: http://docs.datalad.org/projects/container
 [datalad containers-run]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-containers-run.html
 [datalad get]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-get.html
 [datalad run]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-run.html
