@@ -137,7 +137,10 @@ function create_singularity_file() {
 	mkdir -p "$outdir"
 	singfile="$outdir/Singularity.$imagename"
 	# info "$singfile \t from \t $dh:$version_tag"
-	cat >| "$singfile" <<EOF
+	# Do not recreate the file ATM. Since we changed the env vars
+	# we define, we don't want to recreate it if already present
+	if [ ! -e "$singfile" ]; then
+		cat >| "$singfile" <<EOF
 #
 # Automagically prepared for ReproNim/containers distribution.
 # See http://github.com/ReproNim/containers for more info
@@ -157,6 +160,7 @@ export LC_ALL="C.UTF-8"
 
 # TODO: Take advantage of the fact that it is a bids-app somehow?
 EOF
+	fi
 	echo "$singfile"
 }
 
