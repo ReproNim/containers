@@ -160,6 +160,10 @@ export LC_ALL="C.UTF-8"
 
 # TODO: Take advantage of the fact that it is a bids-app somehow?
 EOF
+		# Save it immediately and push for build process to start
+		# Git branch should be configured properly to push
+		datalad add -m "Adding singularity recipe for $dh:$version_tag" "$singfile"
+		datalad publish
 	fi
 	echo "$singfile"
 }
