@@ -24,8 +24,8 @@
 	updateurl = shub://ReproNim/containers:bids-brainiak-srm--latest
 [datalad "containers.bids-broccoli"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-broccoli--1.0.1.sing
-	updateurl = shub://ReproNim/containers:bids-broccoli--1.0.1
+	image = images/bids/bids-broccoli--v1.0.1.sing
+	updateurl = shub://ReproNim/containers:bids-broccoli--v1.0.1
 [datalad "containers.bids-cpac"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-cpac--1.1.0_14.sing
