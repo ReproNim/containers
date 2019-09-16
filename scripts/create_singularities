@@ -205,12 +205,20 @@ function add_singularity_versioned_image() {
 		info " geting image $imagefile from $shuburl"
 		# use datalad to add/change a record
 		# {img_dspath} handling needs https://github.com/datalad/datalad-container/issues/72 TODO WiP
-		datalad containers-add "$familyname" \
-			 -i "$imagefile" \
-			 --update \
-			 --call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}' \
-			 -u "$shuburl" \
-		|| error "No image $imagefilename was found yet"
+		for try in {1..10}; do
+			datalad containers-add "$familyname" \
+					-i "$imagefile" \
+					--update \
+					--call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}' \
+					-u "$shuburl" \
+				&& break
+			sleep=$((try * 60))
+			error "No image $imagefilename was found yet. Sleeping $sleep sec"
+			sleep "$sleep"
+		done
+		if [ ! -e "imagefile" ]; then
+			error "Failed to add the image, even though we tried. Check if it was built ok"
+		fi
 		# TODO: later make it work with updating existing one. We will not be able to use
 		# containers-add --update since original URL is version specific. That is why it
 		# also does not make much sense to create a image file without version. We better
