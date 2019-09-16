@@ -40,8 +40,8 @@
 	updateurl = shub://ReproNim/containers:bids-example--0.0.7
 [datalad "containers.bids-fibredensityandcrosssection"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-fibredensityandcrosssection--0.0.1.sing
-	updateurl = shub://ReproNim/containers:bids-fibredensityandcrosssection--0.0.1
+	image = images/bids/bids-fibredensityandcrosssection--v0.0.1.sing
+	updateurl = shub://ReproNim/containers:bids-fibredensityandcrosssection--v0.0.1
 [datalad "containers.bids-fmriprep"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-fmriprep--1.4.1.sing
