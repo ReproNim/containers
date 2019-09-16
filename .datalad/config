@@ -28,8 +28,8 @@
 	updateurl = shub://ReproNim/containers:bids-broccoli--v1.0.1
 [datalad "containers.bids-cpac"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-cpac--1.1.0_14.sing
-	updateurl = shub://ReproNim/containers:bids-cpac--1.1.0_14
+	image = images/bids/bids-cpac--v1.1.0_14.sing
+	updateurl = shub://ReproNim/containers:bids-cpac--v1.1.0_14
 [datalad "containers.bids-dparsf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-dparsf--4.3.12.sing
