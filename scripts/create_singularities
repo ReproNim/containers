@@ -112,8 +112,8 @@ function get_familyname() {
 	family="$2"
 
 	name=${repoid#*/}
-    # sanitize for datalad not allowing _ in the container names
-    name=${name//_/-}
+	# sanitize for datalad not allowing _ in the container names
+	name=${name//_/-}
 	echo "$family-$name"
 }
 
