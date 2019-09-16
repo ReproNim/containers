@@ -104,8 +104,8 @@
 	updateurl = shub://ReproNim/containers:bids-tracula--6.0.0.beta-0
 [datalad "containers.bids-validator"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-validator--1.2.5.sing
-	updateurl = shub://ReproNim/containers:bids-validator--1.2.5
+	image = images/bids/bids-validator--1.3.1.sing
+	updateurl = shub://ReproNim/containers:bids-validator--1.3.1
 [datalad "containers.neuronets-kwyk"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
