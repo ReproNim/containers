@@ -216,7 +216,7 @@ function add_singularity_versioned_image() {
 			error "No image $imagefilename was found yet. Sleeping $sleep sec"
 			sleep "$sleep"
 		done
-		if [ ! -e "imagefile" ]; then
+		if [ ! -e "$imagefile" ]; then
 			error "Failed to add the image, even though we tried. Check if it was built ok"
 		fi
 		# TODO: later make it work with updating existing one. We will not be able to use
