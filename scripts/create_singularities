@@ -95,7 +95,7 @@ function get_last_docker_version_tag() {
 		# Some release alpha releases, so probably would skip thos for now
 		good_versions=$(echo "$versions" \
 							| grep -v -e '[ab][0-9][0-9]*$' -e 'rc[0-9]*$' \
-							| sed -n -r 's/^(([Vv]|version-)?(([0-9]{1,10}\..*))|((master)$))/\2\4@\1/gp')
+							| sed -n -r 's/^(([Vv]|version-|)([0-9]{1,10}\..*)|(master)$)/\1@\3/gp')
 		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
 	elif [ -z "$versions" ]; then
 		info " $dh no version. Tags: $versions"
