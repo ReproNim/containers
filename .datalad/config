@@ -4,8 +4,8 @@
 	updateurl = shub://ReproNim/containers:arg-test
 [datalad "containers.bids-aa"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-aa--0.2.0.sing
-	updateurl = shub://ReproNim/containers:bids-aa--0.2.0
+	image = images/bids/bids-aa--v0.2.0.sing
+	updateurl = shub://ReproNim/containers:bids-aa--v0.2.0
 [datalad "containers.bids-afni-proc"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-afni-proc--0.0.2.sing
