@@ -301,6 +301,10 @@ generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
 # Docker image for simple_workflow
 generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
+# We generate it right here but better automate its addition
+# Unfortunately the entire add_singularity_image_from_collection is no longer
+# possible because singularity-hub API is gone!!!
+# add_singularity_image_from_collection 2761 "ReproNim/containers" "repronim" "TODO: specify tags pattern to match"
 
 # neuronets
 generate_singularity_for_docker_image "neuronets/kwyk" "neuronets"
