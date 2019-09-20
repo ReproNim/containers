@@ -307,6 +307,10 @@ generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
 # Unfortunately the entire add_singularity_image_from_collection is no longer
 # possible because singularity-hub API is gone!!!
 # add_singularity_image_from_collection 2761 "ReproNim/containers" "repronim" "TODO: specify tags pattern to match"
+# One time run! specify nonesense to not match anything else
+# add_singularity_versioned_image "ReproNim/containers" "repronim" "repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100"
+# TODO: it resulted in repronim-containers--repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing 
+#       image filename since used that prefix... renaming manually for now
 
 # neuronets
 generate_singularity_for_docker_image "neuronets/kwyk" "neuronets"
