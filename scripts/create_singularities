@@ -218,6 +218,8 @@ function add_singularity_versioned_image() {
 		done
 		if [ ! -e "$imagefile" ]; then
 			error "Failed to add the image, even though we tried. Check if it was built ok"
+ 		else
+			datalad publish  # so we share with the world
 		fi
 		# TODO: later make it work with updating existing one. We will not be able to use
 		# containers-add --update since original URL is version specific. That is why it
