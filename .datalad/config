@@ -128,3 +128,7 @@
 	updateurl = shub://ReproNim/containers:repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100
 	image = images/repronim/repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-qsiprep"]
+	updateurl = shub://ReproNim/containers:bids-qsiprep--0.6.4
+	image = images/bids/bids-qsiprep--0.6.4.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
