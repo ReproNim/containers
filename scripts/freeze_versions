@@ -59,4 +59,6 @@ for arg in "$@"; do
 	# a conflict needed to be consciousely resolved (or -S ours used)
 	sed -i -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g" .datalad/config
 done
-datalad save -d^ -m "Freeze container versions $@" ".datalad/config"
+# Probably should not do unconditionally and there should be an option
+# to save where to save -- here or all the way to ^
+# datalad save -d^ -m "Freeze container versions $@" ".datalad/config"
