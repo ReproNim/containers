@@ -16,8 +16,8 @@
 	updateurl = shub://ReproNim/containers:bids-antscorticalthickness--2.2.0-1
 [datalad "containers.bids-baracus"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-baracus--1.1.2.sing
-	updateurl = shub://ReproNim/containers:bids-baracus--1.1.2
+	image = images/bids/bids-baracus--1.1.4.sing
+	updateurl = shub://ReproNim/containers:bids-baracus--1.1.4
 [datalad "containers.bids-brainiak-srm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-brainiak-srm--latest.sing
