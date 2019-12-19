@@ -36,20 +36,27 @@ set -eu
 
 cd "$(dirname "$0")/.."
 
+save_ds=
+frozen=
+
 for arg in "$@"; do
+	case "$arg" in
+		--save-dataset=*)
+			save_ds="${arg#*=}";
+			continue;;
+	esac
+	frozen="$frozen $arg"
 	img=${arg%%=*}
 	if [ "$img" != "$arg" ]; then
 		ver=${arg#*=}
 		echo "I: $img -> $ver"
 		imgpath="images/${img%%-*}/${img}--${ver}.sing"
 		# Check if exists! we cannot freeze to unknown
-		# I don't know -- something is bizzare -- always goes into "then!"
-		# TODO
-		# if [ ! -a "$imgpath" ] ; then
-		# 	echo "E: there is no $imgpath .  Available images for the app are:"
-		# 	/bin/ls -1 "images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g'
-		# 	exit 1
-		# fi
+		if [[ ! -a "$imgpath" ]] ; then
+			echo "E: there is no $imgpath .  Available images for the app are:"
+			/bin/ls -1 "images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g'
+			exit 1
+		fi
 		git config -f .datalad/config --replace-all "datalad.containers.$img.image" "$imgpath"
 	else
 		# freeze to current
@@ -59,6 +66,7 @@ for arg in "$@"; do
 	# a conflict needed to be consciousely resolved (or -S ours used)
 	sed -i -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g" .datalad/config
 done
-# Probably should not do unconditionally and there should be an option
-# to save where to save -- here or all the way to ^
-# datalad save -d^ -m "Freeze container versions $@" ".datalad/config"
+
+if [[ -n "$save_ds" ]]; then
+	datalad save -d"$save_ds" -m "Freeze container versions $frozen" .datalad/config
+fi
