@@ -132,3 +132,7 @@
 	updateurl = shub://ReproNim/containers:bids-qsiprep--0.6.4
 	image = images/bids/bids-qsiprep--0.6.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-pymvpa"]
+	updateurl = shub://ReproNim/containers:bids-pymvpa--1.0.2
+	image = images/bids/bids-pymvpa--1.0.2.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
