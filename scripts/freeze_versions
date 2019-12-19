@@ -51,8 +51,9 @@ for arg in "$@"; do
 		ver=${arg#*=}
 		echo "I: $img -> $ver"
 		imgpath="images/${img%%-*}/${img}--${ver}.sing"
-		# Check if exists! we cannot freeze to unknown
-		if [[ ! -a "$imgpath" ]] ; then
+		# Check if exists! we cannot freeze to unknown.  There is no easy
+		# check if file exists as a symlink or not
+		if ! /bin/ls -d "$imgpath" &>/dev/null ; then
 			echo "E: there is no $imgpath .  Available images for the app are:"
 			/bin/ls -1 "images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g'
 			exit 1
