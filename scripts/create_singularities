@@ -258,6 +258,10 @@ function add_singularity_image_from_collection() {
 	githubid="$2"
 	family="$3"
 
+	echo "   ERROR: this one no longer works are RFing of singularity hub."
+	echo "   We cannot get a list of images and you would need to 'list' then"
+	echo "   explicitly with add_ingularity_versioned_image call"
+	exit 1
 	check_if_of_interest "$githubid" || return 0
 
 	# familyname=$(get_familyname "$githubid" "$family")
@@ -268,7 +272,7 @@ function add_singularity_image_from_collection() {
 	# the custom ones like in case of dockers, but we might need to do the same here
 	# to get "version_pure"
 	version_tag="$(
-		curl -s "https://www.singularity-hub.org/collections/$collection" \
+		curl -s "https://singularity-hub.org/accounts/login/?next=/collections/$collection" \
 		| grep "$githubid:[0-9]" \
 		| sed -e 's,^ *,,g' \
 		| sed -e 's,^[^ ]*:,,g' \
@@ -300,7 +304,9 @@ generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 #
 
 # "Native" Singularity image for ReproIn
-add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
+#add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
+add_singularity_versioned_image "ReproNim/reproin" "repronim" "0.6.0"
+
 # Docker image for simple_workflow
 generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
 # We generate it right here but better automate its addition
