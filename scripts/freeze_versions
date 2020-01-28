@@ -34,6 +34,18 @@
 PS4=+
 set -eu
 
+# from repronim/simple_workflow Simple_Prep_docker
+# a little helper since sed on OSX does not have sed -i
+# for in-place modifications.  Note that filename here comes first
+# just to ease scripting
+sed-i () {
+  filename=$1
+  tfilename=$(mktemp -t sed_replace.XXXXXXXXX)
+  shift
+  sed "$@" "$filename" >| "$tfilename"
+  mv "$tfilename" "$filename"
+}
+
 cd "$(dirname "$0")/.."
 
 save_ds=
@@ -65,7 +77,7 @@ for arg in "$@"; do
 	fi
 	# and we would add the comment so that upon upgrade there for sure would be
 	# a conflict needed to be consciousely resolved (or -S ours used)
-	sed -i -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g" .datalad/config
+	sed-i .datalad/config -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g"
 done
 
 if [[ -n "$save_ds" ]]; then
