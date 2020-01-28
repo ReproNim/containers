@@ -1,0 +1,40 @@
+{
+  "creators": [
+    {
+      "affiliation": "Dartmouth College, Hanover, NH, United States",
+      "name": "Halchenko, Yaroslav O.",
+      "orcid": "0000-0003-3456-2493"
+    },
+    {
+      "affiliation": "University of Massachusetts Medical School, Worcester, MA, United States",
+      "name": "Haselgrove, Christian",
+      "orcid": "0000-0002-4438-0637"
+    },
+    {
+      "affiliation": "TCG, Inc, Washington, DC, United States",
+      "name": "Travers, Matt", 
+      "orcid": "0000-0001-5456-5371"
+    }
+  ],
+  "grants": [
+    {
+      "id": "1P41EB019936", 
+       "links": {
+        "self": "https://projectreporter.nih.gov/project_info_description.cfm?aid=8999833"
+       }, 
+       "title": "Center for Reproducible Neuroimaging Computation (CRNC)", 
+       "funder": {
+         "name": "NIH National Institute of Biomedical Imaging and Bioengineering (NIBIB)"
+       }
+    }
+  ],
+  "keywords": [
+    "containers", 
+    "datalad", 
+    "reproducible research", 
+    "singularity"
+  ],
+  "access_right": "open",
+  "license": "Apache 2.0",
+  "upload_type": "software"
+}
