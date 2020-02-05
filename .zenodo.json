@@ -16,18 +16,6 @@
       "orcid": "0000-0001-5456-5371"
     }
   ],
-  "grants": [
-    {
-      "id": "1P41EB019936", 
-       "links": {
-        "self": "https://projectreporter.nih.gov/project_info_description.cfm?aid=8999833"
-       }, 
-       "title": "Center for Reproducible Neuroimaging Computation (CRNC)", 
-       "funder": {
-         "name": "NIH National Institute of Biomedical Imaging and Bioengineering (NIBIB)"
-       }
-    }
-  ],
   "keywords": [
     "containers", 
     "datalad", 
