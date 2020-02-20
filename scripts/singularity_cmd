@@ -97,7 +97,7 @@ else
 fi
 
 # set -x
-if [ "$OSTYPE" == "linux-gnu" ] && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
+if hash singularity 2>/dev/null && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
 else
 	DARGS=(
