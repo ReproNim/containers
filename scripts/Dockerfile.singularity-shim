@@ -1,4 +1,6 @@
-FROM singularityware/singularity:v3.3.0-slim
+# no longer pushed to - vanessa declared dockerhub insecure
+#FROM singularityware/singularity:v3.3.0-slim
+FROM quay.io/singularity/singularity:v3.5.3-slim
 
 RUN apk update \
     && apk add bash sudo \
@@ -17,6 +19,7 @@ RUN apk update \
         fi\n\
         sudo -u "$USERNAME" /usr/local/singularity/bin/singularity "$@"\n\
     ' > /entrypoint.sh \
+    && chmod +s /usr/local/singularity/libexec/singularity/bin/starter-suid \
     && chmod +x /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
