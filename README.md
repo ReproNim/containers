@@ -1,5 +1,7 @@
 # ReproNim/containers - containerized environments for reproducible neuroimaging
 
+[![Travis tests status](https://secure.travis-ci.org/ReproNim/containers.png?branch=master)](https://travis-ci.org/ReproNim/containers)
+
 This repository provides a [DataLad] dataset (git/git-annex
 repository) with a collection of popular computational tools provided
 within ready to use containerized environments.  At the moment it
