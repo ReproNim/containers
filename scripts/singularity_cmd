@@ -45,10 +45,17 @@ function pass_git_config() {
 	var="$1"
 	default="$2"
 
+	# git config reads without locking, but could lock for writing
+  # so we might need to try multiple times setting the value
 	value=$(git config "$var" || echo "$default")
-	git config -f "$BHOME/.gitconfig" "$var" >/dev/null \
-		|| git config -f "$BHOME/.gitconfig" "$var" "$value"
-
+	# shellcheck disable=SC2034
+	for attempt in {1..5}; do
+    git config -f "$BHOME/.gitconfig" "$var" >/dev/null \
+      || { git config -f "$BHOME/.gitconfig" "$var" "$value" 2>/dev/null && break; } \
+      && break
+    # we failed - sleep a little. Alert: bashism!
+    sleep 0."${RANDOM:0:1}"
+  done
 }
 
 thisfile=$(readlink -f "$0" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$0")
