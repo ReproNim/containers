@@ -145,11 +145,16 @@ Here is an outline of a simple analysis workflow, where we will adhere to
 [YODA principles] where each component should contain all necessary for its
 "reproduction" history and components:
 
+    #!/bin/sh
+    (  # so it could be just copy pasted or used as a script
+    PS4='> '; set -xeu  # to see what we are doing and exit upon error
+    # Work in some temporary directory
+    cd $(mktemp -d ${TMPDIR:-/tmp}/repro-XXXXXXX)
 	# Create a dataset to contain mriqc output
-    datalad create -d data/ds000003-qc -c text2git
-    cd data/ds000003-qc
+    datalad create -d ds000003-qc -c text2git
+    cd ds000003-qc
     # Install our containers collection:
-    datalad install -d . http://github.com/ReproNim/containers
+    datalad install -d . ///repronim/containers
     # Install input data:
     datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
     # Execute desired preprocessing while creating a provenance record
@@ -159,6 +164,7 @@ Here is an outline of a simple analysis workflow, where we will adhere to
             --input sourcedata \
             --output . \
             '{inputs}' '{outputs}' participant group
+    )
 
 and now you have a dataset which has a git record on how these data
 was created:
