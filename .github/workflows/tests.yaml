@@ -25,4 +25,4 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Test example in the README.md
-      run: bash <(sed -n -e '/^ *#!/,/^ *$/p' README.md)
+      run: bash <(sed -n -e '/^ *#!/,/^```$/p' README.md | grep -v '```')
