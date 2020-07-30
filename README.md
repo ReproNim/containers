@@ -30,66 +30,70 @@ All images are "registered" within the dataset for execution using
 [datalad containers-run], so it is trivial to list available
 containers:
 
-    $> datalad containers-list
-    arg-test -> scripts/tests/arg-test.simg
-    bids-aa -> images/bids/bids-aa--0.2.0.sing
-    bids-afni-proc -> images/bids/bids-afni-proc--0.0.2.sing
-    bids-antscorticalthickness -> images/bids/bids-antscorticalthickness--2.2.0-1.sing
-    bids-baracus -> images/bids/bids-baracus--1.1.2.sing
-    bids-brainiak-srm -> images/bids/bids-brainiak-srm--latest.sing
-    bids-broccoli -> images/bids/bids-broccoli--1.0.1.sing
-    bids-cpac -> images/bids/bids-cpac--1.1.0_14.sing
-    bids-dparsf -> images/bids/bids-dparsf--4.3.12.sing
-    bids-example -> images/bids/bids-example--0.0.7.sing
-    bids-fibredensityandcrosssection -> images/bids/bids-fibredensityandcrosssection--0.0.1.sing
-    bids-fmriprep -> images/bids/bids-fmriprep--1.4.1.sing
-    bids-freesurfer -> images/bids/bids-freesurfer--6.0.1-5.sing
-    bids-hcppipelines -> images/bids/bids-hcppipelines--3.17.0-18.sing
-    bids-magetbrain -> images/bids/bids-magetbrain--0.3.sing
-    bids-mindboggle -> images/bids/bids-mindboggle--0.0.4.sing
-    bids-mriqc -> images/bids/bids-mriqc--0.15.1.sing
-    bids-mrtrix3-connectome -> images/bids/bids-mrtrix3-connectome--0.4.2.sing
-    bids-ndmg -> images/bids/bids-ndmg--0.1.0.sing
-    bids-niak -> images/bids/bids-niak--latest.sing
-    bids-nipypelines -> images/bids/bids-nipypelines--0.3.0.sing
-    bids-oppni -> images/bids/bids-oppni--0.7.0-1.sing
-    bids-rshrf -> images/bids/bids-rshrf--1.0.1.sing
-    bids-rs-signal-extract -> images/bids/bids-rs-signal-extract--0.1.sing
-    bids-spm -> images/bids/bids-spm--0.0.15.sing
-    bids-tracula -> images/bids/bids-tracula--6.0.0.beta-0.sing
-    bids-validator -> images/bids/bids-validator--1.2.5.sing
-    neuronets-kwyk -> images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
-    poldracklab-ds003-example -> images/poldracklab/poldracklab-ds003-example--0.0.3.sing
-    repronim-reproin -> images/repronim/repronim-reproin--0.5.4.sing
-    repronim-simple-workflow -> images/repronim/repronim-simple-workflow--1.1.0.sing
+```shell
+$> datalad containers-list
+arg-test -> scripts/tests/arg-test.simg
+bids-aa -> images/bids/bids-aa--0.2.0.sing
+bids-afni-proc -> images/bids/bids-afni-proc--0.0.2.sing
+bids-antscorticalthickness -> images/bids/bids-antscorticalthickness--2.2.0-1.sing
+bids-baracus -> images/bids/bids-baracus--1.1.2.sing
+bids-brainiak-srm -> images/bids/bids-brainiak-srm--latest.sing
+bids-broccoli -> images/bids/bids-broccoli--1.0.1.sing
+bids-cpac -> images/bids/bids-cpac--1.1.0_14.sing
+bids-dparsf -> images/bids/bids-dparsf--4.3.12.sing
+bids-example -> images/bids/bids-example--0.0.7.sing
+bids-fibredensityandcrosssection -> images/bids/bids-fibredensityandcrosssection--0.0.1.sing
+bids-fmriprep -> images/bids/bids-fmriprep--1.4.1.sing
+bids-freesurfer -> images/bids/bids-freesurfer--6.0.1-5.sing
+bids-hcppipelines -> images/bids/bids-hcppipelines--3.17.0-18.sing
+bids-magetbrain -> images/bids/bids-magetbrain--0.3.sing
+bids-mindboggle -> images/bids/bids-mindboggle--0.0.4.sing
+bids-mriqc -> images/bids/bids-mriqc--0.15.1.sing
+bids-mrtrix3-connectome -> images/bids/bids-mrtrix3-connectome--0.4.2.sing
+bids-ndmg -> images/bids/bids-ndmg--0.1.0.sing
+bids-niak -> images/bids/bids-niak--latest.sing
+bids-nipypelines -> images/bids/bids-nipypelines--0.3.0.sing
+bids-oppni -> images/bids/bids-oppni--0.7.0-1.sing
+bids-rshrf -> images/bids/bids-rshrf--1.0.1.sing
+bids-rs-signal-extract -> images/bids/bids-rs-signal-extract--0.1.sing
+bids-spm -> images/bids/bids-spm--0.0.15.sing
+bids-tracula -> images/bids/bids-tracula--6.0.0.beta-0.sing
+bids-validator -> images/bids/bids-validator--1.2.5.sing
+neuronets-kwyk -> images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
+poldracklab-ds003-example -> images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+repronim-reproin -> images/repronim/repronim-reproin--0.5.4.sing
+repronim-simple-workflow -> images/repronim/repronim-simple-workflow--1.1.0.sing
+```
 
 and execute either via `datalad containers-run` (which would also take care
 about getting them first if not present):
 
-    $> datalad containers-run -n bids-validator -- --help
-    [INFO   ] Making sure inputs are available (this may take some time)
-    [INFO   ] == Command start (output follows) ===== 
-    Usage: bids-validator <dataset_directory> [options]
+```shell
+$> datalad containers-run -n bids-validator -- --help
+[INFO   ] Making sure inputs are available (this may take some time)
+[INFO   ] == Command start (output follows) ===== 
+Usage: bids-validator <dataset_directory> [options]
 
-    Options:
-      --help, -h            Show help                                      [boolean]
-      --version, -v         Show version number                            [boolean]
-      --ignoreWarnings      Disregard non-critical issues                  [boolean]
-      --ignoreNiftiHeaders  Disregard NIfTI header content during validation
-                                                                           [boolean]
-      --verbose             Log more extensive information about issues    [boolean]
-      --json                Output results as JSON                         [boolean]
-      --config, -c          Optional configuration file. See
-                            https://github.com/bids-standard/bids-validator for more
-                            info
+Options:
+  --help, -h            Show help                                      [boolean]
+  --version, -v         Show version number                            [boolean]
+  --ignoreWarnings      Disregard non-critical issues                  [boolean]
+  --ignoreNiftiHeaders  Disregard NIfTI header content during validation
+                                                                       [boolean]
+  --verbose             Log more extensive information about issues    [boolean]
+  --json                Output results as JSON                         [boolean]
+  --config, -c          Optional configuration file. See
+                        https://github.com/bids-standard/bids-validator for more
+                        info
 
-    This tool checks if a dataset in a given directory is compatible with the Brain
-    Imaging Data Structure specification. To learn more about Brain Imaging Data
-    Structure visit http://bids.neuroimaging.io
-    [INFO   ] == Command exit (modification check follows) ===== 
-    action summary:
-      get (notneeded: 1)
-      save (notneeded: 1)
+This tool checks if a dataset in a given directory is compatible with the Brain
+Imaging Data Structure specification. To learn more about Brain Imaging Data
+Structure visit http://bids.neuroimaging.io
+[INFO   ] == Command exit (modification check follows) ===== 
+action summary:
+  get (notneeded: 1)
+  save (notneeded: 1)
+```
 
 or first getting them using [datalad get] and then either using
 `singularity` `run` or `exec` directly, or (recommended) via
@@ -145,59 +149,63 @@ Here is an outline of a simple analysis workflow, where we will adhere to
 [YODA principles] where each component should contain all necessary for its
 "reproduction" history and components:
 
-    #!/bin/sh
-    (  # so it could be just copy pasted or used as a script
-    PS4='> '; set -xeu  # to see what we are doing and exit upon error
-    # Work in some temporary directory
-    cd $(mktemp -d ${TMPDIR:-/tmp}/repro-XXXXXXX)
-	# Create a dataset to contain mriqc output
-    datalad create -d ds000003-qc -c text2git
-    cd ds000003-qc
-    # Install our containers collection:
-    datalad install -d . ///repronim/containers
-    # (optionally) Freeze container of interest to the specific version desired
-    # to facilitate reproducibility of some older results
-    datalad run -m "Downgrade/Freeze mriqc container version" containers/scripts/freeze_versions bids-mriqc=0.15.1
-    # Install input data:
-    datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
-    # Execute desired preprocessing while creating a provenance record
-    # in git history
-    datalad containers-run \
-            -n containers/bids-mriqc \
-            --input sourcedata \
-            --output . \
-            '{inputs}' '{outputs}' participant group
-    )
+```shell
+#!/bin/sh
+(  # so it could be just copy pasted or used as a script
+PS4='> '; set -xeu  # to see what we are doing and exit upon error
+# Work in some temporary directory
+cd $(mktemp -d ${TMPDIR:-/tmp}/repro-XXXXXXX)
+# Create a dataset to contain mriqc output
+datalad create -d ds000003-qc -c text2git
+cd ds000003-qc
+# Install our containers collection:
+datalad install -d . ///repronim/containers
+# (optionally) Freeze container of interest to the specific version desired
+# to facilitate reproducibility of some older results
+datalad run -m "Downgrade/Freeze mriqc container version" containers/scripts/freeze_versions bids-mriqc=0.15.1
+# Install input data:
+datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
+# Execute desired preprocessing while creating a provenance record
+# in git history
+datalad containers-run \
+        -n containers/bids-mriqc \
+        --input sourcedata \
+        --output . \
+        '{inputs}' '{outputs}' participant group
+)
+```
 
 and now you have a dataset which has a git record on how these data
 was created:
- 
-    (git) .../ds000003-qc[master] $ git show --quiet
-    commit 5f0fbcbfe84bb8aa32c4400a0838bc41ff1c88e0 (HEAD -> master)
-    Author: Yaroslav Halchenko <debian@onerussian.com>
-    Date:   Sat Aug 31 05:29:31 2019 -0400
-    
-    [DATALAD RUNCMD] containers/scripts/singularity_cmd run c...
-    
-    === Do not change lines below ===
-    {
-     "chain": [],
-     "cmd": "containers/scripts/singularity_cmd run containers/images/bids/bids-mriqc--0.15.1.sing '{inputs}' '{outputs}' participant group",
-     "dsid": "f367440c-cbcf-11e9-9ad2-002590f97d84",
-     "exit": 0,
-     "extra_inputs": [
-      "containers/images/bids/bids-mriqc--0.15.1.sing"
-     ],
-     "inputs": [
-      "sourcedata"
-     ],
-     "outputs": [
-      "."
-     ],
-     "pwd": "."
-    }
-    ^^^ Do not change lines above ^^^
- 
+
+```shell
+(git) .../ds000003-qc[master] $ git show --quiet
+commit 5f0fbcbfe84bb8aa32c4400a0838bc41ff1c88e0 (HEAD -> master)
+Author: Yaroslav Halchenko <debian@onerussian.com>
+Date:   Sat Aug 31 05:29:31 2019 -0400
+
+[DATALAD RUNCMD] containers/scripts/singularity_cmd run c...
+
+=== Do not change lines below ===
+{
+ "chain": [],
+ "cmd": "containers/scripts/singularity_cmd run containers/images/bids/bids-mriqc--0.15.1.sing '{inputs}' '{outputs}' participant group",
+ "dsid": "f367440c-cbcf-11e9-9ad2-002590f97d84",
+ "exit": 0,
+ "extra_inputs": [
+  "containers/images/bids/bids-mriqc--0.15.1.sing"
+ ],
+ "inputs": [
+  "sourcedata"
+ ],
+ "outputs": [
+  "."
+ ],
+ "pwd": "."
+}
+^^^ Do not change lines above ^^^
+```
+
 This record could later be reused (by anyone) using [datalad rerun] to rerun
 this computation using exactly the same version(s) of input data and the 
 singularity container. You can even now [datalad uninstall] sourcedata and even containers 
