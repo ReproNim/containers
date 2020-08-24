@@ -96,8 +96,8 @@
 	updateurl = shub://ReproNim/containers:bids-rs-signal-extract--0.1
 [datalad "containers.bids-spm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-spm--0.0.15.sing
-	updateurl = shub://ReproNim/containers:bids-spm--0.0.15
+	image = images/bids/bids-spm--0.0.20.sing
+	updateurl = shub://ReproNim/containers:bids-spm--0.0.20
 [datalad "containers.bids-tracula"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-tracula--6.0.0.beta-0.sing
