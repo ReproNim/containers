@@ -140,3 +140,7 @@
 	updateurl = shub://ReproNim/containers:bids-bidsonym--0.0.2
 	image = images/bids/bids-bidsonym--0.0.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-multiscalebrainparcellator"]
+	updateurl = shub://ReproNim/containers:bids-multiscalebrainparcellator--1.1.1
+	image = images/bids/bids-multiscalebrainparcellator--1.1.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
