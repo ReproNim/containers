@@ -144,3 +144,7 @@
 	updateurl = shub://ReproNim/containers:bids-multiscalebrainparcellator--1.1.1
 	image = images/bids/bids-multiscalebrainparcellator--1.1.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-connectomemapper-bidsapp"]
+	updateurl = shub://ReproNim/containers:bids-connectomemapper-bidsapp--3.0.0-diffcourse
+	image = images/bids/bids-connectomemapper-bidsapp--3.0.0-diffcourse.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
