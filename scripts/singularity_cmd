@@ -118,6 +118,6 @@ else
 
 	docker run \
 		   "${DARGS[@]}" \
-		   repronim-containers-sing:latest \
+		   repronim/containers:latest \
 		   "$cmd" "${SARGS[@]}"
 fi
