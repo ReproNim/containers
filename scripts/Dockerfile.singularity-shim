@@ -1,10 +1,11 @@
 # no longer pushed to - vanessa declared dockerhub insecure
 #FROM singularityware/singularity:v3.3.0-slim
-FROM quay.io/singularity/singularity:v3.5.3-slim
+FROM quay.io/singularity/singularity:v3.7.0-slim
 
 RUN apk update \
     && apk add bash sudo \
     && rm -rf /var/cache/apk/* \
+    && mv /etc/localtime /etc/localtime.docker \
     && printf '#!/bin/bash\n\
         set -eu\n\
         USERNAME=$(sed -rn "s/^([^:]+):[^:]+:${UID}:.*/\\1/p" /etc/passwd)\n\
