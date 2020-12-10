@@ -11,13 +11,13 @@ then
     exec 3>&2
 fi
 
-if [ "$*" = "pull mjtravers/singularity-shim:latest" ]
+if [ "$*" = "pull repronim/containers:latest" ]
 then
     cat << EOF
-latest: Pulling from mjtravers/singularity-shim
+latest: Pulling from repronim/containers
 Digest: sha256:e906fda34b081178b0fbf89818da3509f958fcb7e6d36bd69204665fb7675d5d
-Status: Image is up to date for mjtravers/singularity-shim:latest
-docker.io/mjtravers/singularity-shim:latest
+Status: Image is up to date for repronim/containers:latest
+docker.io/repronim/containers:latest
 EOF
 elif [ "$1" = "run" -a \
        "$2" = "--privileged" -a \
@@ -32,7 +32,7 @@ elif [ "$1" = "run" -a \
        "${14}" = "-w" -a \
        "${16}" = "-v" -a \
        "${17}" = "/etc/localtime" -a \
-       "${18}" = "mjtravers/singularity-shim:latest" -a \
+       "${18}" = "repronim/containers:latest" -a \
        "${19}" = "exec" -a \
        "${20}" = "-c" -a \
        "${21}" = "-e" -a \
