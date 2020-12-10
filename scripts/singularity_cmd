@@ -125,6 +125,6 @@ else
 
 	docker run \
 		   "${DARGS[@]}" \
-		   mjtravers/singularity-shim:latest \
+		   repronim/containers:latest \
 		   "$cmd" "${SARGS[@]}"
 fi
