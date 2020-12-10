@@ -49,7 +49,7 @@ assert_clean_exit () {
 pull_singularity_shim () {
 	# make sure that we have our shim docker image so its pulling does not
 	# leak into output of scripts/singularity_cmd
-	if ! docker pull mjtravers/singularity-shim:latest; then
+	if ! docker pull repronim/containers:latest; then
 		skip "Failed to pull singularity shim"
 	fi
 }
