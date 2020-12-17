@@ -4,8 +4,10 @@ debug () {
 }
 
 debug_run () {
-	debug "> lines=${lines[@]}"
-	debug "> STATUS=$status"
+	debug "> STATUS=$status OUTPUTS:"
+	for line in "${lines[@]}"; do
+		debug ">> $line"
+	done
 }
 
 fail_msg () {
@@ -22,6 +24,12 @@ error () {
 	exit 2
 }
 
+myrun () {
+	echo "> Running \"$@\""
+	run "$@"
+	debug_run
+}
+
 # Assertion helpers
 
 assert_equal () {
@@ -35,7 +43,7 @@ assert_equal () {
 
 assert_python_re_match () {
 	if ! python -c 'import re, sys; assert re.match(sys.argv[1], sys.argv[2], flags=re.DOTALL)' "$1" "$2"; then
-		fail "<<$2>>\ndid not match\n<<$1>>"
+		fail "<<$2>>\n  did not match\n  <<$1>>"
 	fi
 }
 
