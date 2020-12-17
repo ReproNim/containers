@@ -27,10 +27,8 @@ git annex get "$arg_test_img"
 
 	cd "$topdir"
 	export REPRONIM_USE_DOCKER=1
-	run scripts/singularity_cmd \
+	myrun scripts/singularity_cmd \
 		exec "$arg_test_img" /singularity "foo bar" blah 45.5 /dir "bar;" "foo&" '${foo}'
-
-	debug_run
 
 	assert_clean_exit
 	assert_equal "${lines[0]}"	'arg #1=<foo bar>'
@@ -81,7 +79,7 @@ check_subdir () {
 	# Our arg_test image has no /etc/localtime so singularity might complain
 	# about inability to bind mount that one
 	#  \S* to swallow ANSI coloring
-	target_out=( '(\S*WARNING:\S* skipping mount of /etc/localtime: no such file or directory\n)?/tmp'
+	target_out=( '.*(\S*WARNING:\S* skipping mount of /etc/localtime: no such file or directory\n)?/tmp'
 "$subdir"
 "$subdir/file"
 /var/tmp
@@ -94,14 +92,13 @@ content )
 	if [ "${subdir##/tmp/}" = "$subdir" ]; then
 		# We are not under /tmp so find will not find our directory, add it explicitly to the list
 		# for find
+		debug "Adding $subdir to run_cmd since not under /tmp"
 		run_cmd+=" \"$subdir\""
 	fi
 	run_cmd+=" /var/tmp && cat \"$subdir/file\""
-	run "$topdir/scripts/singularity_cmd" exec "$arg_test_img" sh -c "$run_cmd"
+	myrun "$topdir/scripts/singularity_cmd" exec "$arg_test_img" sh -c "$run_cmd"
 
 	rm -rf "$subdir"  # cleanup asap
-
-	debug_run
 
 	assert_clean_exit
 	assert_python_re_match "${target_out[*]}" "${lines[*]}"

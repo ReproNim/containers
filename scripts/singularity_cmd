@@ -58,7 +58,13 @@ function pass_git_config() {
 	done
 }
 
-thisfile=$(readlink -f "$0" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$0")
+function readlink_f() {
+	readlink -f "$1" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$1"
+}
+
+info "PWD=$PWD"
+
+thisfile=$(readlink_f "$0")
 thisdir=$(dirname "$thisfile")
 updir=$(dirname "$thisdir")
 BHOME="$updir/binds/HOME"
@@ -72,6 +78,10 @@ fi
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
 tmpdir=$(mktemp -d -t singtmp.XXXXXX)
+# To know what base would need to be mounted within docker
+tmpbase=$(dirname "$tmpdir")
+# Create new isolated /tmp to be bound mount
+mkdir -p "$tmpdir/tmp"
 info "created temp dir $tmpdir"
 trap 'rm -fr "$tmpdir" && info "removed temp dir $tmpdir"' exit
 
@@ -89,10 +99,11 @@ SARGS=( -e -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@" )
 # TODO: make it also check/depend on current version of singularity
 need_no_c=
 for d in "$PWD" "$updir"; do
-	if [ "${d##/tmp/}" != "$d" ]; then
+	d_normalized=$(readlink_f "$d")
+	if [ "${d_normalized##/tmp/}" != "$d_normalized/" ]; then
 		# we should create that one within our $tmpdir
-		info "Creating $d under $tmpdir"
-		mkdir -p "$tmpdir/$d" "$tmpdir/var/tmp"
+		info "Creating $d and /var/tmp under $tmpdir"
+		mkdir -p "$tmpdir$d" "$tmpdir/var/tmp"
 		need_no_c=1
 	fi
 done
@@ -107,11 +118,13 @@ fi
 if hash singularity 2>/dev/null && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
 else
+	# we need to bind mount all bases without remapping
 	DARGS=(
 	--privileged
 	--rm
 	-e "UID=$(id -u)"
 	-e "GID=$(id -g)"
+	-v "$tmpbase:$tmpbase"
 	-v "$PWD:$PWD"
 	-v "$updir:$updir"
 	-v "$BHOME:$BHOME"

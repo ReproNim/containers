@@ -167,13 +167,15 @@ datalad run -m "Downgrade/Freeze mriqc container version" \
     containers/scripts/freeze_versions bids-mriqc=0.15.1
 # Install input data:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
+# Setup git to ignore workdir to be used by pipelines
+echo "workdir/" > .gitignore && datalad save -m "Ignore workdir" .gitignore
 # Execute desired preprocessing while creating a provenance record
 # in git history
 datalad containers-run \
         -n containers/bids-mriqc \
         --input sourcedata \
         --output . \
-        '{inputs}' '{outputs}' participant group
+        '{inputs}' '{outputs}' participant group -w workdir
 )
 ```
 
