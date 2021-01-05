@@ -114,6 +114,9 @@ else
 	SARGS=( -B "$tmpdir/tmp:/tmp" -B "$tmpdir/var/tmp:/var/tmp" "${SARGS[@]}" )
 fi
 
+SARGS=( -B "$updir/binds/zoneinfo/UTC:/etc/localtime" "${SARGS[@]}" )
+
+
 # set -x
 if hash singularity 2>/dev/null && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
@@ -130,11 +133,10 @@ else
 	-v "$BHOME:$BHOME"
 	-w "$PWD")
 
-	# Bind mount present /etc/localtime inside the docker container to be
-	# passed into singularity env
-	if [ -e "/etc/localtime" ]; then
-		DARGS=( "${DARGS[@]}" -v /etc/localtime )
-	fi
+	# Even though we bind UTC zoneinfo via singularity -B, it does try to bind
+	# it first itself, and if not present -- would fail.  So we do bind mount it
+	# also into Docker environment to make sure that some /etc/localtime is available
+	DARGS=( "${DARGS[@]}" -v "$updir/binds/zoneinfo/UTC:/etc/localtime" )
 
 	docker run \
 		   "${DARGS[@]}" \
