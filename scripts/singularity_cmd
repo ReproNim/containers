@@ -133,6 +133,12 @@ else
 	-v "$BHOME:$BHOME"
 	-w "$PWD")
 
+	if [ -n "${REPRONIM_DOCKER_OPTS:-}" ]; then
+		# ATM I do want to split all possible options into separate ones if provided,
+		# shellcheck disable=SC2206
+		DARGS=( ${REPRONIM_DOCKER_OPTS} "${DARGS[@]}" )
+	fi
+
 	# Even though we bind UTC zoneinfo via singularity -B, it does try to bind
 	# it first itself, and if not present -- would fail.  So we do bind mount it
 	# also into Docker environment to make sure that some /etc/localtime is available
