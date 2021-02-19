@@ -137,8 +137,8 @@
 	image = images/bids/bids-pymvpa--2.0.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-bidsonym"]
-	updateurl = shub://ReproNim/containers:bids-bidsonym--0.0.2
-	image = images/bids/bids-bidsonym--0.0.2.sing
+	updateurl = shub://ReproNim/containers:bids-bidsonym--0.0.4
+	image = images/bids/bids-bidsonym--0.0.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-multiscalebrainparcellator"]
 	updateurl = shub://ReproNim/containers:bids-multiscalebrainparcellator--1.1.1
