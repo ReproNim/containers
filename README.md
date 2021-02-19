@@ -164,7 +164,7 @@ datalad install -d . ///repronim/containers
 # (optionally) Freeze container of interest to the specific version desired
 # to facilitate reproducibility of some older results
 datalad run -m "Downgrade/Freeze mriqc container version" \
-    containers/scripts/freeze_versions bids-mriqc=0.15.1
+    containers/scripts/freeze_versions bids-mriqc=0.16.0
 # Install input data:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 # Setup git to ignore workdir to be used by pipelines
