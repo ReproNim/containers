@@ -88,8 +88,8 @@
 	updateurl = shub://ReproNim/containers:bids-oppni--0.7.0-1
 [datalad "containers.bids-rshrf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-rshrf--1.0.8.sing
-	updateurl = shub://ReproNim/containers:bids-rshrf--1.0.8
+	image = images/bids/bids-rshrf--1.4.4.sing
+	updateurl = shub://ReproNim/containers:bids-rshrf--1.4.4
 [datalad "containers.bids-rs-signal-extract"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-rs-signal-extract--0.1.sing
