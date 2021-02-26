@@ -81,7 +81,7 @@ fi
 # container in a docker container tries to create a socket in the 
 # (double-bound) directory.  Shortening the name of the directory is one way 
 # to fix the problem.  See https://github.com/ReproNim/containers/issues/57
-if [ $(uname -s) = Darwin ]; then
+if [ "$(uname -s)" = Darwin ]; then
     tmpdir=$(mktemp -d -t s)
 else
     tmpdir=$(mktemp -d -t singtmp.XXXXXX)
