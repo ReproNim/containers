@@ -148,3 +148,6 @@
 	updateurl = shub://ReproNim/containers:bids-connectomemapper-bidsapp--3.0.0-diffcourse
 	image = images/bids/bids-connectomemapper-bidsapp--3.0.0-diffcourse.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.adswa-nilearn"]
+	image = adswa-nilearn--latest.sing
+	cmdexec = singularity exec {img} {cmd}
