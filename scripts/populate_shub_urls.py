@@ -35,8 +35,8 @@ for c in containers:
             if status.size:
                 print(f"  adding {updateurl}")
                 repo.add_url_to_file(image, updateurl)
-            print("Sleeping")  # to not trigger rate limiting of shub
-            sleep(60)
+            #print("Sleeping")  # to not trigger rate limiting of shub
+            #sleep(60)
         else:
             print(f"  {urls}")
     except Exception as exc:
