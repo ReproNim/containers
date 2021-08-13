@@ -152,3 +152,6 @@
 	updateurl = shub://adswa/nilearn-container
 	image = images/adswa/adswa-nilearn--latest.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd exec {img} {cmd}
+[datalad "containers.bids-mialsuperresolutiontoolkit"]
+	image = images/bids/bids-mialsuperresolutiontoolkit--2.0.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
