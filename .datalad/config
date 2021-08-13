@@ -108,7 +108,7 @@
 	updateurl = shub://ReproNim/containers:bids-validator--1.5.4
 [datalad "containers.neuronets-kwyk"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/neuronets/neuronets-kwyk--0.4-gpu.sing
+	image = images/neuronets/neuronets-kwyk--0.5.0-gpu.sing
 	updateurl = shub://ReproNim/containers:neuronets-kwyk--0.4-gpu
 [datalad "containers.poldracklab-ds003-example"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
