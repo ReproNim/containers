@@ -253,37 +253,6 @@ function generate_singularity_for_docker_image() {
 	fi
 }
 
-function add_singularity_image_from_collection() {
-	collection="$1"
-	githubid="$2"
-	family="$3"
-
-	echo "   ERROR: this one no longer works are RFing of singularity hub."
-	echo "   We cannot get a list of images and you would need to 'list' then"
-	echo "   explicitly with add_ingularity_versioned_image call"
-	exit 1
-	check_if_of_interest "$githubid" || return 0
-
-	# familyname=$(get_familyname "$githubid" "$family")
-
-	info "$family <- singularity $githubid"
-
-	# TODO: For now just using the version tag itself since did not encounter yet
-	# the custom ones like in case of dockers, but we might need to do the same here
-	# to get "version_pure"
-	version_tag="$(
-		curl -s "https://singularity-hub.org/accounts/login/?next=/collections/$collection" \
-		| grep "$githubid:[0-9]" \
-		| sed -e 's,^ *,,g' \
-		| sed -e 's,^[^ ]*:,,g' \
-		| sort -V -r \
-		| head -n 1)"
-	if [ -z "$version_tag" ]; then
-		info " no 'proper' version was found - skipping" # for the $githubid"
-		return
-	fi
-	add_singularity_versioned_image "$githubid" "$family" "$version_tag"
-}
 
 curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
 	| awk '/^ *dh:/{print $2}' \
@@ -304,15 +273,10 @@ generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 #
 
 # "Native" Singularity image for ReproIn
-#add_singularity_image_from_collection 588 "ReproNim/reproin" "repronim"
 add_singularity_versioned_image "ReproNim/reproin" "repronim" "0.9.0"
 
 # Docker image for simple_workflow
 generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
-# We generate it right here but better automate its addition
-# Unfortunately the entire add_singularity_image_from_collection is no longer
-# possible because singularity-hub API is gone!!!
-# add_singularity_image_from_collection 2761 "ReproNim/containers" "repronim" "TODO: specify tags pattern to match"
 # One time run! specify nonesense to not match anything else
 # add_singularity_versioned_image "ReproNim/containers" "repronim" "repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100"
 # TODO: it resulted in repronim-containers--repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing 
