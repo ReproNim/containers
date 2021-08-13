@@ -210,7 +210,7 @@ function add_singularity_versioned_image() {
   # docker run -it -v $PWD:$PWD -w $PWD --privileged quay.io/singularity/singularity:v3.5.1 build ./busybox.sing-3.5.1 ./Singularity.busybox
   # docker run -it -v $PWD:$PWD -w $PWD --entrypoint chown quay.io/singularity/singularity:v2.6 -- $UID.$GID ./busybox.sing
   # unfortunately 2.6 version tries to connect to docker service and fails, thus can't fetch anything
-	  sudo singularity build "$imagefile.tmp" "$singfile"
+	  sudo --preserve-env=TMPDIR,SINGULARITY_TMPDIR singularity build "$imagefile.tmp" "$singfile"
 	  # abuse BTRFS CoW to avoid sudo/docker to chown
 	  cp --reflink=auto "$imagefile.tmp" "$imagefile" && rm -f "$imageile.tmp"
 	  datalad containers-add "$familyname" \
