@@ -213,7 +213,7 @@ function add_singularity_versioned_image() {
 	  sudo --preserve-env=TMPDIR,SINGULARITY_TMPDIR singularity build "$imagefile.tmp" "$singfile"
 	  # abuse BTRFS CoW to avoid sudo/docker to chown
 	  cp --reflink=auto "$imagefile.tmp" "$imagefile" && rm -f "$imagefile.tmp"
-      git annex add "$imagefile"
+      datalad save -m "Adding built image for $imagename" "$imagefile"
 	  datalad containers-add "$familyname" \
 					-i "$imagefile" \
 					--update \
