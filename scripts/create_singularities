@@ -212,12 +212,13 @@ function add_singularity_versioned_image() {
   # unfortunately 2.6 version tries to connect to docker service and fails, thus can't fetch anything
 	  sudo --preserve-env=TMPDIR,SINGULARITY_TMPDIR singularity build "$imagefile.tmp" "$singfile"
 	  # abuse BTRFS CoW to avoid sudo/docker to chown
-	  cp --reflink=auto "$imagefile.tmp" "$imagefile" && rm -f "$imageile.tmp"
+	  cp --reflink=auto "$imagefile.tmp" "$imagefile" && rm -f "$imagefile.tmp"
+      git annex add "$imagefile"
 	  datalad containers-add "$familyname" \
 					-i "$imagefile" \
 					--update \
 					--call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}'
-    datalad publish  # so we share with the world
+	  datalad publish  # so we share with the world
 		# TODO: later make it work with updating existing one. We will not be able to use
 		# containers-add --update since original URL is version specific. That is why it
 		# also does not make much sense to create a image file without version. We better
