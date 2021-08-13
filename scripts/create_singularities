@@ -46,6 +46,12 @@ IMAGES_DIR="images"
 
 ARGS=( "${@}" )
 
+# Use local dedicated "tmp/" directory since any other might be too small
+topdir=$(readlink -f "$0" | xargs dirname | xargs dirname)
+export TMPDIR="$topdir/tmp"
+export SINGULARITY_TMPDIR="$TMPDIR"
+mkdir -p "$TMPDIR"
+
 # A helper to select only specific images we would like to check/deal with
 function check_if_of_interest() {
 	# Somehow if no arguments provided then ARGS variable can become unbound here
