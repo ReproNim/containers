@@ -20,6 +20,9 @@ jobs:
         sudo apt-get install eatmydata
         sudo eatmydata apt-get install singularity-container gnupg moreutils strace
         sudo eatmydata apt-get install datalad datalad-container
+        git config --global user.email "test@example.com"
+        git config --global user.name "CI Almighty"
+
 
     - name: Checkout this repository
       uses: actions/checkout@v1
