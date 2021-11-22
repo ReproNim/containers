@@ -171,7 +171,7 @@ EOF
 		# Save it immediately and push for build process to start
 		# Git branch should be configured properly to push
 		datalad save -m "Adding singularity recipe for $dh:$version_tag" "$singfile" 1>&2
-		datalad publish 1>&2
+		datalad push --data auto 1>&2
 	fi
 	echo "$singfile"
 }
@@ -220,7 +220,7 @@ function add_singularity_versioned_image() {
 					-i "$imagefile" \
 					--update \
 					--call-fmt '{img_dspath}/scripts/singularity_cmd run {img} {cmd}'
-	  datalad publish  # so we share with the world
+	  datalad push --data=auto  # so we share with the world
 		# TODO: later make it work with updating existing one. We will not be able to use
 		# containers-add --update since original URL is version specific. That is why it
 		# also does not make much sense to create a image file without version. We better
