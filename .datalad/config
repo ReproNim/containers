@@ -44,7 +44,7 @@
 	updateurl = shub://ReproNim/containers:bids-fibredensityandcrosssection--0.0.1
 [datalad "containers.bids-fmriprep"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-fmriprep--21.0.0.sing
+	image = images/bids/bids-fmriprep--20.2.6.sing
 	updateurl = shub://ReproNim/containers:bids-fmriprep--20.2.0
 [datalad "containers.bids-freesurfer"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
