@@ -146,7 +146,7 @@
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-connectomemapper-bidsapp"]
 	updateurl = shub://ReproNim/containers:bids-connectomemapper-bidsapp--3.0.0-diffcourse
-	image = images/bids/bids-connectomemapper-bidsapp--3.0.0-diffcourse.sing
+	image = images/bids/bids-connectomemapper-bidsapp--3.0.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.adswa-nilearn"]
 	updateurl = shub://adswa/nilearn-container
