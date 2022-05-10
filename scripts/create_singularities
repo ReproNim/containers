@@ -102,7 +102,7 @@ function get_last_docker_version_tag() {
 		# sort -V is not disregarding v prefix, so we do store pure version and original tag in the same line
 		# Some release alpha releases, so probably would skip thos for now
 		good_versions=$(echo "$versions" \
-							| grep -v -e '[ab][0-9][0-9]*$' -e 'rc[0-9]*$' \
+							| grep -v -e '[ab][0-9][0-9]*$' -e 'rc[0-9]*$' -e 'master' \
 							| sed -n -r 's/^(([Vv]|version-|)([0-9]{1,10}\..*)|(master)$)/\3@\1/gp')
 		last_version=$(echo -e "$good_versions" |sort -Vr |head -n 1)
 	elif [ -z "$versions" ]; then
@@ -113,7 +113,6 @@ function get_last_docker_version_tag() {
 	fi
 	echo "$last_version"
 }
-
 
 function get_familyname() {
 	repoid="$1"
@@ -284,6 +283,9 @@ generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 # "Native" Singularity image for ReproIn
 # TODO: figure out who would build those now that shub is gone?!
 add_singularity_versioned_image "ReproNim/reproin" "repronim" "0.9.0"
+
+# nipy/heudiconv
+generate_singularity_for_docker_image "nipy/heudiconv" "nipy"
 
 # Docker image for simple_workflow
 generate_singularity_for_docker_image "ReproNim/simple_workflow" "repronim"
