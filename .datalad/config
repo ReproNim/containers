@@ -162,5 +162,5 @@
 	image = images/bids/bids-micapipe--0.0.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.nipy-heudiconv"]
-	image = images/nipy/nipy-heudiconv--0.11.2.sing
+	image = images/nipy/nipy-heudiconv--0.11.3.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
