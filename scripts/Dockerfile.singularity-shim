@@ -1,5 +1,3 @@
-# no longer pushed to - vanessa declared dockerhub insecure
-#FROM singularityware/singularity:v3.3.0-slim
 FROM quay.io/singularity/singularity:v3.10.0-slim
 
 RUN apk update \
