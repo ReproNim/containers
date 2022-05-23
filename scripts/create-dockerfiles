@@ -7,5 +7,5 @@ while read a suf; do
     f="$d/Dockerfile.singularity$suf-shim"
     echo "Generating $f"
 
-    sed -e "s,{IMAGE},quay.io/singularity/singularity:v3.10.0-$a,g" < "$d/Dockerfile.singularity-template" >| "$f"
+    sed -e "s,{IMAGE},quay.io/singularity/singularity:v3.9.0-$a,g" < "$d/Dockerfile.singularity-template" >| "$f"
 done

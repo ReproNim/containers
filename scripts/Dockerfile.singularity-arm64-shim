@@ -1,4 +1,4 @@
-FROM quay.io/singularity/singularity:v3.10.0-arm64
+FROM quay.io/singularity/singularity:v3.9.0-arm64
 
 RUN apk update \
     && apk add bash sudo \
