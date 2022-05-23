@@ -1,0 +1,24 @@
+FROM {IMAGE}
+
+RUN apk update \
+    && apk add bash sudo \
+    && rm -rf /var/cache/apk/* \
+    && mv /etc/localtime /etc/localtime.docker \
+    && printf '#!/bin/bash\n\
+        set -eu\n\
+        USERNAME=$(sed -rn "s/^([^:]+):[^:]+:${UID}:.*/\\1/p" /etc/passwd)\n\
+        GROUPNAME=$(sed -rn "s/^([^:]+):[^:]+:${GID}:.*/\\1/p" /etc/group)\n\
+        if [ -z "$USERNAME" ]; then\n\
+	        USERNAME=host-user\n\
+            if [ -z "$GROUPNAME" ]; then\n\
+                GROUPNAME=host-user\n\
+                addgroup -g $GID host-user\n\
+            fi\n\
+            adduser -u $UID -G "$GROUPNAME" -D host-user\n\
+        fi\n\
+        sudo -u "$USERNAME" /usr/local/singularity/bin/singularity "$@"\n\
+    ' > /entrypoint.sh \
+    && chmod +s /usr/local/singularity/libexec/singularity/bin/starter-suid \
+    && chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
