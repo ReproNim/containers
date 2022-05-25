@@ -282,7 +282,9 @@ generate_singularity_for_docker_image "poldracklab/ds003-example" "poldracklab"
 
 # "Native" Singularity image for ReproIn
 # TODO: figure out who would build those now that shub is gone?!
-add_singularity_versioned_image "ReproNim/reproin" "repronim" "0.9.0"
+# ATM: built locally and pushed to docker hub... so let's build from those
+# add_singularity_versioned_image "ReproNim/reproin" "repronim" "0.9.0"
+generate_singularity_for_docker_image "repronim/reproin" "repronim"
 
 # nipy/heudiconv
 generate_singularity_for_docker_image "nipy/heudiconv" "nipy"
