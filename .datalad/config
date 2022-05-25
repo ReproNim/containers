@@ -116,7 +116,7 @@
 	updateurl = shub://ReproNim/containers:poldracklab-ds003-example--0.0.3
 [datalad "containers.repronim-reproin"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/repronim/repronim-reproin--0.9.0.sing
+	image = images/repronim/repronim-reproin--0.11.3.sing
 	updateurl = shub://ReproNim/reproin:0.9.0
 [datalad "containers.repronim-simple-workflow"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
