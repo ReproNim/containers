@@ -73,6 +73,9 @@ cmd="${SINGULARITY_CMD:-$1}"; shift
 
 if [ -n "${DATALAD_CONTAINER_NAME:-}" ]; then
 	export SINGULARITYENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
+	# for singularity -> apptainer migration and it seems that both are ok
+	# see https://github.com/ReproNim/containers/issues/69
+	export APPTAINERENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
 fi
 
 # singularity bind mounts system /tmp, which might result in side-effects
