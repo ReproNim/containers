@@ -263,7 +263,7 @@ fi
 
 curl -s -k https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml \
 	| awk '/^ *dh:/{print $2}' \
-	| sed -e "s,',,g" \
+	| sed -e "s,[\"'],,g" \
     | grep -v micalab/micapipe \
 	| while read -r dockerhubid; do
 	generate_singularity_for_docker_image "$dockerhubid" "bids"
