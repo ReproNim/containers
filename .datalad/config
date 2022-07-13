@@ -176,3 +176,6 @@
 [datalad "containers.bids-nirodents"]
 	image = images/bids/bids-nirodents--0.2.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-smriprep"]
+	image = images/bids/bids-smriprep--0.9.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
