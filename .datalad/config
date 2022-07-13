@@ -170,3 +170,6 @@
 [datalad "containers.bids-dmriprep"]
 	image = images/bids/bids-dmriprep--0.5.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-nibabies"]
+	image = images/bids/bids-nibabies--22.0.2.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
