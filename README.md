@@ -39,31 +39,7 @@ bids-afni-proc -> images/bids/bids-afni-proc--0.0.2.sing
 bids-antscorticalthickness -> images/bids/bids-antscorticalthickness--2.2.0-1.sing
 bids-baracus -> images/bids/bids-baracus--1.1.2.sing
 bids-brainiak-srm -> images/bids/bids-brainiak-srm--latest.sing
-bids-broccoli -> images/bids/bids-broccoli--1.0.1.sing
-bids-cpac -> images/bids/bids-cpac--1.1.0_14.sing
-bids-dparsf -> images/bids/bids-dparsf--4.3.12.sing
-bids-example -> images/bids/bids-example--0.0.7.sing
-bids-fibredensityandcrosssection -> images/bids/bids-fibredensityandcrosssection--0.0.1.sing
-bids-fmriprep -> images/bids/bids-fmriprep--1.4.1.sing
-bids-freesurfer -> images/bids/bids-freesurfer--6.0.1-5.sing
-bids-hcppipelines -> images/bids/bids-hcppipelines--3.17.0-18.sing
-bids-magetbrain -> images/bids/bids-magetbrain--0.3.sing
-bids-mindboggle -> images/bids/bids-mindboggle--0.0.4.sing
-bids-mriqc -> images/bids/bids-mriqc--0.15.1.sing
-bids-mrtrix3-connectome -> images/bids/bids-mrtrix3-connectome--0.4.2.sing
-bids-ndmg -> images/bids/bids-ndmg--0.1.0.sing
-bids-niak -> images/bids/bids-niak--latest.sing
-bids-nipypelines -> images/bids/bids-nipypelines--0.3.0.sing
-bids-oppni -> images/bids/bids-oppni--0.7.0-1.sing
-bids-rshrf -> images/bids/bids-rshrf--1.0.1.sing
-bids-rs-signal-extract -> images/bids/bids-rs-signal-extract--0.1.sing
-bids-spm -> images/bids/bids-spm--0.0.15.sing
-bids-tracula -> images/bids/bids-tracula--6.0.0.beta-0.sing
-bids-validator -> images/bids/bids-validator--1.2.5.sing
-neuronets-kwyk -> images/neuronets/neuronets-kwyk--version-0.2-cpu.sing
-poldracklab-ds003-example -> images/poldracklab/poldracklab-ds003-example--0.0.3.sing
-repronim-reproin -> images/repronim/repronim-reproin--0.5.4.sing
-repronim-simple-workflow -> images/repronim/repronim-simple-workflow--1.1.0.sing
+...  many more to list them all ...
 ```
 
 and execute either via `datalad containers-run` (which would also take care
