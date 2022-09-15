@@ -89,8 +89,8 @@ function error() {
 function get_last_docker_version_tag() {
     set -eu -o pipefail
 	dh="$1"
-	j=$(curl -s -k "https://registry.hub.docker.com/v1/repositories/$dh/tags")
-	versions=$(echo "$j" | jq -c '.[]["name"]' | sed -e 's,",,g' | sort -Vr)
+	j=$(curl -s -k "https://registry.hub.docker.com/v2/repositories/$dh/tags")
+	versions=$(echo "$j" | jq -c '.results[]["name"]' | sed -e 's,",,g' | sort -Vr)
 	nversions=$(echo "$versions" | wc -l)
 	if [ "$nversions" -gt 1 ]; then
 		# need to sort etc
