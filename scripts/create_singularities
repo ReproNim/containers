@@ -40,7 +40,7 @@
 #    will consider only two images - one for poldracklab and another one
 #    bids/validator, the other ones will be reported skipped
 
-set -eu
+set -eu -o pipefail
 
 IMAGES_DIR="images"
 
@@ -87,6 +87,7 @@ function error() {
 
 
 function get_last_docker_version_tag() {
+    set -eu -o pipefail
 	dh="$1"
 	j=$(curl -s -k "https://registry.hub.docker.com/v1/repositories/$dh/tags")
 	versions=$(echo "$j" | jq -c '.[]["name"]' | sed -e 's,",,g' | sort -Vr)
@@ -115,6 +116,7 @@ function get_last_docker_version_tag() {
 }
 
 function get_familyname() {
+    set -eu
 	repoid="$1"
 	family="$2"
 
@@ -125,6 +127,7 @@ function get_familyname() {
 }
 
 function get_imagename() {
+    set -eu
 	repoid="$1"
 	family="$2"
 	versiontag="$3"
