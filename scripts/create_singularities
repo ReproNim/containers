@@ -174,7 +174,7 @@ class Builder:
 
     def generate_singularity_for_docker_image(self, githubid: str, family: str) -> None:
         dockerhubid = githubid.lower()
-        if githubid not in self.githubids:
+        if self.githubids and githubid not in self.githubids:
             log.info("skip %s", githubid)
             return
         log.info("%s <- docker %s", family, dockerhubid)
