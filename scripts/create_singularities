@@ -32,209 +32,226 @@
 #    will consider only two images - one for poldracklab and another one
 #    bids/validator, the other ones will be reported skipped
 
+from __future__ import annotations
+from dataclasses import dataclass
 import logging
 import os
 from pathlib import Path
 import re
 import subprocess
 import sys
+from typing import Any, Optional
 import requests
 
 log = logging.getLogger(__name__)
 
-IMAGES_DIR = Path("images")
 
+@dataclass
+class Builder:
+    images_dir: Path
+    tmp_dir: Path
+    githubids: set[str]
 
-def get_last_docker_version_tag(dh):
-    r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
-    r.raise_for_status()
-    versions = [res["name"] for res in r.json()["results"]]
-    if len(versions) > 1:
-        # select only the ones which seems to be semantic and/or master/latest
-        # Some release alpha releases, so probably would skip thos for now
-        good_versions = [
-            re.sub(r"^(([Vv]|version-|)([0-9]{1,10}\..*))", r"\3@\1", v)
-            for v in versions
-            if not (
-                re.search(r"[ab][0-9]+$", v)
-                or re.search(r"rc[0-9]*$", v)
-                or "master" in v
+    def runcmd(self, *args: str, **kwargs: Any) -> subprocess.CompletedProcess:
+        kwargs.setdefault("check", True)
+        kwargs["cwd"] = str(self.images_dir)
+        kwargs["env"] = {
+            **os.environ,
+            "TMPDIR": str(self.tmp_dir),
+            "SINGULARITY_TMPDIR": str(self.tmp_dir),
+        }
+        return subprocess.run(args, **kwargs)
+
+    @staticmethod
+    def get_last_docker_version_tag(dh: str) -> Optional[str]:
+        r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
+        r.raise_for_status()
+        versions = [res["name"] for res in r.json()["results"]]
+        if len(versions) > 1:
+            # select only the ones which seems to be semantic and/or
+            # master/latest.  Some release alpha releases, so probably would
+            # skip those for now
+            good_versions = [
+                re.sub(r"^(([Vv]|version-|)([0-9]{1,10}\..*))", r"\3@\1", v)
+                for v in versions
+                if not (
+                    re.search(r"[ab][0-9]+$", v)
+                    or re.search(r"rc[0-9]*$", v)
+                    or "master" in v
+                )
+            ]
+            return max(good_versions, key=version_key, default=None)
+        elif not versions:
+            log.info(" %s no version. Tags: %s", dh, " ".join(versions))
+            return None
+        else:
+            return versions[0]
+
+    def create_singularity_file(
+        self, dh: str, version_tag: str, version_pure: str, family: str
+    ) -> SingularityFile:
+        imagename = get_imagename(dh, family, version_pure)
+        outdir = self.images_dir / family
+        outdir.mkdir(parents=True, exist_ok=True)
+        singfile = outdir / f"Singularity.{imagename}"
+        # log.info("%s \t from \t %s:%s", singfile, dh, version_tag)
+        # Do not recreate the file ATM. Since we changed the env vars we
+        # define, we don't want to recreate it if already present
+        if not singfile.exists():
+            singfile.write_text(
+                "#\n"
+                "# Automagically prepared for ReproNim/containers distribution.\n"
+                "# See http://github.com/ReproNim/containers for more info\n"
+                "#\n"
+                "Bootstrap: docker\n"
+                f"From: {dh}:{version_tag}\n"
+                "\n"
+                "%post\n"
+                "\n"
+                "# Create commonly present root directories to avoid need in overlays not supported\n"
+                "# on older systems\n"
+                "mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc\n"
+                "\n"
+                "%environment\n"
+                'export LANG="C.UTF-8"\n'
+                'export LC_ALL="C.UTF-8"\n'
+                "\n"
+                "# TODO: Take advantage of the fact that it is a bids-app somehow?\n"
             )
-        ]
-        return max(good_versions, key=version_key, default=None)
-    elif not versions:
-        log.info(" %s no version. Tags: %s", dh, " ".join(versions))
-        return None
-    else:
-        return versions[0]
+            # Save it immediately and push for build process to start
+            # Git branch should be configured properly to push
+            self.runcmd(
+                "datalad",
+                "save",
+                "-m",
+                f"Adding singularity recipe for {dh}:{version_tag}",
+                str(singfile),
+            )
+            self.runcmd("datalad", "push", "--data", "auto")
+        return SingularityFile(sourcefile=singfile, imagename=imagename)
+
+    def add_singularity_versioned_image(
+        self,
+        singfile: SingularityFile,
+        repoid: str,
+        family: str,
+        origrepoid: Optional[str] = None,
+    ) -> None:
+        # If image repo id is different (e.g. ReproNim/containers) from
+        # original repoid where we are getting image for (e.g. generating
+        # Singularity containers from Docker images) -- specify it as 4th arg
+        if origrepoid is None:
+            origrepoid = repoid
+        familyname = get_familyname(origrepoid, family)
+        imagefile = singfile.build(self)
+        if imagefile is not None:
+            self.runcmd(
+                "datalad",
+                "save",
+                "-m",
+                f"Adding built image for {singfile.imagename}",
+                str(imagefile),
+            )
+            self.runcmd(
+                "datalad",
+                "containers-add",
+                familyname,
+                "-i",
+                str(imagefile),
+                "--update",
+                "--call-fmt",
+                "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
+            )
+            self.runcmd("datalad", "push", "--data=auto")  # so we share with the world
+            # TODO: later make it work with updating existing one. We will not
+            # be able to use containers-add --update since original URL is
+            # version specific. That is why it also does not make much sense to
+            # create a image file without version. We better collect all
+            # versions available, so in case an execution of previous version
+            # is needed it could still be done "semi-manually".  May be just
+            # via adding -c datalad.containers.NAME.image variable pointing to
+            # the previous version of the container
+
+    def generate_singularity_for_docker_image(self, githubid: str, family: str) -> None:
+        dockerhubid = githubid.lower()
+        if githubid not in self.githubids:
+            log.info("skip %s", githubid)
+            return
+        log.info("%s <- docker %s", family, dockerhubid)
+        last_version = self.get_last_docker_version_tag(dockerhubid)
+        if last_version is not None:
+            last_version_pure = re.sub(r"@.*\Z", "", last_version)
+            last_version_tag = re.sub(r"^[^@]*@", "", last_version)
+            # print(dockerhubid, last_version)
+            singfile = self.create_singularity_file(
+                dockerhubid, last_version_tag, last_version_pure, family
+            )
+            self.add_singularity_versioned_image(
+                singfile, "ReproNim/containers", family, dockerhubid
+            )
 
 
-def version_key(vstr):
+@dataclass
+class SingularityFile:
+    sourcefile: Path
+    imagename: str
+
+    def build(self, builder: Builder) -> Optional[Path]:
+        # Returns the path to the new imagefile, or None if it already exists
+        imagefilename = f"{self.imagename}.sing"
+        imagefile = self.sourcefile.with_name(imagefilename)
+        if not imagefile.exists() and not imagefile.is_symlink():
+            # eventually can use docker builds, e.g.
+            # docker run -it -v $PWD:$PWD -w $PWD --privileged quay.io/singularity/singularity:v3.5.1 build ./busybox.sing-3.5.1 ./Singularity.busybox
+            # docker run -it -v $PWD:$PWD -w $PWD --entrypoint chown quay.io/singularity/singularity:v2.6 -- $UID.$GID ./busybox.sing
+            # unfortunately 2.6 version tries to connect to docker service and
+            # fails, thus can't fetch anything
+            tmpfile = self.sourcefile.with_name(f"{imagefilename}.tmp")
+            builder.runcmd(
+                "sudo",
+                "--preserve-env=TMPDIR,SINGULARITY_TMPDIR",
+                "singularity",
+                "build",
+                str(tmpfile),
+                str(self.sourcefile),
+            )
+            # abuse BTRFS CoW to avoid sudo/docker to chown
+            builder.runcmd("cp", "--reflink=auto", str(tmpfile), str(imagefile))
+            tmpfile.unlink()
+            return imagefile
+        else:
+            return None
+
+
+def version_key(vstr: str) -> tuple[tuple[int, ...], str]:
     m = re.match(r"[0-9]+(?:\.[0-9]+)*", vstr)
     assert m is not None
     return (tuple(int(c) for c in m[0].split(".")), vstr[m.end() :])
 
 
-def get_familyname(repoid, family):
+def get_familyname(repoid: str, family: str) -> str:
     name = re.sub(r"^[^/]*/", "", repoid)
     # sanitize for datalad not allowing _ in the container names
     name = name.replace("_", "-")
     return f"{family}-{name}"
 
 
-def get_imagename(repoid, family, versiontag):
+def get_imagename(repoid: str, family: str, versiontag: str) -> str:
     familyname = get_familyname(repoid, family)
     return f"{familyname}--{versiontag}"
 
 
-def create_singularity_file(dh, version_tag, version_pure, family):
-    imagename = get_imagename(dh, family, version_pure)
-    outdir = Path(IMAGES_DIR, family)
-    outdir.mkdir(parents=True, exist_ok=True)
-    singfile = outdir / f"Singularity.{imagename}"
-    # log.info("%s \t from \t %s:%s", singfile, dh, version_tag)
-    # Do not recreate the file ATM. Since we changed the env vars we define, we
-    # don't want to recreate it if already present
-    if not singfile.exists():
-        singfile.write_text(
-            "#\n"
-            "# Automagically prepared for ReproNim/containers distribution.\n"
-            "# See http://github.com/ReproNim/containers for more info\n"
-            "#\n"
-            "Bootstrap: docker\n"
-            f"From: {dh}:{version_tag}\n"
-            "\n"
-            "%post\n"
-            "\n"
-            "# Create commonly present root directories to avoid need in overlays not supported\n"
-            "# on older systems\n"
-            "mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc\n"
-            "\n"
-            "%environment\n"
-            'export LANG="C.UTF-8"\n'
-            'export LC_ALL="C.UTF-8"\n'
-            "\n"
-            "# TODO: Take advantage of the fact that it is a bids-app somehow?\n"
-        )
-        # Save it immediately and push for build process to start
-        # Git branch should be configured properly to push
-        subprocess.run(
-            [
-                "datalad",
-                "save",
-                "-m",
-                f"Adding singularity recipe for {dh}:{version_tag}",
-                str(singfile),
-            ],
-            check=True,
-        )
-        subprocess.run(["datalad", "push", "--data", "auto"], check=True)
-    return singfile
-
-
-def add_singularity_versioned_image(repoid, family, version_pure, origrepoid=None):
-    # If image repo id is different (e.g. ReproNim/containers) from original
-    # repoid where we are getting image for (e.g. generating Singularity
-    # containers from Docker images) -- specify it as 4th arg
-    if origrepoid is None:
-        origrepoid = repoid
-
-    imagedir = Path(IMAGES_DIR, family)
-    familyname = get_familyname(origrepoid, family)
-    imagename = get_imagename(origrepoid, family, version_pure)
-
-    imagefilename = f"{imagename}.sing"
-    imagefile = imagedir / imagefilename
-    singfile = imagedir / f"Singularity.{imagename}"
-    if not imagefile.exists() and not imagefile.is_symlink():
-        # eventually can use docker builds, e.g.
-        # docker run -it -v $PWD:$PWD -w $PWD --privileged quay.io/singularity/singularity:v3.5.1 build ./busybox.sing-3.5.1 ./Singularity.busybox
-        # docker run -it -v $PWD:$PWD -w $PWD --entrypoint chown quay.io/singularity/singularity:v2.6 -- $UID.$GID ./busybox.sing
-        # unfortunately 2.6 version tries to connect to docker service and
-        # fails, thus can't fetch anything
-        tmpfile = imagedir / f"{imagefilename}.tmp"
-        subprocess.run(
-            [
-                "sudo",
-                "--preserve-env=TMPDIR,SINGULARITY_TMPDIR",
-                "singularity",
-                "build",
-                str(tmpfile),
-                str(singfile),
-            ],
-            check=True,
-        )
-        # abuse BTRFS CoW to avoid sudo/docker to chown
-        subprocess.run(
-            ["cp", "--reflink=auto", str(tmpfile), str(imagefile)], check=True
-        )
-        tmpfile.unlink()
-
-        subprocess.run(
-            [
-                "datalad",
-                "save",
-                "-m",
-                f"Adding built image for {imagename}",
-                str(imagefile),
-            ],
-            check=True,
-        )
-        subprocess.run(
-            [
-                "datalad",
-                "containers-add",
-                familyname,
-                "-i",
-                imagefile,
-                "--update",
-                "--call-fmt",
-                "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
-            ],
-            check=True,
-        )
-        subprocess.run(
-            ["datalad", "push", "--data=auto"], check=True
-        )  # so we share with the world
-
-        # TODO: later make it work with updating existing one. We will not be
-        # able to use containers-add --update since original URL is version
-        # specific. That is why it also does not make much sense to create a
-        # image file without version. We better collect all versions
-        # available, so in case an execution of previous version is needed it
-        # could still be done "semi-manually".  May be just via adding -c
-        # datalad.containers.NAME.image variable pointing to the previous
-        # version of the container
-
-
-def generate_singularity_for_docker_image(githubid, family):
-    dockerhubid = githubid.lower()
-    if githubid not in sys.argv[1:]:
-        log.info("skip %s", githubid)
-        return
-    log.info("%s <- docker %s", family, dockerhubid)
-    last_version = get_last_docker_version_tag(dockerhubid)
-    if last_version is not None:
-        last_version_pure = re.sub(r"@.*\Z", "", last_version)
-        last_version_tag = re.sub(r"^[^@]*@", "", last_version)
-        # print(dockerhubid, last_version)
-        create_singularity_file(
-            dockerhubid, last_version_tag, last_version_pure, family
-        )
-        add_singularity_versioned_image(
-            "ReproNim/containers", family, last_version_pure, dockerhubid
-        )
-
-
-def main():
+def main() -> None:
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
 
     # Use local dedicated "tmp/" directory since any other might be too small
     topdir = Path(__file__).parent.parent
-    os.environ["TMPDIR"] = os.environ["SINGULARITY_TMPDIR"] = str(topdir / "tmp")
     topdir.mkdir(parents=True, exist_ok=True)
-
-    os.chdir(topdir)
+    builder = Builder(
+        image_dir=topdir / "images",
+        tmp_dir=topdir / "tmp",
+        githubids=set(sys.argv[1:]),
+    )
 
     # We are still using elderly singularity 2.6.1 to build images, so elderly
     # singularity could run images we generate, since images produced by 3
@@ -258,13 +275,15 @@ def main():
         if m:
             dockerhubid = re.sub(r"[\"']", "", m[1])
             if "micalab/micapipe" not in dockerhubid:
-                generate_singularity_for_docker_image(dockerhubid, "bids")
+                builder.generate_singularity_for_docker_image(dockerhubid, "bids")
 
     # validator is not bids-app but we will stick it along with bids
-    generate_singularity_for_docker_image("bids/validator", "bids")
+    builder.generate_singularity_for_docker_image("bids/validator", "bids")
 
     # Additional ones from Poldrack
-    generate_singularity_for_docker_image("poldracklab/ds003-example", "poldracklab")
+    builder.generate_singularity_for_docker_image(
+        "poldracklab/ds003-example", "poldracklab"
+    )
 
     #
     # ReproNim
@@ -273,21 +292,18 @@ def main():
     # "Native" Singularity image for ReproIn
     # TODO: figure out who would build those now that shub is gone?!
     # ATM: built locally and pushed to docker hub... so let's build from those
-    # add_singularity_versioned_image("ReproNim/reproin", "repronim", "0.9.0")
-    generate_singularity_for_docker_image("repronim/reproin", "repronim")
+    builder.generate_singularity_for_docker_image("repronim/reproin", "repronim")
 
     # nipy/heudiconv
-    generate_singularity_for_docker_image("nipy/heudiconv", "nipy")
+    builder.generate_singularity_for_docker_image("nipy/heudiconv", "nipy")
 
     # Docker image for simple_workflow
-    generate_singularity_for_docker_image("ReproNim/simple_workflow", "repronim")
-    # One time run! specify nonesense to not match anything else
-    # add_singularity_versioned_image("ReproNim/containers", "repronim", "repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100")
-    # TODO: it resulted in repronim-containers--repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing
-    #       image filename since used that prefix... renaming manually for now
+    builder.generate_singularity_for_docker_image(
+        "ReproNim/simple_workflow", "repronim"
+    )
 
     # neuronets
-    generate_singularity_for_docker_image("neuronets/kwyk", "neuronets")
+    builder.generate_singularity_for_docker_image("neuronets/kwyk", "neuronets")
 
 
 if __name__ == "__main__":
