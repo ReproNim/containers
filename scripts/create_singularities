@@ -72,15 +72,16 @@ class Builder:
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
             # skip those for now
-            good_versions = [
-                re.sub(r"^(([Vv]|version-|)([0-9]{1,10}\..*))", r"\3@\1", v)
-                for v in versions
+            good_versions: list[str] = []
+            for v in versions:
                 if not (
                     re.search(r"[ab][0-9]+$", v)
                     or re.search(r"rc[0-9]*$", v)
                     or "master" in v
-                )
-            ]
+                ):
+                    m = re.match(r"(([Vv]|version-|)([0-9]{1,10}\..*))", v)
+                    if m:
+                        good_versions.append(m.expand(r"\3@\1"))
             if good_versions:
                 return max(good_versions, key=version_key)
             else:
