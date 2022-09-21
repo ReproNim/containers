@@ -102,24 +102,26 @@ class Builder:
         # define, we don't want to recreate it if already present
         if not singfile.exists():
             singfile.write_text(
-                "#\n"
-                "# Automagically prepared for ReproNim/containers distribution.\n"
-                "# See http://github.com/ReproNim/containers for more info\n"
-                "#\n"
-                "Bootstrap: docker\n"
-                f"From: {dh}:{version_tag}\n"
-                "\n"
-                "%post\n"
-                "\n"
-                "# Create commonly present root directories to avoid need in overlays not supported\n"
-                "# on older systems\n"
-                "mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc\n"
-                "\n"
-                "%environment\n"
-                'export LANG="C.UTF-8"\n'
-                'export LC_ALL="C.UTF-8"\n'
-                "\n"
-                "# TODO: Take advantage of the fact that it is a bids-app somehow?\n"
+                f"""\
+#
+# Automagically prepared for ReproNim/containers distribution.
+# See http://github.com/ReproNim/containers for more info
+#
+Bootstrap: docker
+From: {dh}:{version_tag}
+
+%post
+
+# Create commonly present root directories to avoid need in overlays not supported
+# on older systems
+mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
+
+%environment
+export LANG="C.UTF-8"
+export LC_ALL="C.UTF-8"
+
+# TODO: Take advantage of the fact that it is a bids-app somehow?
+"""
             )
             # Save it immediately and push for build process to start
             # Git branch should be configured properly to push
