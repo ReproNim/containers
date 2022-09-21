@@ -1,0 +1,28 @@
+name: Type-check Python code
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  typing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip wheel
+          python -m pip install --upgrade --upgrade-strategy=eager nox
+
+      - name: Type-check
+        run: nox -e typing
+        working-directory: scripts
+
+# vim:set et sts=2:

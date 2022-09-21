@@ -40,7 +40,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-from typing import Any, Optional
+from typing import Any, Optional, cast
 import requests
 
 log = logging.getLogger(__name__)
@@ -66,7 +66,7 @@ class Builder:
     def get_last_docker_version_tag(dh: str) -> Optional[str]:
         r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         r.raise_for_status()
-        versions = [res["name"] for res in r.json()["results"]]
+        versions = [cast(str, res["name"]) for res in r.json()["results"]]
         if len(versions) > 1:
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
@@ -80,7 +80,10 @@ class Builder:
                     or "master" in v
                 )
             ]
-            return max(good_versions, key=version_key, default=None)
+            if good_versions:
+                return max(good_versions, key=version_key)
+            else:
+                return None
         elif not versions:
             log.info(" %s no version. Tags: %s", dh, " ".join(versions))
             return None
@@ -248,7 +251,7 @@ def main() -> None:
     topdir = Path(__file__).parent.parent
     topdir.mkdir(parents=True, exist_ok=True)
     builder = Builder(
-        image_dir=topdir / "images",
+        images_dir=topdir / "images",
         tmp_dir=topdir / "tmp",
         githubids=set(sys.argv[1:]),
     )
@@ -256,13 +259,13 @@ def main() -> None:
     # We are still using elderly singularity 2.6.1 to build images, so elderly
     # singularity could run images we generate, since images produced by 3
     # seems to not be usable with 2.
-    r = subprocess.run(
+    rc = subprocess.run(
         ["singularity", "--version"],
         check=True,
         stdout=subprocess.PIPE,
         universal_newlines=True,
     )
-    if "2.6.1" not in r.stdout:
+    if "2.6.1" not in rc.stdout:
         log.error("singularity is 'too new'")
         sys.exit(1)
 
