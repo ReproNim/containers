@@ -228,10 +228,12 @@ class SingularityFile:
             return None
 
 
-def version_key(vstr: str) -> tuple[tuple[int, ...], str]:
+def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:
     m = re.match(r"[0-9]+(?:\.[0-9]+)*", vstr)
-    assert m is not None
-    return (tuple(int(c) for c in m[0].split(".")), vstr[m.end() :])
+    if m:
+        return (0, tuple(int(c) for c in m[0].split(".")), vstr[m.end() :])
+    else:
+        return (1, (), vstr)
 
 
 def get_familyname(repoid: str, family: str) -> str:
