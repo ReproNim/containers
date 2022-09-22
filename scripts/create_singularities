@@ -64,7 +64,7 @@ class Builder:
         return subprocess.run(args, **kwargs)
 
     @staticmethod
-    def get_last_docker_version_tag(dh: str) -> Optional[str]:
+    def get_last_docker_version_tag(dh: str) -> Optional[tuple[str, str]]:
         r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         r.raise_for_status()
         versions = [cast(str, res["name"]) for res in r.json()["results"]]
@@ -72,7 +72,7 @@ class Builder:
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
             # skip those for now
-            good_versions: list[str] = []
+            good_versions: dict[str, str] = {}
             for v in versions:
                 if not (
                     re.search(r"[ab][0-9]+$", v)
@@ -81,16 +81,17 @@ class Builder:
                 ):
                     m = re.match(r"(([Vv]|version-|)([0-9]{1,10}\..*))", v)
                     if m:
-                        good_versions.append(m.expand(r"\3@\1"))
+                        good_versions[m[3]] = m[1]
             if good_versions:
-                return max(good_versions, key=version_key)
+                k = max(good_versions, key=version_key)
+                return (k, good_versions[k])
             else:
                 return None
         elif not versions:
             log.info(" %s no version. Tags: %s", dh, " ".join(versions))
             return None
         else:
-            return versions[0]
+            return (versions[0], versions[0])
 
     def create_singularity_file(
         self, dh: str, version_tag: str, version_pure: str, family: str
@@ -187,8 +188,7 @@ export LC_ALL="C.UTF-8"
         log.info("%s <- docker %s", family, dockerhubid)
         last_version = self.get_last_docker_version_tag(dockerhubid)
         if last_version is not None:
-            last_version_pure = re.sub(r"@.*\Z", "", last_version)
-            last_version_tag = re.sub(r"^[^@]*@", "", last_version)
+            last_version_pure, last_version_tag = last_version
             # print(dockerhubid, last_version)
             singfile = self.create_singularity_file(
                 dockerhubid, last_version_tag, last_version_pure, family
@@ -231,7 +231,7 @@ class SingularityFile:
 
 
 def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:
-    m = re.match(r"[0-9]+(?:\.[0-9]+)*", vstr)
+    m = re.match(r"[0-9]+(?:[._][0-9]+)*", vstr)
     if m:
         return (0, tuple(int(c) for c in m[0].split(".")), vstr[m.end() :])
     else:
