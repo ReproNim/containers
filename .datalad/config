@@ -56,7 +56,7 @@
 	updateurl = shub://ReproNim/containers:bids-hcppipelines--3.17.0-18
 [datalad "containers.bids-magetbrain"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-magetbrain--0.3.sing
+	image = images/bids/bids-magetbrain--0.3.1.sing
 	updateurl = shub://ReproNim/containers:bids-magetbrain--0.3
 [datalad "containers.bids-mindboggle"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
