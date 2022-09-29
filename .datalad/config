@@ -185,3 +185,6 @@
 [datalad "containers.pymvpa-mvpa2"]
     image = images/pymvpa/pymvpa-mvpa2--2.6.5.nd100.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.brainiak-brainiak"]
+	image = images/brainiak/brainiak-brainiak--0.11-20201015.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
