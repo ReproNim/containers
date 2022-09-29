@@ -33,6 +33,7 @@
 #    bids/validator, the other ones will be reported skipped
 
 from __future__ import annotations
+from collections.abc import Generator
 from dataclasses import dataclass
 import logging
 import os
@@ -93,8 +94,26 @@ class Builder:
         else:
             return (versions[0], versions[0])
 
+    @staticmethod
+    def get_docker_repositories(namespace: str, full:bool = True) -> Generator[str, None, None]:
+        """Return repositories for a specific namespace (user or organization)
+        """
+        r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{namespace}")
+        r.raise_for_status()
+        for res in r.json()["results"]:
+            if res["repository_type"] != "image":
+                # don't know what to do with those
+                continue
+            name = cast(str, res["name"])
+            assert namespace == res["namespace"]
+            if full:
+                yield f"{namespace}/{name}"
+            else:
+                yield name
+
     def create_singularity_file(
-        self, dh: str, version_tag: str, version_pure: str, family: str
+        self, dh: str, version_tag: str, version_pure: str, family: str,
+        save_push: bool=False
     ) -> SingularityFile:
         imagename = get_imagename(dh, family, version_pure)
         outdir = self.images_dir / family
@@ -126,16 +145,17 @@ export LC_ALL="C.UTF-8"
 # TODO: Take advantage of the fact that it is a bids-app somehow?
 """
             )
-            # Save it immediately and push for build process to start
-            # Git branch should be configured properly to push
-            self.runcmd(
-                "datalad",
-                "save",
-                "-m",
-                f"Adding singularity recipe for {dh}:{version_tag}",
-                str(singfile),
-            )
-            self.runcmd("datalad", "push", "--data", "auto")
+            if save_push:
+                # Save it immediately and push for build process to start
+                # Git branch should be configured properly to push
+                self.runcmd(
+                    "datalad",
+                    "save",
+                    "-m",
+                    f"Adding singularity recipe for {dh}:{version_tag}",
+                    str(singfile),
+                )
+                self.runcmd("datalad", "push", "--data", "auto")
         return SingularityFile(sourcefile=singfile, imagename=imagename)
 
     def add_singularity_versioned_image(
@@ -157,8 +177,9 @@ export LC_ALL="C.UTF-8"
                 "datalad",
                 "save",
                 "-m",
-                f"Adding built image for {singfile.imagename}",
+                f"Adding recipe&image for {singfile.imagename}",
                 str(imagefile),
+                str(singfile.sourcefile),
             )
             self.runcmd(
                 "datalad",
@@ -198,6 +219,12 @@ export LC_ALL="C.UTF-8"
             self.add_singularity_versioned_image(
                 singfile, "ReproNim/containers", family, dockerhubid
             )
+
+    def generate_singularity_for_docker_namespace(self, namespace: str, family: str=None) -> None:
+        if not family:
+            family = namespace.lower()
+        for name in self.get_docker_repositories(namespace):
+            self.generate_singularity_for_docker_image(name, family=family)
 
 
 @dataclass
@@ -312,6 +339,9 @@ def main() -> None:
 
     # neuronets
     builder.generate_singularity_for_docker_image("neuronets/kwyk")
+
+    # Entire organization
+    builder.generate_singularity_for_docker_namespace("brainiak")
 
 
 if __name__ == "__main__":
