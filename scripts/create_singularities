@@ -180,8 +180,10 @@ export LC_ALL="C.UTF-8"
             # via adding -c datalad.containers.NAME.image variable pointing to
             # the previous version of the container
 
-    def generate_singularity_for_docker_image(self, githubid: str, family: str) -> None:
+    def generate_singularity_for_docker_image(self, githubid: str, family: str=None) -> None:
         dockerhubid = githubid.lower()
+        if not family:
+            family = dockerhubid.split('/', 1)[0]
         if self.githubids and githubid not in self.githubids:
             log.info("skip %s", githubid)
             return
@@ -288,12 +290,10 @@ def main() -> None:
                 builder.generate_singularity_for_docker_image(dockerhubid, "bids")
 
     # validator is not bids-app but we will stick it along with bids
-    builder.generate_singularity_for_docker_image("bids/validator", "bids")
+    builder.generate_singularity_for_docker_image("bids/validator")
 
     # Additional ones from Poldrack
-    builder.generate_singularity_for_docker_image(
-        "poldracklab/ds003-example", "poldracklab"
-    )
+    builder.generate_singularity_for_docker_image("poldracklab/ds003-example")
 
     #
     # ReproNim
@@ -302,19 +302,18 @@ def main() -> None:
     # "Native" Singularity image for ReproIn
     # TODO: figure out who would build those now that shub is gone?!
     # ATM: built locally and pushed to docker hub... so let's build from those
-    builder.generate_singularity_for_docker_image("repronim/reproin", "repronim")
+    builder.generate_singularity_for_docker_image("repronim/reproin")
 
     # nipy/heudiconv
-    builder.generate_singularity_for_docker_image("nipy/heudiconv", "nipy")
+    builder.generate_singularity_for_docker_image("nipy/heudiconv")
 
     # Docker image for simple_workflow
-    builder.generate_singularity_for_docker_image(
-        "ReproNim/simple_workflow", "repronim"
-    )
+    builder.generate_singularity_for_docker_image("ReproNim/simple_workflow")
 
     # neuronets
-    builder.generate_singularity_for_docker_image("neuronets/kwyk", "neuronets")
+    builder.generate_singularity_for_docker_image("neuronets/kwyk")
 
 
 if __name__ == "__main__":
+    #print(list(Builder.get_docker_repositories('brainiak')))
     main()
