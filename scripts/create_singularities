@@ -65,11 +65,11 @@ class Builder:
         return subprocess.run(args, **kwargs)
 
     @staticmethod
-    def get_last_docker_version_tag(dh: str) -> Optional[tuple[str, str]]:
+    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False) -> Optional[tuple[str, str]]:
         r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         r.raise_for_status()
         versions = [cast(str, res["name"]) for res in r.json()["results"]]
-        if len(versions) > 1:
+        if len(versions) > 1 or (versions and only_good_versions):
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
             # skip those for now
@@ -200,7 +200,9 @@ export LC_ALL="C.UTF-8"
             # via adding -c datalad.containers.NAME.image variable pointing to
             # the previous version of the container
 
-    def generate_singularity_for_docker_image(self, githubid: str, family: str=None) -> None:
+    def generate_singularity_for_docker_image(self, githubid: str, family: str=None,
+                                              only_good_versions: bool=False) \
+            -> None:
         dockerhubid = githubid.lower()
         if not family:
             family = dockerhubid.split('/', 1)[0]
@@ -208,7 +210,8 @@ export LC_ALL="C.UTF-8"
             log.info("skip %s", githubid)
             return
         log.info("%s <- docker %s", family, dockerhubid)
-        last_version = self.get_last_docker_version_tag(dockerhubid)
+        last_version = self.get_last_docker_version_tag(
+            dockerhubid, only_good_versions=only_good_versions)
         if last_version is not None:
             last_version_pure, last_version_tag = last_version
             # print(dockerhubid, last_version)
@@ -219,11 +222,13 @@ export LC_ALL="C.UTF-8"
                 singfile, "ReproNim/containers", family, dockerhubid
             )
 
-    def generate_singularity_for_docker_namespace(self, namespace: str, family: str=None) -> None:
+    def generate_singularity_for_docker_namespace(self, namespace: str, family: str=None,
+                                                  only_good_versions: bool=False) -> None:
         if not family:
             family = namespace.lower()
         for name in self.get_docker_repositories(namespace):
-            self.generate_singularity_for_docker_image(name, family=family)
+            self.generate_singularity_for_docker_image(
+                name, family=family, only_good_versions=only_good_versions)
 
 
 @dataclass
@@ -340,7 +345,8 @@ def main() -> None:
     builder.generate_singularity_for_docker_image("neuronets/kwyk")
 
     # Entire organization
-    builder.generate_singularity_for_docker_namespace("brainiak")
+    # Some purely "latest" give us troubles. Let them tag
+    builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
 
     builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
