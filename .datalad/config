@@ -200,3 +200,6 @@
 [datalad "containers.brainiak-rtcloudxl"]
 	image = images/brainiak/brainiak-rtcloudxl--1.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.brainiak-rttoolsxl"]
+	image = images/brainiak/brainiak-rttoolsxl--1.3.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
