@@ -200,7 +200,7 @@ export LC_ALL="C.UTF-8"
             # via adding -c datalad.containers.NAME.image variable pointing to
             # the previous version of the container
 
-    def generate_singularity_for_docker_image(self, githubid: str, family: str=None,
+    def generate_singularity_for_docker_image(self, githubid: str, family: Optional[str]=None,
                                               only_good_versions: bool=False) \
             -> None:
         dockerhubid = githubid.lower()
@@ -222,7 +222,7 @@ export LC_ALL="C.UTF-8"
                 singfile, "ReproNim/containers", family, dockerhubid
             )
 
-    def generate_singularity_for_docker_namespace(self, namespace: str, family: str=None,
+    def generate_singularity_for_docker_namespace(self, namespace: str, family: Optional[str]=None,
                                                   only_good_versions: bool=False) -> None:
         if not family:
             family = namespace.lower()
