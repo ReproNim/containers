@@ -209,3 +209,6 @@
 [datalad "containers.brainiak-rtcloudlite"]
 	image = images/brainiak/brainiak-rtcloudlite--1.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-bidspm"]
+	image = images/bids/bids-bidspm--3.0.0.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
