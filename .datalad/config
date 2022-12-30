@@ -213,5 +213,5 @@
 	image = images/bids/bids-bidspm--3.0.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-bidsmreye"]
-	image = images/bids/bids-bidsmreye--dev.sing
+	image = images/bids/bids-bidsmreye--0.3.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
