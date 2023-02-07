@@ -350,3 +350,6 @@
 [datalad "containers.neurodesk-fatsegnet"]
 	image = images/neurodesk/neurodesk-fatsegnet--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-eeglab"]
+	image = images/neurodesk/neurodesk-eeglab--2020.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
