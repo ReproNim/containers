@@ -401,3 +401,6 @@
 [datalad "containers.neurodesk-aslprep"]
 	image = images/neurodesk/neurodesk-aslprep--0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-ants"]
+	image = images/neurodesk/neurodesk-ants--2.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
