@@ -392,3 +392,6 @@
 [datalad "containers.neurodesk-bidscoin"]
 	image = images/neurodesk/neurodesk-bidscoin--3.7.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bart"]
+	image = images/neurodesk/neurodesk-bart--0.7.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
