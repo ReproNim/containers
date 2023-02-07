@@ -8,7 +8,7 @@ repository) with a collection of popular computational tools provided
 within ready to use containerized environments.  At the moment it
 provides only [Singularity] images.  Versions of all images are tracked using
 [git-annex] with content of the images provided from a dedicated
-[Singularity Hub Collection] and http://datasets.datalad.org (AKA `///` of 
+[Singularity Hub Collection] and http://datasets.datalad.org (AKA `///` of
 DataLad) or other original collections.
 
 The aims for this project is
@@ -48,7 +48,7 @@ about getting them first if not present):
 ```shell
 $> datalad containers-run -n bids-validator -- --help
 [INFO   ] Making sure inputs are available (this may take some time)
-[INFO   ] == Command start (output follows) ===== 
+[INFO   ] == Command start (output follows) =====
 Usage: bids-validator <dataset_directory> [options]
 
 Options:
@@ -66,7 +66,7 @@ Options:
 This tool checks if a dataset in a given directory is compatible with the Brain
 Imaging Data Structure specification. To learn more about Brain Imaging Data
 Structure visit http://bids.neuroimaging.io
-[INFO   ] == Command exit (modification check follows) ===== 
+[INFO   ] == Command exit (modification check follows) =====
 action summary:
   get (notneeded: 1)
   save (notneeded: 1)
@@ -84,7 +84,7 @@ This helper script assists in making singularity execution reproducible by
 
 - disabling passing environment variables inside your containerized environment
 - creating temporary `/tmp` directory for the environment, so there is no
-  interaction with file paths outside of the current directory (which should 
+  interaction with file paths outside of the current directory (which should
   ideally be a DataLad dataset)
 - using custom and nearly empty [binds/HOME]() HOME directory, so there is
   no possible leakage of locally user-level installed Python and other modules
@@ -116,33 +116,39 @@ establish "reproducible interactive sessions" with the help of that script.
 
 Singularity image files have `.sing` extension.  Since we are providing
 a custom filename to store the file at, we cannot guess the format of
-the container (e.g., either it is 
+the container (e.g., either it is
 [.sif](https://www.sylabs.io/2018/03/sif-containing-your-containers/)),
 so we just use uniform `.sing` extension.
 
 # A typical YODA workflow
 
-Before proceeding our typical workflow, let's re-express [YODA principles] as a possible workflow:
+Lets summarize YODA principles as a possible workflow:
 
-- create dataset which would contain results,
-- install/add to that dataset everything needed (code, other datasets, containers)
-  to perform the analysis
+- create a new dataset which would contain results and everything needed
+    to obtain them
+- install/add subdatasets(code, other datasets, containers)
 - perform the analysis using **only** materials available within the reach of this dataset.
+
+
+Let's assume that our goal is to do Quality Control of an MRI dataset
+(which is available as DataLad dataset ds000003. We will create a new
+dataset with the output of the QC results(as analyzed by mriqc
+BIDS-App). mriqc is provided by the ReproNim/containers dataset of
+containers. Below, we execute a simple analysis workflow which 
+adheres to YODA principles and we **end up with a dataset that contains
+all componentes necessary a history of how it was achieved.**
 
 This would help to guarantee reproducibility in the future because all the
 materials would be *reachable* within that dataset.
 
-# A typical workflow
 
-Let's assume that our goal is to do Quality Control of an MRI dataset (which is
-already available as DataLad dataset), e.g. openneuro ds000003, and create a
-new dataset with the output of the QC results as analyzed by mriqc
-BIDS-App which is contained within this ReproNim/containers dataset of containers.
-Here we outline simple analysis workflow, where we will adhere to
-[YODA principles] to achieve the goal and where each component should contain all necessary for its
-"reproduction" history and components.
+## Runnable script
 
+For advanced users who are comfortable with datalad, the following
+script may give you everything you need.
 
+<details>
+<summary>The version of the script with more explanations</summary>
 
 ```shell
 #!/bin/sh
@@ -171,7 +177,81 @@ datalad containers-run \
         --output . \
         '{inputs}' '{outputs}' participant group -w workdir
 )
+
 ```
+</details>
+
+## Walkthrough
+
+For users who are new to these components, we will walk through how
+these components are used together in a typical Yoda workflow.
+the steps
+
+```bash
+mkdir ~/my-experiments
+cd ~/my-experiments
+datalad create -d ds000003-qc -c text2git
+cd ds000003-qc
+```
+
+Datalad has created a new directory for our results, `ds000003-qc`.
+According to YODA principles, this dataset should also contain our input
+data, code, and anything else we need to run the analysis.
+
+Install the input dataset:
+
+```bash
+datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
+```
+
+Now we install the `ReproNim/containers` collection.
+
+```bash
+datalad install -d . ///repronim/containers
+```
+
+Now let's take a look at what we have.
+
+```bash
+/ds000003-qc # The root dataset contains everything
+    /sourcedata # we call it source, but it is actually 000003-demo
+    /repronim/containers # This is where our non-custom code lives
+```
+
+Now we can "freeze" a container or containers that we plan to use so
+anyone (including you) will know exactly which version was used. This is
+technically optional, but very helpful. (All that changes is a
+subproject commit hash.)
+
+```bash
+datalad run -m "Downgrade/Freeze mriqc container version" \
+    containers/scripts/freeze_versions bids-mriqc=0.16.0
+```
+
+When we run the bids-mriqc container, it will need a working directory
+for intermediate files. These are not helpfull to commit, so we will
+tell git (and datalad) to ignore the whole directory.
+
+```bash
+echo "workdir/" > .gitignore && datalad save -m "Ignore workdir" .gitignore
+```
+
+Now we use `datalad containers-run` to perform the analysis.
+
+**_NOTE:_** mriqc is memory intensive, so we are restricting to a single
+participant. OOM error will cause a NodeExecutionError, and the cause
+may not be immediately obvious.
+
+```bash
+datalad containers-run \
+        --container-name containers/bids-mriqc \
+        --input sourcedata \
+        --output . \
+        '{inputs}' '{outputs}' participant --participant-label sub-02 -w workdir
+```
+
+If everything worked as expected, we will now see our new analysis, and
+a commit message of how it was obtained!
 
 and now you have a dataset which has a git record on how these data
 was created:
@@ -205,9 +285,9 @@ Date:   Sat Aug 31 05:29:31 2019 -0400
 ```
 
 This record could later be reused (by anyone) using [datalad rerun] to rerun
-this computation using exactly the same version(s) of input data and the 
-singularity container. You can even now [datalad uninstall] sourcedata and even containers 
-sub-datasets to save space - they will be retrievable at those exact versions later 
+this computation using exactly the same version(s) of input data and the
+singularity container. You can even now [datalad uninstall] sourcedata and even containers
+sub-datasets to save space - they will be retrievable at those exact versions later
 on if you need to extend or redo your analysis.
 
 #### Notes:
@@ -218,13 +298,13 @@ on if you need to extend or redo your analysis.
 - a copy of the dataset is made available from [`///repronim/ds000003-qc`](http://datasets.datalad.org/?dir=/repronim/ds000003-qc)
   and [https://github.com/ReproNim/ds000003-qc]().
 
-	
+
 # Installation
 
 It is a DataLad dataset, so you can either just [git clone] or [datalad install] it.
-You will need to have [git-annex] available to retrieve any images. And you will 
+You will need to have [git-annex] available to retrieve any images. And you will
 need DataLad and [datalad-container] extension installed for [datalad containers-run].
-Since Singularity is Linux-only application, it will be "functional" only on 
+Since Singularity is Linux-only application, it will be "functional" only on
 Linux. On OSX (and possibly Windows), if you have Docker installed, singularity
 images will be executed through the provided docker shim image.
 
@@ -251,20 +331,20 @@ environment corresponding actions were taken.
 
 ## Grants
 
-Development of this project and [datalad-container] extension was supported by the ReproNim project 
+Development of this project and [datalad-container] extension was supported by the ReproNim project
 ([NIH 1P41EB019936-01A1](https://projectreporter.nih.gov/project_info_description.cfm?projectnumber=1P41EB019936-01A1)).
 DataLad development was supported by a US-German collaboration in computational neuroscience (CRCNS) "DataGit: converging catalogues, warehouses, and deployment logistics into a federated 'data distribution'" (Halchenko/Hanke), co-funded by the US National Science Foundation ([NSF 1429999](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1429999)) and the German Federal Ministry of Education and Research (BMBF 01GQ1411). Additional support is provided by the German federal state of Saxony-Anhalt and the European Regional Development Fund, Project: Center for Behavioral Brain Sciences, Imaging Platform.
 
 ## Copyrighted works
 
-All container images are collections of various projects governed by the 
+All container images are collections of various projects governed by the
 corresponding copyrights/licenses.  Some are not completely FOSS and might
-require additional license(s) to be obtained and provided (e.g. FreeSurfer 
+require additional license(s) to be obtained and provided (e.g. FreeSurfer
 license for `fmriprep`).
 
 ### `artwork/repronim-containers-yoda_*`
 
-Based on the artwork Copyright 2018-2019 Michael Hanke, from 
+Based on the artwork Copyright 2018-2019 Michael Hanke, from
 [myyoda/poster](https://github.com/myyoda/poster), distributed under [CC BY](https://creativecommons.org/licenses/by/4.0/).
 
 [git-annex]: http://git-annex.branchable.com
