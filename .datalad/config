@@ -389,3 +389,6 @@
 [datalad "containers.neurodesk-bidstools"]
 	image = images/neurodesk/neurodesk-bidstools--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bidscoin"]
+	image = images/neurodesk/neurodesk-bidscoin--3.7.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
