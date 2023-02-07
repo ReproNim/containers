@@ -386,3 +386,6 @@
 [datalad "containers.neurodesk-brainstorm"]
 	image = images/neurodesk/neurodesk-brainstorm--3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bidstools"]
+	image = images/neurodesk/neurodesk-bidstools--1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
