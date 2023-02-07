@@ -347,3 +347,6 @@
 [datalad "containers.neurodesk-fieldtrip"]
 	image = images/neurodesk/neurodesk-fieldtrip--20211114.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-fatsegnet"]
+	image = images/neurodesk/neurodesk-fatsegnet--1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
