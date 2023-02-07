@@ -408,5 +408,5 @@
 	image = images/neurodesk/neurodesk-aidamri--1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-afni"]
-	image = images/neurodesk/neurodesk-afni--23.0.simg
+	image = images/neurodesk/neurodesk-afni--22.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
