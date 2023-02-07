@@ -272,3 +272,6 @@
 [datalad "containers.neurodesk-oshyx"]
 	image = images/neurodesk/neurodesk-oshyx--0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-nipype"]
+	image = images/neurodesk/neurodesk-nipype--1.8.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
