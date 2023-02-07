@@ -293,3 +293,6 @@
 [datalad "containers.neurodesk-mritools"]
 	image = images/neurodesk/neurodesk-mritools--3.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-mriqc"]
+	image = images/neurodesk/neurodesk-mriqc--0.16.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
