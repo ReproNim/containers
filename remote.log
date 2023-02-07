@@ -1,0 +1,2 @@
+58140b89-2abc-43eb-b89e-7c4cd82acab2 autoenable=true encryption=none externaltype=datalad name=datalad type=external timestamp=1615853980.990553014s
+71c620b5-997f-4849-bb30-c42dbb48a51e autoenable=true location=http://datasets.datalad.org/repronim/containers/.git name=datasets.datalad.org type=git timestamp=1563389624.584709579s
