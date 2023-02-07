@@ -251,3 +251,6 @@
 [datalad "containers.neurodesk-rstudio"]
 	image = images/neurodesk/neurodesk-rstudio--1.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-root"]
+	image = images/neurodesk/neurodesk-root--6.22.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
