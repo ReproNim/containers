@@ -278,3 +278,6 @@
 [datalad "containers.neurodesk-niistat"]
 	image = images/neurodesk/neurodesk-niistat--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-niftyreg"]
+	image = images/neurodesk/neurodesk-niftyreg--1.4.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
