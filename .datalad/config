@@ -248,3 +248,6 @@
 [datalad "containers.neurodesk-sigviewer"]
 	image = images/neurodesk/neurodesk-sigviewer--0.6.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-rstudio"]
+	image = images/neurodesk/neurodesk-rstudio--2022.07.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
