@@ -365,3 +365,6 @@
 [datalad "containers.neurodesk-deepretinotopy"]
 	image = images/neurodesk/neurodesk-deepretinotopy--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-convert3d"]
+	image = images/neurodesk/neurodesk-convert3d--1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
