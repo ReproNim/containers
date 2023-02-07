@@ -170,7 +170,7 @@ class Builder:
                     save=False
                 )
                 key = ds.repo.add(str(imagefile))['key']
-                for url in img.urls[1:]:
+                for url in img.urls:
                     self.runcmd(
                         "git", "annex", "registerurl", "-c", "annex.alwayscommit=false",
                         key, url
