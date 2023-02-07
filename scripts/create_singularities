@@ -44,7 +44,18 @@ import sys
 from typing import Any, Optional, cast
 import requests
 
+import datalad.api as dl
+
 log = logging.getLogger(__name__)
+
+
+@dataclass
+class NeuroDeskSingularityImage:
+    container: str
+    name: str
+    version: str
+    date: str
+    urls: list[str]
 
 
 @dataclass
@@ -110,6 +121,77 @@ class Builder:
                 yield f"{namespace}/{name}"
             else:
                 yield name
+
+    @staticmethod
+    def get_neurodesk_images() -> Generator[NeuroDeskSingularityImage, None, None]:
+        """Return list of Neurodesk singularity images
+
+        Following https://github.com/ReproNim/containers/issues/64#issuecomment-1418301696
+        """
+        r = requests.get(f"https://raw.githubusercontent.com/NeuroDesk/neurocommand/main/cvmfs/log.txt")
+        r.raise_for_status()
+        # look like afni_21.2.00_20210714 categories:functional imaging,
+        # for now we disregard the metadata
+        for l in r.text.splitlines():
+            container = l.split()[0]
+            name, version, date = container.split('_')
+            yield NeuroDeskSingularityImage(
+                container=container,
+                name=name,
+                version=version,
+                date=date,
+                urls=[
+                    f'https://objectstorage.{zone}.oraclecloud.com/n/sd63xuke79z3/b/neurodesk/o/{container}.simg'
+                    for zone in ('us-ashburn-1', 'eu-frankfurt-1', 'ap-sydney-1')
+                ]
+            )
+
+    def add_neurodesk_singularity_images(
+        self,
+    ) -> None:
+        # AFAIK they are sorted by version and we need to add
+        # datalad-container one only to the latest version.
+        # For the others -- check if image file exists and if not -- add
+        all_imgs = list(self.get_neurodesk_images())[::-1]
+
+        ds = dl.Dataset(self.repo_dir)
+        outdir = self.images_dir / 'neurodesk'
+        outdir.mkdir(parents=True, exist_ok=True)
+
+        prior_img = None
+        added, registered = [], 0
+        for img in all_imgs:
+            imagefile = (outdir / get_imagename(img.name, 'neurodesk', img.version)).with_suffix(".simg")
+            if not imagefile.exists():
+                log.info("%s <- singularity %s", 'neurodesk', img.container)
+                out = dl.download_url(
+                    img.urls[0],
+                    path=imagefile,
+                    save=False
+                )
+                key = ds.repo.add(str(imagefile))['key']
+                for url in img.urls[1:]:
+                    self.runcmd(
+                        "git", "annex", "registerurl", "-c", "annex.alwayscommit=false",
+                        key, url
+                    )
+                added.append(str(imagefile))
+            if img.name != prior_img:
+                registered += 1
+                log.info(" <- register %s %s", img.name, img.version)
+                self.runcmd(
+                    "datalad",
+                    "containers-add",
+                    get_familyname(img.name, 'neurodesk'),
+                    "-i",
+                    str(imagefile),
+                    "--update",
+                    "--call-fmt",
+                    "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
+                )
+        if added:
+            ds.save(path=added,
+                    message=f"Add {len(added)} NeuroDesk images with {registered} registered")
 
     def create_singularity_file(
         self, dh: str, version_tag: str, version_pure: str, family: str,
@@ -309,6 +391,9 @@ def main() -> None:
         log.error("singularity is 'too new'")
         sys.exit(1)
 
+    builder.add_neurodesk_singularity_images()
+    return
+
     r = requests.get(
         "https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml"
     )
@@ -347,6 +432,9 @@ def main() -> None:
     # Entire organization
     # Some purely "latest" give us troubles. Let them tag
     builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
+
+    # Custom: neurodesk singularity images
+    builder.add_neurodesk_singularity_images()
 
     builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
