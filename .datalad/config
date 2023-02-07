@@ -353,3 +353,6 @@
 [datalad "containers.neurodesk-eeglab"]
 	image = images/neurodesk/neurodesk-eeglab--2020.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-dsistudio"]
+	image = images/neurodesk/neurodesk-dsistudio--2020.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
