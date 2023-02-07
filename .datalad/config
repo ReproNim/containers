@@ -332,3 +332,6 @@
 [datalad "containers.neurodesk-hdbet"]
 	image = images/neurodesk/neurodesk-hdbet--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-gimp"]
+	image = images/neurodesk/neurodesk-gimp--2.10.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
