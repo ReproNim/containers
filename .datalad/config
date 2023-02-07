@@ -261,5 +261,5 @@
 	image = images/neurodesk/neurodesk-rabies--0.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-qsmxt"]
-	image = images/neurodesk/neurodesk-qsmxt--1.3.simg
+	image = images/neurodesk/neurodesk-qsmxt--1.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
