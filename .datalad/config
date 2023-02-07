@@ -368,3 +368,6 @@
 [datalad "containers.neurodesk-convert3d"]
 	image = images/neurodesk/neurodesk-convert3d--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-connectomeworkbench"]
+	image = images/neurodesk/neurodesk-connectomeworkbench--1.5.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
