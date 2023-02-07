@@ -239,3 +239,6 @@
 [datalad "containers.neurodesk-sovabids"]
 	image = images/neurodesk/neurodesk-sovabids--0.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-slicersalt"]
+	image = images/neurodesk/neurodesk-slicersalt--3.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
