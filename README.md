@@ -120,11 +120,29 @@ the container (e.g., either it is
 [.sif](https://www.sylabs.io/2018/03/sif-containing-your-containers/)),
 so we just use uniform `.sing` extension.
 
+# A typical YODA workflow
+
+Before proceeding our typical workflow, let's re-express [YODA principles] as a possible workflow:
+
+- create dataset which would contain results,
+- install/add to that dataset everything needed (code, other datasets, containers)
+  to perform the analysis
+- perform the analysis using **only** materials available within the reach of this dataset.
+
+This would help to guarantee reproducibility in the future because all the
+materials would be *reachable* within that dataset.
+
 # A typical workflow
 
-Here is an outline of a simple analysis workflow, where we will adhere to
-[YODA principles] where each component should contain all necessary for its
-"reproduction" history and components:
+Let's assume that our goal is to do Quality Control of an MRI dataset (which is
+already available as DataLad dataset), e.g. openneuro ds000003, and create a
+new dataset with the output of the QC results as analyzed by mriqc
+BIDS-App which is contained within this ReproNim/containers dataset of containers.
+Here we outline simple analysis workflow, where we will adhere to
+[YODA principles] to achieve the goal and where each component should contain all necessary for its
+"reproduction" history and components.
+
+
 
 ```shell
 #!/bin/sh
