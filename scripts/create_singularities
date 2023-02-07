@@ -190,6 +190,7 @@ class Builder:
                     "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
                 )
         if added:
+            ds.repo.set_metadata(files=added, add={'distribution-restrictions': 'out-of-space'})
             ds.save(path=added,
                     message=f"Add {len(added)} NeuroDesk images with {registered} registered")
 
