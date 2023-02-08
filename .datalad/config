@@ -225,7 +225,7 @@
 	image = images/neurodesk/neurodesk-trackvis--0.6.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-tgvqsm"]
-	image = images/neurodesk/neurodesk-tgvqsm--1.0.simg
+	image = images/neurodesk/neurodesk-tgvqsm--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-surfice"]
 	image = images/neurodesk/neurodesk-surfice--1.0.simg
