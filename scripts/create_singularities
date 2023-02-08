@@ -177,6 +177,7 @@ class Builder:
                     )
                 added.append(str(imagefile))
             if img.name != prior_img:
+                prior_img = img.name
                 registered += 1
                 log.info(" <- register %s %s", img.name, img.version)
                 self.runcmd(
