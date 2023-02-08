@@ -282,7 +282,7 @@
 	image = images/neurodesk/neurodesk-niftyreg--1.4.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mrtrix3tissue"]
-	image = images/neurodesk/neurodesk-mrtrix3tissue--5.2.simg
+	image = images/neurodesk/neurodesk-mrtrix3tissue--5.2.8.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mrtrix3"]
 	image = images/neurodesk/neurodesk-mrtrix3--3.0.simg
