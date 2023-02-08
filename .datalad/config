@@ -378,7 +378,7 @@
 	image = images/neurodesk/neurodesk-code--220114.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-clearswi"]
-	image = images/neurodesk/neurodesk-clearswi--1.0.simg
+	image = images/neurodesk/neurodesk-clearswi--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-cat12"]
 	image = images/neurodesk/neurodesk-cat12--r1933.simg
