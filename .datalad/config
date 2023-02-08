@@ -243,7 +243,7 @@
 	image = images/neurodesk/neurodesk-slicersalt--3.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-slicer"]
-	image = images/neurodesk/neurodesk-slicer--4.11.simg
+	image = images/neurodesk/neurodesk-slicer--5.0.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-sigviewer"]
 	image = images/neurodesk/neurodesk-sigviewer--0.6.simg
