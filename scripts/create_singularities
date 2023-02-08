@@ -161,9 +161,9 @@ class Builder:
         prior_img = None
         added, registered = [], 0
         for img in all_imgs:
+            log.info("neurodesk <- singularity %s", img.container)
             imagefile = Path(str(outdir / get_imagename(img.name, 'neurodesk', img.version)) + ".simg")
             if not (imagefile.exists() or imagefile.is_symlink()):
-                log.info("%s <- singularity %s", 'neurodesk', img.container)
                 out = dl.download_url(
                     img.urls[0],
                     path=imagefile,
