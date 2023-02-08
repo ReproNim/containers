@@ -321,7 +321,7 @@
 	image = images/neurodesk/neurodesk-laynii--2.2.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-lashis"]
-	image = images/neurodesk/neurodesk-lashis--1.simg
+	image = images/neurodesk/neurodesk-lashis--2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-julia"]
 	image = images/neurodesk/neurodesk-julia--1.4.simg
