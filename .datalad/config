@@ -252,7 +252,7 @@
 	image = images/neurodesk/neurodesk-rstudio--2022.07.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-root"]
-	image = images/neurodesk/neurodesk-root--6.22.simg
+	image = images/neurodesk/neurodesk-root--6.22.02.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-romeo"]
 	image = images/neurodesk/neurodesk-romeo--3.2.simg
