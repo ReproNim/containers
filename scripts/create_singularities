@@ -162,7 +162,7 @@ class Builder:
         added, registered = [], 0
         for img in all_imgs:
             imagefile = Path(str(outdir / get_imagename(img.name, 'neurodesk', img.version)) + ".simg")
-            if not imagefile.exists():
+            if not (imagefile.exists() or imagefile.is_symlink()):
                 log.info("%s <- singularity %s", 'neurodesk', img.container)
                 out = dl.download_url(
                     img.urls[0],
@@ -176,20 +176,20 @@ class Builder:
                         key, url
                     )
                 added.append(str(imagefile))
-            if img.name != prior_img:
-                prior_img = img.name
-                registered += 1
-                log.info(" <- register %s %s", img.name, img.version)
-                self.runcmd(
-                    "datalad",
-                    "containers-add",
-                    get_familyname(img.name, 'neurodesk'),
-                    "-i",
-                    str(imagefile),
-                    "--update",
-                    "--call-fmt",
-                    "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
-                )
+                if img.name != prior_img:
+                    prior_img = img.name
+                    registered += 1
+                    log.info(" <- register %s %s", img.name, img.version)
+                    self.runcmd(
+                        "datalad",
+                        "containers-add",
+                        get_familyname(img.name, 'neurodesk'),
+                        "-i",
+                        str(imagefile),
+                        "--update",
+                        "--call-fmt",
+                        "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
+                    )
         if added:
             ds.repo.set_metadata(files=added, add={'distribution-restrictions': 'out-of-space'})
             ds.save(path=added,
@@ -392,9 +392,6 @@ def main() -> None:
     if "2.6.1" not in rc.stdout:
         log.error("singularity is 'too new'")
         sys.exit(1)
-
-    builder.add_neurodesk_singularity_images()
-    return
 
     r = requests.get(
         "https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml"
