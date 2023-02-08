@@ -288,7 +288,7 @@
 	image = images/neurodesk/neurodesk-mrtrix3--3.0.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mrsiproc"]
-	image = images/neurodesk/neurodesk-mrsiproc--0.0.simg
+	image = images/neurodesk/neurodesk-mrsiproc--0.0.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mritools"]
 	image = images/neurodesk/neurodesk-mritools--3.3.simg
