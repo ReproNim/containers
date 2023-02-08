@@ -276,7 +276,7 @@
 	image = images/neurodesk/neurodesk-nipype--1.8.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-niistat"]
-	image = images/neurodesk/neurodesk-niistat--1.0.simg
+	image = images/neurodesk/neurodesk-niistat--1.0.20191216.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-niftyreg"]
 	image = images/neurodesk/neurodesk-niftyreg--1.4.simg
