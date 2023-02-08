@@ -309,7 +309,7 @@
 	image = images/neurodesk/neurodesk-mne--1.1.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-minc"]
-	image = images/neurodesk/neurodesk-minc--1.9.simg
+	image = images/neurodesk/neurodesk-minc--1.9.18.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-matlab"]
 	image = images/neurodesk/neurodesk-matlab--2022a.simg
