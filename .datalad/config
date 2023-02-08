@@ -357,7 +357,7 @@
 	image = images/neurodesk/neurodesk-dsistudio--2020.10.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-diffusiontoolkit"]
-	image = images/neurodesk/neurodesk-diffusiontoolkit--0.6.4.simg
+	image = images/neurodesk/neurodesk-diffusiontoolkit--0.6.4.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-delphi"]
 	image = images/neurodesk/neurodesk-delphi--0.0.simg
