@@ -1,0 +1,3 @@
+[codespell]
+skip = .git,.nox,.mypy_cache
+#ignore-words-list = aks,postgressql,filterin,ser,ist,respone,classe
