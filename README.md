@@ -148,7 +148,7 @@ For advanced users who are comfortable with datalad, the following
 script may give you everything you need.
 
 <details>
-<summary>The version of the script with more explanations</summary>
+<summary>The version of the script with all commands explained</summary>
 
 ```shell
 #!/bin/sh
