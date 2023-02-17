@@ -204,7 +204,7 @@ Install the input dataset:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 ```
 
-Now we install the `ReproNim/containers` collection.
+Next we install the `ReproNim/containers` collection.
 
 ```bash
 datalad install -d . ///repronim/containers
