@@ -131,12 +131,12 @@ Lets summarize YODA principles as a possible workflow:
 
 
 Let's assume that our goal is to do Quality Control of an MRI dataset
-(which is available as DataLad dataset ds000003. We will create a new
-dataset with the output of the QC results(as analyzed by mriqc
+(which is available as DataLad dataset ds000003). We will create a new
+dataset with the output of the QC results (as analyzed by mriqc
 BIDS-App). mriqc is provided by the ReproNim/containers dataset of
-containers. Below, we execute a simple analysis workflow which 
+containers. Below, we execute a simple analysis workflow which
 adheres to YODA principles and we **end up with a dataset that contains
-all componentes necessary a history of how it was achieved.**
+all components necessary a history of how it was achieved.**
 
 This would help to guarantee reproducibility in the future because all the
 materials would be *reachable* within that dataset.
@@ -184,7 +184,7 @@ datalad containers-run \
 ## Walkthrough
 
 For users who are new to these components, we will walk through how
-these components are used together in a typical Yoda workflow.
+these components are used together in a typical YODA workflow.
 the steps
 
 ```bash
@@ -214,14 +214,22 @@ Now let's take a look at what we have.
 
 ```bash
 /ds000003-qc # The root dataset contains everything
-    /sourcedata # we call it source, but it is actually 000003-demo
-    /repronim/containers # This is where our non-custom code lives
+ |--/sourcedata # we call it source, but it is actually ds000003-demo
+ |--/containers # repronim/containers, this is where our non-custom code lives
 ```
 
-Now we can "freeze" a container or containers that we plan to use so
-anyone (including you) will know exactly which version was used. This is
-technically optional, but very helpful. (All that changes is a
-subproject commit hash.)
+`freeze_versions` is an optional step that will record and "freeze" the
+version of the container used. Even if the `///containers` dataset is
+upgraded with a newer version of our container, we are "pinned" to the
+container we explicitly determined. Note: To upgrade the container,
+rerun `freeze_versions` script with the new version.
+
+Note: `freeze_versions` adds a change to the `///repronim/containers`
+dataset.  Therefore, it is important to ensure that your clone of
+`///repronim/containers` is publicly available. Reproducers will use
+this clone and inherit your changes to `.datalad/config`, including the
+frozen versions.
+
 
 ```bash
 datalad run -m "Downgrade/Freeze mriqc container version" \
@@ -239,8 +247,8 @@ echo "workdir/" > .gitignore && datalad save -m "Ignore workdir" .gitignore
 Now we use `datalad containers-run` to perform the analysis.
 
 **_NOTE:_** mriqc is memory intensive, so we are restricting to a single
-participant. OOM error will cause a NodeExecutionError, and the cause
-may not be immediately obvious.
+participant. OOM (Out of Memory) situations cause a `NodeExecutionError`
+with an `Error 137`.
 
 ```bash
 datalad containers-run \
@@ -251,10 +259,9 @@ datalad containers-run \
 ```
 
 If everything worked as expected, we will now see our new analysis, and
-a commit message of how it was obtained!
-
-and now you have a dataset which has a git record on how these data
-was created:
+a commit message of how it was obtained! All of this is contained within
+a single (nested) dataset with a complete record of how all the data was
+obtained.
 
 ```shell
 (git) .../ds000003-qc[master] $ git show --quiet
