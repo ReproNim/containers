@@ -237,7 +237,7 @@ datalad run -m "Downgrade/Freeze mriqc container version" \
 ```
 
 When we run the bids-mriqc container, it will need a working directory
-for intermediate files. These are not helpfull to commit, so we will
+for intermediate files. These are not helpful to commit, so we will
 tell git (and datalad) to ignore the whole directory.
 
 ```bash
