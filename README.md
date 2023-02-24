@@ -144,7 +144,7 @@ materials would be *reachable* within that dataset.
 
 ## Runnable script
 
-For advanced users who are comfortable with datalad, the following
+For advanced users who are comfortable with DataLad, the following
 script may give you everything you need.
 
 <details>
