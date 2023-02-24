@@ -221,8 +221,9 @@ Now let's take a look at what we have.
 `freeze_versions` is an optional step that will record and "freeze" the
 version of the container used. Even if the `///containers` dataset is
 upgraded with a newer version of our container, we are "pinned" to the
-container we explicitly determined. Note: To upgrade the container,
-rerun `freeze_versions` script with the new version.
+container we explicitly determined. Note: To switch version of the container
+(e.g., to upgrade to a new one), rerun `freeze_versions` script with the version
+specified.
 
 Note: `freeze_versions` adds a change to the `///repronim/containers`
 dataset.  Therefore, it is important to ensure that your clone of
