@@ -227,7 +227,8 @@ specified.
 
 Note: `freeze_versions` adds a change to the `///repronim/containers`
 dataset.  Therefore, it is important to ensure that your clone of
-`///repronim/containers` is publicly available. Reproducers will use
+`///repronim/containers` is publicly available and specify that URL in the `.gitmodules` instead
+of the original one. Reproducers will use
 this clone and inherit your changes to `.datalad/config`, including the
 frozen versions.
 
