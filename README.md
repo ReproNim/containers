@@ -194,7 +194,7 @@ datalad create -d ds000003-qc -c text2git
 cd ds000003-qc
 ```
 
-Datalad has created a new directory for our results, `ds000003-qc`.
+DataLad has created a new directory for our results, `ds000003-qc`.
 According to YODA principles, this dataset should also contain our input
 data, code, and anything else we need to run the analysis.
 
