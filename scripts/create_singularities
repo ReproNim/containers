@@ -239,6 +239,7 @@ export LC_ALL="C.UTF-8"
                     f"Adding singularity recipe for {dh}:{version_tag}",
                     str(singfile),
                 )
+                self.runcmd("git", "pull")  # to possibly merge remote changes
                 self.runcmd("datalad", "push", "--data", "auto")
         return SingularityFile(sourcefile=singfile, imagename=imagename)
 
@@ -435,6 +436,7 @@ def main() -> None:
     # Custom: neurodesk singularity images
     builder.add_neurodesk_singularity_images()
 
+    self.runcmd("git", "pull")  # to possibly merge remote changes
     builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
