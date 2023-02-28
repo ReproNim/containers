@@ -436,7 +436,7 @@ def main() -> None:
     # Custom: neurodesk singularity images
     builder.add_neurodesk_singularity_images()
 
-    self.runcmd("git", "pull")  # to possibly merge remote changes
+    builder.runcmd("git", "pull")  # to possibly merge remote changes
     builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
