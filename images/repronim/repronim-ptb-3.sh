@@ -9,4 +9,4 @@ neurodocker generate singularity \
    --ndfreeze date=20190915 \
    --pkg-manager apt \
    --install {octave,matlab}-psychtoolbox-3{,-nonfree} octave-{image,optim,signal,statistics} strace gdb valgrind \
-   >| Singularity.repronim-ptb-3--$v
+   >| Singularity.repronim-ptb-3--"$v"

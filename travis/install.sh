@@ -5,7 +5,7 @@ set -ev
 git clone https://github.com/matthew-brett/multibuild ~/multibuild
 source ~/multibuild/osx_utils.sh
 
-if [ $TRAVIS_OS_NAME = linux ]
+if [ "$TRAVIS_OS_NAME" = linux ]
 then
     # So we get all backports etc
     bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)

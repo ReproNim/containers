@@ -20,4 +20,4 @@ generate() {
 
 # sed to overcome https://github.com/ReproNim/neurodocker/issues/458
 # but would apply it also to initial apt installations we do not care about
-generate singularity | sed -e 's,--no-install-recommends \\, \\,g' > Singularity.$(basename $this|sed -e 's,\.gen,,g')
+generate singularity | sed -e 's,--no-install-recommends \\, \\,g' > Singularity.$(basename "$this"|sed -e 's,\.gen,,g')
