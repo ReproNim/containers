@@ -3,6 +3,7 @@
 set -ev
 
 git clone https://github.com/matthew-brett/multibuild ~/multibuild
+# shellcheck disable=SC1090
 source ~/multibuild/osx_utils.sh
 
 if [ "$TRAVIS_OS_NAME" = linux ]
