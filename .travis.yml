@@ -12,5 +12,5 @@ install:
   - travis_retry ./travis/install.sh
 
 script:
-    - grep -m 1 -l '^#!/bin/.*sh' -- scripts/* | xargs shellcheck
+    - grep -m 1 -l '^#!/bin/.*sh' | grep -v '\.\(txt\|md\)' | xargs shellcheck
     - bats -t scripts/tests

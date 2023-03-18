@@ -12,4 +12,4 @@ if ! datalad containers-run --help >/dev/null 2>&1; then
     exit 1
 fi
 
-$(dirname "$0")/create_singularities
+"$(dirname "$0")/create_singularities"

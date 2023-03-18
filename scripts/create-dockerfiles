@@ -3,7 +3,7 @@
 d=$(dirname "$0")
 echo "slim 
 arm64 -arm64" | \
-while read a suf; do
+while read -r a suf; do
     f="$d/Dockerfile.singularity$suf-shim"
     echo "Generating $f"
 
