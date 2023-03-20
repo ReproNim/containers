@@ -2,13 +2,23 @@
 #emacs: -*- mode: shell-script; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- 
 #ex: set sts=4 ts=4 sw=4 noet:
 #
-#  A helper to freeze (and possibly downgrade) versions of specified containers.
+#  A helper to freeze (and possibly downgrade) versions of specified containers,
+#  or copy definition to be contained within the super-dataset.
 #
-#  Example invocation:
+#  Example invocations
 #
-#     freeze_versions bids-mriqc=0.15.0 bids-fmriprep=1.4.1 bids-aa
+#  1. Just freeze given containers within this dataset, so when upgrading,
+#     if .datalad/config changes due to new versions etc, conflicts would
+#     come up and require manual conscious decision on how to upgrade.
 #
-# COPYRIGHT: Yaroslav Halchenko 2019
+#     scripts/freeze_versions bids-mriqc=0.15.0 bids-fmriprep=1.4.1 bids-aa
+#
+#  2. Copy container definitions, and this way freeze within super-dataset
+#     where this one was included as code/containers subdataset
+#
+#     code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.15.0 bids-fmriprep
+#
+# COPYRIGHT: Yaroslav Halchenko 2019-2023
 #
 # LICENSE: MIT
 #
@@ -46,40 +56,104 @@ sed-i () {
   mv "$tfilename" "$filename"
 }
 
-cd "$(dirname "$0")/.."
+error () {
+  echo "ERROR: " "$@" >&2
+}
+
+topd="$(dirname "$0")/.."
+# shorten if possible
+if [ "$(readlink -f "$topd")" = "$(readlink -f ".")" ]; then
+  topd=.
+fi
 
 save_ds=
+target_ds="$topd"  # config of which to tune
+topd_rel=  # relative path to topd from target_ds, if non-empty, should have trailing /
 frozen=
+
+echo "topd_rel: $topd_rel"
 
 for arg in "$@"; do
 	case "$arg" in
 		--save-dataset=*)
 			save_ds="${arg#*=}";
+			if [ -z "$save_ds" ]; then
+			  error "Got empty --save-dataset, specify path"
+			  exit 2
+			fi
+			target_ds="$save_ds"
+			# if we are asking to save into another dataset
+			if [ "$(readlink -f "$topd")" != "$(readlink -f "$save_ds")" ]; then
+        # $save_ds should be a parent of $topd
+        topd_rel=$(realpath --relative-to="$save_ds" "$topd")
+        if [ "${topd_rel:0:2}" = ".." ]; then
+          error "$topd is not subdirectory of $save_ds, cannot freeze/copy that way"
+          exit 2
+        elif [ "$topd_rel" = "." ]; then
+          # the same dataset, no copying, just in place freezing
+          topd_rel=  # empty is better
+        else
+          echo "I: We will be copying/freezing versions in $save_ds"
+          topd_rel="$topd_rel/"
+        fi
+      fi
+      if [ ! -e "$save_ds/.datalad/config" ]; then
+        error "$save_ds folder has no .datalad/config.  Please ensure that you are "\
+          "pointing to parent superdataset top directory"
+          exit 4
+      fi
 			continue;;
+	  --*)
+	    echo "Unknown option '$arg'" >&2
+	    exit 5
 	esac
-	frozen="$frozen $arg"
+
+	frozen="$frozen $arg"  # just for commit message
 	img=${arg%%=*}
-	if [ "$img" != "$arg" ]; then
+	if [ "$img" != "$arg" ]; then  # we had version specified
 		ver=${arg#*=}
 		echo "I: $img -> $ver"
 		imgpath="images/${img%%-*}/${img}--${ver}.sing"
 		# Check if exists! we cannot freeze to unknown.  There is no easy
 		# check if file exists as a symlink or not
-		if ! /bin/ls -d "$imgpath" &>/dev/null ; then
-			echo "E: there is no $imgpath .  Available images for the app are:"
-			/bin/ls -1 "images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g'
+		if ! /bin/ls -d "$topd/$imgpath" &>/dev/null ; then
+			error "There is no $topd/$imgpath .  Available images for the app are:"
+			/bin/ls -1 "$topd/images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g' 1>&2
 			exit 1
 		fi
-		git config -f .datalad/config --replace-all "datalad.containers.$img.image" "$imgpath"
 	else
 		# freeze to current
-		imgpath=$(git config -f .datalad/config "datalad.containers.$img.image")
+		imgpath=$(git -C "$topd" config -f .datalad/config "datalad.containers.$img.image")
 	fi
-	# and we would add the comment so that upon upgrade there for sure would be
-	# a conflict needed to be consciousely resolved (or -S ours used)
-	sed-i .datalad/config -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g"
+
+  # Point to specific image -- might be the same if topd=target_d and there were no ver
+  # specified, but we do it here uniformly for consistency
+  git config -f "$target_ds/.datalad/config" --replace-all "datalad.containers.$img.image" "$topd_rel$imgpath"
+
+	# if it was a copy into some other super-dataset, we should copy some other fields
+	if [ -n "$topd_rel" ]; then
+    # if copying to some other dataset, procedure is different, since we need to copy all
+    git config -f .datalad/config --get-regexp "containers.${img}\." \
+    | while read var value; do
+      case "${var##*.}" in
+        image) continue;;  # already done above, skip
+        cmdexec)
+          if echo "$value" | grep -q '^{img_dspath}/'; then
+            value=$(echo "$value" | sed -e "s,{img_dspath}/,{img_dspath}/$topd_rel,g")
+          else
+            value="$topd_rel$value"
+          fi;;
+      esac
+      git config -f "$target_ds/.datalad/config" --replace-all "$var" "$value"
+    done
+  else
+    # if in current dataset, then
+    # we would add the comment so that upon upgrade there for sure would be
+	  # a conflict needed to be consciously resolved (or -S ours used)
+	  sed-i "$topd/.datalad/config" -e "s,$topd_rel$imgpath\([ \\t].*\)*$,$topd_rel$imgpath  # frozen,g"
+  fi
 done
 
 if [[ -n "$save_ds" ]]; then
-	datalad save -d"$save_ds" -m "Freeze container versions $frozen" .datalad/config
+	datalad save -d"$save_ds" -m "Freeze container versions $frozen" "${save_ds%/}/.datalad/config"
 fi
