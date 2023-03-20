@@ -3,12 +3,9 @@
 set -eu
 
 this=$0
-# Either to build against to-be-released heudiconv
-dev_build=
 
 generate() {
 	# more details might come on https://github.com/ReproNim/neurodocker/issues/330
-	[ "$1" == singularity ] && add_entry=' "$@"' || add_entry=''
 	#neurodocker generate "$1" \
 	ndversion=0.7.0
 	docker run --rm repronim/neurodocker:$ndversion generate "$1" \
@@ -20,4 +17,4 @@ generate() {
 
 # sed to overcome https://github.com/ReproNim/neurodocker/issues/458
 # but would apply it also to initial apt installations we do not care about
-generate singularity | sed -e 's,--no-install-recommends \\, \\,g' > Singularity.$(basename $this|sed -e 's,\.gen,,g')
+generate singularity | sed -e 's,--no-install-recommends \\, \\,g' > "Singularity.$(basename "$this"|sed -e 's,\.gen,,g')"
