@@ -161,10 +161,10 @@ datalad create -d ds000003-qc -c text2git
 cd ds000003-qc
 # Install our containers collection:
 datalad install -d . ///repronim/containers
-# (optionally) Freeze container of interest to the specific version desired
-# to facilitate reproducibility of some older results
-datalad run -m "Downgrade/Freeze mriqc container version" \
-    containers/scripts/freeze_versions bids-mriqc=0.16.0
+# Optionally -- copy container of interest definition to the current (or desired)
+# version # to facilitate reproducibility while still being able to upgrade containers
+# subdataset if so desired to get access to newer versions.
+containers/scripts/freeze_versions --save-dataset=. bids-mriqc
 # Install input data:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 # Setup git to ignore workdir to be used by pipelines
@@ -172,7 +172,7 @@ echo "workdir/" > .gitignore && datalad save -m "Ignore workdir" .gitignore
 # Execute desired preprocessing while creating a provenance record
 # in git history
 datalad containers-run \
-        -n containers/bids-mriqc \
+        -n bids-mriqc \
         --input sourcedata \
         --output . \
         '{inputs}' '{outputs}' participant group -w workdir
@@ -217,6 +217,8 @@ Now let's take a look at what we have.
  |--/sourcedata # we call it source, but it is actually ds000003-demo
  |--/containers # repronim/containers, this is where our non-custom code lives
 ```
+
+TODO -- update whenever version above shown to do what is desired.
 
 `freeze_versions` is an optional step that will record and "freeze" the
 version of the container used. Even if the `///containers` dataset is
