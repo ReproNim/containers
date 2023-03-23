@@ -133,7 +133,7 @@ for arg in "$@"; do
 	# if it was a copy into some other super-dataset, we should copy some other fields
 	if [ -n "$topd_rel" ]; then
     # if copying to some other dataset, procedure is different, since we need to copy all
-    git config -f .datalad/config --get-regexp "containers.${img}\." \
+    git config -f $topd/.datalad/config --get-regexp "containers.${img}\." \
     | while read var value; do
       case "${var##*.}" in
         image) continue;;  # already done above, skip
