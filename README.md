@@ -164,7 +164,9 @@ datalad install -d . ///repronim/containers
 # Optionally -- copy container of interest definition to the current (or desired)
 # version # to facilitate reproducibility while still being able to upgrade containers
 # subdataset if so desired to get access to newer versions.
-containers/scripts/freeze_versions --save-dataset=. bids-mriqc
+# We will also use 0.16.0 since newer ones require more memory and
+# would fail to run on CI.
+containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
 # Install input data:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 # Setup git to ignore workdir to be used by pipelines
