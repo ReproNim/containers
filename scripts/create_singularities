@@ -35,6 +35,7 @@
 from __future__ import annotations
 from collections.abc import Generator
 from dataclasses import dataclass
+import click
 import logging
 import os
 from pathlib import Path
@@ -371,7 +372,9 @@ def get_imagename(repoid: str, family: str, versiontag: str) -> str:
     return f"{familyname}--{versiontag}"
 
 
-def main() -> None:
+@click.command()
+@click.option("--push", is_flag=True, show_default=True, default=False, help="Push upon completion.")
+def main(push: bool) -> None:
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
 
     # Use local dedicated "tmp/" directory since any other might be too small
@@ -440,7 +443,8 @@ def main() -> None:
     builder.add_neurodesk_singularity_images()
 
     builder.runcmd("git", "pull")  # to possibly merge remote changes
-    builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
+    if push:
+        builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
 if __name__ == "__main__":
