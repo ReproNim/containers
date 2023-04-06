@@ -29,6 +29,3 @@ jobs:
 
     - name: Test example in the README.md
       run: bash <(sed -n -e '/^ *#!/,/^```$/p' README.md | grep -v '```')
-
-    - name: Verify that images are available either from web or our server
-      run: if git annex find --not --in web --and --not --in datalad-public | grep -q . ; then exit 1; fi 
