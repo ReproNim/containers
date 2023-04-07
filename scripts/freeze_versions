@@ -13,6 +13,13 @@
 #
 #     scripts/freeze_versions bids-mriqc=0.15.0 bids-fmriprep=1.4.1 bids-aa
 #
+#     and it can take partial version specification if there is only one
+#     image with that version prefix is available, e.g.
+#
+#     scripts/freeze_versions neurodesk-fmriprep=20.1
+#
+#     would freeze to the 20.1.3 version as that is the only one available for 20.1.
+#
 #  2. Copy container definitions, and this way freeze within super-dataset
 #     where this one was included as code/containers subdataset
 #
@@ -113,13 +120,21 @@ for arg in "$@"; do
 	if [ "$img" != "$arg" ]; then  # we had version specified
 		ver=${arg#*=}
 		echo "I: $img -> $ver"
-		imgpath="images/${img%%-*}/${img}--${ver}.sing"
-		# Check if exists! we cannot freeze to unknown.  There is no easy
-		# check if file exists as a symlink or not
-		if ! /bin/ls -d "$topd/$imgpath" &>/dev/null ; then
-			error "There is no $topd/$imgpath .  Available images for the app are:"
-			/bin/ls -1 "$topd/images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g' 1>&2
-			exit 1
+		imgprefix=$topd/images/${img%%-*}/${img}--${ver}
+		if /bin/ls -d "$imgprefix" &>/dev/null; then
+			# we were specified precisely with extension etc
+			imgpath="$imgprefix"
+		else
+			imgpaths=( $(/bin/ls -1 "$imgprefix".*) )
+			case ${#imgpaths[@]} in
+				0) error "There is no ${imgprefix}.* files.  Available images for the app are:"
+				   /bin/ls -1 "$topd/images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g' 1>&2
+				   exit 1;;
+				1) imgpath=${imgpaths[0]};;
+				*) error "There are multiple images available. Include extension into your version specification. Available images are:"
+				   echo "${imgpaths[@]}" | sed -e 's, ,\n  ,g' -e 's,^,  ,g'
+				   exit 1;;
+			esac
 		fi
 	else
 		# freeze to current
