@@ -48,7 +48,9 @@
 #  THE SOFTWARE.
 #
 
-PS4=+
+# TODO: rewrite in Python3!  realpath used here is not on OSX etc
+
+PS4='${LINENO} > '
 set -eu
 
 # from repronim/simple_workflow Simple_Prep_docker
@@ -130,7 +132,7 @@ for arg in "$@"; do
 				0) error "There is no ${imgprefix}.* files.  Available images for the app are:"
 				   /bin/ls -1 "$topd/images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g' 1>&2
 				   exit 1;;
-				1) imgpath=${imgpaths[0]};;
+				1) imgpath=$(realpath -ms --relative-to="${save_ds:-.}" ${imgpaths[0]});;  # already would include topd
 				*) error "There are multiple images available. Include extension into your version specification. Available images are:"
 				   echo "${imgpaths[@]}" | sed -e 's, ,\n  ,g' -e 's,^,  ,g'
 				   exit 1;;
@@ -138,12 +140,11 @@ for arg in "$@"; do
 		fi
 	else
 		# freeze to current
-		imgpath=$(git -C "$topd" config -f .datalad/config "datalad.containers.$img.image")
+		imgpath=$topd_rel$(git -C "$topd" config -f .datalad/config "datalad.containers.$img.image")
 	fi
-
   # Point to specific image -- might be the same if topd=target_d and there were no ver
   # specified, but we do it here uniformly for consistency
-  git config -f "$target_ds/.datalad/config" --replace-all "datalad.containers.$img.image" "$topd_rel$imgpath"
+  git config -f "$target_ds/.datalad/config" --replace-all "datalad.containers.$img.image" "$imgpath"
 
 	# if it was a copy into some other super-dataset, we should copy some other fields
 	if [ -n "$topd_rel" ]; then
@@ -165,7 +166,7 @@ for arg in "$@"; do
     # if in current dataset, then
     # we would add the comment so that upon upgrade there for sure would be
 	  # a conflict needed to be consciously resolved (or -S ours used)
-	  sed-i "$topd/.datalad/config" -e "s,$topd_rel$imgpath\([ \\t].*\)*$,$topd_rel$imgpath  # frozen,g"
+	  sed-i "$topd/.datalad/config" -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g"
   fi
 done
 
