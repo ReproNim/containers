@@ -222,6 +222,8 @@ Now let's take a look at what we have.
 
 TODO -- update whenever version above shown to do what is desired.
 
+### Freezing Container Image Versions
+
 `freeze_versions` is an optional step that will record and "freeze" the
 version of the container used. Even if the `///containers` dataset is
 upgraded with a newer version of our container, we are "pinned" to the
@@ -229,18 +231,35 @@ container we explicitly determined. Note: To switch version of the container
 (e.g., to upgrade to a new one), rerun `freeze_versions` script with the version
 specified.
 
-Note: `freeze_versions` adds a change to the `///repronim/containers`
-dataset.  Therefore, it is important to ensure that your clone of
-`///repronim/containers` is publicly available and specify that URL in the `.gitmodules` instead
-of the original one. Reproducers will use
-this clone and inherit your changes to `.datalad/config`, including the
-frozen versions.
+The container version can be "frozen" into the `///repronim/containers`
+dataset, **or** the top-level dataset.
 
+
+**Option 1: Top level dataset (recommended)**
 
 ```bash
+# Run from ~/top-level-dataset
 datalad run -m "Downgrade/Freeze mriqc container version" \
-    containers/scripts/freeze_versions bids-mriqc=0.16.0
+    code/containers/scripts/freeze_versions bids-mriqc=0.16.0
 ```
+
+**Option 2: ///repronim/containers**
+
+```bash
+# Run from ~/top-level-dataset/code/containers
+datalad run -m "Downgrade/Freeze mriqc container version" \
+    scripts/freeze_versions bids-mriqc=0.16.0
+```
+
+Note: It is recommended to freeze a container image version into the
+top-level dataset to simplify reuse. If `///repronim/containers` is
+modified in any way, the author must ensure that their altered fork of
+`///repronim/containers` is publicly available and that its URL
+specified in the `.gitmodules`. By freezing into the top-level dataset
+instead, authors do not need to host a modified version of
+`///reporonim/containers`.
+
+### Running the Containers
 
 When we run the bids-mriqc container, it will need a working directory
 for intermediate files. These are not helpful to commit, so we will
