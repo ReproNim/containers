@@ -231,7 +231,7 @@ container we explicitly determined. Note: To switch version of the container
 (e.g., to upgrade to a new one), rerun `freeze_versions` script with the version
 specified.
 
-The container version can be "frozen" into the `///repronim/containers`
+The container version can be "frozen" into the clone of the `///repronim/containers`
 dataset, **or** the top-level dataset.
 
 
@@ -240,7 +240,7 @@ dataset, **or** the top-level dataset.
 ```bash
 # Run from ~/top-level-dataset
 datalad run -m "Downgrade/Freeze mriqc container version" \
-    code/containers/scripts/freeze_versions bids-mriqc=0.16.0
+    code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
 ```
 
 **Option 2: ///repronim/containers**
