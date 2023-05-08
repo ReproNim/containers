@@ -374,7 +374,8 @@ def get_imagename(repoid: str, family: str, versiontag: str) -> str:
 
 @click.command()
 @click.option("--push", is_flag=True, show_default=True, default=False, help="Push upon completion.")
-def main(push: bool) -> None:
+@click.argument("githubids", nargs=-1, default=None)
+def main(push: bool, githubids: list[str]|None) -> None:
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
 
     # Use local dedicated "tmp/" directory since any other might be too small
@@ -384,7 +385,7 @@ def main(push: bool) -> None:
         repo_dir=topdir,
         images_dir=topdir / "images",
         tmp_dir=topdir / "tmp",
-        githubids=set(sys.argv[1:]),
+        githubids=githubids,
     )
 
     # We are still using elderly singularity 2.6.1 to build images, so elderly
