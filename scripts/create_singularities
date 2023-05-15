@@ -385,7 +385,7 @@ def main(push: bool, githubids: list[str]|None) -> None:
         repo_dir=topdir,
         images_dir=topdir / "images",
         tmp_dir=topdir / "tmp",
-        githubids=githubids,
+        githubids=set(githubids or []),
     )
 
     # We are still using elderly singularity 2.6.1 to build images, so elderly
