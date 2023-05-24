@@ -428,3 +428,6 @@
 [datalad "containers.neurodesk-elastix"]
 	image = images/neurodesk/neurodesk-elastix--5.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bidsapphcppipelines"]
+	image = images/neurodesk/neurodesk-bidsapphcppipelines--4.3.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
