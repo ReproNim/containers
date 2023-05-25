@@ -34,6 +34,11 @@ jobs:
           HOMEBREW_NO_AUTO_UPDATE=1 brew install bats-core
           sudo cp ci/dummy_docker /usr/local/bin/docker
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "test@example.com"
+          git config --global user.name "CI Almighty"
+
       - name: Fetch git-annex data
         run: |
           git fetch origin git-annex
