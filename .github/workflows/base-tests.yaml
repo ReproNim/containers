@@ -1,0 +1,47 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  base-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies (Ubuntu)
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          # So we get all backports etc
+          bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)
+          sudo apt-get update -qq
+          sudo apt-get install eatmydata  # to speedup some installations
+          sudo eatmydata apt-get install singularity-container shellcheck bats git-annex-standalone
+
+      - name: Install dependencies (macOS)
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install shellcheck
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install git-annex
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install bats
+          sudo cp ci/dummy_docker /usr/local/bin/docker
+
+      - name: Fetch git-annex data
+        run: |
+          git fetch origin git-annex
+          git remote add --fetch datalad.datasets.org http://datasets.datalad.org/repronim/containers/.git
+          git annex upgrade  # we need v7 for the unlocked test img
+
+      - name: Shellcheck code examples
+        run: grep -m 1 -l '^#!/bin/.*sh' | grep -v '\.\(txt\|md\)' | xargs shellcheck
+
+      - name: Run script tests
+        run: bats -t scripts/tests
