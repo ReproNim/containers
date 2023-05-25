@@ -31,7 +31,7 @@ jobs:
         run: |
           HOMEBREW_NO_AUTO_UPDATE=1 brew install shellcheck
           HOMEBREW_NO_AUTO_UPDATE=1 brew install git-annex
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install bats
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install bats-core
           sudo cp ci/dummy_docker /usr/local/bin/docker
 
       - name: Fetch git-annex data
