@@ -45,8 +45,12 @@ jobs:
           git remote add --fetch datalad.datasets.org http://datasets.datalad.org/repronim/containers/.git
           git annex upgrade  # we need v7 for the unlocked test img
 
-      - name: Shellcheck code examples
-        run: grep -m 1 -l '^#!/bin/.*sh' | grep -v '\.\(txt\|md\)' | xargs shellcheck
+      - name: Shellcheck scripts
+        run: |
+          find . -type f \
+            '!' '(' -name '*.txt' -o -name '*.md' ')' \
+            -exec grep -q -m1 '^#!/bin/.*sh' {} ';' \
+            -exec shellcheck {} ';'
 
       - name: Run script tests
         run: bats -t scripts/tests
