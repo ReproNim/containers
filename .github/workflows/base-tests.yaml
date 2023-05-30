@@ -47,10 +47,11 @@ jobs:
 
       - name: Shellcheck scripts
         run: |
-          find . -type f \
+          find . -name .git -prune -o -type f \
             '!' '(' -name '*.txt' -o -name '*.md' ')' \
             -exec grep -q -m1 '^#!/bin/.*sh' {} ';' \
-            -exec shellcheck {} ';'
+            -print0 \
+          | xargs -0 shellcheck
 
       - name: Run script tests
         run: bats -t scripts/tests
