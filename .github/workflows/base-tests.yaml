@@ -49,7 +49,7 @@ jobs:
         run: |
           find . -name .git -prune -o -type f \
             '!' '(' -name '*.txt' -o -name '*.md' ')' \
-            -exec grep -q -m1 '^#!/bin/.*sh' {} ';' \
+            -exec grep -q -m1 '^#!/bin/\(ba\|da\|k\)\?sh' {} ';' \
             -print0 \
           | xargs -0 shellcheck
 
