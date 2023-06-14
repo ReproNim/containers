@@ -64,7 +64,7 @@
 	updateurl = shub://ReproNim/containers:bids-mindboggle--0.0.4
 [datalad "containers.bids-mriqc"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-mriqc--23.0.1.sing
+	image = images/bids/bids-mriqc--23.1.0.sing
 	updateurl = shub://ReproNim/containers:bids-mriqc--0.16.1
 [datalad "containers.bids-mrtrix3-connectome"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
