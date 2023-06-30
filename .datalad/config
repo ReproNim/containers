@@ -443,3 +443,6 @@
 [datalad "containers.neurodesk-bidsappmrtrix3connectome"]
 	image = images/neurodesk/neurodesk-bidsappmrtrix3connectome--0.5.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bidsappspm"]
+	image = images/neurodesk/neurodesk-bidsappspm--0.0.20.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
