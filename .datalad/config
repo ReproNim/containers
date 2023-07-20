@@ -449,3 +449,6 @@
 [datalad "containers.neurodesk-bidsapppymvpa"]
 	image = images/neurodesk/neurodesk-bidsapppymvpa--2.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-ilastik"]
+	image = images/neurodesk/neurodesk-ilastik--1.4.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
