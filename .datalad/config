@@ -399,7 +399,7 @@
 	image = images/neurodesk/neurodesk-ashs--2.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-aslprep"]
-	image = images/neurodesk/neurodesk-aslprep--0.2.7.simg
+	image = images/neurodesk/neurodesk-aslprep--0.4.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-ants"]
 	image = images/neurodesk/neurodesk-ants--2.3.5.simg
