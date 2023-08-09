@@ -78,6 +78,10 @@ if [ -n "${DATALAD_CONTAINER_NAME:-}" ]; then
 	export APPTAINERENV_DATALAD_CONTAINER_NAME="$DATALAD_CONTAINER_NAME"
 fi
 
+# fix non-writable matplotlib cache dir in apptainer https://github.com/ReproNim/containers/issues/97                                  
+export SINGULARITYENV_MPLCONFIGDIR=/tmp                                                                                                
+export APPTAINERENV_MPLCONFIGDIR=/tmp         
+
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
 # Mac's tmpdir (with default options) causes problems when a singularity 
