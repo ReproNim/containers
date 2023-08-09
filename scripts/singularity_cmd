@@ -79,8 +79,8 @@ if [ -n "${DATALAD_CONTAINER_NAME:-}" ]; then
 fi
 
 # fix non-writable matplotlib cache dir in apptainer https://github.com/ReproNim/containers/issues/97                                  
-export SINGULARITYENV_MPLCONFIGDIR=/tmp                                                                                                
-export APPTAINERENV_MPLCONFIGDIR=/tmp         
+export SINGULARITYENV_MPLCONFIGDIR=/tmp/mpl-config
+export APPTAINERENV_MPLCONFIGDIR=/tmp/mpl-config
 
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
