@@ -458,3 +458,6 @@
 [datalad "containers.brainiak-rtcloudtest"]
 	image = images/brainiak/brainiak-rtcloudtest--1.5.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-hmri"]
+	image = images/neurodesk/neurodesk-hmri--0.6.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
