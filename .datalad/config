@@ -48,7 +48,7 @@
 	updateurl = shub://ReproNim/containers:bids-fmriprep--20.2.0
 [datalad "containers.bids-freesurfer"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-freesurfer--6.0.1-unstable.sing
+	image = images/bids/bids-freesurfer--7.4.1-unstable.sing
 	updateurl = shub://ReproNim/containers:bids-freesurfer--6.0.1-6.1
 [datalad "containers.bids-hcppipelines"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
