@@ -156,7 +156,7 @@
 	image = images/bids/bids-mialsuperresolutiontoolkit--2.1.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-hippunfold"]
-	image = images/bids/bids-hippunfold--1.3.3.sing
+	image = images/bids/bids-hippunfold--1.4.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-micapipe"]
 	image = images/bids/bids-micapipe--0.0.1.sing
