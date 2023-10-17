@@ -1,155 +1,117 @@
 [datalad "containers.arg-test"]
 	cmdexec = singularity exec {img} {cmd}
 	image = scripts/tests/arg-test.simg
-	updateurl = shub://ReproNim/containers:arg-test
 [datalad "containers.bids-aa"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-aa--0.2.0.sing
-	updateurl = shub://ReproNim/containers:bids-aa--0.2.0
 [datalad "containers.bids-afni-proc"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-afni-proc--0.0.2.sing
-	updateurl = shub://ReproNim/containers:bids-afni-proc--0.0.2
 [datalad "containers.bids-antscorticalthickness"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-antscorticalthickness--2.2.0-1.sing
-	updateurl = shub://ReproNim/containers:bids-antscorticalthickness--2.2.0-1
 [datalad "containers.bids-baracus"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-baracus--1.1.4.sing
-	updateurl = shub://ReproNim/containers:bids-baracus--1.1.4
 [datalad "containers.bids-brainiak-srm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-brainiak-srm--latest.sing
-	updateurl = shub://ReproNim/containers:bids-brainiak-srm--latest
 [datalad "containers.bids-broccoli"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-broccoli--1.0.1.sing
-	updateurl = shub://ReproNim/containers:bids-broccoli--1.0.1
 [datalad "containers.bids-cpac"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-cpac--1.1.0_14.sing
-	updateurl = shub://ReproNim/containers:bids-cpac--1.1.0_14
 [datalad "containers.bids-dparsf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-dparsf--4.3.12.sing
-	updateurl = shub://ReproNim/containers:bids-dparsf--4.3.12
 [datalad "containers.bids-example"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-example--0.0.7.sing
-	updateurl = shub://ReproNim/containers:bids-example--0.0.7
 [datalad "containers.bids-fibredensityandcrosssection"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-fibredensityandcrosssection--0.0.1.sing
-	updateurl = shub://ReproNim/containers:bids-fibredensityandcrosssection--0.0.1
 [datalad "containers.bids-fmriprep"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-fmriprep--23.1.4.sing
-	updateurl = shub://ReproNim/containers:bids-fmriprep--20.2.0
 [datalad "containers.bids-freesurfer"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-freesurfer--7.4.1-unstable.sing
-	updateurl = shub://ReproNim/containers:bids-freesurfer--6.0.1-6.1
 [datalad "containers.bids-hcppipelines"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-hcppipelines--4.3.0-3.sing
-	updateurl = shub://ReproNim/containers:bids-hcppipelines--3.17.0-18
 [datalad "containers.bids-magetbrain"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-magetbrain--0.3.1.sing
-	updateurl = shub://ReproNim/containers:bids-magetbrain--0.3
 [datalad "containers.bids-mindboggle"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-mindboggle--0.0.4-1.sing
-	updateurl = shub://ReproNim/containers:bids-mindboggle--0.0.4
 [datalad "containers.bids-mriqc"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-mriqc--23.1.0.sing
-	updateurl = shub://ReproNim/containers:bids-mriqc--0.16.1
 [datalad "containers.bids-mrtrix3-connectome"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-mrtrix3-connectome--0.5.3.sing
-	updateurl = shub://ReproNim/containers:bids-mrtrix3-connectome--0.4.2
 [datalad "containers.bids-ndmg"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-ndmg--0.1.0.sing
-	updateurl = shub://ReproNim/containers:bids-ndmg--0.1.0
 [datalad "containers.bids-niak"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-niak--latest.sing
-	updateurl = shub://ReproNim/containers:bids-niak--latest
 [datalad "containers.bids-nipypelines"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-nipypelines--0.3.0.sing
-	updateurl = shub://ReproNim/containers:bids-nipypelines--0.3.0
 [datalad "containers.bids-oppni"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-oppni--0.7.0-1.sing
-	updateurl = shub://ReproNim/containers:bids-oppni--0.7.0-1
 [datalad "containers.bids-rshrf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-rshrf--1.5.8.sing
-	updateurl = shub://ReproNim/containers:bids-rshrf--1.4.4
 [datalad "containers.bids-rs-signal-extract"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-rs-signal-extract--0.1.sing
-	updateurl = shub://ReproNim/containers:bids-rs-signal-extract--0.1
 [datalad "containers.bids-spm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-spm--0.0.20.sing
-	updateurl = shub://ReproNim/containers:bids-spm--0.0.20
 [datalad "containers.bids-tracula"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-tracula--6.0.0.beta-0.sing
-	updateurl = shub://ReproNim/containers:bids-tracula--6.0.0.beta-0
 [datalad "containers.bids-validator"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-validator--1.13.1.sing
-	updateurl = shub://ReproNim/containers:bids-validator--1.5.4
 [datalad "containers.neuronets-kwyk"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/neuronets/neuronets-kwyk--0.5.0-gpu.sing
-	updateurl = shub://ReproNim/containers:neuronets-kwyk--0.4-gpu
 [datalad "containers.poldracklab-ds003-example"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sing
-	updateurl = shub://ReproNim/containers:poldracklab-ds003-example--0.0.3
 [datalad "containers.repronim-reproin"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/repronim/repronim-reproin--0.13.1.sing
-	updateurl = shub://ReproNim/reproin:0.9.0
 [datalad "containers.repronim-simple-workflow"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/repronim/repronim-simple-workflow--1.1.0.sing
-	updateurl = shub://ReproNim/containers:repronim-simple-workflow--1.1.0
 [datalad "dataset"]
 	id = b02e63c2-62c1-11e9-82b0-52540040489c
 [datalad "containers.repronim-containers"]
-	updateurl = shub://ReproNim/containers:repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100
 	image = images/repronim/repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-qsiprep"]
-	updateurl = shub://ReproNim/containers:bids-qsiprep--0.7.2
 	image = images/bids/bids-qsiprep--0.19.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-pymvpa"]
-	updateurl = shub://ReproNim/containers:bids-pymvpa--2.0.2
 	image = images/bids/bids-pymvpa--4.0.3.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-bidsonym"]
-	updateurl = shub://ReproNim/containers:bids-bidsonym--0.0.4
 	image = images/bids/bids-bidsonym--0.0.4.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-multiscalebrainparcellator"]
-	updateurl = shub://ReproNim/containers:bids-multiscalebrainparcellator--1.1.1
 	image = images/bids/bids-multiscalebrainparcellator--1.1.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-connectomemapper-bidsapp"]
-	updateurl = shub://ReproNim/containers:bids-connectomemapper-bidsapp--3.0.0-diffcourse
 	image = images/bids/bids-connectomemapper-bidsapp--3.1.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.adswa-nilearn"]
-	updateurl = shub://adswa/nilearn-container
 	image = images/adswa/adswa-nilearn--latest.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd exec {img} {cmd}
 [datalad "containers.bids-mialsuperresolutiontoolkit"]
