@@ -1,6 +1,5 @@
-#!/bin/bash
-#emacs: -*- mode: shell-script; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- 
-#ex: set sts=4 ts=4 sw=4 noet:
+#!/usr/bin/env python3
+# ex: set sts=4 ts=4 sw=4 noet:
 #
 #  A helper to freeze (and possibly downgrade) versions of specified containers,
 #  or copy definition to be contained within the super-dataset.
@@ -48,128 +47,191 @@
 #  THE SOFTWARE.
 #
 
-# TODO: rewrite in Python3!  realpath used here is not on OSX etc
+from glob import escape
+import os.path
+from pathlib import Path
+import re
+import subprocess
+import sys
+import tempfile
 
-PS4='${LINENO} > '
-set -eu
 
-# from repronim/simple_workflow Simple_Prep_docker
-# a little helper since sed on OSX does not have sed -i
-# for in-place modifications.  Note that filename here comes first
-# just to ease scripting
-sed-i () {
-  filename=$1
-  tfilename=$(mktemp -t sed_replace.XXXXXXXXX)
-  shift
-  sed "$@" "$filename" >| "$tfilename"
-  mv "$tfilename" "$filename"
-}
+def error(message: str) -> None:
+    print("ERROR:", message, file=sys.stderr)
 
-error () {
-  echo "ERROR: " "$@" >&2
-}
 
-topd="$(dirname "$0")/.."
+topd = Path(__file__).parent.parent
 # shorten if possible
-if [ "$(readlink -f "$topd")" = "$(readlink -f ".")" ]; then
-  topd=.
-fi
+if topd.resolve() == Path.cwd().resolve():
+    topd = Path(".")
 
-save_ds=
-target_ds="$topd"  # config of which to tune
-topd_rel=  # relative path to topd from target_ds, if non-empty, should have trailing /
-frozen=
+save_ds = None
+target_ds = topd  # config of which to tune
+topd_rel = None  # relative path to topd from target_ds
+frozen = ""
 
-echo "topd_rel: $topd_rel"
+print(f"topd_rel: {topd_rel}")
 
-for arg in "$@"; do
-	case "$arg" in
-		--save-dataset=*)
-			save_ds="${arg#*=}";
-			if [ -z "$save_ds" ]; then
-			  error "Got empty --save-dataset, specify path"
-			  exit 2
-			fi
-			target_ds="$save_ds"
-			# if we are asking to save into another dataset
-			if [ "$(readlink -f "$topd")" != "$(readlink -f "$save_ds")" ]; then
-        # $save_ds should be a parent of $topd
-        topd_rel=$(realpath --relative-to="$save_ds" "$topd")
-        if [ "${topd_rel:0:2}" = ".." ]; then
-          error "$topd is not subdirectory of $save_ds, cannot freeze/copy that way"
-          exit 2
-        elif [ "$topd_rel" = "." ]; then
-          # the same dataset, no copying, just in place freezing
-          topd_rel=  # empty is better
-        else
-          echo "I: We will be copying/freezing versions in $save_ds"
-          topd_rel="$topd_rel/"
-        fi
-      fi
-      if [ ! -e "$save_ds/.datalad/config" ]; then
-        error "$save_ds folder has no .datalad/config.  Please ensure that you are "\
-          "pointing to parent superdataset top directory"
-          exit 4
-      fi
-			continue;;
-	  --*)
-	    echo "Unknown option '$arg'" >&2
-	    exit 5
-	esac
+for arg in sys.argv[1:]:
+    if arg.startswith("--save-dataset="):
+        s = arg.partition("=")[2]
+        if not s:
+            error("Got empty --save-dataset, specify path")
+            sys.exit(2)
+        save_ds = Path(s)
+        target_ds = save_ds
+        # if we are asking to save into another dataset
+        if topd.resolve() != save_ds.resolve():
+            # save_ds should be a parent of topd
+            topd_rel = os.path.relpath(topd, save_ds)
+            if topd_rel.startswith(".."):
+                error(
+                    f"{topd} is not subdirectory of {save_ds}, cannot freeze/copy that way"
+                )
+                sys.exit(2)
+            elif topd_rel == ".":
+                # the same dataset, no copying, just in place freezing
+                topd_rel = None  # empty is better
+            else:
+                print(f"I: We will be copying/freezing versions in {save_ds}")
+                topd_rel = Path(topd_rel)
+        if not (save_ds / ".datalad" / "config").exists():
+            error(
+                f"{save_ds} folder has no .datalad/config.  Please ensure that you are pointing to parent superdataset top directory"
+            )
+            sys.exit(4)
+        continue
+    elif arg.startswith("--"):
+        print(f"Unknown option '{arg}'", file=sys.stderr)
+        sys.exit(5)
 
-	frozen="$frozen $arg"  # just for commit message
-	img=${arg%%=*}
-	if [ "$img" != "$arg" ]; then  # we had version specified
-		ver=${arg#*=}
-		echo "I: $img -> $ver"
-		imgprefix=$topd/images/${img%%-*}/${img}--${ver}
-		if /bin/ls -d "$imgprefix" &>/dev/null; then
-			# we were specified precisely with extension etc
-			imgpath="$imgprefix"
-		else
-			imgpaths=( $(/bin/ls -1 "$imgprefix".*) )
-			case ${#imgpaths[@]} in
-				0) error "There is no ${imgprefix}.* files.  Available images for the app are:"
-				   /bin/ls -1 "$topd/images/${img%%-*}/${img}--"* | sed -e 's,^,  ,g' 1>&2
-				   exit 1;;
-				1) imgpath=$(realpath -ms --relative-to="${save_ds:-.}" ${imgpaths[0]});;  # already would include topd
-				*) error "There are multiple images available. Include extension into your version specification. Available images are:"
-				   echo "${imgpaths[@]}" | sed -e 's, ,\n  ,g' -e 's,^,  ,g'
-				   exit 1;;
-			esac
-		fi
-	else
-		# freeze to current
-		imgpath=$topd_rel$(git -C "$topd" config -f .datalad/config "datalad.containers.$img.image")
-	fi
-  # Point to specific image -- might be the same if topd=target_d and there were no ver
-  # specified, but we do it here uniformly for consistency
-  git config -f "$target_ds/.datalad/config" --replace-all "datalad.containers.$img.image" "$imgpath"
+    frozen = f"{frozen} {arg}"  # just for commit message
+    img, _, ver = arg.partition("=")[0]
+    if img != arg:
+        # we had version specified
+        print(f"I: {img} -> {ver}")
+        imgprefix = topd / "images" / img.partition("-")[0] / f"{img}--{ver}"
+        if imgprefix.exists():
+            # we were specified precisely with extension etc
+            imgpath = imgprefix
+        else:
+            imgpaths = list(imgprefix.parent.glob(f"{escape(imgprefix.name)}.*"))
+            if len(imgpaths) == 0:
+                error(
+                    f"There is no {imgprefix}.* files.  Available images for the app are:"
+                )
+                for p in imgprefix.parent.glob(f"{escape(img)}--*"):
+                    print(f"  {p}", file=sys.stderr)
+                sys.exit(1)
+            elif len(imgpaths) == 1:
+                imgpath = os.path.relpath(
+                    imgpaths[0], save_ds or "."
+                )  # already would include topd
+            else:
+                error(
+                    "There are multiple images available. Include extension into your version specification. Available images are:"
+                )
+                for p in imgpaths:
+                    print(f"  {p}")
+                sys.exit(1)
+    else:
+        # freeze to current
+        r = subprocess.run(
+            [
+                "git",
+                "-C",
+                topd,
+                "config",
+                "-f",
+                ".datalad/config",
+                f"datalad.containers.{img}.image",
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            text=True,
+        )
+        imgpath = (topd_rel or Path()) / r.stdout.rstrip("\n")
 
-	# if it was a copy into some other super-dataset, we should copy some other fields
-	if [ -n "$topd_rel" ]; then
-    # if copying to some other dataset, procedure is different, since we need to copy all
-    git config -f $topd/.datalad/config --get-regexp "containers.${img}\." \
-    | while read var value; do
-      case "${var##*.}" in
-        image) continue;;  # already done above, skip
-        cmdexec)
-          if echo "$value" | grep -q '^{img_dspath}/'; then
-            value=$(echo "$value" | sed -e "s,{img_dspath}/,{img_dspath}/$topd_rel,g")
-          else
-            value="$topd_rel$value"
-          fi;;
-      esac
-      git config -f "$target_ds/.datalad/config" --replace-all "$var" "$value"
-    done
-  else
-    # if in current dataset, then
-    # we would add the comment so that upon upgrade there for sure would be
-	  # a conflict needed to be consciously resolved (or -S ours used)
-	  sed-i "$topd/.datalad/config" -e "s,$imgpath\([ \\t].*\)*$,$imgpath  # frozen,g"
-  fi
-done
+    # Point to specific image -- might be the same if topd=target_d and there
+    # were no ver specified, but we do it here uniformly for consistency
+    subprocess.run(
+        [
+            "git",
+            "config",
+            "-f",
+            target_ds / ".datalad" / "config",
+            "--replace-all",
+            f"datalad.containers.{img}.image",
+            str(imgpath),
+        ],
+        check=True,
+    )
 
-if [[ -n "$save_ds" ]]; then
-	datalad save -d"$save_ds" -m "Freeze container versions $frozen" "${save_ds%/}/.datalad/config"
-fi
+    # if it was a copy into some other super-dataset, we should copy some other
+    # fields
+    if topd_rel is not None:
+        # if copying to some other dataset, procedure is different, since we
+        # need to copy all
+        r = subprocess.run(
+            [
+                "git",
+                "config",
+                "-f",
+                topd / ".datalad" / "config",
+                "--get-regexp",
+                rf"containers.{img}\.",
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            text=True,
+        )
+        for line in r.stdout.splitlines():
+            var, value = line.split(maxsplit=1)
+            if var.endswith(".image"):
+                continue  # already done above, skip
+            elif var.endswith(".cmdexec"):
+                if value.startswith("{img_dspath}/"):  # Not an f-less f-string
+                    value = value.replace("{img_dspath}/", f"{{img_dspath}}/{topd_rel}")
+                else:
+                    value = (topd_rel or Path()) / value
+            subprocess.run(
+                [
+                    "git",
+                    "config",
+                    "-f",
+                    target_ds / ".datalad" / "config",
+                    "--replace-all",
+                    var,
+                    value,
+                ],
+                check=True,
+            )
+
+    else:
+        # if in current dataset, then
+        # we would add the comment so that upon upgrade there for sure would be
+        # a conflict needed to be consciously resolved (or -S ours used)
+        fd, tmppath = tempfile.mkstemp(dir=topd / ".datalad")
+        with os.fdopen(fd, "w", encoding="utf-8") as outfp:
+            with (topd / ".datalad" / "config").open(encoding="utf-8") as infp:
+                for line in infp:
+                    line = re.sub(
+                        rf"{re.escape(imgpath)}(?:[ \t].*)*$",
+                        f"{imgpath}  # frozen",
+                        line.rstrip("\n"),
+                    )
+                    print(line, file=outfp)
+        os.replace(tmppath, topd / ".datalad" / "config")
+
+if save_ds is not None:
+    subprocess.run(
+        [
+            "datalad",
+            "save",
+            f"-d{save_ds}",
+            "-m",
+            f"Freeze container versions {frozen}",
+            Path(save_ds) / ".datalad" / "config",
+        ],
+        check=True,
+    )
