@@ -436,6 +436,10 @@ def main(push: bool, githubids: list[str]|None) -> None:
     # neuronets
     builder.generate_singularity_for_docker_image("neuronets/kwyk")
 
+    # Jeremy Magland images, to try out dendro
+    builder.generate_singularity_for_docker_image("magland/pc-mountainsort5")
+    builder.generate_singularity_for_docker_image("magland/pc-kilosort3")
+
     # Entire organization
     # Some purely "latest" give us troubles. Let them tag
     builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
