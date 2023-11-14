@@ -438,3 +438,6 @@
 [datalad "containers.magland-pc-kilosort3"]
 	image = images/magland/magland-pc-kilosort3--latest.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-hnncore"]
+	image = images/neurodesk/neurodesk-hnncore--0.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
