@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# ex: set sts=4 ts=4 sw=4 noet:
+# ex: set sts=4 ts=4 sw=4 et:
 #
 #  A helper to freeze (and possibly downgrade) versions of specified containers,
 #  or copy definition to be contained within the super-dataset.
