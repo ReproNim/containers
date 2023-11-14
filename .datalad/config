@@ -421,7 +421,7 @@
 	image = images/brainiak/brainiak-rtcloudtest--1.5.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-hmri"]
-	image = images/neurodesk/neurodesk-hmri--0.6.0.simg
+	image = images/neurodesk/neurodesk-hmri--0.6.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-xcp-d"]
 	image = images/bids/bids-xcp-d--04.0.sing
