@@ -47,6 +47,7 @@
 #  THE SOFTWARE.
 #
 
+import argparse
 from glob import escape
 import os.path
 from pathlib import Path
@@ -72,39 +73,35 @@ frozen = ""
 
 print(f"topd_rel: {topd_rel}")
 
-for arg in sys.argv[1:]:
-    if arg.startswith("--save-dataset="):
-        s = arg.partition("=")[2]
-        if not s:
-            error("Got empty --save-dataset, specify path")
-            sys.exit(2)
-        save_ds = Path(s)
-        target_ds = save_ds
-        # if we are asking to save into another dataset
-        if topd.resolve() != save_ds.resolve():
-            # save_ds should be a parent of topd
-            topd_rel = os.path.relpath(topd, save_ds)
-            if topd_rel.startswith(".."):
-                error(
-                    f"{topd} is not subdirectory of {save_ds}, cannot freeze/copy that way"
-                )
-                sys.exit(2)
-            elif topd_rel == ".":
-                # the same dataset, no copying, just in place freezing
-                topd_rel = None  # empty is better
-            else:
-                print(f"I: We will be copying/freezing versions in {save_ds}")
-                topd_rel = Path(topd_rel)
-        if not (save_ds / ".datalad" / "config").exists():
-            error(
-                f"{save_ds} folder has no .datalad/config.  Please ensure that you are pointing to parent superdataset top directory"
-            )
-            sys.exit(4)
-        continue
-    elif arg.startswith("--"):
-        print(f"Unknown option '{arg}'", file=sys.stderr)
-        sys.exit(5)
+parser = argparse.ArgumentParser()
+parser.add_argument("--save-dataset", type=Path)
+parser.add_argument("images", nargs="*")
+args = parser.parse_args()
 
+target_ds = save_ds = args.save_dataset
+if save_ds is not None:
+    # if we are asking to save into another dataset
+    if topd.resolve() != save_ds.resolve():
+        # save_ds should be a parent of topd
+        topd_rel = os.path.relpath(topd, save_ds)
+        if topd_rel.startswith(".."):
+            error(
+                f"{topd} is not subdirectory of {save_ds}, cannot freeze/copy that way"
+            )
+            sys.exit(2)
+        elif topd_rel == ".":
+            # the same dataset, no copying, just in place freezing
+            topd_rel = None  # empty is better
+        else:
+            print(f"I: We will be copying/freezing versions in {save_ds}")
+            topd_rel = Path(topd_rel)
+    if not (save_ds / ".datalad" / "config").exists():
+        error(
+            f"{save_ds} folder has no .datalad/config.  Please ensure that you are pointing to parent superdataset top directory"
+        )
+        sys.exit(4)
+
+for arg in args.images:
     frozen = f"{frozen} {arg}"  # just for commit message
     img, _, ver = arg.partition("=")[0]
     if img != arg:
