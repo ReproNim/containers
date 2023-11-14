@@ -435,3 +435,6 @@
 [datalad "containers.magland-pc-mountainsort5"]
 	image = images/magland/magland-pc-mountainsort5--latest.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.magland-pc-kilosort3"]
+	image = images/magland/magland-pc-kilosort3--latest.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
