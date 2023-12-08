@@ -103,8 +103,8 @@ if save_ds is not None:
 
 for arg in args.images:
     frozen = f"{frozen} {arg}"  # just for commit message
-    img, _, ver = arg.partition("=")[0]
-    if img != arg:
+    img, _, ver = arg.partition("=")
+    if ver:
         # we had version specified
         print(f"I: {img} -> {ver}")
         imgprefix = topd / "images" / img.partition("-")[0] / f"{img}--{ver}"
