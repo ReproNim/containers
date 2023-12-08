@@ -188,7 +188,7 @@ for arg in args.images:
                 continue  # already done above, skip
             elif var.endswith(".cmdexec"):
                 if value.startswith("{img_dspath}/"):  # Not an f-less f-string
-                    value = value.replace("{img_dspath}/", f"{{img_dspath}}/{topd_rel}")
+                    value = value.replace("{img_dspath}/", f"{{img_dspath}}/{topd_rel}/")
                 else:
                     value = (topd_rel or Path()) / value
             subprocess.run(
