@@ -31,8 +31,6 @@
 #  THE SOFTWARE.
 #
 
-set -eu
-
 function info() {
 	: #	echo -e "I: " "$@" >&2
 }
@@ -71,6 +69,13 @@ function pass_git_config() {
 function readlink_f() {
 	readlink -f "$1" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$1"
 }
+
+if [ "$#" = 0 ]; then
+	echo "Using as a library. Run with 'exec' or 'run' command and options."
+	exit 0
+fi
+
+set -eu
 
 info "PWD=$PWD"
 
