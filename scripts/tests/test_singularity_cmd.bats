@@ -1,4 +1,6 @@
 #!/usr/bin/env bats
+#emacs: -*- mode: shell-script; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*-
+#ex: set sts=4 ts=4 sw=4 noet:
 #
 # This test uses the Bash Automated Testing System
 # See: https://github.com/bats-core/bats-core
