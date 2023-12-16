@@ -143,6 +143,10 @@ mkdir -p "$tmpdir/tmp"
 info "created temp dir $tmpdir"
 trap 'rm -fr "$tmpdir" && info "removed temp dir $tmpdir"' exit
 
+# We start anew since we use --add to support multi-value entries
+if [ -e "$BHOME/.gitconfig" ]; then
+	rm -f "$BHOME/.gitconfig"
+fi
 pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 # only if set - pass pidlock so we could operate on NFS mounts, like on rolando
