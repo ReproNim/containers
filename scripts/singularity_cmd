@@ -151,6 +151,7 @@ pass_git_config "user.name" "ReproNim User"
 pass_git_config "user.email" "nobody@example.com"
 # only if set - pass pidlock so we could operate on NFS mounts, like on rolando
 pass_git_config "annex.pidlock"
+pass_git_config "safe.directory"
 
 # Common arguments for the singularity run
 SARGS=( -e -B "$PWD" -H "$BHOME" --pwd "$PWD" "$@" )
