@@ -37,34 +37,61 @@ function info() {
 
 #
 # Generate $BHOME/.gitconfig if not present or missing required minimal user
-# info based on the current one
+# info based on the current/active one.
+# Entry will be added, so if already contains a value, we will keep adding.
 #
 function pass_git_config() {
 	var="$1"
 
-	# git config reads without locking, but could lock for writing
-	# so we might need to try multiple times setting the value
-	set +e
-	value=$(git config "$var")
-	ret=$?
-	set -e
-
 	# if variable is not defined at all
-	if [ "$ret" = 1 ] ; then
+	if ! git config "$var" > /dev/null ; then
 		# and default was not provided - nothing for us to do
 		[ "$#" -ge 2 ] || return 0
 		# otherwise, use that default
-		value="$2"
+		VALUES=( "$2" )
+	else
+		# read all values into an array
+		mapfile -t VALUES < <(git config --get-all "$var")
 	fi
-	# shellcheck disable=SC2034
-	for attempt in {1..5}; do
-		git config -f "$BHOME/.gitconfig" "$var" >/dev/null \
-			|| { git config -f "$BHOME/.gitconfig" "$var" "$value" 2>/dev/null && break; } \
-			&& break
-		# we failed - sleep a little. Alert: bashism!
-		sleep 0."${RANDOM:0:1}"
+
+	for value in "${VALUES[@]}"; do
+		# git config reads without locking, but could lock for writing
+		# so we might need to try multiple times setting the value
+		#
+		# shellcheck disable=SC2034
+		for attempt in {1..5}; do
+			if git config -f "$BHOME/.gitconfig" --add "$var" "$value" 2>/dev/null
+			then
+				break
+			fi
+			# we failed - sleep a little. Alert: bashism!
+			sleep 0."${RANDOM:0:1}"
+		done
 	done
 }
+
+function test_pass_git_config() {
+	if [ "$(uname -s)" = Darwin ]; then
+		BHOME=$(mktemp -d -t s)
+	else
+		BHOME=$(mktemp -d -t singtmp.XXXXXX)
+	fi
+
+	# TODO: To make it into a proper test, can create a temp HOME and populate sample
+	# .gitconfig, and then compare with the result
+	echo "TEMP HOME=$BHOME"
+	pass_git_config "user.name" "Must not be used"
+	pass_git_config "user.absent" "Default User"
+	pass_git_config "annex.unset"
+	pass_git_config "annex.autoupgraderepository"
+	pass_git_config "safe.directory"
+
+	echo "new git config"
+	cat "$BHOME/.gitconfig"
+}
+
+# test_pass_git_config
+# exit 0
 
 function readlink_f() {
 	readlink -f "$1" 2> /dev/null || python -c 'import sys, os ; print(os.path.realpath(sys.argv[1]))' "$1"
