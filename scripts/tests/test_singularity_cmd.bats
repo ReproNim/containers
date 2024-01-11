@@ -1,4 +1,6 @@
 #!/usr/bin/env bats
+#emacs: -*- mode: shell-script; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*-
+#ex: set sts=4 ts=4 sw=4 noet:
 #
 # This test uses the Bash Automated Testing System
 # See: https://github.com/bats-core/bats-core
@@ -22,6 +24,7 @@ cd "$BATS_TEST_DIRNAME"
 git annex get "$arg_test_img"
 
 
+# bats test_tags=docker
 @test "verifying arguments passed to singularity_cmd Docker shim" {
 	pull_singularity_shim
 
@@ -41,22 +44,26 @@ git annex get "$arg_test_img"
 }
 
 
+# bats test_tags=docker
 @test "verifying ability to singularity exec under /tmp subdir" {
 	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
 	check_subdir "$(_mktemp_dir_under /tmp)"
 }
 
+# bats test_tags=docker
 @test "verifying ability to singularity exec under /tmp subdir (explicit use of docker)" {
 	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
 	export REPRONIM_USE_DOCKER=1
 	check_subdir "$(_mktemp_dir_under /tmp)"
 }
 
+# bats test_tags=docker
 @test "verifying ability to singularity exec under $HOME subdir" {
 	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
 	check_subdir "$(_mktemp_dir_under $HOME)"
 }
 
+# bats test_tags=docker
 @test "verifying ability to singularity exec under $HOME subdir (explicit use of docker)" {
 	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
 	export REPRONIM_USE_DOCKER=1
