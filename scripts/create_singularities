@@ -437,8 +437,9 @@ def main(push: bool, githubids: list[str]|None) -> None:
     builder.generate_singularity_for_docker_image("neuronets/kwyk")
 
     # Jeremy Magland images, to try out dendro
-    builder.generate_singularity_for_docker_image("magland/pc-mountainsort5")
-    builder.generate_singularity_for_docker_image("magland/pc-kilosort3")
+    # Seems to be 404ing https://github.com/scratchrealm/pc-spike-sorting/issues/10
+    #builder.generate_singularity_for_docker_image("magland/pc-mountainsort5")
+    #builder.generate_singularity_for_docker_image("magland/pc-kilosort3")
 
     # Entire organization
     # Some purely "latest" give us troubles. Let them tag
