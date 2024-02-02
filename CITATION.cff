@@ -1,0 +1,53 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  ReproNim/containers - containerized environments for
+  reproducible neuroimaging
+message: >-
+  If you use this product, please cite it using the metadata
+  from this file.
+type: dataset
+authors:
+  - orcid: 'https://orcid.org/0000-0003-3456-2493'
+    affiliation: 'Dartmouth College, Hanover, NH, United States'
+    given-names: Yaroslav
+    name-particle: O
+    family-names: Halchenko
+  - given-names: Christian
+    family-names: Haselgrove
+    affiliation: >-
+      University of Massachusetts Medical School, Worcester,
+      MA, United States
+    orcid: 'https://orcid.org/0000-0002-4438-0637'
+  - family-names: Travers
+    given-names: Matt
+    orcid: 'https://orcid.org/0000-0001-5456-5371'
+    affiliation: 'TCG, Inc, Washington, DC, United States"'
+  - given-names: John
+    family-names: Wodder
+    name-suffix: II
+    name-particle: T.
+    affiliation: 'Dartmouth College, Hanover, NH, United States'
+  - given-names: Austin
+    family-names: Macdonald
+    affiliation: 'Dartmouth College, Hanover, NH, United States'
+    orcid: 'https://orcid.org/0000-0002-8124-807X'
+identifiers:
+  - type: other
+    value: 'RRID:SCR_018467'
+    description: 'https://scicrunch.org/resources'
+repository-code: 'https://github.com/ReproNim/containers'
+repository: 'https://datasets.datalad.org/?dir=/repronim/containers'
+abstract: >-
+  This repository provides a DataLad dataset (git/git-annex
+  repository) with a collection of popular computational
+  tools provided within ready to use containerized
+  environments.
+keywords:
+  - reproducible research
+  - datalad
+  - containers
+  - singularity
+version: 0.20240201.0
