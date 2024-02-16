@@ -108,7 +108,7 @@ for arg in args.images:
         # we had version specified
         print(f"I: {img} -> {ver}")
         imgprefix = topd / "images" / img.partition("-")[0] / f"{img}--{ver}"
-        if imgprefix.exists():
+        if imgprefix.is_symlink() or imgprefix.exists():
             # we were specified precisely with extension etc
             imgpath = imgprefix
         else:
