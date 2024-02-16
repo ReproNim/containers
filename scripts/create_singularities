@@ -33,7 +33,7 @@
 #    bids/validator, the other ones will be reported skipped
 
 from __future__ import annotations
-from collections.abc import Generator
+from collections.abc import Generator, Iterator
 from dataclasses import dataclass
 import click
 import logging
@@ -42,6 +42,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from time import sleep
 from typing import Any, Optional, cast
 import requests
 
@@ -78,7 +79,7 @@ class Builder:
 
     @staticmethod
     def get_last_docker_version_tag(dh: str, only_good_versions: bool=False) -> Optional[tuple[str, str]]:
-        r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
+        r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         r.raise_for_status()
         versions = [cast(str, res["name"]) for res in r.json()["results"]]
         if len(versions) > 1 or (versions and only_good_versions):
@@ -110,7 +111,7 @@ class Builder:
     def get_docker_repositories(namespace: str, full:bool = True) -> Generator[str, None, None]:
         """Return repositories for a specific namespace (user or organization)
         """
-        r = requests.get(f"https://registry.hub.docker.com/v2/repositories/{namespace}")
+        r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{namespace}")
         r.raise_for_status()
         for res in r.json()["results"]:
             if res["repository_type"] != "image":
@@ -451,6 +452,46 @@ def main(push: bool, githubids: list[str]|None) -> None:
     builder.runcmd("git", "pull")  # to possibly merge remote changes
     if push:
         builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
+
+
+def retry_get(url: str) -> requests.Response:
+    sleepiter = exp_wait(attempts=10)
+    while True:
+        try:
+            return requests.get(url)
+        except (requests.ConnectionError, requests.Timeout) as e:
+            if (wait := next(sleepiter, None)) is not None:
+                log.warning(
+                    "Request to %s failed due to %s: %s; sleeping for %f"
+                    " seconds and retrying",
+                    type(e).__name__,
+                    str(e),
+                    wait,
+                )
+                sleep(wait)
+            else:
+                raise
+
+
+def exp_wait(
+    base: float = 1.25,
+    multiplier: float = 1,
+    attempts: int | None = None,
+) -> Iterator[float]:
+    """
+    Returns a generator of values usable as `sleep()` times when retrying
+    something with exponential backoff.
+
+    :param float base: the base value for exponentiation
+    :param float multiplier: value to multiply values by after exponentiation
+    :param Optional[int] attempts:
+        how many values to yield; set to `None` to yield forever
+    :rtype: Iterator[float]
+    """
+    n = 0
+    while attempts is None or n < attempts:
+        yield base**n * multiplier
+        n += 1
 
 
 if __name__ == "__main__":
