@@ -459,7 +459,7 @@ def retry_get(url: str) -> requests.Response:
     while True:
         try:
             return requests.get(url)
-        except (requests.ConnectionError, requests.Timeout) as e:
+        except (requests.ConnectionError, requests.exceptions.HTTPError, requests.Timeout) as e:
             if (wait := next(sleepiter, None)) is not None:
                 log.warning(
                     "Request to %s failed due to %s: %s; sleeping for %f"
