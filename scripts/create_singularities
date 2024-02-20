@@ -80,7 +80,6 @@ class Builder:
     @staticmethod
     def get_last_docker_version_tag(dh: str, only_good_versions: bool=False) -> Optional[tuple[str, str]]:
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
-        r.raise_for_status()
         versions = [cast(str, res["name"]) for res in r.json()["results"]]
         if len(versions) > 1 or (versions and only_good_versions):
             # select only the ones which seems to be semantic and/or
@@ -112,7 +111,6 @@ class Builder:
         """Return repositories for a specific namespace (user or organization)
         """
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{namespace}")
-        r.raise_for_status()
         for res in r.json()["results"]:
             if res["repository_type"] != "image":
                 # don't know what to do with those
@@ -458,8 +456,15 @@ def retry_get(url: str) -> requests.Response:
     sleepiter = exp_wait(attempts=10)
     while True:
         try:
-            return requests.get(url)
-        except (requests.ConnectionError, requests.Timeout) as e:
+            r = requests.get(url)
+            r.raise_for_status()
+            return r
+        except (requests.ConnectionError, requests.HTTPError, requests.Timeout) as e:
+            if (
+                isinstance(e, requests.HTTPError)
+                and e.response is not None and e.response.status_code < 500
+            ):
+                raise e
             if (wait := next(sleepiter, None)) is not None:
                 log.warning(
                     "Request to %s failed due to %s: %s; sleeping for %f"
@@ -470,7 +475,7 @@ def retry_get(url: str) -> requests.Response:
                 )
                 sleep(wait)
             else:
-                raise
+                raise e
 
 
 def exp_wait(
