@@ -51,7 +51,12 @@ function pass_git_config() {
 		VALUES=( "$2" )
 	else
 		# read all values into an array
-		mapfile -t VALUES < <(git config --get-all "$var")
+		# There is no mapfile on OSX, so can't do
+		# mapfile -t VALUES < <(git config --get-all "$var")
+		VALUES=()
+		while IFS= read -r line; do
+		    VALUES+=("$line")
+		done < <(git config --get-all "$var")
 	fi
 
 	for value in "${VALUES[@]}"; do
