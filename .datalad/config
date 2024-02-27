@@ -444,3 +444,6 @@
 [datalad "containers.neurodesk-fastcsr"]
 	image = images/neurodesk/neurodesk-fastcsr--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brkraw"]
+	image = images/neurodesk/neurodesk-brkraw--0.3.11.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
