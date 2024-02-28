@@ -286,7 +286,7 @@
 	image = images/neurodesk/neurodesk-lashis--2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-julia"]
-	image = images/neurodesk/neurodesk-julia--1.4.1.simg
+	image = images/neurodesk/neurodesk-julia--1.10.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-itksnap"]
 	image = images/neurodesk/neurodesk-itksnap--4.0.2.simg
