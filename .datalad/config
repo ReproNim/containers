@@ -447,3 +447,6 @@
 [datalad "containers.neurodesk-brkraw"]
 	image = images/neurodesk/neurodesk-brkraw--0.3.11.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-giga-connectome"]
+	image = images/bids/bids-giga-connectome--0.4.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
