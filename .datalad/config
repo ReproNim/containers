@@ -304,7 +304,7 @@
 	image = images/neurodesk/neurodesk-freesurfer--7.4.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-fmriprep"]
-	image = images/neurodesk/neurodesk-fmriprep--23.0.0.simg
+	image = images/neurodesk/neurodesk-fmriprep--23.2.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-fieldtrip"]
 	image = images/neurodesk/neurodesk-fieldtrip--20220617.simg
