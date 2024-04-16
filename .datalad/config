@@ -450,3 +450,6 @@
 [datalad "containers.bids-giga-connectome"]
 	image = images/bids/bids-giga-connectome--0.4.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-qsiprep"]
+	image = images/neurodesk/neurodesk-qsiprep--0.20.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
