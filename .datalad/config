@@ -48,7 +48,7 @@
 	image = images/bids/bids-mindboggle--0.0.4-1.sing
 [datalad "containers.bids-mriqc"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-mriqc--23.1.1.sing
+	image = images/bids/bids-mriqc--24.0.0.sing
 [datalad "containers.bids-mrtrix3-connectome"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-mrtrix3-connectome--0.5.3.sing
