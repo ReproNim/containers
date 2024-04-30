@@ -55,3 +55,8 @@ jobs:
 
       - name: Run script tests
         run: bats -t scripts/tests
+
+      # Keeping just in case to debug fails
+      #- name: Setup tmate session
+      #  if: ${{ failure() }}
+      #  uses: mxschmitt/action-tmate@v3
