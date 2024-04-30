@@ -46,26 +46,26 @@ git annex get "$arg_test_img"
 
 # bats test_tags=docker
 @test "verifying ability to singularity exec under /tmp subdir" {
-	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
+	skip_if_ci_osx "skipping Singularity directory test on Travis OSX"
 	check_subdir "$(_mktemp_dir_under /tmp)"
 }
 
 # bats test_tags=docker
 @test "verifying ability to singularity exec under /tmp subdir (explicit use of docker)" {
-	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
+	skip_if_ci_osx "skipping Singularity directory test on Travis OSX"
 	export REPRONIM_USE_DOCKER=1
 	check_subdir "$(_mktemp_dir_under /tmp)"
 }
 
 # bats test_tags=docker
 @test "verifying ability to singularity exec under $HOME subdir" {
-	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
+	skip_if_ci_osx "skipping Singularity directory test on Travis OSX"
 	check_subdir "$(_mktemp_dir_under $HOME)"
 }
 
 # bats test_tags=docker
 @test "verifying ability to singularity exec under $HOME subdir (explicit use of docker)" {
-	skip_if_travis_osx "skipping Singularity directory test on Travis OSX"
+	skip_if_ci_osx "skipping Singularity directory test on Travis OSX"
 	export REPRONIM_USE_DOCKER=1
 	check_subdir "$(_mktemp_dir_under $HOME)"
 }
