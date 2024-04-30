@@ -445,7 +445,8 @@ def main(push: bool, githubids: list[str]|None) -> None:
     builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
 
     # Custom: neurodesk singularity images
-    builder.add_neurodesk_singularity_images()
+    # TEMP: disabled while CDN is "migrating"
+    # builder.add_neurodesk_singularity_images()
 
     builder.runcmd("git", "pull")  # to possibly merge remote changes
     if push:
