@@ -9,7 +9,7 @@
 #   sudo ./install.sh /usr/local
 #
 # Several ways to run the test:
-#   ./test_singularity_cmd.bats
+#   ./test_freeze_versions.bats
 #   bats test_freeze_versions.bats
 #   bats .
 

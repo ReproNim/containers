@@ -55,10 +55,15 @@ import re
 import subprocess
 import sys
 import tempfile
+import warnings
 
 
 def error(message: str) -> None:
     print("ERROR:", message, file=sys.stderr)
+
+def debug(message: str) -> None:
+    # print("DEBUG:", message, file=sys.stderr)
+    pass
 
 
 topd = Path(__file__).parent.parent
@@ -71,14 +76,18 @@ target_ds = topd  # config of which to tune
 topd_rel = None  # relative path to topd from target_ds
 frozen = ""
 
-print(f"topd_rel: {topd_rel}")
+debug(f"topd_rel: {topd_rel}")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--save-dataset", type=Path)
 parser.add_argument("images", nargs="*")
 args = parser.parse_args()
 
-target_ds = save_ds = args.save_dataset
+if args.save_dataset:
+    target_ds = save_ds = args.save_dataset
+
+debug(f"Target DS: {target_ds} == {target_ds.resolve()};  Save DS: {save_ds}")
+
 if save_ds is not None:
     # if we are asking to save into another dataset
     if topd.resolve() != save_ds.resolve():
@@ -108,7 +117,8 @@ for arg in args.images:
         # we had version specified
         print(f"I: {img} -> {ver}")
         imgprefix = topd / "images" / img.partition("-")[0] / f"{img}--{ver}"
-        if imgprefix.exists():
+        debug(f"Checking {imgprefix}")
+        if imgprefix.is_symlink() or imgprefix.exists():
             # we were specified precisely with extension etc
             imgpath = imgprefix
         else:
@@ -210,14 +220,23 @@ for arg in args.images:
         # a conflict needed to be consciously resolved (or -S ours used)
         fd, tmppath = tempfile.mkstemp(dir=topd / ".datalad")
         with os.fdopen(fd, "w", encoding="utf-8") as outfp:
-            with (topd / ".datalad" / "config").open(encoding="utf-8") as infp:
+            frozen_entries = 0
+            cfg_file = topd / ".datalad" / "config"
+            with (cfg_file).open(encoding="utf-8") as infp:
                 for line in infp:
-                    line = re.sub(
-                        rf"{re.escape(imgpath)}(?:[ \t].*)*$",
+                    line = line.rstrip("\n")
+                    new_line = re.sub(
+                        rf"{re.escape(str(imgpath))}(?:[ \t].*)*$",
                         f"{imgpath}  # frozen",
-                        line.rstrip("\n"),
+                        line,
                     )
-                    print(line, file=outfp)
+                    print(new_line, file=outfp)
+                    if new_line != line:
+                        frozen_entries += 1
+            if not frozen_entries:
+                raise RuntimeError(f"Did not freeze any entry for {imgpath}")
+            elif frozen_entries > 1:
+                warnings.warn(f"Froze multiple ({frozen_entries}) entries for {imgpath}. Check {cfg_file} for consistency/desired effect.")
         os.replace(tmppath, topd / ".datalad" / "config")
 
 if save_ds is not None:

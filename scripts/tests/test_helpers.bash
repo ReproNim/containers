@@ -62,8 +62,8 @@ pull_singularity_shim () {
 	fi
 }
 
-skip_if_travis_osx() {
-	if [ "$TRAVIS_OS_NAME" = osx ]
+skip_if_ci_osx() {
+	if [ "$TRAVIS_OS_NAME" = osx ] || ( [ -n "GITHUB_ENV" ] && [ "$RUNNER_OS" = "macOS" ] )
 	then
 		skip "$@"
 	fi
