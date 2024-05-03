@@ -141,8 +141,7 @@ class Builder:
                 version=version,
                 date=date,
                 urls=[
-                    f'https://objectstorage.{zone}.oraclecloud.com/n/sd63xuke79z3/b/neurodesk/o/{container}.simg'
-                    for zone in ('us-ashburn-1', 'eu-frankfurt-1', 'ap-sydney-1')
+                    f'https://d15yxasja65rk8.cloudfront.net/{container}.simg'
                 ]
             )
 
@@ -445,8 +444,9 @@ def main(push: bool, githubids: list[str]|None) -> None:
     builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
 
     # Custom: neurodesk singularity images
-    # TEMP: disabled while CDN is "migrating"
-    # builder.add_neurodesk_singularity_images()
+    # TODO: update URLs for all existing to not have oraclecloud.com ones and only new
+    # https://d15yxasja65rk8.cloudfront.net ones
+    builder.add_neurodesk_singularity_images()
 
     builder.runcmd("git", "pull")  # to possibly merge remote changes
     if push:
