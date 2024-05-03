@@ -316,7 +316,7 @@
 	image = images/neurodesk/neurodesk-eeglab--2020.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-dsistudio"]
-	image = images/neurodesk/neurodesk-dsistudio--2020.10.simg
+	image = images/neurodesk/neurodesk-dsistudio--chen.2024.04.19.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-diffusiontoolkit"]
 	image = images/neurodesk/neurodesk-diffusiontoolkit--0.6.4.1.simg
