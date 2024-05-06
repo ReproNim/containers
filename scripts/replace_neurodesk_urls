@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# A fix up script to register new CDN urls and remove old ones for neurodesk
+#
+
+set -ue
+
+function geturls() {
+	git -c annex.alwayscommit=false annex whereis --json "$1" | jq '.whereis[] | select(.description == "web") | .urls' | sed -e "s|[\"',]||g" | grep "$2" || :
+}
+
+for f in images/neurodesk/*.simg ; do 
+    echo "INFO: file $f"
+    oracleurls=( $(geturls "$f" oraclecloud) )
+    cloudfronturls=( $(geturls "$f" cloudfront) )
+    if [ -z "${oracleurls[*]}" ]; then
+        if [ -n "${cloudfronturls[*]}" ]; then
+            echo "INFO:  no oracleurls for $f and have cloudfront already -- skipping entirely"
+            continue
+        else
+            echo "ERROR:  no oracleurls for $f and no cloudfronts!"
+            exit 1
+        fi
+    fi
+    img=$(echo "${oracleurls[*]}" | sed -e 's,.*/,,g' )
+	if [ -z "$img" ]; then
+		echo "ERROR: Got empty image from ${oracleurls[*]}"
+		exit 1
+	fi
+    newurl="https://d15yxasja65rk8.cloudfront.net/$img"
+    # let's verify that it is not 404
+    ret=$(curl -o /dev/null -s -I -w "%{http_code}" "$newurl")
+    if [ $ret != 200 ]; then
+        echo "ERROR: $newurl - could not verify presence: $ret . Will not be added" >&2
+        #exit 1
+    else
+        echo "OK: $newurl" >&2
+        if [ -n "${cloudfronturls[*]}" ]; then
+            echo " INFO: cloudfront url seems to be already known -- $cloudfronturls . Not adding"
+        else
+            echo " INFO: adding $newurl to $f" 
+            git -c annex.alwayscommit=false annex addurl "--file=$f" "$newurl"
+        fi
+    fi
+    echo " INFO: removing ${#oracleurls[@]} oracle urls"
+    for url in "${oracleurls[@]}"; do
+        git -c annex.alwayscommit=false annex rmurl "$f" "$url" 
+    done
+done
+# Trigger git-annex commit
+git -c annex.commitmessage="Updating URLs for neurodesk" annex merge
