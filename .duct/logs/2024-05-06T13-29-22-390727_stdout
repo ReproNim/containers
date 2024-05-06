@@ -1,0 +1,67 @@
+INFO: file images/neurodesk/neurodesk-afni--21.2.00.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/afni_21.2.00_20210714.simg to images/neurodesk/neurodesk-afni--21.2.00.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/afni_21.2.00_20210714.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--21.2.00.simg ok
+rmurl images/neurodesk/neurodesk-afni--21.2.00.simg ok
+rmurl images/neurodesk/neurodesk-afni--21.2.00.simg ok
+INFO: file images/neurodesk/neurodesk-afni--22.1.14.simg
+ INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--22.1.14.simg ok
+rmurl images/neurodesk/neurodesk-afni--22.1.14.simg ok
+rmurl images/neurodesk/neurodesk-afni--22.1.14.simg ok
+INFO: file images/neurodesk/neurodesk-afni--22.3.06.simg
+ INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--22.3.06.simg ok
+rmurl images/neurodesk/neurodesk-afni--22.3.06.simg ok
+rmurl images/neurodesk/neurodesk-afni--22.3.06.simg ok
+INFO: file images/neurodesk/neurodesk-afni--22.3.07.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/afni_22.3.07_20221206.simg to images/neurodesk/neurodesk-afni--22.3.07.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/afni_22.3.07_20221206.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--22.3.07.simg ok
+rmurl images/neurodesk/neurodesk-afni--22.3.07.simg ok
+rmurl images/neurodesk/neurodesk-afni--22.3.07.simg ok
+INFO: file images/neurodesk/neurodesk-afni--23.0.00.simg
+ INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--23.0.00.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.0.00.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.0.00.simg ok
+INFO: file images/neurodesk/neurodesk-afni--23.0.04.simg
+ INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--23.0.04.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.0.04.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.0.04.simg ok
+INFO: file images/neurodesk/neurodesk-afni--23.0.07.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/afni_23.0.07_20230302.simg to images/neurodesk/neurodesk-afni--23.0.07.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/afni_23.0.07_20230302.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--23.0.07.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.0.07.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.0.07.simg ok
+INFO: file images/neurodesk/neurodesk-afni--23.3.02.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/afni_23.3.02_20231024.simg to images/neurodesk/neurodesk-afni--23.3.02.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/afni_23.3.02_20231024.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--23.3.02.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.3.02.simg ok
+rmurl images/neurodesk/neurodesk-afni--23.3.02.simg ok
+INFO: file images/neurodesk/neurodesk-afni--24.1.02.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/afni_24.1.02_20240409.simg to images/neurodesk/neurodesk-afni--24.1.02.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/afni_24.1.02_20240409.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-afni--24.1.02.simg ok
+rmurl images/neurodesk/neurodesk-afni--24.1.02.simg ok
+rmurl images/neurodesk/neurodesk-afni--24.1.02.simg ok
+INFO: file images/neurodesk/neurodesk-aidamri--1.1.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/aidamri_1.1_20210708.simg to images/neurodesk/neurodesk-aidamri--1.1.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/aidamri_1.1_20210708.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neurodesk-aidamri--1.1.simg ok
+rmurl images/neurodesk/neurodesk-aidamri--1.1.simg ok
+rmurl images/neurodesk/neurodesk-aidamri--1.1.simg ok
+INFO: file images/neurodesk/neurodesk-ants--2.3.1.simg
+ INFO: adding https://d15yxasja65rk8.cloudfront.net/ants_2.3.1_20211204.simg to images/neurodesk/neurodesk-ants--2.3.1.simg
+^[[0Jaddurl https://d15yxasja65rk8.cloudfront.net/ants_2.3.1_20211204.simg ok
+^[[1G INFO: removing 3 oracle urls
+rmurl images/neurodesk/neu

@@ -1,0 +1,46 @@
+OK: https://d15yxasja65rk8.cloudfront.net/afni_21.2.00_20210714.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/afni_22.1.14_20220713.simg - could not verify presence: 403 . Will not be added
+ERROR: https://d15yxasja65rk8.cloudfront.net/afni_22.3.06_20221128.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/afni_22.3.07_20221206.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/afni_23.0.00_20230118.simg - could not verify presence: 403 . Will not be added
+ERROR: https://d15yxasja65rk8.cloudfront.net/afni_23.0.04_20230215.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/afni_23.0.07_20230302.simg
+OK: https://d15yxasja65rk8.cloudfront.net/afni_23.3.02_20231024.simg
+OK: https://d15yxasja65rk8.cloudfront.net/afni_24.1.02_20240409.simg
+OK: https://d15yxasja65rk8.cloudfront.net/aidamri_1.1_20210708.simg
+OK: https://d15yxasja65rk8.cloudfront.net/ants_2.3.1_20211204.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/ants_2.3.4_20211212.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/ants_2.3.5_20211212.simg
+OK: https://d15yxasja65rk8.cloudfront.net/ashs_2.0.0_20210105.simg
+OK: https://d15yxasja65rk8.cloudfront.net/aslprep_0.2.7_20210323.simg
+OK: https://d15yxasja65rk8.cloudfront.net/aslprep_0.4.0_20230728.simg
+OK: https://d15yxasja65rk8.cloudfront.net/aslprep_0.5.0_20231116.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/aslprep_0.6.0_20240129.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/bart_0.7.00_20210302.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/bidsappaa_0.2.0_20230612.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/bidsappbaracus_1.1.4_20230612.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/bidsappbrainsuite_21a_20230615.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/bidsapphcppipelines_4.3.0_20230524.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidsappmrtrix3connectome_0.5.3_20230615.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidsapppymvpa_2.0.2_20230629.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidsappspm_0.0.20_20230629.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidscoin_3.7.0_20220329.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidscoin_4.2.0_20231017.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidscoin_4.2.1_20231030.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/bidscoin_4.3.0_20240220.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/bidscoin_4.3.2_20240329.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/bidstools_1.0.0_20201208.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/bidstools_1.0.1_20230905.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidstools_1.0.2_20231017.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidstools_1.0.3_20231030.simg
+OK: https://d15yxasja65rk8.cloudfront.net/bidstools_1.0.4_20240221.simg
+OK: https://d15yxasja65rk8.cloudfront.net/brainstorm_3.211130_20211207.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/brkraw_0.3.11_20240223.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/cat12_r1933_20220128.simg
+OK: https://d15yxasja65rk8.cloudfront.net/cat12_r2166_20230601.simg
+OK: https://d15yxasja65rk8.cloudfront.net/clearswi_1.0.0_20211018.simg
+ERROR: https://d15yxasja65rk8.cloudfront.net/code_220114_20220121.simg - could not verify presence: 403 . Will not be added
+OK: https://d15yxasja65rk8.cloudfront.net/code_230315_20230315.simg
+OK: https://d15yxasja65rk8.cloudfront.net/conn_20b_20210109.simg
+OK: https://d15yxasja65rk8.cloudfront.net/conn_22a_20231115.simg
+error: git-annex died of signal 9
