@@ -9,9 +9,11 @@ function geturls() {
 	git -c annex.alwayscommit=false annex whereis --json "$1" | jq '.whereis[] | select(.description == "web") | .urls' | sed -e "s|[\"',]||g" | grep "$2" || :
 }
 
-for f in images/neurodesk/*.simg ; do 
+for f in images/neurodesk/*.simg ; do
     echo "INFO: file $f"
+    # shellcheck disable=SC2207
     oracleurls=( $(geturls "$f" oraclecloud) )
+    # shellcheck disable=SC2207
     cloudfronturls=( $(geturls "$f" cloudfront) )
     if [ -z "${oracleurls[*]}" ]; then
         if [ -n "${cloudfronturls[*]}" ]; then
@@ -22,15 +24,16 @@ for f in images/neurodesk/*.simg ; do
             exit 1
         fi
     fi
+    # shellcheck disable=SC2001
     img=$(echo "${oracleurls[*]}" | sed -e 's,.*/,,g' )
-	if [ -z "$img" ]; then
-		echo "ERROR: Got empty image from ${oracleurls[*]}"
-		exit 1
-	fi
+    if [ -z "$img" ]; then
+        echo "ERROR: Got empty image from ${oracleurls[*]}"
+        exit 1
+    fi
     newurl="https://d15yxasja65rk8.cloudfront.net/$img"
     # let's verify that it is not 404
     ret=$(curl -o /dev/null -s -I -w "%{http_code}" "$newurl")
-    if [ $ret != 200 ]; then
+    if [ "$ret" != 200 ]; then
         echo "ERROR: $newurl - could not verify presence: $ret . Will not be added" >&2
         #exit 1
     else
@@ -38,13 +41,13 @@ for f in images/neurodesk/*.simg ; do
         if [ -n "${cloudfronturls[*]}" ]; then
             echo " INFO: cloudfront url seems to be already known -- $cloudfronturls . Not adding"
         else
-            echo " INFO: adding $newurl to $f" 
+            echo " INFO: adding $newurl to $f"
             git -c annex.alwayscommit=false annex addurl "--file=$f" "$newurl"
         fi
     fi
     echo " INFO: removing ${#oracleurls[@]} oracle urls"
     for url in "${oracleurls[@]}"; do
-        git -c annex.alwayscommit=false annex rmurl "$f" "$url" 
+        git -c annex.alwayscommit=false annex rmurl "$f" "$url"
     done
 done
 # Trigger git-annex commit
