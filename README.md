@@ -238,15 +238,15 @@ dataset, **or** the top-level dataset.
 **Option 1: Top level dataset (recommended)**
 
 ```bash
-# Run from ~/top-level-dataset
+# Run from ~/my-experiments/ds000003-qc
 datalad run -m "Downgrade/Freeze mriqc container version" \
-    code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
+    containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
 ```
 
 **Option 2: ///repronim/containers**
 
 ```bash
-# Run from ~/top-level-dataset/code/containers
+# Run from ~/my-experiments/ds000003-qc/containers
 datalad run -m "Downgrade/Freeze mriqc container version" \
     scripts/freeze_versions bids-mriqc=0.16.0
 ```
