@@ -39,7 +39,7 @@ for f in images/neurodesk/*.simg ; do
     else
         echo "OK: $newurl" >&2
         if [ -n "${cloudfronturls[*]}" ]; then
-            echo " INFO: cloudfront url seems to be already known -- $cloudfronturls . Not adding"
+            echo " INFO: cloudfront url seems to be already known -- ${cloudfronturls[*]} . Not adding"
         else
             echo " INFO: adding $newurl to $f"
             git -c annex.alwayscommit=false annex addurl "--file=$f" "$newurl"
