@@ -8,11 +8,16 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
+      matrix:
+        os:
+          - ubuntu-20.04
+          - macos-latest
     steps:
-    - name: Set up system
+    - name: Set up system (Ubuntu)
+      if: startsWith(matrix.os, 'ubuntu')
       shell: bash
       run: |
         bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)
@@ -20,9 +25,17 @@ jobs:
         sudo apt-get install eatmydata
         sudo eatmydata apt-get install singularity-container gnupg moreutils strace
         sudo eatmydata apt-get install datalad datalad-container
+
+    - name: Set up system (macOS)
+      if: startsWith(matrix.os, 'macos')
+      run: |
+        python3 -m pip install datalad-container datalad-installer
+        datalad-installer -l DEBUG --sudo ok git-annex -m brew
+
+    - name: Configure Git
+      run: |
         git config --global user.email "test@example.com"
         git config --global user.name "CI Almighty"
-
 
     - name: Checkout this repository
       uses: actions/checkout@v4
