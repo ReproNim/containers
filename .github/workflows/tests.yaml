@@ -29,7 +29,9 @@ jobs:
     - name: Set up system (macOS)
       if: startsWith(matrix.os, 'macos')
       run: |
-        python3 -m pip install datalad-container datalad-installer
+        python3 -m venv ~/venv
+        . ~/venv/bin/activate
+        pip install datalad-container datalad-installer
         datalad-installer -l DEBUG --sudo ok git-annex -m brew
 
     - name: Configure Git
@@ -41,4 +43,8 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Test example in the README.md
-      run: bash <(sed -n -e '/^ *#!/,/^```$/p' README.md | grep -v '```')
+      run: |
+        if [ -d ~/venv ]
+        then . ~/venv/bin/activate
+        fi
+        bash <(sed -n -e '/^ *#!/,/^```$/p' README.md | grep -v '```')
