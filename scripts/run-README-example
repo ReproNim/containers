@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# A helper to assist with running the example embedded in README.md
+#
+set -eu -o pipefail
+
+cd "$(dirname "$0")/.."
+
+bash <(sed -n -e '/^ *#!/,/^```$/p' README.md | grep -v '```')
