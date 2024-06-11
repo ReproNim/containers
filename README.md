@@ -160,13 +160,14 @@ cd $(mktemp -d ${TMPDIR:-/tmp}/repro-XXXXXXX)
 datalad create -d ds000003-qc -c text2git
 cd ds000003-qc
 # Install our containers collection:
-datalad install -d . ///repronim/containers
+datalad install -d . -s ///repronim/containers code/containers
 # Optionally -- copy container of interest definition to the current (or desired)
 # version # to facilitate reproducibility while still being able to upgrade containers
 # subdataset if so desired to get access to newer versions.
 # We will also use 0.16.0 since newer ones require more memory and
 # would fail to run on CI.
-containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
+datalad run -m "Downgrade/Freeze mriqc container version" \
+  code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
 # Install input data:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 # Setup git to ignore workdir to be used by pipelines
@@ -209,15 +210,15 @@ datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 Next we install the `ReproNim/containers` collection.
 
 ```bash
-datalad install -d . ///repronim/containers
+datalad install -d . -s ///repronim/containers code/containers
 ```
 
 Now let's take a look at what we have.
 
-```bash
+```
 /ds000003-qc # The root dataset contains everything
  |--/sourcedata # we call it source, but it is actually ds000003-demo
- |--/containers # repronim/containers, this is where our non-custom code lives
+ |--/code/containers # repronim/containers, this is where our non-custom code lives
 ```
 
 TODO -- update whenever version above shown to do what is desired.
@@ -225,7 +226,7 @@ TODO -- update whenever version above shown to do what is desired.
 ### Freezing Container Image Versions
 
 `freeze_versions` is an optional step that will record and "freeze" the
-version of the container used. Even if the `///containers` dataset is
+version of the container used. Even if the `///repronim/containers` dataset is
 upgraded with a newer version of our container, we are "pinned" to the
 container we explicitly determined. Note: To switch version of the container
 (e.g., to upgrade to a new one), rerun `freeze_versions` script with the version
@@ -240,15 +241,15 @@ dataset, **or** the top-level dataset.
 ```bash
 # Run from ~/my-experiments/ds000003-qc
 datalad run -m "Downgrade/Freeze mriqc container version" \
-    containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
+  code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
 ```
 
 **Option 2: ///repronim/containers**
 
 ```bash
-# Run from ~/my-experiments/ds000003-qc/containers
+# Run from ~/my-experiments/ds000003-qc/
 datalad run -m "Downgrade/Freeze mriqc container version" \
-    scripts/freeze_versions bids-mriqc=0.16.0
+    code/containers/scripts/freeze_versions bids-mriqc=0.16.0
 ```
 
 Note: It is recommended to freeze a container image version into the
@@ -271,16 +272,12 @@ echo "workdir/" > .gitignore && datalad save -m "Ignore workdir" .gitignore
 
 Now we use `datalad containers-run` to perform the analysis.
 
-**_NOTE:_** mriqc is memory intensive, so we are restricting to a single
-participant. OOM (Out of Memory) situations cause a `NodeExecutionError`
-with an `Error 137`.
-
 ```bash
 datalad containers-run \
-        --container-name containers/bids-mriqc \
+        -n bids-mriqc \
         --input sourcedata \
         --output . \
-        '{inputs}' '{outputs}' participant --participant-label sub-02 -w workdir
+        '{inputs}' '{outputs}' participant group -w workdir
 ```
 
 If everything worked as expected, we will now see our new analysis, and
@@ -290,30 +287,29 @@ obtained.
 
 ```shell
 (git) .../ds000003-qc[master] $ git show --quiet
-commit 5f0fbcbfe84bb8aa32c4400a0838bc41ff1c88e0 (HEAD -> master)
-Author: Yaroslav Halchenko <debian@onerussian.com>
-Date:   Sat Aug 31 05:29:31 2019 -0400
+Author: Austin <austin@dartmouth.edu>
+Date:   Wed Jun 5 15:41:59 2024 -0400
 
-[DATALAD RUNCMD] containers/scripts/singularity_cmd run c...
+    [DATALAD RUNCMD] ./code/containers/scripts/singularity_cm...
 
-=== Do not change lines below ===
-{
- "chain": [],
- "cmd": "containers/scripts/singularity_cmd run containers/images/bids/bids-mriqc--0.15.1.sing '{inputs}' '{outputs}' participant group",
- "dsid": "f367440c-cbcf-11e9-9ad2-002590f97d84",
- "exit": 0,
- "extra_inputs": [
-  "containers/images/bids/bids-mriqc--0.15.1.sing"
- ],
- "inputs": [
-  "sourcedata"
- ],
- "outputs": [
-  "."
- ],
- "pwd": "."
-}
-^^^ Do not change lines above ^^^
+    === Do not change lines below ===
+    {
+     "chain": [],
+     "cmd": "./code/containers/scripts/singularity_cmd run code/containers/images/bids/bids-mriqc--0.16.0.sing '{inputs}' '{outputs}' participant group -w workdir",
+     "dsid": "c9c96ab9-f803-43ba-83e2-2eaec7ab4725",
+     "exit": 0,
+     "extra_inputs": [
+      "code/containers/images/bids/bids-mriqc--0.16.0.sing"
+     ],
+     "inputs": [
+      "sourcedata"
+     ],
+     "outputs": [
+      "."
+     ],
+     "pwd": "."
+    }
+    ^^^ Do not change lines above ^^^
 ```
 
 This record could later be reused (by anyone) using [datalad rerun] to rerun
