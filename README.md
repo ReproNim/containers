@@ -287,9 +287,6 @@ obtained.
 
 ```shell
 (git) .../ds000003-qc[master] $ git show --quiet
-```
-
-```
 Author: Austin <austin@dartmouth.edu>
 Date:   Wed Jun 5 15:41:59 2024 -0400
 
