@@ -109,7 +109,7 @@
 	image = images/bids/bids-multiscalebrainparcellator--1.1.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-connectomemapper-bidsapp"]
-	image = images/bids/bids-connectomemapper-bidsapp--3.1.0.sing
+	image = images/bids/bids-connectomemapper-bidsapp--3.2.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.adswa-nilearn"]
 	image = images/adswa/adswa-nilearn--latest.sing
