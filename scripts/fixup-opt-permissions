@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -eu
+
+export TMPDIR=$(dirname $0)/../tmp ; 
+export SINGULARITY_TMPDIR="$TMPDIR"; 
+
+
+
+for img in "$@"; do
+   imgd=$(dirname "$img")
+   imgb=$(basename "$img")
+   recipe="$imgd/Singularity.${imgb%.*}"
+   # Should not be changed yet!
+   git diff --exit-code "$recipe"
+   sed -i '/%post/a # Bugfix\n# https://github.com/nipreps/mriqc/issues/1304\nchmod a+rX -R /opt\n' "$recipe"
+   rm -f "$img"
+   sudo --preserve-env=TMPDIR,SINGULARITY_TMPDIR singularity build "$img" "$recipe"
+   sudo chown $USER:$USER "$img"
+done
