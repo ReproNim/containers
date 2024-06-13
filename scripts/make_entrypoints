@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# A simple script which would establish a folder with entry points to the tools
+# from a folder where a specific tool is found under for a given image.
+# ATM hardcoded for neurodesk images of FSL.
+
+# Should be made as parameters, hardcoded for now
+image=neurodesk/neurodesk-fsl--6.0.7.4.simg
+image_path="$(dirname "$0")/../images/$image"
+tool=bet
+toolkit_pattern='\<FSL\>'
+
+set -eu
+out_path="$1"
+
+function sing_exec() {
+    singularity exec "$image_path" "$@"
+}
+
+set -eu
+tool_path=$(sing_exec which "$tool")
+tool_binpath=$(dirname "$tool_path")
+
+mkdir -p "$out_path"
+echo "INFO: Creating wrapper ._exec"
+echo "#\!/bin/sh
+
+img='$image_path'
+bindir='$tool_binpath'
+
+toolname=\"\$(basename \"\$0\")\"
+singularity exec \"\$img\" \"\$toolname\" \"\$@\""  > "$out_path/._exec"
+chmod a+x "$out_path/._exec"
+
+echo "INFO: Populating shim symlinks - "
+sing_exec bash -c "find '$tool_binpath' -maxdepth 1 -type f -perm /+x -print0  |  xargs -0 grep -l '$toolkit_pattern'" \
+| while read -r tool_to_link_path; do
+    tool_to_link="$(basename "$tool_to_link_path")"
+    echo -n " $tool_to_link"
+    ln -s ._exec "$out_path/$tool_to_link"
+done
+echo
+
+nf=$(find "$out_path" -type l -lname ._exec | wc -l)
+echo "INFO: Seeing $nf symlinks under '$out_path' now."
+if echo "$PATH" | grep -q "$out_path:"; then
+    echo "INFO: It seems that PATH already contains $out_path"
+else
+    echo "INFO: Do  export PATH=\"$out_path:\$PATH\""
+fi
