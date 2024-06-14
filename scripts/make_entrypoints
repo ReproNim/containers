@@ -6,9 +6,11 @@
 
 # Should be made as parameters, hardcoded for now
 image=neurodesk/neurodesk-fsl--6.0.7.4.simg
-image_path="$(dirname "$0")/../images/$image"
+image_path="$(dirname "$0" | xargs readlink -f)/../images/$image"
 tool=bet
-toolkit_pattern='\<FSL\>'
+# That was not good enough
+#toolkit_pattern='\(\<FSL\>\|fsl-.*python\|fslmaths\)'
+toolkit_pattern='.'
 
 set -eu
 out_path="$1"
