@@ -33,7 +33,7 @@
 	image = images/bids/bids-fibredensityandcrosssection--0.0.1.sing
 [datalad "containers.bids-fmriprep"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-fmriprep--23.2.3.sing
+	image = images/bids/bids-fmriprep--24.0.0.sing
 [datalad "containers.bids-freesurfer"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-freesurfer--7.4.1-unstable.sing
