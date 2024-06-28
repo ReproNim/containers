@@ -92,7 +92,7 @@ class Builder:
                     or re.search(r"rc[0-9]*$", v)
                     or "master" in v
                 ):
-                    m = re.match(r"(([Vv]|version-|)([0-9]{1,10}\..*))", v)
+                    m = re.match(r"(([Vv]|version-|release-|)([0-9]{1,10}\..*))", v)
                     if m:
                         good_versions[m[3]] = m[1]
             if good_versions:
