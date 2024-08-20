@@ -430,7 +430,7 @@
 	image = images/bids/bids-aslprep--0.7.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-vesselboost"]
-	image = images/neurodesk/neurodesk-vesselboost--0.9.4.simg
+	image = images/neurodesk/neurodesk-vesselboost--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.magland-pc-mountainsort5"]
 	image = images/magland/magland-pc-mountainsort5--latest.sing
