@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# COPYRIGHT: ReproNim/containers Team 2018-2023
+# COPYRIGHT: ReproNim/containers Team 2018-2024
 #
 # LICENSE: MIT
 #
@@ -78,9 +78,11 @@ class Builder:
         return subprocess.run(args, **kwargs)
 
     @staticmethod
-    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False) -> Optional[tuple[str, str]]:
+    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         versions = [cast(str, res["name"]) for res in r.json()["results"]]
+        if version_regex:
+            versions = [v for v in versions if re.search(version_regex, v)]
         if len(versions) > 1 or (versions and only_good_versions):
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
@@ -248,13 +250,14 @@ export LC_ALL="C.UTF-8"
         repoid: str,
         family: str,
         origrepoid: Optional[str] = None,
+        familysuf: Optional[str]=None,
     ) -> None:
         # If image repo id is different (e.g. ReproNim/containers) from
         # original repoid where we are getting image for (e.g. generating
         # Singularity containers from Docker images) -- specify it as 4th arg
         if origrepoid is None:
             origrepoid = repoid
-        familyname = get_familyname(origrepoid, family)
+        familyname = get_familyname(origrepoid, family, familysuf)
         imagefile = singfile.build(self)
         if imagefile is not None:
             self.runcmd(
@@ -285,7 +288,10 @@ export LC_ALL="C.UTF-8"
             # the previous version of the container
 
     def generate_singularity_for_docker_image(self, githubid: str, family: Optional[str]=None,
-                                              only_good_versions: bool=False) \
+                                              only_good_versions: bool=False, 
+                                              version_regex: Optional[str]=None,
+                                              familysuf: Optional[str]=None,
+                                              ) \
             -> None:
         dockerhubid = githubid.lower()
         if not family:
@@ -298,7 +304,8 @@ export LC_ALL="C.UTF-8"
             return
         log.info("%s <- docker %s", family, dockerhubid)
         last_version = self.get_last_docker_version_tag(
-            dockerhubid, only_good_versions=only_good_versions)
+            dockerhubid, only_good_versions=only_good_versions,
+            version_regex=version_regex)
         if last_version is not None:
             last_version_pure, last_version_tag = last_version
             # print(dockerhubid, last_version)
@@ -306,7 +313,7 @@ export LC_ALL="C.UTF-8"
                 dockerhubid, last_version_tag, last_version_pure, family
             )
             self.add_singularity_versioned_image(
-                singfile, "ReproNim/containers", family, dockerhubid
+                singfile, "ReproNim/containers", family, dockerhubid, familysuf=familysuf,
             )
 
     def generate_singularity_for_docker_namespace(self, namespace: str, family: Optional[str]=None,
@@ -358,15 +365,19 @@ def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:
         return (1, (), vstr)
 
 
-def get_familyname(repoid: str, family: str) -> str:
+# Use familysuf to add smth like "LTS" or alike
+def get_familyname(repoid: str, family: str, familysuf: Optional[str]=None) -> str:
     name = re.sub(r"^[^/]*/", "", repoid)
     # sanitize for datalad not allowing _ in the container names
     name = name.replace("_", "-")
-    return f"{family}-{name}"
+    familyname = f"{family}-{name}"
+    if familysuf:
+        familyname += f"-{familysuf}"
+    return familyname
 
 
-def get_imagename(repoid: str, family: str, versiontag: str) -> str:
-    familyname = get_familyname(repoid, family)
+def get_imagename(repoid: str, family: str, versiontag: str, familysuf: Optional[str]=None) -> str:
+    familyname = get_familyname(repoid, family, familysuf)
     return f"{familyname}--{versiontag}"
 
 
@@ -412,6 +423,8 @@ def main(push: bool, githubids: list[str]|None) -> None:
 
     # validator is not bids-app but we will stick it along with bids
     builder.generate_singularity_for_docker_image("bids/validator")
+    # LTS releases for some bids-apps. TODO later may be: check for having ALL versions
+    builder.generate_singularity_for_docker_image("nipreps/fmriprep", version_regex=r"^v?20\.2\.[0-9]+$", family="bids", familysuf="20-2")
 
     # Additional ones from Poldrack
     builder.generate_singularity_for_docker_image("poldracklab/ds003-example")
