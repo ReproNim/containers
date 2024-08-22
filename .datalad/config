@@ -477,3 +477,6 @@
 [datalad "containers.neurodesk-mrtrix3src"]
 	image = images/neurodesk/neurodesk-mrtrix3src--latest.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-fmriprep-20-2"]
+	image = images/bids/bids-fmriprep--20.2.8.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
