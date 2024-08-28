@@ -2,6 +2,8 @@
 
 set -eu
 
+v=2024.1.4
+
 generate() {
 	[ "$1" == singularity ] && add_entry=' "$@"' || add_entry=''
 	ndversion=1.0.1
@@ -30,5 +32,5 @@ generate() {
 #       --user=reproin \
 }
 
-generate docker > Dockerfile
-generate singularity > Singularity
+# generate docker > Dockerfile
+generate singularity > Singularity.repronim-psychopy--"$v"
