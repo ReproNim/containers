@@ -480,3 +480,6 @@
 [datalad "containers.bids-fmriprep-20-2"]
 	image = images/bids/bids-fmriprep--20.2.8.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-qmrlab"]
+	image = images/neurodesk/neurodesk-qmrlab--2.4.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
