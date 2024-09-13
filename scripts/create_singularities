@@ -299,7 +299,7 @@ export LC_ALL="C.UTF-8"
         if self.githubids and githubid not in self.githubids:
             log.info("skip %s", githubid)
             return
-        if dockerhubid in ("djarecka/fmriprep_fake", "pennlinc/toy_bids_app", "nipreps/fmripost-aroma"):
+        if dockerhubid in ("djarecka/fmriprep_fake", "pennlinc/toy_bids_app", "nipreps/fmripost-aroma", "nipreps/fmripost-phase"):
             log.info("TEMP TODO skip %s due to odd OCI issue ATM with old singularity", dockerhubid)
             return
         log.info("%s <- docker %s", family, dockerhubid)
