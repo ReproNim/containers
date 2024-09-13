@@ -411,7 +411,7 @@ def main(push: bool, githubids: list[str]|None) -> None:
         sys.exit(1)
 
     r = requests.get(
-        "https://raw.githubusercontent.com/BIDS-Apps/bids-apps.github.io/master/_config.yml"
+        "https://raw.githubusercontent.com/bids-standard/bids-website/main/data/tools/apps.yml"
     )
     r.raise_for_status()
     for line in r.text.splitlines():
