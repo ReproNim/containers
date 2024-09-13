@@ -489,3 +489,6 @@
 [datalad "containers.bids-qsirecon"]
 	image = images/bids/bids-qsirecon--unstable.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-reproa"]
+	image = images/bids/bids-reproa--0.2.1.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
