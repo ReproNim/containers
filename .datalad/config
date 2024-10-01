@@ -498,3 +498,6 @@
 [datalad "containers.neurodesk-dcm2niix"]
 	image = images/neurodesk/neurodesk-dcm2niix--v1.0.20240202.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brainnetviewer"]
+	image = images/neurodesk/neurodesk-brainnetviewer--1.7.20191031.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
