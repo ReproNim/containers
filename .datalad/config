@@ -492,3 +492,6 @@
 [datalad "containers.bids-reproa"]
 	image = images/bids/bids-reproa--0.2.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-micapipe"]
+	image = images/neurodesk/neurodesk-micapipe--v0.2.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
