@@ -124,7 +124,7 @@
 	image = images/bids/bids-micapipe--0.0.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.nipy-heudiconv"]
-	image = images/nipy/nipy-heudiconv--1.2.0.sing
+	image = images/nipy/nipy-heudiconv--1.3.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-funcmasker-flex"]
 	image = images/bids/bids-funcmasker-flex--0.2.0.sing
