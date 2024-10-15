@@ -504,3 +504,6 @@
 [datalad "containers.neurodesk-brainlifecli"]
 	image = images/neurodesk/neurodesk-brainlifecli--1.7.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-vmtk"]
+	image = images/neurodesk/neurodesk-vmtk--1.5.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
