@@ -78,7 +78,7 @@
 	image = images/bids/bids-tracula--6.0.0.beta-0.sing
 [datalad "containers.bids-validator"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-validator--1.14.13.sing
+	image = images/bids/bids-validator--1.14.14.sing
 [datalad "containers.neuronets-kwyk"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/neuronets/neuronets-kwyk--0.5.0-gpu.sing
