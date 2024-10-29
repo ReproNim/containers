@@ -472,7 +472,7 @@
 	image = images/bids/bids-bibsnet--3.4.2.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-petdeface"]
-	image = images/bids/bids-petdeface--0.1.1.sing
+	image = images/bids/bids-petdeface--0.2.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mrtrix3src"]
 	image = images/neurodesk/neurodesk-mrtrix3src--latest.simg
