@@ -3,13 +3,9 @@
 # See http://github.com/ReproNim/containers for more info
 #
 Bootstrap: docker
-From: nipreps/mriqc:24.0.2
+From: nipreps/nibabies:24.0.1
 
 %post
-# Bugfix
-# https://github.com/nipreps/mriqc/issues/1304
-chmod a+rX -R /opt
-
 
 # Create commonly present root directories to avoid need in overlays not supported
 # on older systems
