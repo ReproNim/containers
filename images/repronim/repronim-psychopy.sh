@@ -5,7 +5,8 @@ set -eu
 v=2024.1.4
 
 generate() {
-	[ "$1" == singularity ] && add_entry=' "$@"' || add_entry=''
+    # unused ATM
+	# [ "$1" == singularity ] && add_entry=' "$@"' || add_entry=''
 	ndversion=1.0.1
     # Thought to use conda-forge for this, but feedstock is not maintained:
     #  https://github.com/conda-forge/psychopy-feedstock/issues/64
@@ -24,7 +25,7 @@ generate() {
           libusb-1.0-0-dev portaudio19-dev libasound2-dev \
           vim wget strace time ncdu gnupg curl procps pigz less tree python3 python3-pip \
         --run "git clone https://github.com/wieluk/psychopy_linux_installer/ /opt/psychopy-installer; cd /opt/psychopy-installer; git checkout 21b1ac36ee648e00cc3b68fd402c1e826270dad6" \
-		--run "/opt/psychopy-installer/psychopy_linux_installer.sh --install_dir=/opt/psychopy --psychopy_version="$v" --bids_version=2023.2.0 --python_version=3.10.14 --wxpython_version=4.2.1 -v -f" \
+		--run "/opt/psychopy-installer/psychopy_linux_installer.sh --install_dir=/opt/psychopy --psychopy_version='$v' --bids_version=2023.2.0 --python_version=3.10.14 --wxpython_version=4.2.1 -v -f" \
         --run "/opt/psychopy/psychopy_*/bin/pip install qrcode" \
         --run "bash -c 'ln -s /opt/psychopy/psychopy_*/bin/psychopy /usr/local/bin/'" \
         --run "bash -c 'b=\$(ls /opt/psychopy/psychopy_*/bin/python3); echo -e \"#!/bin/sh\n\$b \\\"\\\$@\\\"\" >| /usr/local/bin/python3; chmod a+x /usr/local/bin/python3'" \
