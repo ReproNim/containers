@@ -268,6 +268,11 @@ export LC_ALL="C.UTF-8"
                 str(imagefile),
                 str(singfile.sourcefile),
             )
+            base_opts = ' '
+            if familyname == 'bids-mriqc':
+                # need to explicitly specify option to avoid use of datalad inside
+                # ref: https://github.com/ReproNim/containers/issues/131
+                base_opts = ' --no-datalad-get '
             self.runcmd(
                 "datalad",
                 "containers-add",
@@ -276,7 +281,7 @@ export LC_ALL="C.UTF-8"
                 str(imagefile),
                 "--update",
                 "--call-fmt",
-                "{img_dspath}/scripts/singularity_cmd run {img} {cmd}",
+                "{img_dspath}/scripts/singularity_cmd run {img}" + base_opts + "{cmd}",
             )
             # TODO: later make it work with updating existing one. We will not
             # be able to use containers-add --update since original URL is
