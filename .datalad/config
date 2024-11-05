@@ -507,3 +507,6 @@
 [datalad "containers.neurodesk-vmtk"]
 	image = images/neurodesk/neurodesk-vmtk--1.5.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-heudiconv"]
+	image = images/neurodesk/neurodesk-heudiconv--1.3.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
