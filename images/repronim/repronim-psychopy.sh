@@ -22,7 +22,7 @@ generate() {
 		--install build-essential pkg-config git \
           sudo \
           libgtk-3-dev libwxgtk3.2-dev libwxgtk-media3.2-dev libwxgtk-webview3.2-dev libcanberra-gtk3-module \
-          libusb-1.0-0-dev portaudio19-dev libasound2-dev \
+          libusb-1.0-0-dev portaudio19-dev libasound2-dev pulseaudio-utils \
           vim wget strace time ncdu gnupg curl procps pigz less tree python3 python3-pip \
         --run "git clone https://github.com/wieluk/psychopy_linux_installer/ /opt/psychopy-installer; cd /opt/psychopy-installer; git checkout 21b1ac36ee648e00cc3b68fd402c1e826270dad6" \
 		--run "/opt/psychopy-installer/psychopy_linux_installer.sh --install_dir=/opt/psychopy --psychopy_version='$v' --bids_version=2023.2.0 --python_version=3.10.14 --wxpython_version=4.2.1 -v -f" \
