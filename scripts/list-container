@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eu
+container="$1"
+if [ $# -gt 1 ]; then
+    output="$2"
+else
+    output=${container%.*}.filelist.gz
+fi
+
+singularity exec "$container" find / -xdev 2>/dev/null | gzip -9 > $output 
+echo "I: listed $container into $output"
