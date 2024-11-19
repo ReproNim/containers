@@ -168,6 +168,9 @@ datalad install -d . -s ///repronim/containers code/containers
 # would fail to run on CI.
 datalad run -m "Downgrade/Freeze mriqc container version" \
   code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
+# That version of mriqc does not have an option  --no-datalad-get  we had to
+# hardcode for mriqc to workaround an issue. So let's remove it
+datalad run -m "Remove ad-hoc option for mriqc for older frozen version" sed -i -e 's, --no-datalad-get,,g' .datalad/config
 # Install input data:
 datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
 # Setup git to ignore workdir to be used by pipelines
@@ -243,6 +246,8 @@ dataset, **or** the top-level dataset.
 datalad run -m "Downgrade/Freeze mriqc container version" \
   code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.16.0
 ```
+
+
 
 **Option 2: ///repronim/containers**
 
