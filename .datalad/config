@@ -513,3 +513,6 @@
 [datalad "containers.neurodesk-samsrfx"]
 	image = images/neurodesk/neurodesk-samsrfx--v10.003.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-palmettobug"]
+	image = images/neurodesk/neurodesk-palmettobug--0.0.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
