@@ -265,6 +265,15 @@ specified in the `.gitmodules`. By freezing into the top-level dataset
 instead, authors do not need to host a modified version of
 `///reporonim/containers`.
 
+### Fixup datalad config
+
+The version of mriqc we are using does not have an option  `--no-datalad-get` which is hardcoded
+into mriqc config, so we should remove it.
+
+```bash
+datalad run -m "Remove ad-hoc option for mriqc for older frozen version" sed -i -e 's, --no-datalad-get,,g' .datalad/config
+```
+
 ### Running the Containers
 
 When we run the bids-mriqc container, it will need a working directory
