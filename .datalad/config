@@ -343,7 +343,7 @@
 	image = images/neurodesk/neurodesk-clearswi--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-cat12"]
-	image = images/neurodesk/neurodesk-cat12--r2166.simg
+	image = images/neurodesk/neurodesk-cat12--12.9.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-brainstorm"]
 	image = images/neurodesk/neurodesk-brainstorm--3.211130.simg
