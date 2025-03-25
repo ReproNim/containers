@@ -528,3 +528,6 @@
 [datalad "containers.neurodesk-pydeface"]
 	image = images/neurodesk/neurodesk-pydeface--2.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-cvrmap"]
+	image = images/bids/bids-cvrmap--2.0.26.sing
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
