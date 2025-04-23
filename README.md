@@ -384,11 +384,11 @@ Based on the artwork Copyright 2018-2019 Michael Hanke, from
 [DataLad]: http://datalad.org
 [datalad-container]: http://docs.datalad.org/projects/container
 [datalad containers-run]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-containers-run.html
-[datalad get]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-get.html
-[datalad run]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-run.html
-[datalad rerun]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-rerun.html
-[datalad install]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-install.html
-[datalad uninstall]: http://docs.datalad.org/projects/container/en/latest/generated/man/datalad-uninstall.html
+[datalad get]: http://docs.datalad.org/en/stable/generated/man/datalad-get.html
+[datalad run]: http://docs.datalad.org/en/stable/generated/man/datalad-run.html
+[datalad rerun]: http://docs.datalad.org/en/stable/generated/man/datalad-rerun.html
+[datalad install]: http://docs.datalad.org/en/stable/generated/man/datalad-install.html
+[datalad uninstall]: http://docs.datalad.org/en/stable/generated/man/datalad-uninstall.html
 
 [git clone]: https://git-scm.com/docs/git-clone
 
