@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# Inspired by  https://github.com/ReproNim/containers/issues/137#issuecomment-2877505303
+#
+git annex find --in here | grep '\.si*' | while read f; do
+    { singularity run "$f" --help 2>&1 && echo "$f: ok" || echo "$f: failed to execute --help" >&2; } | grep -q "no runscript" && echo "$f: no runscript" >&2; 
+done
