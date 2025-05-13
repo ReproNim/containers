@@ -1,0 +1,199 @@
+INFO:    Starting build...
+Getting image source signatures
+Copying blob sha256:738450aea5f8426606d81f919575dd5d096b41723b21d3907e88864249d8944b
+Copying blob sha256:51de7fc88f83bcd2ca272e9807479a820de15d4593a3dc968f48b4d1a264a15d
+Copying blob sha256:4f9bb8e081d93848263d5c8ff20270983c16677528d3cb8280bff02ad12ab3c0
+Copying blob sha256:58c97f36fd4e9a7f0a6099eee5422210349bcceb3ada17c5b6e372b193e1c53e
+Copying blob sha256:23b7d26ef1d294256da0d70ce374277b9aab5ca683015073316005cb63d33849
+Copying config sha256:56702c61529f652e18e461b9d975da1b918fb642b0bcda7dc99adf61b3ca13c8
+Writing manifest to image destination
+Storing signatures
+2025/04/23 13:26:37  info unpack layer: sha256:23b7d26ef1d294256da0d70ce374277b9aab5ca683015073316005cb63d33849
+2025/04/23 13:26:40  info unpack layer: sha256:51de7fc88f83bcd2ca272e9807479a820de15d4593a3dc968f48b4d1a264a15d
+2025/04/23 13:26:40  info unpack layer: sha256:58c97f36fd4e9a7f0a6099eee5422210349bcceb3ada17c5b6e372b193e1c53e
+2025/04/23 13:26:40  info unpack layer: sha256:4f9bb8e081d93848263d5c8ff20270983c16677528d3cb8280bff02ad12ab3c0
+2025/04/23 13:26:40  info unpack layer: sha256:738450aea5f8426606d81f919575dd5d096b41723b21d3907e88864249d8944b
+INFO:    Running post scriptlet
++ export ND_ENTRYPOINT=/neurodocker/startup.sh
++ apt-get update -qq
++ apt-get install -y -q --no-install-recommends apt-utils bzip2 ca-certificates curl locales unzip
+debconf: delaying package configuration, since apt-utils is not installed
++ rm -rf /var/lib/apt/lists/auxfiles /var/lib/apt/lists/deb.debian.org_debian-security_dists_bookworm-security_InRelease /var/lib/apt/lists/deb.debian.org_debian-security_dists_bookworm-security_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm-updates_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm-updates_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/lock /var/lib/apt/lists/neuro.debian.net_debian_dists_bookworm_InRelease /var/lib/apt/lists/neuro.debian.net_debian_dists_bookworm_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/neuro.debian.net_debian_dists_data_InRelease /var/lib/apt/lists/neuro.debian.net_debian_dists_data_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/partial
++ sed -i -e s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/ /etc/locale.gen
++ dpkg-reconfigure --frontend=noninteractive locales
+Generating locales (this might take a while)...
+  en_US.UTF-8... done
+Generation complete.
++ update-locale LANG=en_US.UTF-8
++ chmod 777 /opt
++ chmod a+s /opt
++ mkdir -p /neurodocker
++ [ ! -f /neurodocker/startup.sh ]
++ echo #!/usr/bin/env bash
++ echo set -e
++ echo export USER="${USER:=`whoami`}"
++ echo if [ -n "$1" ]; then "$@"; else /usr/bin/env bash; fi
++ chmod -R 777 /neurodocker
++ chmod a+s /neurodocker
++ apt-get update -qq
++ apt-get install -y -q --no-install-recommends build-essential curl git gnupg less libasound2-dev libcanberra-gtk3-module libgtk-3-dev libusb-1.0-0-dev libwxgtk-media3.2-dev libwxgtk-webview3.2-dev libwxgtk3.2-dev ncdu pavucontrol pigz pkg-config portaudio19-dev procps pulseaudio pulseaudio-utils python3 python3-pip strace sudo time tree vim wget
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78, <> line 481.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 481.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
++ rm -rf /var/lib/apt/lists/auxfiles /var/lib/apt/lists/deb.debian.org_debian-security_dists_bookworm-security_InRelease /var/lib/apt/lists/deb.debian.org_debian-security_dists_bookworm-security_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm-updates_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm-updates_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/lock /var/lib/apt/lists/neuro.debian.net_debian_dists_bookworm_InRelease /var/lib/apt/lists/neuro.debian.net_debian_dists_bookworm_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/neuro.debian.net_debian_dists_data_InRelease /var/lib/apt/lists/neuro.debian.net_debian_dists_data_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/partial
++ git clone https://github.com/wieluk/psychopy_linux_installer/ /opt/psychopy-installer
+Cloning into '/opt/psychopy-installer'...
++ cd /opt/psychopy-installer
++ git checkout tags/v1.4.3
+Note: switching to 'tags/v1.4.3'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 83544ba consistent log_message
++ /opt/psychopy-installer/psychopy_linux_installer --install-dir=/opt/psychopy --psychopy-version=2024.2.5 --additional-packages=psychopy_bids==2024.2.2 --python-version=3.10 --wxpython-version=4.2.2 -v -f
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+ 32 69.3M   32 22.3M    0     0  20.9M      0  0:00:03  0:00:01  0:00:02 20.9M100 69.3M  100 69.3M    0     0  37.3M      0  0:00:01  0:00:01 --:--:-- 59.3M
+WARNING: Location '/usr/local/psychopy_python/wx_wheels/' is ignored: it is either a non-existing path or lacks a specific scheme.
+ERROR: Could not find a version that satisfies the requirement wxpython==4.2.2 (from versions: none)
+ERROR: No matching distribution found for wxpython==4.2.2
+ERROR: Could not find a version that satisfies the requirement wxPython==4.2.2 (from versions: none)
+ERROR: No matching distribution found for wxPython==4.2.2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0  143M    0  6881    0     0  12226      0  3:25:16 --:--:--  3:25:16 12226 28  143M   28 41.2M    0     0  28.6M      0  0:00:05  0:00:01  0:00:04 46.9M 70  143M   70  101M    0     0  41.4M      0  0:00:03  0:00:02  0:00:01 53.8M100  143M  100  143M    0     0  47.1M      0  0:00:03  0:00:03 --:--:-- 57.8M
+/opt/psychopy-installer/psychopy_linux_installer: line 609: xdg-user-dir: command not found
++ /opt/psychopy/psychopy_2024.2.5_py3.10/bin/pip install reprostim[all,disp_mon]==0.7.9
++ bash -c ln -s /opt/psychopy/psychopy_2024.2.5_py3.10/bin/psychopy /usr/local/bin/
++ bash -c b=$(ls /opt/psychopy/psychopy_2024.2.5_py3.10/bin/python3); echo -e "#!/bin/sh\n$b \"\$@\"" >| /usr/local/bin/python3; chmod a+x /usr/local/bin/python3
++ printf { \
+  "pkg_manager": "apt", \
+  "existing_users": [ \
+    "root" \
+  ], \
+  "instructions": [ \
+    { \
+      "name": "from_", \
+      "kwds": { \
+        "base_image": "neurodebian:bookworm" \
+      } \
+    }, \
+    { \
+      "name": "env", \
+      "kwds": { \
+        "LANG": "en_US.UTF-8", \
+        "LC_ALL": "en_US.UTF-8", \
+        "ND_ENTRYPOINT": "/neurodocker/startup.sh" \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "export ND_ENTRYPOINT=\\"/neurodocker/startup.sh\\"\\napt-get update -qq\\napt-get install -y -q --no-install-recommends \\\\\\n    apt-utils \\\\\\n    bzip2 \\\\\\n    ca-certificates \\\\\\n    curl \\\\\\n    locales \\\\\\n    unzip\\nrm -rf /var/lib/apt/lists/*\\nsed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen\\ndpkg-reconfigure --frontend=noninteractive locales\\nupdate-locale LANG=\\"en_US.UTF-8\\"\\nchmod 777 /opt && chmod a+s /opt\\nmkdir -p /neurodocker\\nif [ ! -f \\"$ND_ENTRYPOINT\\" ]; then\\n  echo '#!/usr/bin/env bash' >> \\"$ND_ENTRYPOINT\\"\\n  echo 'set -e' >> \\"$ND_ENTRYPOINT\\"\\n  echo 'export USER=\\"${USER:=`whoami`}\\"' >> \\"$ND_ENTRYPOINT\\"\\n  echo 'if [ -n \\"$1\\" ]; then \\"$@\\"; else /usr/bin/env bash; fi' >> \\"$ND_ENTRYPOINT\\";\\nfi\\nchmod -R 777 /neurodocker && chmod a+s /neurodocker" \
+      } \
+    }, \
+    { \
+      "name": "install", \
+      "kwds": { \
+        "pkgs": [ \
+          "build-essential", \
+          "pkg-config", \
+          "git", \
+          "sudo", \
+          "libgtk-3-dev", \
+          "libwxgtk3.2-dev", \
+          "libwxgtk-media3.2-dev", \
+          "libwxgtk-webview3.2-dev", \
+          "libcanberra-gtk3-module", \
+          "libusb-1.0-0-dev", \
+          "portaudio19-dev", \
+          "libasound2-dev", \
+          "pulseaudio", \
+          "pavucontrol", \
+          "pulseaudio-utils", \
+          "vim", \
+          "wget", \
+          "strace", \
+          "time", \
+          "ncdu", \
+          "gnupg", \
+          "curl", \
+          "procps", \
+          "pigz", \
+          "less", \
+          "tree", \
+          "python3", \
+          "python3-pip" \
+        ], \
+        "opts": null \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "apt-get update -qq\\napt-get install -y -q --no-install-recommends \\\\\\n    build-essential \\\\\\n    curl \\\\\\n    git \\\\\\n    gnupg \\\\\\n    less \\\\\\n    libasound2-dev \\\\\\n    libcanberra-gtk3-module \\\\\\n    libgtk-3-dev \\\\\\n    libusb-1.0-0-dev \\\\\\n    libwxgtk-media3.2-dev \\\\\\n    libwxgtk-webview3.2-dev \\\\\\n    libwxgtk3.2-dev \\\\\\n    ncdu \\\\\\n    pavucontrol \\\\\\n    pigz \\\\\\n    pkg-config \\\\\\n    portaudio19-dev \\\\\\n    procps \\\\\\n    pulseaudio \\\\\\n    pulseaudio-utils \\\\\\n    python3 \\\\\\n    python3-pip \\\\\\n    strace \\\\\\n    sudo \\\\\\n    time \\\\\\n    tree \\\\\\n    vim \\\\\\n    wget\\nrm -rf /var/lib/apt/lists/*" \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "git clone https://github.com/wieluk/psychopy_linux_installer/ /opt/psychopy-installer; cd /opt/psychopy-installer; git checkout tags/v1.4.3" \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "/opt/psychopy-installer/psychopy_linux_installer --install-dir=/opt/psychopy --psychopy-version=2024.2.5 --additional-packages=psychopy_bids==2024.2.2 --python-version=3.10 --wxpython-version=4.2.2 -v -f" \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "/opt/psychopy/psychopy_2024.2.5_py3.10/bin/pip install reprostim[all,disp_mon]==0.7.9" \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "bash -c 'ln -s /opt/psychopy/psychopy_2024.2.5_py3.10/bin/psychopy /usr/local/bin/'" \
+      } \
+    }, \
+    { \
+      "name": "run", \
+      "kwds": { \
+        "command": "bash -c 'b=$\(ls /opt/psychopy/psychopy_2024.2.5_py3.10/bin/python3\); echo -e \\"#!/bin/sh\\\\n$b \\\\\\"\\\\$@\\\\\\"\\" >| /usr/local/bin/python3; chmod a+x /usr/local/bin/python3'" \
+      } \
+    }, \
+    { \
+      "name": "entrypoint", \
+      "kwds": { \
+        "args": [ \
+          "python3" \
+        ] \
+      } \
+    } \
+  ] \
+}
+INFO:    Adding environment to container
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: repronim-reprostim-0.7.9.sing
