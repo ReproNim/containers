@@ -172,14 +172,14 @@ datalad run -m "Downgrade/Freeze mriqc container version" \
 # hardcode for mriqc to workaround an issue. So let's remove it
 datalad run -m "Remove ad-hoc option for mriqc for older frozen version" sed -i -e 's, --no-datalad-get,,g' .datalad/config
 # Install input data:
-datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
+datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata/raw
 # Setup git to ignore workdir to be used by pipelines
 echo "workdir/" > .gitignore && datalad save -m "Ignore workdir" .gitignore
 # Execute desired preprocessing while creating a provenance record
 # in git history
 datalad containers-run \
         -n bids-mriqc \
-        --input sourcedata \
+        --input sourcedata/raw \
         --output . \
         '{inputs}' '{outputs}' participant group -w workdir
 )
@@ -220,7 +220,8 @@ Now let's take a look at what we have.
 
 ```
 /ds000003-qc # The root dataset contains everything
- |--/sourcedata # we call it source, but it is actually ds000003-demo
+ |--/sourcedata
+ |    raw/  # we call it source, but it is actually ds000003-demo "raw" BIDS dataset
  |--/code/containers # repronim/containers, this is where our non-custom code lives
 ```
 
@@ -289,7 +290,7 @@ Now we use `datalad containers-run` to perform the analysis.
 ```bash
 datalad containers-run \
         -n bids-mriqc \
-        --input sourcedata \
+        --input sourcedata/raw \
         --output . \
         '{inputs}' '{outputs}' participant group -w workdir
 ```
@@ -316,7 +317,7 @@ Date:   Wed Jun 5 15:41:59 2024 -0400
       "code/containers/images/bids/bids-mriqc--0.16.0.sing"
      ],
      "inputs": [
-      "sourcedata"
+      "sourcedata/raw"
      ],
      "outputs": [
       "."
