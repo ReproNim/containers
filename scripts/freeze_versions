@@ -24,7 +24,7 @@
 #
 #     code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.15.0 bids-fmriprep
 #
-# COPYRIGHT: Yaroslav Halchenko 2019-2023
+# COPYRIGHT: Yaroslav Halchenko 2019-2024
 #
 # LICENSE: MIT
 #

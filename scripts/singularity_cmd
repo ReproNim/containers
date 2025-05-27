@@ -8,7 +8,7 @@
 #  - cleansed environment variables
 # while bind mounting (and starting from) current directory.
 #
-# COPYRIGHT: Yaroslav Halchenko 2019-2023
+# COPYRIGHT: Yaroslav Halchenko 2019-2025
 #
 # LICENSE: MIT
 #
