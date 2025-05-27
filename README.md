@@ -339,6 +339,19 @@ on if you need to extend or redo your analysis.
   remote resources, see [ReproNim/reproman PR#438](https://github.com/ReproNim/reproman/pull/438);
 - a copy of the dataset is made available from [`///repronim/ds000003-qc`](http://datasets.datalad.org/?dir=/repronim/ds000003-qc)
   and [https://github.com/ReproNim/ds000003-qc]().
+- if you would like to create `licenses/` folder in your project datasets
+  to e.g. contain license for freesurfer, then you better add them to git-annex.
+  Following commands provide one way to do it:
+
+```shell
+mkdir licenses
+# instruct git-annex to add license files to annex, but this added file with instructions to git
+echo -e '* annex.largefiles=anything\n.gitattributes annex.largefiles=nothing' > licenses/.gitattributes
+datalad save -m "Add licenses must go into git-annex so I could avoid sharing them" licenses/.gitattributes
+cp ~/.freesurfer-license licenses/freesurfer
+datalad save -m 'added freesurfer license' licenses/freesurfer
+```
+
 
 
 # Installation
