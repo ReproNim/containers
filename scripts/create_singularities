@@ -33,7 +33,7 @@
 #    bids/validator, the other ones will be reported skipped
 #
 #  - you can use --image-groups/-i to specify specific groups or images to build:
-#    
+#
 #    scripts/create_singularities -i bids-apps -i neurodesk
 #    scripts/create_singularities -i repronim/reproin -i bids/validator
 #    scripts/create_singularities -i repronim
@@ -45,6 +45,7 @@ from __future__ import annotations
 from collections.abc import Generator, Iterator
 from dataclasses import dataclass
 import click
+import json
 import logging
 import os
 from pathlib import Path
@@ -186,15 +187,49 @@ class Builder:
                 # We need to check if it is actually coming from the same URL, as URL
                 # might change, e.g. if they change the image to a newer/fixed one
                 # which would be reflected in the date component which is not in the version :-/
-                # TODO: Here check which URLs is registered within git-annex for imagefile
-                # using git annex whereis --json  command on the
-                to_download = False
+
+                # Check which URLs are registered within git-annex for imagefile
+                whereis_result = self.runcmd(
+                    "git", "annex", "whereis", "--json", str(imagefile),
+                    capture_output=True, text=True
+                )
+                whereis_data = json.loads(whereis_result.stdout)
+
+                # Get URLs from web remote
+                web_urls = []
+                for remote in whereis_data.get('whereis', []):
+                    if remote.get('uuid') == '00000000-0000-0000-0000-000000000001':  # web remote
+                        web_urls = remote.get('urls', [])
+                        break
+
+                # Check if any of the current img.urls match the registered web URLs
+                url_match_found = set(web_urls).intersection(img.urls)
+
+                if not url_match_found and web_urls:
+                    # URLs have changed, need to unregister old ones and re-download
+                    log.info("URLs for %s have changed, unregistering old URLs", img.container)
+                    key = whereis_data.get('key')
+                    if key:
+                        for old_url in web_urls:
+                            self.runcmd(
+                                "git", "annex", "unregisterurl",
+                                "-c", "annex.alwayscommit=false",
+                                key, old_url
+                            )
+                    to_download = True
+                elif not web_urls:
+                    # No URLs registered, need to register them
+                    log.info("No URLs registered for %s, will register", img.container)
+                    to_download = True
             else:
                 to_download = True
+
+            if to_download:
                 out = dl.download_url(
                     img.urls[0],
                     path=imagefile,
-                    save=False
+                    save=False,
+                    overwrite=True,
                 )
                 key = ds.repo.add(str(imagefile))['key']
                 for url in img.urls:
@@ -203,6 +238,8 @@ class Builder:
                         key, url
                     )
                 added.append(str(imagefile))
+
+                # Register container with datalad if this is the first/latest version of this image
                 if img.name != prior_img:
                     prior_img = img.name
                     registered += 1
@@ -327,7 +364,7 @@ export LC_ALL="C.UTF-8"
             # the previous version of the container
 
     def generate_singularity_for_docker_image(self, githubid: str, family: Optional[str]=None,
-                                              only_good_versions: bool=False, 
+                                              only_good_versions: bool=False,
                                               version_regex: Optional[str]=None,
                                               familysuf: Optional[str]=None,
                                               ) \
@@ -455,7 +492,7 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
     # Determine which images/groups to build
     requested_groups = set(image_groups) if image_groups else set()
     build_all = not requested_groups
-    
+
     # Helper function to check if we should build an image
     def should_build(group_name: str, image_name: Optional[str] = None) -> bool:
         if build_all:
@@ -478,7 +515,7 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
                 dockerhubid = re.sub(r"[\"']", "", m[1])
                 if "micalab/micapipe" not in dockerhubid:
                     builder.generate_singularity_for_docker_image(dockerhubid, "bids")
-        
+
         # LTS releases for some bids-apps. TODO later may be: check for having ALL versions
         builder.generate_singularity_for_docker_image("nipreps/fmriprep", version_regex=r"^v?20\.2\.[0-9]+$", family="bids", familysuf="20-2")
 
