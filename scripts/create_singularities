@@ -163,17 +163,34 @@ class Builder:
         # datalad-container one only to the latest version.
         # For the others -- check if image file exists and if not -- add
         all_imgs = list(self.get_neurodesk_images())[::-1]
+        if len(all_imgs) < 100:
+            raise AssertionError(
+                "Expected at least 100 NeuroDesk images, got %d" % len(all_imgs)
+            )
 
         ds = dl.Dataset(self.repo_dir)
         outdir = self.images_dir / 'neurodesk'
         outdir.mkdir(parents=True, exist_ok=True)
 
+        existing_img_files = list(outdir.glob("*.simg"))
+        known_img_files = []
         prior_img = None
         added, registered = [], 0
         for img in all_imgs:
             log.info("neurodesk <- singularity %s", img.container)
             imagefile = Path(str(outdir / get_imagename(img.name, 'neurodesk', img.version)) + ".simg")
-            if not (imagefile.exists() or imagefile.is_symlink()):
+            known_img_files.append(imagefile)
+
+            to_download = False
+            if (imagefile.exists() or imagefile.is_symlink()):
+                # We need to check if it is actually coming from the same URL, as URL
+                # might change, e.g. if they change the image to a newer/fixed one
+                # which would be reflected in the date component which is not in the version :-/
+                # TODO: Here check which URLs is registered within git-annex for imagefile
+                # using git annex whereis --json  command on the
+                to_download = False
+            else:
+                to_download = True
                 out = dl.download_url(
                     img.urls[0],
                     path=imagefile,
@@ -204,6 +221,14 @@ class Builder:
             ds.repo.set_metadata(files=added, add={'distribution-restrictions': 'out-of-space'})
             ds.save(path=added,
                     message=f"Add {len(added)} NeuroDesk images with {registered} registered")
+        if (stale_img_files := set(existing_img_files).difference(known_img_files)):
+            for stale_img_file in stale_img_files:
+                log.warning(
+                    "Stale NeuroDesk image file %s found, removing it", stale_img_file
+                )
+                stale_img_file.unlink()
+            ds.save(path=stale_img_files,
+                    message=f"Remove {len(stale_img_files)} stale NeuroDesk images")
 
     def create_singularity_file(
         self, dh: str, version_tag: str, version_pure: str, family: str,
