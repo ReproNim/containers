@@ -398,8 +398,9 @@ def get_imagename(repoid: str, family: str, versiontag: str, familysuf: Optional
 @click.command()
 @click.option("--push", is_flag=True, show_default=True, default=False, help="Push upon completion.")
 @click.option("--image-groups", "-i", multiple=True, help="Specific image groups or individual images to build. Can be used multiple times.")
+@click.option("--no-singularity-check", is_flag=True, show_default=True, default=False, help="Disable checking the version of singularity.")
 @click.argument("githubids", nargs=-1, default=None)
-def main(push: bool, image_groups: tuple[str, ...], githubids: list[str]|None) -> None:
+def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, githubids: list[str]|None) -> None:
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
 
     # Use local dedicated "tmp/" directory since any other might be too small
@@ -415,15 +416,16 @@ def main(push: bool, image_groups: tuple[str, ...], githubids: list[str]|None) -
     # We are still using elderly singularity 2.6.1 to build images, so elderly
     # singularity could run images we generate, since images produced by 3
     # seems to not be usable with 2.
-    rc = subprocess.run(
-        ["singularity", "--version"],
-        check=True,
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    if "2.6.1" not in rc.stdout:
-        log.error("singularity is 'too new'")
-        sys.exit(1)
+    if not no_singularity_check:
+        rc = subprocess.run(
+            ["singularity", "--version"],
+            check=True,
+            stdout=subprocess.PIPE,
+            universal_newlines=True,
+        )
+        if "2.6.1" not in rc.stdout:
+            log.error("singularity is 'too new'")
+            sys.exit(1)
 
     # Determine which images/groups to build
     requested_groups = set(image_groups) if image_groups else set()
