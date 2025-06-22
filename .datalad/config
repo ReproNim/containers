@@ -373,7 +373,7 @@
 	image = images/neurodesk/neurodesk-afni--24.3.00.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mfcsc"]
-	image = images/neurodesk/neurodesk-mfcsc--1.1.simg
+	image = images/neurodesk/neurodesk-mfcsc--1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-vina"]
 	image = images/neurodesk/neurodesk-vina--1.2.3.simg
