@@ -501,8 +501,8 @@ def main(push: bool, image_groups: tuple[str, ...], githubids: list[str]|None) -
     if should_build('neurodesk'):
         builder.add_neurodesk_singularity_images()
 
-    builder.runcmd("git", "pull")  # to possibly merge remote changes
     if push:
+        builder.runcmd("git", "pull")  # to possibly merge remote changes
         builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
