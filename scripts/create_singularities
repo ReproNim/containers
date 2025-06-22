@@ -31,6 +31,15 @@
 #
 #    will consider only two images - one for poldracklab and another one
 #    bids/validator, the other ones will be reported skipped
+#
+#  - you can use --image-groups/-i to specify specific groups or images to build:
+#    
+#    scripts/create_singularities -i bids-apps -i neurodesk
+#    scripts/create_singularities -i repronim/reproin -i bids/validator
+#    scripts/create_singularities -i repronim
+#
+#    Available groups: bids-apps, neurodesk, repronim, brainiak, neuronets, poldrack
+#    You can also specify individual image names
 
 from __future__ import annotations
 from collections.abc import Generator, Iterator
@@ -388,8 +397,9 @@ def get_imagename(repoid: str, family: str, versiontag: str, familysuf: Optional
 
 @click.command()
 @click.option("--push", is_flag=True, show_default=True, default=False, help="Push upon completion.")
+@click.option("--image-groups", "-i", multiple=True, help="Specific image groups or individual images to build. Can be used multiple times.")
 @click.argument("githubids", nargs=-1, default=None)
-def main(push: bool, githubids: list[str]|None) -> None:
+def main(push: bool, image_groups: tuple[str, ...], githubids: list[str]|None) -> None:
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
 
     # Use local dedicated "tmp/" directory since any other might be too small
@@ -415,56 +425,81 @@ def main(push: bool, githubids: list[str]|None) -> None:
         log.error("singularity is 'too new'")
         sys.exit(1)
 
-    r = requests.get(
-        "https://raw.githubusercontent.com/bids-standard/bids-website/main/data/tools/apps.yml"
-    )
-    r.raise_for_status()
-    for line in r.text.splitlines():
-        m = re.match(r" *dh:\s+(\S+)", line.rstrip("\n\r"))
-        if m:
-            dockerhubid = re.sub(r"[\"']", "", m[1])
-            if "micalab/micapipe" not in dockerhubid:
-                builder.generate_singularity_for_docker_image(dockerhubid, "bids")
+    # Determine which images/groups to build
+    requested_groups = set(image_groups) if image_groups else set()
+    build_all = not requested_groups
+    
+    # Helper function to check if we should build an image
+    def should_build(group_name: str, image_name: Optional[str] = None) -> bool:
+        if build_all:
+            return True
+        if group_name in requested_groups:
+            return True
+        if image_name and image_name in requested_groups:
+            return True
+        return False
+
+    # Build BIDS apps
+    if should_build('bids-apps'):
+        r = requests.get(
+            "https://raw.githubusercontent.com/bids-standard/bids-website/main/data/tools/apps.yml"
+        )
+        r.raise_for_status()
+        for line in r.text.splitlines():
+            m = re.match(r" *dh:\s+(\S+)", line.rstrip("\n\r"))
+            if m:
+                dockerhubid = re.sub(r"[\"']", "", m[1])
+                if "micalab/micapipe" not in dockerhubid:
+                    builder.generate_singularity_for_docker_image(dockerhubid, "bids")
+        
+        # LTS releases for some bids-apps. TODO later may be: check for having ALL versions
+        builder.generate_singularity_for_docker_image("nipreps/fmriprep", version_regex=r"^v?20\.2\.[0-9]+$", family="bids", familysuf="20-2")
 
     # validator is not bids-app but we will stick it along with bids
-    builder.generate_singularity_for_docker_image("bids/validator")
-    # LTS releases for some bids-apps. TODO later may be: check for having ALL versions
-    builder.generate_singularity_for_docker_image("nipreps/fmriprep", version_regex=r"^v?20\.2\.[0-9]+$", family="bids", familysuf="20-2")
+    if should_build('bids-apps', 'bids/validator'):
+        builder.generate_singularity_for_docker_image("bids/validator")
 
     # Additional ones from Poldrack
-    builder.generate_singularity_for_docker_image("poldracklab/ds003-example")
+    if should_build('poldrack', 'poldracklab/ds003-example'):
+        builder.generate_singularity_for_docker_image("poldracklab/ds003-example")
 
     #
     # ReproNim
     #
+    if should_build('repronim', 'repronim/reproin'):
+        # "Native" Singularity image for ReproIn
+        # TODO: figure out who would build those now that shub is gone?!
+        # ATM: built locally and pushed to docker hub... so let's build from those
+        builder.generate_singularity_for_docker_image("repronim/reproin")
 
-    # "Native" Singularity image for ReproIn
-    # TODO: figure out who would build those now that shub is gone?!
-    # ATM: built locally and pushed to docker hub... so let's build from those
-    builder.generate_singularity_for_docker_image("repronim/reproin")
+    if should_build('repronim', 'nipy/heudiconv'):
+        # nipy/heudiconv
+        builder.generate_singularity_for_docker_image("nipy/heudiconv")
 
-    # nipy/heudiconv
-    builder.generate_singularity_for_docker_image("nipy/heudiconv")
-
-    # Docker image for simple_workflow
-    builder.generate_singularity_for_docker_image("ReproNim/simple_workflow")
+    if should_build('repronim', 'ReproNim/simple_workflow'):
+        # Docker image for simple_workflow
+        builder.generate_singularity_for_docker_image("ReproNim/simple_workflow")
 
     # neuronets
-    builder.generate_singularity_for_docker_image("neuronets/kwyk")
+    if should_build('neuronets', 'neuronets/kwyk'):
+        builder.generate_singularity_for_docker_image("neuronets/kwyk")
 
     # Jeremy Magland images, to try out dendro
     # Seems to be 404ing https://github.com/scratchrealm/pc-spike-sorting/issues/10
-    #builder.generate_singularity_for_docker_image("magland/pc-mountainsort5")
-    #builder.generate_singularity_for_docker_image("magland/pc-kilosort3")
+    #if should_build('magland'):
+    #    builder.generate_singularity_for_docker_image("magland/pc-mountainsort5")
+    #    builder.generate_singularity_for_docker_image("magland/pc-kilosort3")
 
     # Entire organization
     # Some purely "latest" give us troubles. Let them tag
-    builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
+    if should_build('brainiak'):
+        builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
 
     # Custom: neurodesk singularity images
     # TODO: update URLs for all existing to not have oraclecloud.com ones and only new
     # https://d15yxasja65rk8.cloudfront.net ones
-    builder.add_neurodesk_singularity_images()
+    if should_build('neurodesk'):
+        builder.add_neurodesk_singularity_images()
 
     builder.runcmd("git", "pull")  # to possibly merge remote changes
     if push:
