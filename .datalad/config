@@ -540,3 +540,6 @@
 [datalad "containers.neurodesk-tractseg"]
 	image = images/neurodesk/neurodesk-tractseg--2.9.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-halfpipe"]
+	image = images/neurodesk/neurodesk-halfpipe--1.2.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
