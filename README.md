@@ -225,8 +225,6 @@ Now let's take a look at what we have.
  |--/code/containers # repronim/containers, this is where our non-custom code lives
 ```
 
-TODO -- update whenever version above shown to do what is desired.
-
 ### Freezing Container Image Versions
 
 `freeze_versions` is an optional step that will record and "freeze" the
