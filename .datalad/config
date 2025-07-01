@@ -546,3 +546,6 @@
 [datalad "containers.neurodesk-pcntoolkit"]
 	image = images/neurodesk/neurodesk-pcntoolkit--0.35.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-batchheudiconv"]
+	image = images/neurodesk/neurodesk-batchheudiconv--1.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
