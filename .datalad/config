@@ -552,3 +552,6 @@
 [datalad "containers.neurodesk-amico"]
 	image = images/neurodesk/neurodesk-amico--2.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-gingerale"]
+	image = images/neurodesk/neurodesk-gingerale--3.0.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
