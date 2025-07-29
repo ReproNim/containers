@@ -140,8 +140,7 @@ class Builder:
 
         Following https://github.com/ReproNim/containers/issues/64#issuecomment-1418301696
         """
-        r = requests.get(f"https://raw.githubusercontent.com/NeuroDesk/neurocommand/main/cvmfs/log.txt")
-        r.raise_for_status()
+        r = retry_get(f"https://raw.githubusercontent.com/NeuroDesk/neurocommand/main/cvmfs/log.txt")
         # look like afni_21.2.00_20210714 categories:functional imaging,
         # for now we disregard the metadata
         for l in r.text.splitlines():
@@ -505,10 +504,9 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
 
     # Build BIDS apps
     if should_build('bids-apps'):
-        r = requests.get(
+        r = retry_get(
             "https://raw.githubusercontent.com/bids-standard/bids-website/main/data/tools/apps.yml"
         )
-        r.raise_for_status()
         for line in r.text.splitlines():
             m = re.match(r" *dh:\s+(\S+)", line.rstrip("\n\r"))
             if m:
@@ -578,15 +576,18 @@ def retry_get(url: str) -> requests.Response:
             r.raise_for_status()
             return r
         except (requests.ConnectionError, requests.HTTPError, requests.Timeout) as e:
-            if (
-                isinstance(e, requests.HTTPError)
-                and e.response is not None and e.response.status_code < 500
-            ):
-                raise e
+            # Retry on connection errors, timeouts, and specific HTTP errors
+            if isinstance(e, requests.HTTPError) and e.response is not None:
+                status_code = e.response.status_code
+                # Don't retry on client errors except for rate limiting (429)
+                # and do retry on server errors (5xx)
+                if status_code < 500 and status_code != 429:
+                    raise e
             if (wait := next(sleepiter, None)) is not None:
                 log.warning(
                     "Request to %s failed due to %s: %s; sleeping for %f"
                     " seconds and retrying",
+                    url,
                     type(e).__name__,
                     str(e),
                     wait,
