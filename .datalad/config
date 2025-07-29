@@ -558,3 +558,6 @@
 [datalad "containers.neurodesk-gigaconnectome"]
 	image = images/neurodesk/neurodesk-gigaconnectome--0.6.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-nftsim"]
+	image = images/neurodesk/neurodesk-nftsim--1.0.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
