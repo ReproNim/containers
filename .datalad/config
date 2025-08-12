@@ -570,3 +570,6 @@
 [datalad "containers.neurodesk-ospreybids"]
 	image = images/neurodesk/neurodesk-ospreybids--4.2.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bidsme"]
+	image = images/neurodesk/neurodesk-bidsme--1.9.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
