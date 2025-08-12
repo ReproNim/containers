@@ -567,3 +567,6 @@
 [datalad "containers.neurodesk-qupath"]
 	image = images/neurodesk/neurodesk-qupath--0.6.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-ospreybids"]
+	image = images/neurodesk/neurodesk-ospreybids--4.2.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
