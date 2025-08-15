@@ -219,10 +219,10 @@ datalad install -d . -s ///repronim/containers code/containers
 Now let's take a look at what we have.
 
 ```
-/ds000003-qc # The root dataset contains everything
- |--/sourcedata
+ds000003-qc/  # The root dataset contains everything
+ |--sourcedata/
  |    raw/  # we call it source, but it is actually ds000003-demo "raw" BIDS dataset
- |--/code/containers # repronim/containers, this is where our non-custom code lives
+ \--code/containers/  # repronim/containers, this is where our non-custom code lives
 ```
 
 ### Freezing Container Image Versions
