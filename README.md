@@ -207,7 +207,7 @@ data, code, and anything else we need to run the analysis.
 Install the input dataset:
 
 ```bash
-datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata
+datalad install -d . -s https://github.com/ReproNim/ds000003-demo sourcedata/raw
 ```
 
 Next we install the `ReproNim/containers` collection.
@@ -327,7 +327,7 @@ Date:   Wed Jun 5 15:41:59 2024 -0400
 
 This record could later be reused (by anyone) using [datalad rerun] to rerun
 this computation using exactly the same version(s) of input data and the
-singularity container. You can even now [datalad uninstall] sourcedata and even containers
+singularity container. You can even now [datalad uninstall] sourcedata/raw and even containers
 sub-datasets to save space - they will be retrievable at those exact versions later
 on if you need to extend or redo your analysis.
 
