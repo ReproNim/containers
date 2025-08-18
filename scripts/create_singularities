@@ -533,6 +533,9 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         # TODO: figure out who would build those now that shub is gone?!
         # ATM: built locally and pushed to docker hub... so let's build from those
         builder.generate_singularity_for_docker_image("repronim/reproin")
+    
+    if should_build('repronim', 'repronim/reprostim'):
+        builder.generate_singularity_for_docker_image("repronim/reprostim")
 
     if should_build('repronim', 'nipy/heudiconv'):
         # nipy/heudiconv
