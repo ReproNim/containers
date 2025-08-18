@@ -576,3 +576,6 @@
 [datalad "containers.repronim-reprostim"]
 	image = images/repronim/repronim-reprostim--0.7.14.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-linda"]
+	image = images/neurodesk/neurodesk-linda--0.5.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
