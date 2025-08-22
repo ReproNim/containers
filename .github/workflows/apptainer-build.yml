@@ -1,0 +1,40 @@
+name: Create and publish a Docker image
+
+on:
+  push:
+    branches: ['master']
+    paths:
+      - image/*/Singularity*
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: courtois-neuromod/repronim_buildenv:master
+
+jobs:
+  build-and-push-apptainer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    container:
+      image: ${REGISTRY}/${IMAGE_NAME}
+      options:
+        - "--device=/dev/fuse"
+        - "--security-opt apparmor=unconfined"
+        - "--security-opt seccomp=unconfined"
+        - "--security-opt systempaths=unconfined"
+    steps:
+      - name: Setup git
+        run:
+          - git config --global user.name "GitHub al MiGhtY"
+          - git config --global user.email "git@github.com"
+      - name: install dataset
+        run:
+          datalad install -s https://github.com/${{ env.GITHUB_REPOSITORY }}.git /work
+      - name: Build new apptainer image
+        run: |
+          cd /work
+          deffile=$(git show --name-only | grep Singularity)
+          target_image=${deffile/Singularity./}.sing
+          apptainer build $target_image $deffile
+          datalad save -m "build container ${target_image} from ${deffile}"
+          datalad push --to storage-remote || true
+          datalad push --to origin
