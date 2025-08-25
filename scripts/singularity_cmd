@@ -187,10 +187,27 @@ fi
 SARGS=( -B "$updir/binds/zoneinfo/UTC:/etc/localtime" "${SARGS[@]}" )
 
 
+execute_with_duct() {
+	# Check if duct is available
+	if ! hash duct 2>/dev/null; then
+		echo "Error: duct command not found. Please install con-duct package:" >&2
+		echo "  pip install con-duct" >&2
+		exit 1
+	fi
+	# Execute with duct wrapper
+	duct "$@"
+}
+
 # set -x
 if hash singularity 2>/dev/null && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
-	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
+	if [ -n "${REPRONIM_USE_DUCT:-}" ]; then
+		execute_with_duct singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
+	else
+		singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
+	fi
 else
+	# NOTE: duct integration is not currently supported with docker execution
+	# See: https://github.com/con/duct/issues/142
 	# we need to bind mount all bases without remapping
 	DARGS=(
 	--privileged
