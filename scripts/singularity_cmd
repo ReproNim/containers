@@ -188,8 +188,8 @@ SARGS=( -B "$updir/binds/zoneinfo/UTC:/etc/localtime" "${SARGS[@]}" )
 
 
 execute_with_duct() {
-	# Check if duct is available
-	if ! hash duct 2>/dev/null; then
+	# Check if duct is installed (use --version because hash is fooled by pyenv shims)
+	if ! duct --version >/dev/null 2>&1; then
 		echo "Error: duct command not found. Please install con-duct package:" >&2
 		echo "  pip install con-duct" >&2
 		exit 1
