@@ -131,7 +131,7 @@ This will wrap your container execution with duct monitoring and automatically g
 
 By default, duct logs are saved to `.duct/logs/{datetime_filesafe}-{pid}_*`.
 
-`con-duct` location, (and any other parameters) should configured via environment variables.
+`con-duct` location, (and any other parameters) should be configured via environment variables.
 
 ```bash
 export DUCT_OUTPUT_PREFIX="./my-logs/{datetime_filesafe}-{pid}_"
