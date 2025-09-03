@@ -208,6 +208,9 @@ if hash singularity 2>/dev/null && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
 else
 	# NOTE: duct integration is not currently supported with docker execution
 	# See: https://github.com/con/duct/issues/142
+	if [ -n "${REPRONIM_USE_DUCT:-}" ]; then
+		echo "Warning: REPRONIM_USE_DUCT is set, but resource monitoring with duct is not supported in Docker mode and will be ignored." >&2
+	fi
 	# we need to bind mount all bases without remapping
 	DARGS=(
 	--privileged
