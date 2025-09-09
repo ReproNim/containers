@@ -127,60 +127,7 @@ datalad containers-run -n bids-mriqc --input sourcedata/raw --output . \
 
 This will wrap your container execution with duct monitoring and automatically generate detailed resource usage logs.
 
-#### Duct Output Configuration
-
-By default, duct logs are saved to `.duct/logs/{datetime_filesafe}-{pid}_*`.
-
-`con-duct` location, (and any other parameters) should be configured via environment variables.
-
-```bash
-export DUCT_OUTPUT_PREFIX="./my-logs/{datetime_filesafe}-{pid}_"
-```
-
-See [con-duct docs](https://github.com/con/duct/blob/main/README.md) for a complete list of options.
-
-#### Working with Duct Logs
-
-Duct generates several types of output files:
-- `*usage.json`: JSON Lines format with timestamped resource usage samples
-- `*info.json`: Execution summary with system information and aggregate statistics
-- `*stdout`/`*stderr`: Captured command output
-
-You can analyze these logs using duct's built-in tools:
-
-**List execution runs:**
-```bash
-con-duct ls $DUCT_OUTPUT_PREFIX* -f yaml
-```
-
-```yaml
-- command: singularity run -W /tmp/singtmp.AUUtGR -B /home/austin/devel/sandbox/duct-test/repronim-container-integration/ds000003-qc/code/containers/binds/zoneinfo/UTC:/etc/localtime
-    -B /tmp/singtmp.AUUtGR/tmp:/tmp -B /tmp/singtmp.AUUtGR/var/tmp:/var/tmp -e -B
-    /home/austin/devel/sandbox/duct-test/repronim-container-integration/ds000003-qc
-    -H /home/austin/devel/sandbox/duct-test/repronim-container-integration/ds000003-qc/code/containers/binds/HOME
-    --pwd /home/austin/devel/sandbox/duct-test/repronim-container-integration/ds000003-qc
-    code/containers/images/bids/bids-mriqc--0.16.0.sing sourcedata/raw  participant
-    group -w workdir
-  exit_code: '0'
-  peak_rss: 7.8 GB
-  prefix: Z_
-  wall_clock_time: 493.888 sec
-```
-
-**Pretty-print execution summary:**
-
-```bash
-con-duct pp $DUCT_OUTPUT_PREFIX*info.json -H
-```
-
-**Generate resource usage plots:**
-```bash
-con-duct plot $DUCT_OUTPUT_PREFIX*usage.json --output resource-plot.png
-```
-
-![Resource Usage Over Time](docs/static/duct-demo-plot.png)
-
-The plot shows CPU percentage, memory usage (RSS and VSZ), and memory percentage over the execution timeline, helping you understand resource consumption patterns, identify potential optimization opportunities, and document resource requirements for re-execution.
+See the [duct documentation](https://github.com/con/duct/blob/main/README.md) for configuration options and tools for working with duct logs.
 
 ### Interactive sessions
 
