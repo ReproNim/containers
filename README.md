@@ -105,6 +105,30 @@ On non-Linux systems, or if `REPRONIM_USE_DOCKER` environment variable is set to
 singularity within it.  All necessary paths will be bind mounted as with a regular direct execution using
 singularity.
 
+### Resource Monitoring with Duct
+
+`repronim/containers` supports optional resource monitoring using [duct](https://github.com/con/duct), a lightweight wrapper that collects execution data including CPU usage, memory consumption, and runtime statistics.
+
+**Note:** Duct integration is currently only supported with direct Singularity execution, not with Docker mode.
+
+Duct integration requires the `con-duct` package:
+
+```bash
+pip install con-duct
+```
+
+To enable resource monitoring, set the `REPRONIM_USE_DUCT` environment variable:
+
+```bash
+export REPRONIM_USE_DUCT=1
+datalad containers-run -n bids-mriqc --input sourcedata/raw --output . \
+    '{inputs}' '{outputs}' participant group -w workdir
+```
+
+This will wrap your container execution with duct monitoring and automatically generate detailed resource usage logs.
+
+See the [duct documentation](https://github.com/con/duct/blob/main/README.md) for configuration options and tools for working with duct logs.
+
 ### Interactive sessions
 
 See [WiP PR #9](https://github.com/ReproNim/containers/pull/9) to

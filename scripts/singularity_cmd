@@ -187,10 +187,30 @@ fi
 SARGS=( -B "$updir/binds/zoneinfo/UTC:/etc/localtime" "${SARGS[@]}" )
 
 
+execute_with_duct() {
+	# Check if duct is installed (use --version because hash is fooled by pyenv shims)
+	if ! duct --version >/dev/null 2>&1; then
+		echo "Error: duct command not found. Please install con-duct package:" >&2
+		echo "  pip install con-duct" >&2
+		exit 1
+	fi
+	# Execute with duct wrapper
+	duct "$@"
+}
+
 # set -x
 if hash singularity 2>/dev/null && [ -z "${REPRONIM_USE_DOCKER:-}" ]; then
-	singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
+	if [ -n "${REPRONIM_USE_DUCT:-}" ]; then
+		execute_with_duct singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
+	else
+		singularity "$cmd" -W "$tmpdir" "${SARGS[@]}"
+	fi
 else
+	# NOTE: duct integration is not currently supported with docker execution
+	# See: https://github.com/con/duct/issues/142
+	if [ -n "${REPRONIM_USE_DUCT:-}" ]; then
+		echo "Warning: REPRONIM_USE_DUCT is set, but resource monitoring with duct is not supported in Docker mode and will be ignored." >&2
+	fi
 	# we need to bind mount all bases without remapping
 	DARGS=(
 	--privileged
