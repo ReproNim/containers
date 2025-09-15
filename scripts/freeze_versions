@@ -24,7 +24,7 @@
 #
 #     code/containers/scripts/freeze_versions --save-dataset=. bids-mriqc=0.15.0 bids-fmriprep
 #
-# COPYRIGHT: Yaroslav Halchenko 2019-2024
+# COPYRIGHT: Yaroslav Halchenko 2019-2025
 #
 # LICENSE: MIT
 #
@@ -80,7 +80,7 @@ debug(f"topd_rel: {topd_rel}")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--save-dataset", type=Path)
-parser.add_argument("images", nargs="*")
+parser.add_argument("images", nargs="*", help="List of images in the NAME[:TARGET_NAME][=VERSION] format")
 args = parser.parse_args()
 
 if args.save_dataset:
@@ -113,6 +113,12 @@ if save_ds is not None:
 for arg in args.images:
     frozen = f"{frozen} {arg}"  # just for commit message
     img, _, ver = arg.partition("=")
+    img, _, img_target = img.partition(':')
+    if img_target:
+        print(f"I: {img} as {img_target}")
+    else:
+        # no remapping -- using the same name
+        img_target = img
     if ver:
         # we had version specified
         print(f"I: {img} -> {ver}")
@@ -151,7 +157,7 @@ for arg in args.images:
                 "config",
                 "-f",
                 ".datalad/config",
-                f"datalad.containers.{img}.image",
+                f"datalad.containers.{img_target}.image",
             ],
             check=True,
             stdout=subprocess.PIPE,
@@ -168,7 +174,7 @@ for arg in args.images:
             "-f",
             target_ds / ".datalad" / "config",
             "--replace-all",
-            f"datalad.containers.{img}.image",
+            f"datalad.containers.{img_target}.image",
             str(imgpath),
         ],
         check=True,
@@ -194,6 +200,11 @@ for arg in args.images:
         )
         for line in r.stdout.splitlines():
             var, value = line.split(maxsplit=1)
+            if img != img_target:
+                # we need another target variable
+                var_target = var.replace(f"containers.{img}.", f"containers.{img_target}.")
+            else:
+                var_target = var
             if var.endswith(".image"):
                 continue  # already done above, skip
             elif var.endswith(".cmdexec"):
@@ -208,7 +219,7 @@ for arg in args.images:
                     "-f",
                     target_ds / ".datalad" / "config",
                     "--replace-all",
-                    var,
+                    var_target,
                     value,
                 ],
                 check=True,
