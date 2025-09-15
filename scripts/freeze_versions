@@ -112,8 +112,8 @@ if save_ds is not None:
 
 for arg in args.images:
     frozen = f"{frozen} {arg}"  # just for commit message
-    img, _, ver = arg.partition("=")
-    img, _, img_target = img.partition(':')
+    image_spec, _, ver = arg.partition("=")
+    img, _, img_target = image_spec.partition(':')
     if img_target:
         print(f"I: {img} as {img_target}")
     else:
@@ -157,7 +157,7 @@ for arg in args.images:
                 "config",
                 "-f",
                 ".datalad/config",
-                f"datalad.containers.{img_target}.image",
+                f"datalad.containers.{img}.image",
             ],
             check=True,
             stdout=subprocess.PIPE,
