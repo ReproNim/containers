@@ -298,7 +298,7 @@
 	image = images/neurodesk/neurodesk-gimp--2.10.18.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-fsl"]
-	image = images/neurodesk/neurodesk-fsl--6.0.6.4.simg
+	image = images/neurodesk/neurodesk-fsl--6.0.7.18.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-freesurfer"]
 	image = images/neurodesk/neurodesk-freesurfer--8.1.0.simg
