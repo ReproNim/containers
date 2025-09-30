@@ -588,3 +588,6 @@
 [datalad "containers.neurodesk-xnat"]
 	image = images/neurodesk/neurodesk-xnat--1.9.2.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-spmpython"]
+	image = images/neurodesk/neurodesk-spmpython--25.1.2.post1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
