@@ -585,3 +585,6 @@
 [datalad "containers.neurodesk-networkcorrespondancetoolkit"]
 	image = images/neurodesk/neurodesk-networkcorrespondancetoolkit--0.3.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-xnat"]
+	image = images/neurodesk/neurodesk-xnat--1.9.2.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
