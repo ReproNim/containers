@@ -426,6 +426,14 @@ license for `fmriprep`).
 Based on the artwork Copyright 2018-2019 Michael Hanke, from
 [myyoda/poster](https://github.com/myyoda/poster), distributed under [CC BY](https://creativecommons.org/licenses/by/4.0/).
 
+# References
+
+## Related resources and articles
+
+- https://www.augmentedmind.de/2025/03/30/the-9-best-docker-registry-tools/
+- https://oci.dag.dev/ - explore docker registries interactively
+- https://github.com/oras-project/oras-py  - Python interface to interact with registries
+
 [git-annex]: http://git-annex.branchable.com
 [DataLad]: http://datalad.org
 [datalad-container]: http://docs.datalad.org/projects/container
