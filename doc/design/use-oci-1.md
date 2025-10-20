@@ -5,7 +5,7 @@ on functionality in https://github.com/datalad/datalad-container/pull/277
 (skopeo branch of the https://github.com/yarikoptic/datalad-container/ fork) to
 initiate OCI container locally using `datalad containers-add oci:docker://...`
 under `images-oci/` subdataset, under similar path (e.g.
-repronim/repronim-reproin--0.13.1.oci  for
+repronim/repronim-reproin--0.13.1.oci for
 images/repronim/repronim-reproin--0.13.1.sing in this one), registering it to
 be ran with `{img_dspath}/scripts/oci_cmd run` which we are to provide as well.
 E.g.
@@ -55,10 +55,10 @@ and then verifying that all annex files are available from URLs:
 
    git annex find --not --in datalad --and --not --in web bids/bids-aa--0.2.0.oci
 
-should come out empty.  (so we need a generic helper function to be used here to reuse)
+should come out empty. (so we need a generic helper function to be used here to reuse)
 
 Original images, and corresponding recipes, like in this case
-images/bids/Singularity.bids-aa--0.2.0 where "From:" was found, and the  corresponding image images/bids/bids-aa--0.2.0.sing should be "git rm"ed and committed with informative message. Path to the image within .datalad.config  should be replaced to point to .sif instead of original .sing version.
+images/bids/Singularity.bids-aa--0.2.0 where "From:" was found, and the corresponding image images/bids/bids-aa--0.2.0.sing should be "git rm"ed and committed with an informative message. Path to the image within .datalad.config should be replaced to point to .sif instead of original .sing version.
 
 While developing, try migration first on some simpler cases like
 
