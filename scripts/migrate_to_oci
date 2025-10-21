@@ -1,0 +1,566 @@
+#!/usr/bin/env python3
+#
+# COPYRIGHT: ReproNim/containers Team 2018-2025
+#
+# LICENSE: MIT
+#
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in
+#  all copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+#  THE SOFTWARE.
+#
+
+"""
+Migrate auto-generated Singularity containers to OCI-based workflow.
+
+This script migrates existing Singularity recipe files (identified by
+'Automagically prepared' header) to the new OCI-based workflow where
+containers are first downloaded as OCI images and then converted to SIF files.
+"""
+
+from __future__ import annotations
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional
+import click
+import json
+import logging
+import re
+import subprocess
+import sys
+
+import datalad.api as dl
+
+log = logging.getLogger(__name__)
+
+
+@dataclass
+class MigrationResult:
+    """Result of attempting to migrate a single container."""
+    singularity_file: Path
+    success: bool
+    error_message: Optional[str] = None
+    oci_image_path: Optional[Path] = None
+    sif_image_path: Optional[Path] = None
+
+
+class OCIMigrator:
+    """Handles migration of Singularity containers to OCI-based workflow."""
+
+    def __init__(
+        self,
+        repo_dir: Path,
+        images_dir: Path,
+        images_oci_dir: Path,
+        skip_failures: bool = False,
+    ):
+        self.repo_dir = repo_dir
+        self.images_dir = images_dir
+        self.images_oci_dir = images_oci_dir
+        self.skip_failures = skip_failures
+        self.results: list[MigrationResult] = []
+
+    def runcmd(self, *args: str, **kwargs) -> subprocess.CompletedProcess:
+        """Run a command with common settings."""
+        kwargs.setdefault("check", True)
+        kwargs.setdefault("cwd", str(self.repo_dir))
+        kwargs.setdefault("capture_output", True)
+        kwargs.setdefault("text", True)
+        return subprocess.run(args, **kwargs)
+
+    def verify_annex_urls(self, path: Path) -> bool:
+        """
+        Verify that all annex files under path are available from URLs.
+
+        Returns True if all files are available from web or datalad special remotes.
+        """
+        try:
+            result = self.runcmd(
+                "git", "annex", "find",
+                "--not", "--in", "datalad",
+                "--and", "--not", "--in", "web",
+                str(path)
+            )
+            # If command succeeds and output is empty, all files have URLs
+            return not result.stdout.strip()
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to verify annex URLs for %s: %s", path, e)
+            return False
+
+    def parse_singularity_file(self, singfile: Path) -> Optional[dict]:
+        """
+        Parse a Singularity recipe file to extract Docker image information.
+
+        Returns dict with 'namespace', 'image', and 'tag' if successful.
+        """
+        content = singfile.read_text()
+
+        # Check if it's an auto-generated file
+        if "Automagically prepared" not in content:
+            log.debug("Skipping %s - not auto-generated", singfile)
+            return None
+
+        # Extract the From: line
+        # Format: "From: namespace/image:tag" or "From: image:tag"
+        match = re.search(r"^From:\s+(.+)$", content, re.MULTILINE)
+        if not match:
+            log.warning("Could not find 'From:' line in %s", singfile)
+            return None
+
+        from_line = match.group(1).strip()
+
+        # Parse the Docker image specification
+        # Can be: image:tag, namespace/image:tag, or registry/namespace/image:tag
+        parts = from_line.split(":")
+        if len(parts) != 2:
+            log.warning("Invalid Docker image format in %s: %s", singfile, from_line)
+            return None
+
+        image_part, tag = parts
+
+        # Split image_part by / to get namespace and image name
+        image_components = image_part.split("/")
+        if len(image_components) == 1:
+            # Just image name, no namespace (rare)
+            namespace = "library"
+            image = image_components[0]
+        elif len(image_components) == 2:
+            # namespace/image
+            namespace, image = image_components
+        else:
+            # registry/namespace/image or more complex
+            # For Docker Hub images, we typically have namespace/image
+            namespace = "/".join(image_components[:-1])
+            image = image_components[-1]
+
+        return {
+            "namespace": namespace,
+            "image": image,
+            "tag": tag,
+            "docker_url": from_line,
+        }
+
+    def get_oci_image_name(self, singfile: Path) -> str:
+        """
+        Generate OCI image name from Singularity file path.
+
+        E.g., images/bids/Singularity.bids-validator--1.2.3
+        -> bids/bids-validator--1.2.3.oci
+        """
+        # Get the base name without 'Singularity.' prefix
+        base_name = singfile.name.replace("Singularity.", "")
+        # Get the family directory (e.g., 'bids')
+        family = singfile.parent.name
+        # Construct OCI image path
+        return f"{family}/{base_name}.oci"
+
+    def get_sif_image_name(self, singfile: Path) -> str:
+        """
+        Generate SIF image name from Singularity file path.
+
+        E.g., images/bids/Singularity.bids-validator--1.2.3
+        -> bids/bids-validator--1.2.3.sif
+        """
+        base_name = singfile.name.replace("Singularity.", "")
+        family = singfile.parent.name
+        return f"{family}/{base_name}.sif"
+
+    def create_oci_image(
+        self,
+        docker_url: str,
+        oci_image_name: str,
+        container_name: str,
+    ) -> bool:
+        """
+        Create an OCI image using datalad containers-add.
+
+        Returns True if successful.
+        """
+        oci_image_path = self.images_oci_dir / oci_image_name
+
+        # Ensure parent directory exists
+        oci_image_path.parent.mkdir(parents=True, exist_ok=True)
+
+        try:
+            log.info("Creating OCI image for %s from %s", container_name, docker_url)
+
+            # Change to images-oci directory for datalad operations
+            self.runcmd(
+                "datalad",
+                "containers-add",
+                "--url", f"oci:docker://{docker_url}",
+                "-i", oci_image_name,
+                container_name,
+                cwd=str(self.images_oci_dir),
+            )
+
+            # Verify all annex files have URLs
+            if not self.verify_annex_urls(oci_image_path):
+                log.error("OCI image files for %s are not all available from URLs", oci_image_name)
+                return False
+
+            log.info("Successfully created OCI image at %s", oci_image_path)
+            return True
+
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to create OCI image for %s: %s", container_name, e)
+            log.error("stdout: %s", e.stdout)
+            log.error("stderr: %s", e.stderr)
+            return False
+
+    def build_sif_from_oci(
+        self,
+        oci_image_name: str,
+        sif_image_name: str,
+    ) -> bool:
+        """
+        Build a SIF file from an OCI image using datalad run.
+
+        Returns True if successful.
+        """
+        sif_image_path = self.images_dir / sif_image_name
+        oci_image_path = self.images_oci_dir / oci_image_name
+
+        try:
+            log.info("Building SIF image %s from OCI image %s", sif_image_name, oci_image_name)
+
+            # Use datalad run to build the SIF with proper tracking
+            self.runcmd(
+                "datalad", "run",
+                "-m", f"Build SIF image for {sif_image_name}",
+                "--output", str(sif_image_path),
+                "scripts/oci_cmd", "build",
+                str(sif_image_path),
+                f"images-oci/{oci_image_name}/",
+            )
+
+            log.info("Successfully built SIF image at %s", sif_image_path)
+            return True
+
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to build SIF image %s: %s", sif_image_name, e)
+            log.error("stdout: %s", e.stdout)
+            log.error("stderr: %s", e.stderr)
+            return False
+
+    def update_container_config(
+        self,
+        container_name: str,
+        old_image_path: Path,
+        new_image_path: Path,
+    ) -> bool:
+        """
+        Update .datalad/config to point to new SIF file instead of old .sing file.
+
+        Returns True if successful.
+        """
+        try:
+            # Get current config value
+            result = self.runcmd(
+                "git", "config", "-f", ".datalad/config",
+                f"datalad.containers.{container_name}.image"
+            )
+            current_path = result.stdout.strip()
+
+            # Update to new path
+            self.runcmd(
+                "git", "config", "-f", ".datalad/config",
+                f"datalad.containers.{container_name}.image",
+                str(new_image_path)
+            )
+
+            log.info("Updated container config for %s: %s -> %s",
+                    container_name, current_path, new_image_path)
+            return True
+
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to update container config for %s: %s", container_name, e)
+            return False
+
+    def remove_old_files(
+        self,
+        singularity_file: Path,
+        old_image_file: Path,
+    ) -> bool:
+        """
+        Remove old Singularity recipe and .sing image files.
+
+        Returns True if successful.
+        """
+        try:
+            files_to_remove = []
+
+            if singularity_file.exists():
+                files_to_remove.append(str(singularity_file))
+
+            if old_image_file.exists() or old_image_file.is_symlink():
+                files_to_remove.append(str(old_image_file))
+
+            if files_to_remove:
+                self.runcmd("git", "rm", *files_to_remove)
+                log.info("Removed old files: %s", ", ".join(files_to_remove))
+
+            return True
+
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to remove old files: %s", e)
+            return False
+
+    def migrate_container(self, singfile: Path) -> MigrationResult:
+        """
+        Migrate a single Singularity container to OCI-based workflow.
+
+        Returns MigrationResult indicating success or failure.
+        """
+        log.info("=" * 80)
+        log.info("Migrating %s", singfile)
+
+        # Parse Singularity file
+        parsed = self.parse_singularity_file(singfile)
+        if parsed is None:
+            return MigrationResult(
+                singularity_file=singfile,
+                success=False,
+                error_message="Could not parse Singularity file",
+            )
+
+        docker_url = parsed["docker_url"]
+        oci_image_name = self.get_oci_image_name(singfile)
+        sif_image_name = self.get_sif_image_name(singfile)
+
+        # Generate container name (similar to how it's done in create_singularities)
+        # Extract from path: images/bids/Singularity.bids-validator--1.2.3
+        # Container name would be: bids-validator
+        base_name = singfile.name.replace("Singularity.", "")
+        family = singfile.parent.name
+        # Remove version suffix to get container name
+        container_name_parts = base_name.split("--")
+        if len(container_name_parts) > 1:
+            container_name = f"{family}-{container_name_parts[0]}"
+        else:
+            container_name = f"{family}-{base_name}"
+
+        log.info("  Docker URL: %s", docker_url)
+        log.info("  OCI image: %s", oci_image_name)
+        log.info("  SIF image: %s", sif_image_name)
+        log.info("  Container name: %s", container_name)
+
+        # Create OCI image
+        if not self.create_oci_image(docker_url, oci_image_name, container_name):
+            return MigrationResult(
+                singularity_file=singfile,
+                success=False,
+                error_message="Failed to create OCI image",
+            )
+
+        # Build SIF from OCI
+        if not self.build_sif_from_oci(oci_image_name, sif_image_name):
+            return MigrationResult(
+                singularity_file=singfile,
+                success=False,
+                error_message="Failed to build SIF image",
+                oci_image_path=self.images_oci_dir / oci_image_name,
+            )
+
+        # Update container configuration
+        old_image_file = singfile.with_name(base_name + ".sing")
+        new_image_file = self.images_dir / sif_image_name
+
+        if not self.update_container_config(container_name, old_image_file, new_image_file):
+            return MigrationResult(
+                singularity_file=singfile,
+                success=False,
+                error_message="Failed to update container configuration",
+                oci_image_path=self.images_oci_dir / oci_image_name,
+                sif_image_path=new_image_file,
+            )
+
+        # Remove old files
+        if not self.remove_old_files(singfile, old_image_file):
+            return MigrationResult(
+                singularity_file=singfile,
+                success=False,
+                error_message="Failed to remove old files",
+                oci_image_path=self.images_oci_dir / oci_image_name,
+                sif_image_path=new_image_file,
+            )
+
+        # Commit the migration
+        try:
+            self.runcmd(
+                "git", "commit",
+                "-m", f"Migrate {base_name} to OCI-based workflow\n\n"
+                      f"- Created OCI image at images-oci/{oci_image_name}\n"
+                      f"- Built SIF image at {sif_image_name}\n"
+                      f"- Removed old Singularity recipe and .sing file\n"
+                      f"- Updated .datalad/config to use .sif image"
+            )
+            log.info("Successfully migrated %s", singfile)
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to commit migration for %s: %s", singfile, e)
+            return MigrationResult(
+                singularity_file=singfile,
+                success=False,
+                error_message="Failed to commit migration",
+                oci_image_path=self.images_oci_dir / oci_image_name,
+                sif_image_path=new_image_file,
+            )
+
+        return MigrationResult(
+            singularity_file=singfile,
+            success=True,
+            oci_image_path=self.images_oci_dir / oci_image_name,
+            sif_image_path=new_image_file,
+        )
+
+    def find_automagic_singularity_files(self) -> list[Path]:
+        """Find all auto-generated Singularity files in the repository."""
+        try:
+            result = self.runcmd(
+                "git", "grep", "-l", "Automagically prepared", "--", "images/"
+            )
+            files = [Path(line.strip()) for line in result.stdout.splitlines()]
+            log.info("Found %d auto-generated Singularity files", len(files))
+            return files
+        except subprocess.CalledProcessError:
+            log.warning("No auto-generated Singularity files found")
+            return []
+
+    def run_migration(
+        self,
+        specific_files: Optional[list[str]] = None,
+    ) -> None:
+        """Run the migration process."""
+        # Find files to migrate
+        if specific_files:
+            files_to_migrate = [Path(f) for f in specific_files]
+        else:
+            files_to_migrate = self.find_automagic_singularity_files()
+
+        log.info("Will migrate %d Singularity files", len(files_to_migrate))
+
+        # Migrate each file
+        for singfile in files_to_migrate:
+            result = self.migrate_container(singfile)
+            self.results.append(result)
+
+            if not result.success:
+                log.error("Failed to migrate %s: %s",
+                         singfile, result.error_message)
+                if not self.skip_failures:
+                    log.error("Stopping migration due to failure (use --skip-failures to continue)")
+                    break
+
+        # Print summary
+        self.print_summary()
+
+    def print_summary(self) -> None:
+        """Print a summary of migration results."""
+        total = len(self.results)
+        successful = sum(1 for r in self.results if r.success)
+        failed = total - successful
+
+        log.info("=" * 80)
+        log.info("Migration Summary")
+        log.info("=" * 80)
+        log.info("Total: %d", total)
+        log.info("Successful: %d", successful)
+        log.info("Failed: %d", failed)
+
+        if failed > 0:
+            log.info("\nFailed migrations:")
+            for result in self.results:
+                if not result.success:
+                    log.info("  - %s: %s", result.singularity_file, result.error_message)
+
+
+@click.command()
+@click.option(
+    "--skip-failures",
+    is_flag=True,
+    default=False,
+    help="Continue migration even if some containers fail",
+)
+@click.option(
+    "--log-file",
+    type=click.Path(),
+    default=None,
+    help="Path to log file for failed conversions",
+)
+@click.argument("singularity_files", nargs=-1)
+def main(
+    skip_failures: bool,
+    log_file: Optional[str],
+    singularity_files: tuple[str, ...],
+) -> None:
+    """
+    Migrate Singularity containers to OCI-based workflow.
+
+    If SINGULARITY_FILES are specified, only those files will be migrated.
+    Otherwise, all auto-generated Singularity files will be migrated.
+    """
+    # Setup logging
+    logging.basicConfig(
+        format="[%(levelname)-8s] %(message)s",
+        level=logging.INFO,
+    )
+
+    if log_file:
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setFormatter(logging.Formatter("[%(levelname)-8s] %(message)s"))
+        log.addHandler(file_handler)
+
+    # Setup paths
+    topdir = Path(__file__).parent.parent
+    images_dir = topdir / "images"
+    images_oci_dir = topdir / "images-oci"
+
+    # Ensure images-oci directory exists and is a datalad dataset
+    if not images_oci_dir.exists():
+        log.info("Creating images-oci subdataset")
+        try:
+            # Create as a datalad subdataset
+            result = subprocess.run(
+                ["datalad", "create", "-d", str(topdir), str(images_oci_dir)],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as e:
+            log.error("Failed to create images-oci subdataset: %s", e)
+            log.error("stderr: %s", e.stderr)
+            sys.exit(1)
+
+    # Create migrator and run
+    migrator = OCIMigrator(
+        repo_dir=topdir,
+        images_dir=images_dir,
+        images_oci_dir=images_oci_dir,
+        skip_failures=skip_failures,
+    )
+
+    migrator.run_migration(
+        specific_files=list(singularity_files) if singularity_files else None,
+    )
+
+    # Exit with error if any migrations failed
+    failed = sum(1 for r in migrator.results if not r.success)
+    if failed > 0:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
