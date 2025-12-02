@@ -603,3 +603,6 @@
 [datalad "containers.neurodesk-spm25"]
 	image = images/neurodesk/neurodesk-spm25--25.01.02.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-fsqc"]
+	image = images/neurodesk/neurodesk-fsqc--2.1.4.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
