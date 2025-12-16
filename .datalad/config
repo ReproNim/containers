@@ -196,7 +196,7 @@
 	image = images/neurodesk/neurodesk-spm12--r7771.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-spinalcordtoolbox"]
-	image = images/neurodesk/neurodesk-spinalcordtoolbox--6.4.simg
+	image = images/neurodesk/neurodesk-spinalcordtoolbox--7.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-sovabids"]
 	image = images/neurodesk/neurodesk-sovabids--0.3.1a0.simg
