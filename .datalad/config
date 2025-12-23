@@ -612,3 +612,6 @@
 [datalad "containers.neurodesk-ezbids"]
 	image = images/neurodesk/neurodesk-ezbids--1.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brainager"]
+	image = images/neurodesk/neurodesk-brainager--2.1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
