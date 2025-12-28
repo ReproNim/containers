@@ -1,0 +1,100 @@
+#!/bin/bash
+#
+# Script to rebuild .sing images that have "no runscript" issues
+# using current singularity, converting them to .sif format,
+# and updating .datalad/config accordingly.
+#
+
+set -eu
+
+# Use local tmp directory for singularity builds (to have enough storage)
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+REPO_DIR="$(dirname "$SCRIPT_DIR")"
+TMPDIR="$REPO_DIR/tmp"
+mkdir -p "$TMPDIR"
+export SINGULARITY_TMPDIR="$TMPDIR"
+
+STDERR_LOG="$REPO_DIR/.duct/logs/2025.12.25T13.07.37-2217752_stderr"
+DATALAD_CONFIG="$REPO_DIR/.datalad/config"
+
+if [ ! -f "$STDERR_LOG" ]; then
+    echo "Error: Log file not found: $STDERR_LOG" >&2
+    exit 1
+fi
+
+# Extract files with "no runscript" error
+grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
+    # sing_file is like "images/bids/bids-giga-connectome--0.6.0.sing"
+
+    # Skip if file doesn't end with .sing
+    if [[ ! "$sing_file" =~ \.sing$ ]]; then
+        echo "Skipping non-.sing file: $sing_file"
+        continue
+    fi
+
+    # Full path to the .sing file
+    full_sing_path="$REPO_DIR/$sing_file"
+
+    # Derive paths
+    dir=$(dirname "$sing_file")
+    base=$(basename "$sing_file" .sing)
+
+    # New .sif file path
+    sif_file="$dir/$base.sif"
+    full_sif_path="$REPO_DIR/$sif_file"
+
+    # Singularity recipe file (no extension, just Singularity.name--version)
+    recipe_file="$REPO_DIR/$dir/Singularity.$base"
+
+    echo "Processing: $sing_file"
+    echo "  -> New SIF: $sif_file"
+    echo "  -> Recipe: $recipe_file"
+
+    # Check if recipe exists
+    if [ ! -f "$recipe_file" ]; then
+        echo "  WARNING: Recipe file not found: $recipe_file - skipping"
+        continue
+    fi
+
+    # Check if old .sing file exists (might need datalad get)
+    if [ ! -f "$full_sing_path" ]; then
+        echo "  NOTE: .sing file not present locally: $full_sing_path"
+        echo "  Will still try to build new .sif and update config"
+    fi
+
+    # Build new .sif image
+    echo "  Building new .sif image..."
+    if singularity build --fakeroot "$full_sif_path" "$recipe_file"; then
+        echo "  Build successful: $sif_file"
+
+        # Update .datalad/config to use new .sif instead of .sing
+        # The config has lines like: image = images/bids/bids-giga-connectome--0.6.0.sing
+        if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
+            echo "  Updating .datalad/config..."
+            sed -i "s|image = $sing_file|image = $sif_file|g" "$DATALAD_CONFIG"
+            echo "  Config updated: $sing_file -> $sif_file"
+        else
+            echo "  NOTE: $sing_file not found in .datalad/config (may not be registered)"
+        fi
+
+        # Remove old .sing file with git rm
+        if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
+            echo "  Removing old .sing file with git rm..."
+            git rm -f "$full_sing_path" 2>/dev/null || echo "  NOTE: git rm failed (file may be annexed or not tracked)"
+        else
+            echo "  NOTE: Old .sing file not tracked in git"
+        fi
+
+        echo "  Done processing $sing_file"
+    else
+        echo "  ERROR: Build failed for $sing_file" >&2
+    fi
+
+    echo ""
+done
+
+echo "All done. Remember to:"
+echo "  1. Review changes with 'git status' and 'git diff'"
+echo "  2. Add new .sif files: git annex add images/**/*.sif"
+echo "  3. Commit changes: git commit -m 'Rebuild images with no runscript as .sif'"
+echo "  4. Clean up tmp directory if no longer needed: rm -rf $TMPDIR"
