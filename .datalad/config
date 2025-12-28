@@ -78,7 +78,7 @@
 	image = images/bids/bids-tracula--6.0.0.beta-0.sing
 [datalad "containers.bids-validator"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-validator--2.5.6.sing
+	image = images/bids/bids-validator--2.5.6.sif
 [datalad "containers.neuronets-kwyk"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/neuronets/neuronets-kwyk--0.5.0-gpu.sing
@@ -97,7 +97,7 @@
 	image = images/repronim/repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-qsiprep"]
-	image = images/bids/bids-qsiprep--1.0.2.sing
+	image = images/bids/bids-qsiprep--1.0.2.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-pymvpa"]
 	image = images/bids/bids-pymvpa--4.0.4.sing
@@ -139,7 +139,7 @@
 	image = images/bids/bids-nirodents--0.2.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-smriprep"]
-	image = images/bids/bids-smriprep--0.19.2.sing
+	image = images/bids/bids-smriprep--0.19.2.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-gift-bids"]
 	image = images/bids/bids-gift-bids--4.0.5.3.sing
@@ -148,7 +148,7 @@
     image = images/pymvpa/pymvpa-mvpa2--2.6.5.nd100.1.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.brainiak-brainiak"]
-	image = images/brainiak/brainiak-brainiak--0.12-20250106.sing
+	image = images/brainiak/brainiak-brainiak--0.12-20250106.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.brainiak-rtcloud"]
 	image = images/brainiak/brainiak-rtcloud--1.4.sing
@@ -424,7 +424,7 @@
 	image = images/neurodesk/neurodesk-hmri--0.6.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-xcp-d"]
-	image = images/bids/bids-xcp-d--0.13.0.sing
+	image = images/bids/bids-xcp-d--0.13.0.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-aslprep"]
 	image = images/bids/bids-aslprep--25.1.0.sing
@@ -448,7 +448,7 @@
 	image = images/neurodesk/neurodesk-brkraw--0.3.11.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-giga-connectome"]
-	image = images/bids/bids-giga-connectome--0.6.0.sing
+	image = images/bids/bids-giga-connectome--0.6.0.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-qsiprep"]
 	image = images/neurodesk/neurodesk-qsiprep--1.0.1.simg
@@ -487,7 +487,7 @@
 	image = images/neurodesk/neurodesk-niimath--1.0.20250804.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-qsirecon"]
-	image = images/bids/bids-qsirecon--1.1.1.sing
+	image = images/bids/bids-qsirecon--1.1.1.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-reproa"]
 	image = images/bids/bids-reproa--0.2.1.sing
@@ -592,7 +592,7 @@
 	image = images/neurodesk/neurodesk-spmpython--25.1.2.post1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-petprep"]
-	image = images/bids/bids-petprep--0.0.3.sing
+	image = images/bids/bids-petprep--0.0.3.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-apptainer"]
 	image = images/neurodesk/neurodesk-apptainer--1.4.4.simg
