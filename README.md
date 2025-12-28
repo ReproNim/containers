@@ -138,11 +138,8 @@ establish "reproducible interactive sessions" with the help of that script.
 
 ## Container image files
 
-Singularity image files have `.sing` extension.  Since we are providing
-a custom filename to store the file at, we cannot guess the format of
-the container (e.g., either it is
-[.sif](https://www.sylabs.io/2018/03/sif-containing-your-containers/)),
-so we just use uniform `.sing` extension.
+Singularity image files have [`.sif` extension](https://github.com/apptainer/sif)
+(older ones created using Singularity < 3, will have `.sing`).
 
 # A typical YODA workflow
 

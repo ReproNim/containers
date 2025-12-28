@@ -15,7 +15,7 @@ if [ ! -z "$PS1" ]; then
             _name="$SINGULARITY_NAME"
         fi
         # strip our possible suffix
-        _name="$(echo $_name | sed -e 's,.sing$,,g')"
+        _name="$(echo $_name | sed -E 's,.si(ng|f)$,,g')"
         export PS1="singularity:$_name > $PS1"
     fi
 fi

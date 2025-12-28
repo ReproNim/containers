@@ -407,7 +407,7 @@ class SingularityFile:
 
     def build(self, builder: Builder) -> Optional[Path]:
         # Returns the path to the new imagefile, or None if it already exists
-        imagefilename = f"{self.imagename}.sing"
+        imagefilename = f"{self.imagename}.sif"
         imagefile = self.sourcefile.with_name(imagefilename)
         if not imagefile.exists() and not imagefile.is_symlink():
             # eventually can use docker builds, e.g.
@@ -474,9 +474,8 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         githubids=set(githubids or []),
     )
 
-    # We are still using elderly singularity 2.6.1 to build images, so elderly
-    # singularity could run images we generate, since images produced by 3
-    # seems to not be usable with 2.
+    # We no longer use elderly singularity 2.6.1 to build images, since nobody
+    # uses that old version and SIF format should be stable by now.
     if not no_singularity_check:
         rc = subprocess.run(
             ["singularity", "--version"],
@@ -484,8 +483,8 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
             stdout=subprocess.PIPE,
             universal_newlines=True,
         )
-        if "2.6.1" not in rc.stdout:
-            log.error("singularity is 'too new'")
+        if "2.6.1" in rc.stdout:
+            log.error("singularity is 'too old'")
             sys.exit(1)
 
     # Determine which images/groups to build

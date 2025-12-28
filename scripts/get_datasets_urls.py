@@ -24,7 +24,7 @@ for c in containers:
         j = ds.status(p, annex=True)[0]
     except:
         continue
-    if not j.get('key') or not p.endswith('.sing'):
+    if not j.get('key') or not (p.endswith('.sing') or p.endswith('.sif')):
         continue
     whereis = repo.whereis(p)
     if (uuid in whereis and
