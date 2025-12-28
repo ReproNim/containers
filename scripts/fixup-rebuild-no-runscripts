@@ -4,22 +4,68 @@
 # using current singularity, converting them to .sif format,
 # and updating .datalad/config accordingly.
 #
+# Usage: fixup-rebuild-no-runscripts [-n|--dry-run] [LOG_FILE]
+#
+#   -n, --dry-run   Show what would be done without making changes
+#   LOG_FILE        Path to duct stderr log file (default: most recent in .duct/logs/)
+#
 
 set -eu
+
+# Parse arguments
+DRY_RUN=0
+STDERR_LOG=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -n|--dry-run)
+            DRY_RUN=1
+            shift
+            ;;
+        -*)
+            echo "Unknown option: $1" >&2
+            echo "Usage: $0 [-n|--dry-run] [LOG_FILE]" >&2
+            exit 1
+            ;;
+        *)
+            STDERR_LOG="$1"
+            shift
+            ;;
+    esac
+done
 
 # Use local tmp directory for singularity builds (to have enough storage)
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 TMPDIR="$REPO_DIR/tmp"
-mkdir -p "$TMPDIR"
+if [ "$DRY_RUN" -eq 0 ]; then
+    mkdir -p "$TMPDIR"
+fi
 export SINGULARITY_TMPDIR="$TMPDIR"
 
-STDERR_LOG="$REPO_DIR/.duct/logs/2025.12.25T13.07.37-2217752_stderr"
+# If no log file specified, find the most recent stderr log
+if [ -z "$STDERR_LOG" ]; then
+    DUCT_LOGS_DIR="$REPO_DIR/.duct/logs"
+    if [ -d "$DUCT_LOGS_DIR" ]; then
+        STDERR_LOG=$(ls -t "$DUCT_LOGS_DIR"/*_stderr 2>/dev/null | head -1)
+    fi
+    if [ -z "$STDERR_LOG" ]; then
+        echo "Error: No stderr log file found in $DUCT_LOGS_DIR" >&2
+        exit 1
+    fi
+    echo "Using log file: $STDERR_LOG"
+fi
+
 DATALAD_CONFIG="$REPO_DIR/.datalad/config"
 
 if [ ! -f "$STDERR_LOG" ]; then
     echo "Error: Log file not found: $STDERR_LOG" >&2
     exit 1
+fi
+
+if [ "$DRY_RUN" -eq 1 ]; then
+    echo "=== DRY RUN MODE - No changes will be made ==="
+    echo ""
 fi
 
 # Extract files with "no runscript" error
@@ -63,31 +109,51 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
     fi
 
     # Build new .sif image
-    echo "  Building new .sif image..."
-    if singularity build --fakeroot "$full_sif_path" "$recipe_file"; then
-        echo "  Build successful: $sif_file"
+    if [ "$DRY_RUN" -eq 1 ]; then
+        echo "  [DRY RUN] Would build: singularity build --fakeroot $full_sif_path $recipe_file"
 
-        # Update .datalad/config to use new .sif instead of .sing
-        # The config has lines like: image = images/bids/bids-giga-connectome--0.6.0.sing
+        # Check what config update would happen
         if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
-            echo "  Updating .datalad/config..."
-            sed -i "s|image = $sing_file|image = $sif_file|g" "$DATALAD_CONFIG"
-            echo "  Config updated: $sing_file -> $sif_file"
+            echo "  [DRY RUN] Would update .datalad/config: $sing_file -> $sif_file"
         else
-            echo "  NOTE: $sing_file not found in .datalad/config (may not be registered)"
+            echo "  [DRY RUN] NOTE: $sing_file not found in .datalad/config (may not be registered)"
         fi
 
-        # Remove old .sing file with git rm
+        # Check what git rm would happen
         if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
-            echo "  Removing old .sing file with git rm..."
-            git rm -f "$full_sing_path" 2>/dev/null || echo "  NOTE: git rm failed (file may be annexed or not tracked)"
+            echo "  [DRY RUN] Would remove: git rm -f $full_sing_path"
         else
-            echo "  NOTE: Old .sing file not tracked in git"
+            echo "  [DRY RUN] NOTE: Old .sing file not tracked in git"
         fi
 
-        echo "  Done processing $sing_file"
+        echo "  [DRY RUN] Done (no changes made)"
     else
-        echo "  ERROR: Build failed for $sing_file" >&2
+        echo "  Building new .sif image..."
+        if singularity build --fakeroot "$full_sif_path" "$recipe_file"; then
+            echo "  Build successful: $sif_file"
+
+            # Update .datalad/config to use new .sif instead of .sing
+            # The config has lines like: image = images/bids/bids-giga-connectome--0.6.0.sing
+            if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
+                echo "  Updating .datalad/config..."
+                sed -i "s|image = $sing_file|image = $sif_file|g" "$DATALAD_CONFIG"
+                echo "  Config updated: $sing_file -> $sif_file"
+            else
+                echo "  NOTE: $sing_file not found in .datalad/config (may not be registered)"
+            fi
+
+            # Remove old .sing file with git rm
+            if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
+                echo "  Removing old .sing file with git rm..."
+                git rm -f "$full_sing_path" 2>/dev/null || echo "  NOTE: git rm failed (file may be annexed or not tracked)"
+            else
+                echo "  NOTE: Old .sing file not tracked in git"
+            fi
+
+            echo "  Done processing $sing_file"
+        else
+            echo "  ERROR: Build failed for $sing_file" >&2
+        fi
     fi
 
     echo ""
