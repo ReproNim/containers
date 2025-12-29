@@ -21,7 +21,7 @@
 	image = images/bids/bids-broccoli--1.0.1.sif
 [datalad "containers.bids-cpac"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-cpac--1.1.0_14.sing
+	image = images/bids/bids-cpac--1.1.0_14.sif
 [datalad "containers.bids-dparsf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-dparsf--4.3.12.sing
