@@ -24,7 +24,7 @@
 	image = images/bids/bids-cpac--1.1.0_14.sif
 [datalad "containers.bids-dparsf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-dparsf--4.3.12.sing
+	image = images/bids/bids-dparsf--4.3.12.sif
 [datalad "containers.bids-example"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-example--0.0.7.sing
