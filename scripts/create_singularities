@@ -266,57 +266,30 @@ class Builder:
             ds.save(path=stale_img_files,
                     message=f"Remove {len(stale_img_files)} stale NeuroDesk images")
 
-    def create_singularity_file(
+    def prepare_docker_image(
         self, dh: str, version_tag: str, version_pure: str, family: str,
-        save_push: bool=False
-    ) -> SingularityFile:
+    ) -> DockerImage:
+        """Prepare a DockerImage object for pulling.
+
+        Args:
+            dh: Docker Hub ID (e.g., "nipreps/fmriprep")
+            version_tag: Version tag as it appears on Docker Hub (e.g., "25.2.3")
+            version_pure: Normalized version string (e.g., "25.2.3")
+            family: Image family/category (e.g., "bids")
+
+        Returns:
+            DockerImage object ready for pulling
+        """
         imagename = get_imagename(dh, family, version_pure)
         outdir = self.images_dir / family
         outdir.mkdir(parents=True, exist_ok=True)
-        singfile = outdir / f"Singularity.{imagename}"
-        # log.info("%s \t from \t %s:%s", singfile, dh, version_tag)
-        # Do not recreate the file ATM. Since we changed the env vars we
-        # define, we don't want to recreate it if already present
-        if not singfile.exists():
-            singfile.write_text(
-                f"""\
-#
-# Automagically prepared for ReproNim/containers distribution.
-# See http://github.com/ReproNim/containers for more info
-#
-Bootstrap: docker
-From: {dh}:{version_tag}
-
-%post
-
-# Create commonly present root directories to avoid need in overlays not supported
-# on older systems
-mkdir -p /ihome /data /data2 /zfs /isi /dartfs /dartfs-hpc
-
-%environment
-export LANG="C.UTF-8"
-export LC_ALL="C.UTF-8"
-
-# TODO: Take advantage of the fact that it is a bids-app somehow?
-"""
-            )
-            if save_push:
-                # Save it immediately and push for build process to start
-                # Git branch should be configured properly to push
-                self.runcmd(
-                    "datalad",
-                    "save",
-                    "-m",
-                    f"Adding singularity recipe for {dh}:{version_tag}",
-                    str(singfile),
-                )
-                self.runcmd("git", "pull")  # to possibly merge remote changes
-                self.runcmd("datalad", "push", "--data", "auto")
-        return SingularityFile(sourcefile=singfile, imagename=imagename)
+        imagefile = outdir / f"{imagename}.sif"
+        docker_uri = f"docker://{dh}:{version_tag}"
+        return DockerImage(docker_uri=docker_uri, imagefile=imagefile, imagename=imagename)
 
     def add_singularity_versioned_image(
         self,
-        singfile: SingularityFile,
+        docker_image: DockerImage,
         repoid: str,
         family: str,
         origrepoid: Optional[str] = None,
@@ -328,15 +301,14 @@ export LC_ALL="C.UTF-8"
         if origrepoid is None:
             origrepoid = repoid
         familyname = get_familyname(origrepoid, family, familysuf)
-        imagefile = singfile.build(self)
+        imagefile = docker_image.pull(self)
         if imagefile is not None:
             self.runcmd(
                 "datalad",
                 "save",
                 "-m",
-                f"Adding recipe&image for {singfile.imagename}",
+                f"Adding image for {docker_image.imagename} from {docker_image.docker_uri}",
                 str(imagefile),
-                str(singfile.sourcefile),
             )
             base_opts = ' '
             if familyname == 'bids-mriqc':
@@ -384,11 +356,11 @@ export LC_ALL="C.UTF-8"
         if last_version is not None:
             last_version_pure, last_version_tag = last_version
             # print(dockerhubid, last_version)
-            singfile = self.create_singularity_file(
+            docker_image = self.prepare_docker_image(
                 dockerhubid, last_version_tag, last_version_pure, family
             )
             self.add_singularity_versioned_image(
-                singfile, "ReproNim/containers", family, dockerhubid, familysuf=familysuf,
+                docker_image, "ReproNim/containers", family, dockerhubid, familysuf=familysuf,
             )
 
     def generate_singularity_for_docker_namespace(self, namespace: str, family: Optional[str]=None,
@@ -401,33 +373,38 @@ export LC_ALL="C.UTF-8"
 
 
 @dataclass
-class SingularityFile:
-    sourcefile: Path
-    imagename: str
+class DockerImage:
+    """Represents a Docker image to be pulled as a Singularity .sif file."""
+    docker_uri: str  # e.g., "docker://nipreps/fmriprep:25.2.3"
+    imagefile: Path  # Target .sif file path
+    imagename: str   # e.g., "bids-fmriprep--25.2.3"
 
-    def build(self, builder: Builder) -> Optional[Path]:
-        # Returns the path to the new imagefile, or None if it already exists
-        imagefilename = f"{self.imagename}.sif"
-        imagefile = self.sourcefile.with_name(imagefilename)
-        if not imagefile.exists() and not imagefile.is_symlink():
-            # eventually can use docker builds, e.g.
-            # docker run -it -v $PWD:$PWD -w $PWD --privileged quay.io/singularity/singularity:v3.5.1 build ./busybox.sing-3.5.1 ./Singularity.busybox
-            # docker run -it -v $PWD:$PWD -w $PWD --entrypoint chown quay.io/singularity/singularity:v2.6 -- $UID.$GID ./busybox.sing
-            # unfortunately 2.6 version tries to connect to docker service and
-            # fails, thus can't fetch anything
-            tmpfile = self.sourcefile.with_name(f"{imagefilename}.tmp")
+    def pull(self, builder: Builder) -> Optional[Path]:
+        """Pull the Docker image as a .sif file.
+
+        Returns the path to the new imagefile, or None if it already exists.
+        """
+        if not self.imagefile.exists() and not self.imagefile.is_symlink():
+            tmpfile = self.imagefile.with_suffix(".sif.tmp")
             builder.runcmd(
-                "sudo",
-                "--preserve-env=TMPDIR,SINGULARITY_TMPDIR",
                 "singularity",
-                "build",
+                "pull",
+                "--disable-cache",
                 str(tmpfile),
-                str(self.sourcefile),
+                self.docker_uri,
             )
-            # abuse BTRFS CoW to avoid sudo/docker to chown
-            builder.runcmd("cp", "--reflink=auto", str(tmpfile), str(imagefile))
+            # Use cp with reflink to avoid permission issues
+            builder.runcmd("cp", "--reflink=auto", str(tmpfile), str(self.imagefile))
             tmpfile.unlink()
-            return imagefile
+
+            # Add to git-annex and set metadata with original URI
+            builder.runcmd("git", "annex", "add", str(self.imagefile))
+            builder.runcmd(
+                "git", "annex", "metadata",
+                "--set", f"original-uri={self.docker_uri}",
+                str(self.imagefile),
+            )
+            return self.imagefile
         else:
             return None
 

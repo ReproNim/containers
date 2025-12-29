@@ -1,8 +1,12 @@
 #!/bin/bash
 #
 # Script to rebuild .sing images that have "no runscript" issues
-# using current singularity, converting them to .sif format,
+# by pulling directly from Docker Hub, converting them to .sif format,
 # and updating .datalad/config accordingly.
+#
+# The script extracts the Docker URI from the corresponding Singularity.*
+# recipe file, pulls the image using 'singularity pull', sets git-annex
+# metadata with the original-uri, and removes the now-unnecessary recipe file.
 #
 # Usage: fixup-rebuild-no-runscripts [-n|--dry-run] [LOG_FILE]
 #
@@ -102,15 +106,28 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
         continue
     fi
 
+    # Extract the Docker URI from the recipe file's "From:" line
+    # Format in file: "From: dockerhubid:version_tag"
+    from_line=$(grep -E "^From:" "$recipe_file" | head -1)
+    if [ -z "$from_line" ]; then
+        echo "  WARNING: No 'From:' line found in $recipe_file - skipping"
+        continue
+    fi
+    # Extract the image reference (e.g., "nipreps/fmriprep:25.2.3")
+    docker_image=$(echo "$from_line" | sed 's/^From:[[:space:]]*//')
+    docker_uri="docker://$docker_image"
+    echo "  -> Docker URI: $docker_uri"
+
     # Check if old .sing file exists (might need datalad get)
     if [ ! -f "$full_sing_path" ]; then
         echo "  NOTE: .sing file not present locally: $full_sing_path"
-        echo "  Will still try to build new .sif and update config"
+        echo "  Will still try to pull new .sif and update config"
     fi
 
-    # Build new .sif image
+    # Pull new .sif image
     if [ "$DRY_RUN" -eq 1 ]; then
-        echo "  [DRY RUN] Would build: singularity build --fakeroot $full_sif_path $recipe_file"
+        echo "  [DRY RUN] Would pull: singularity pull --disable-cache $full_sif_path $docker_uri"
+        echo "  [DRY RUN] Would set metadata: git annex metadata --set original-uri='$docker_uri' $full_sif_path"
 
         # Check what config update would happen
         if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
@@ -119,18 +136,31 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
             echo "  [DRY RUN] NOTE: $sing_file not found in .datalad/config (may not be registered)"
         fi
 
-        # Check what git rm would happen
+        # Check what git rm would happen for old .sing file
         if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
             echo "  [DRY RUN] Would remove: git rm -f $full_sing_path"
         else
             echo "  [DRY RUN] NOTE: Old .sing file not tracked in git"
         fi
 
+        # Check what git rm would happen for recipe file
+        if git ls-files --error-unmatch "$recipe_file" 2>/dev/null; then
+            echo "  [DRY RUN] Would remove recipe: git rm $recipe_file"
+        else
+            echo "  [DRY RUN] Would remove recipe (untracked): rm $recipe_file"
+        fi
+
         echo "  [DRY RUN] Done (no changes made)"
     else
-        echo "  Building new .sif image..."
-        if singularity build --fakeroot "$full_sif_path" "$recipe_file"; then
-            echo "  Build successful: $sif_file"
+        echo "  Pulling new .sif image..."
+        if singularity pull --disable-cache "$full_sif_path" "$docker_uri"; then
+            echo "  Pull successful: $sif_file"
+
+            # Set git-annex metadata with original URI
+            echo "  Setting git-annex metadata..."
+            git annex add "$full_sif_path"
+            git annex metadata --set "original-uri=$docker_uri" "$full_sif_path"
+            echo "  Metadata set: original-uri=$docker_uri"
 
             # Update .datalad/config to use new .sif instead of .sing
             # The config has lines like: image = images/bids/bids-giga-connectome--0.6.0.sing
@@ -145,14 +175,24 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
             # Remove old .sing file with git rm
             if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
                 echo "  Removing old .sing file with git rm..."
-                git rm -f "$full_sing_path" 2>/dev/null || echo "  NOTE: git rm failed (file may be annexed or not tracked)"
+                git rm -f "$full_sing_path"
             else
                 echo "  NOTE: Old .sing file not tracked in git"
             fi
 
+            # Remove the Singularity recipe file (no longer needed)
+            echo "  Removing Singularity recipe file..."
+            if git ls-files --error-unmatch "$recipe_file" 2>/dev/null; then
+                git rm "$recipe_file"
+            else
+                rm "$recipe_file"
+            fi
+            echo "  Recipe file removed: $recipe_file"
+
             echo "  Done processing $sing_file"
         else
-            echo "  ERROR: Build failed for $sing_file" >&2
+            echo "  ERROR: Pull failed for $sing_file" >&2
+            exit 1
         fi
     fi
 
@@ -161,6 +201,5 @@ done
 
 echo "All done. Remember to:"
 echo "  1. Review changes with 'git status' and 'git diff'"
-echo "  2. Add new .sif files: git annex add images/**/*.sif"
-echo "  3. Commit changes: git commit -m 'Rebuild images with no runscript as .sif'"
-echo "  4. Clean up tmp directory if no longer needed: rm -rf $TMPDIR"
+echo "  2. Commit changes: git commit -m 'Convert images with no runscript to .sif via docker pull'"
+echo "  3. Clean up tmp directory if no longer needed: rm -rf $TMPDIR"
