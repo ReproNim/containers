@@ -9,7 +9,7 @@
 	image = images/bids/bids-afni-proc--0.0.2.sif
 [datalad "containers.bids-antscorticalthickness"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-antscorticalthickness--2.2.0-1.sing
+	image = images/bids/bids-antscorticalthickness--2.2.0-1.sif
 [datalad "containers.bids-baracus"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-baracus--1.1.4.sing
