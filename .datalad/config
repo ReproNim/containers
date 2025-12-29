@@ -133,7 +133,7 @@
 	image = images/bids/bids-dmriprep--0.5.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-nibabies"]
-	image = images/bids/bids-nibabies--25.2.1.sing
+	image = images/bids/bids-nibabies--25.2.1.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-nirodents"]
 	image = images/bids/bids-nirodents--0.2.1.sing
@@ -472,7 +472,7 @@
 	image = images/bids/bids-bibsnet--3.6.0.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-petdeface"]
-	image = images/bids/bids-petdeface--0.3.0.sing
+	image = images/bids/bids-petdeface--0.3.0.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mrtrix3src"]
 	image = images/neurodesk/neurodesk-mrtrix3src--latest.simg

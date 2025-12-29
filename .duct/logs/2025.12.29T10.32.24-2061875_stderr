@@ -1,0 +1,929 @@
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 10:32:58  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/29 10:33:00  info unpack layer: sha256:7b92ef21d2f905f77db23aa740f7ee4287c6e5aaf277ca238c92c2ce90dfc6e2
+2025/12/29 10:33:16  info unpack layer: sha256:9ddd4048c766384f77ba2ef44e77f08249591138d50cdcd0c31924eb92ca4fc9
+2025/12/29 10:33:16  info unpack layer: sha256:8370e082655fd484b1f7761bf2ad84ec38d7dcb9ca998a525f0bc104c63344f7
+2025/12/29 10:33:17  info unpack layer: sha256:708c26481e03d8108e4145e7104f42ff039411f941708f29aa76639bfe881602
+2025/12/29 10:33:17  info unpack layer: sha256:7dee319acc122d214644f82ea4817aad8eda02e0bd788eda813dcc84ff0ee67e
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:19  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:27  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:33:36  info unpack layer: sha256:b132ff2292bcccca4835518037800e5ad9e43b03296729e41c0c5519491c27ff
+2025/12/29 10:33:45  info unpack layer: sha256:f4034fc0e96591c03bfba0eeb546da910693aba6a88cab5afaf2754d5084a4b1
+2025/12/29 10:33:50  info unpack layer: sha256:f75447ab4259a668f4fd60de4be21b91fb1279f5308fe132481e18c75d83d942
+2025/12/29 10:33:50  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/29 10:33:50  info unpack layer: sha256:a33b55a6691215f43e2c11a03e515e826a4466234f6a5526a16fb9a9ba9d2331
+2025/12/29 10:33:50  info unpack layer: sha256:c98b6ce3728fed7ea76126ef46154fa06b690849ba8a5e88599b74beddd24ad6
+2025/12/29 10:34:54  info unpack layer: sha256:d1ff1f54f8d0316f0ad26c43639a19cf488b2385c0ec548340ba702e27ac2905
+2025/12/29 10:34:54  info unpack layer: sha256:4b1b681c96b07d0ce020866b47c1127f5034799bbb8f76f1babcc37cae81d7c2
+2025/12/29 10:34:54  info unpack layer: sha256:7dbd15f446d2f7eb923166733757db49275221d065374df31705df762d2693fe
+2025/12/29 10:34:55  info unpack layer: sha256:5c6514c10d3a3cc92b6be8f63a30250af7e601ef2628f339e923b07730d1d2a4
+2025/12/29 10:34:55  info unpack layer: sha256:bed390e534c6fc51312b565226730e5431d39150b3e4b061a92cb615d0b4a838
+2025/12/29 10:34:56  info unpack layer: sha256:14ad454f312efd6e2926bd96af2d2d041815072da503cbaeac081d1e9f287e3b
+2025/12/29 10:34:56  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 10:38:03  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/29 10:38:04  info unpack layer: sha256:2f6bc2434e5fc22bfcacdb8f163b674197b2d00de257cc04b389f7cc5d2e9155
+2025/12/29 10:38:21  info unpack layer: sha256:cf6e83299be29bc429b274763aec7354ca177733af805b8db55a9c6a5949c90e
+2025/12/29 10:38:21  info unpack layer: sha256:5197b27cc980711d90fa20f9bbb8c221770ce3eb8a86c0eaefba12cb3b9ac8c6
+2025/12/29 10:38:21  info unpack layer: sha256:6c6d232d5873d762fc6386dfee537225a67090cbbb2a9a6a6e835122b6cd37f3
+2025/12/29 10:38:21  info unpack layer: sha256:9b95927b064810a53941c682de911c42f4276f46ab0b14e0d435b6d8db0e7912
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:23  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:31  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:38:40  info unpack layer: sha256:70e932afcb23e38ef287b6a3c631b436fd63ed31aa1a2cfd543fe97e0ccfe15e
+2025/12/29 10:38:49  info unpack layer: sha256:262a027113cd78467cd4c4c7433b00f96f0f24e417e16eaec59f6e4b68c581b3
+2025/12/29 10:38:54  info unpack layer: sha256:c0ba3cfb473b1add9fd660d6d53e6f9f7ab1abf57f5c67de149fd9661fcf7426
+2025/12/29 10:38:54  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/29 10:38:54  info unpack layer: sha256:e98ae20a21c5ed472d70d1bc84d296f397d047cc522d8a6291274b4821e30710
+2025/12/29 10:38:54  info unpack layer: sha256:23d1dec0dbaede5829b2e69676823d7f4f95d46bbc55bb5cf1554f6a637dbdbf
+2025/12/29 10:39:58  info unpack layer: sha256:1c0ec60320b3b8c479adebd2440a1ad151d4eef7196a25ed00cb5a0388437c16
+2025/12/29 10:39:58  info unpack layer: sha256:3ada832f9d82795ab7d2c5ebd0ad3b1c59343108967d6bc9288dba6b95b730c8
+2025/12/29 10:39:58  info unpack layer: sha256:c10a9bf541f410117cb41598be57980ee1ad984d1e6b4c219799cc9be5c684a4
+2025/12/29 10:40:00  info unpack layer: sha256:23aef1d453b06b4c4e29674814435668b51f8c31124fb567ce160c16eddbbc20
+2025/12/29 10:40:00  info unpack layer: sha256:7cb05145c91487f93cdad206b522cb147c91e45b55996799d61c7fe9dcda788c
+2025/12/29 10:40:00  info unpack layer: sha256:049f0e6a769b53bef6676e0d60cc74ee0060e8024bed79722b79b087e6f2a6a6
+2025/12/29 10:40:00  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 10:49:14  info unpack layer: sha256:b2b31b28ee3c96e96195c754f8679f690db4b18e475682d716122016ef056f39
+2025/12/29 10:49:17  info unpack layer: sha256:c3cc7b6f04730c072f8b292917e0d95bb886096a2b2b1781196170965161cd27
+2025/12/29 10:49:18  info unpack layer: sha256:2112e5e7c3ff699043b282f1ff24d3ef185c080c28846f1d7acc5ccf650bc13d
+2025/12/29 10:49:22  info unpack layer: sha256:af247aac076473044d24960a352a8ec6f154cf0a28f4fbf35fe5d43b52687ba2
+2025/12/29 10:49:30  info unpack layer: sha256:6f47d6e914288e17a55b4aa7e3b7729d4af842a61d64e4739e83cac341ca128e
+2025/12/29 10:49:30  info unpack layer: sha256:0ded565f374640b5419d27084a28e0b42ca49936d78d908e5dc8cc1ca8e4414e
+2025/12/29 10:49:32  info unpack layer: sha256:c03fa7c846dfee5a49b8537da88567f06fc403bb2294108212d2c69aabd271d2
+2025/12/29 10:49:32  info unpack layer: sha256:1ee7cb9a6420a5c571f3eeb55d6f533ed8254a79898d70f1707b44cc22aafd74
+2025/12/29 10:49:32  info unpack layer: sha256:9c67ab51882d42878d7a1f84bd3a2a04295dec7f249e83a7b9a6de36f78ae651
+2025/12/29 10:49:32  info unpack layer: sha256:ab22728b78ebbc7c0720159f75de08d727e0ad2afa9332a96916b0e9d1648b76
+2025/12/29 10:49:37  info unpack layer: sha256:7fb148894e16dfca3bd7e83315ae4ecf9c5ceee4bd9b2ab954791a067bf1b514
+2025/12/29 10:49:37  info unpack layer: sha256:18103a57c5c2de50e288d019804b43246b52cf25cb665b7d9f3189db51d9acac
+2025/12/29 10:49:37  info unpack layer: sha256:891057fb2b653fb36b0c5ffd3a852546e4012145c42488bd19eb0e7f7c93da4f
+2025/12/29 10:49:37  info unpack layer: sha256:fdceb11c1876d8af22ea04c6abf28fbb20c08e0b39e5857706443c9278ce33bf
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:28  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libBLT.2.dylib} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libBLT.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libBLTlite.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libtcl.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libtcl8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libtix.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libtix8.1.8.3.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libtk.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libtk8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:29  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 10:50:30  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:01:34  info unpack layer: sha256:7b034a0da041e5bca594d59a3af44922af47e398f55130eeab781f461d57151d
+2025/12/29 11:01:34  info unpack layer: sha256:1b6b17613c2cda708cdc43e3930752110cb440a2880fb17e3e35e941efb2e428
+2025/12/29 11:01:34  info unpack layer: sha256:d911a24363470d5143f48f6e3a02d02be8550e35e89e9c0ff850be9d98ca4a1c
+2025/12/29 11:01:34  info unpack layer: sha256:bd5ec1367a5a086dcd3f66654995e180c96bd3a1253536e779be560696ca2d03
+2025/12/29 11:01:34  info unpack layer: sha256:4e8d1a9d05249f2b9635298cfcf998a6d237398d5082dd4a099f29006e558524
+2025/12/29 11:01:34  info unpack layer: sha256:ead8feb05e17106c553b4b2e47187896c3f5384255975aa5e717f40321fefe15
+2025/12/29 11:03:08  info unpack layer: sha256:e46ea5992c97ea939692bfcca1be9a71f819bc3ecc9205f9ef571f971caf2f9c
+2025/12/29 11:03:08  info unpack layer: sha256:99f94e2aad2cd0bba8fe22a65f49370596838a666be5dc680182ef23db454c73
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 11:33:22  info unpack layer: sha256:3e6b9d1a95114e19f12262a4e8a59ad1d1a10ca7b82108adcf0605a200294964
+2025/12/29 11:33:25  info unpack layer: sha256:37927ed901b1b2608b72796c6881bf645480268eca4ac9a37b9219e050bb4d84
+2025/12/29 11:33:26  info unpack layer: sha256:79b2f47ad4443652b9b5cc81a95ede249fd976310efdbee159f29638783778c0
+2025/12/29 11:33:29  info unpack layer: sha256:e23f099911d692f62b851cf49a1e93294288a115f5cd2d014180e4d3684d34ab
+2025/12/29 11:33:37  info unpack layer: sha256:04db4a06a7d0f1dc9d567254c4b07b3d4198f2bd845af42fef40d959768d86d8
+2025/12/29 11:33:38  info unpack layer: sha256:589d6f9b4526609dff29ade929892e8eddc72739af3e8060075609c85d257fb0
+2025/12/29 11:33:39  info unpack layer: sha256:2256a6b212b5890e8a54ca20424adaa4a68c61372867e7dd33015ce21bb5e729
+2025/12/29 11:33:39  info unpack layer: sha256:f8fcc6f81cf8f7125ca037dce77713313aa9a8879c9f0d5569b56aef0611294b
+2025/12/29 11:33:39  info unpack layer: sha256:cb9dcd9d6d07471483f08c91da78edc91dbb6aa2b60a145d4d8a56e7f3ae997f
+2025/12/29 11:33:39  info unpack layer: sha256:2cbbb6c6e619b280fa3de3a2b23799344a898ed31134c0bcadb928fff158e50c
+2025/12/29 11:33:44  info unpack layer: sha256:989f82fbaae10e5dc7a47e8b64f71f2f73f28c4fe796d71f995c4c1cde536e31
+2025/12/29 11:33:44  info unpack layer: sha256:5fe7d96897e1215e80a1565071ad5f97898e69ccc16c47732b1a31c46e39b896
+2025/12/29 11:33:44  info unpack layer: sha256:d2c2fd30d2298c8853beb67cbd5e91a687a6c743cacea60399f07bb4ed9ec787
+2025/12/29 11:33:44  info unpack layer: sha256:6c242b22c6cf29496e62158d46af3c08f8585bdc13f586b9da181998f23e5ca9
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:35  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libBLT.2.dylib} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libBLT.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libBLTlite.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libtcl.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libtcl8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libtix.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libtix8.1.8.3.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libtk.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libtk8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:36  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:34:37  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 11:45:56  info unpack layer: sha256:f1faf4363bfdfc007c685a4c3be65a1d4212d160559a1411c8fe6a801a9438e4
+2025/12/29 11:45:56  info unpack layer: sha256:18f7b638dd5e74c01bb0ba40fa8e74af4c153cf6cbbfb2c0c3c3e21a3178e381
+2025/12/29 11:45:56  info unpack layer: sha256:6d249b695c00f303b3b2a75c6233530d9ad026c7c2bb288b31a323761887a50b
+2025/12/29 11:45:56  info unpack layer: sha256:f2452f094185aac9d1ecb77d000fd26c79b62dd3f513488accb1fdc6816eadb9
+2025/12/29 11:45:56  info unpack layer: sha256:f023e33edfc39e333fb3bc6c6984f15759774363b93d9993219e96980a1c2f91
+2025/12/29 11:45:56  info unpack layer: sha256:e94465950479c42c3d8406d8ca6b954b5d9b88fee961f481477a0b1a43cd8b8d
+2025/12/29 11:46:43  info unpack layer: sha256:8e25ee20350603c5972d78e1b09586a46c9c20e74e2ffb4c43f3073b095238c3
+2025/12/29 11:46:43  info unpack layer: sha256:dee19010ce3be4c2ab518fdf3f4d9734265d565add412a49d6060a7170a6d3af
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 12:21:23  info unpack layer: sha256:ebed137c7c18cb1906fb8314eabc10611ddf49a281f8c1b5eab987a7137f749f
+2025/12/29 12:21:26  info unpack layer: sha256:c2e76af9483f2d17a3e370639403df2c53a3da1480d533116a8694cd91f15d5a
+2025/12/29 12:21:27  info unpack layer: sha256:37f838b71c6b82c581b7543a313255b8c99c23cc9d96c1ad6f9f5f208c942553
+2025/12/29 12:21:30  info unpack layer: sha256:873a4c80287477653c01b20948fc34bb1bacf0f826bcc2ddc3bd2fe25b342d45
+2025/12/29 12:21:38  info unpack layer: sha256:86a35ac8b270ca99af023e0ff50e0672c9df7e779fa4796d3706986d07d887bd
+2025/12/29 12:21:38  info unpack layer: sha256:d66dc9ad63eaa47f27dd94917491a2d7bd77aa6cf7a84dd341dbbcbe563ca7cc
+2025/12/29 12:21:40  info unpack layer: sha256:95c430539c3de38c84abb47a72004fd7aed816794dbd8e2cae41a9e2ab2ace24
+2025/12/29 12:21:40  info unpack layer: sha256:2d9d50e23ff7882ea6315ecdb821da38713bbd612fe9c06f515ed5083ff1fd7d
+2025/12/29 12:21:40  info unpack layer: sha256:a54f1bcdc1216e1023d814538200fc2667833035e9cb44d2dc3c8f0dc6797e0f
+2025/12/29 12:21:40  info unpack layer: sha256:683b914e6e6015b4ca40c7a92b28ad16c6160233d18143bd699e0c9fb50b973c
+2025/12/29 12:21:45  info unpack layer: sha256:24329264a2e18295e3a68b838c4dbf02d5bdf5693c34bf3ee404d6020a92976d
+2025/12/29 12:21:45  info unpack layer: sha256:d3e310695616e4a16eb4ccb2585e145c40f056c95f09805f0968b48bc4ca8e34
+2025/12/29 12:21:45  info unpack layer: sha256:d8e773b7e65cbbdf89b80dff4cdcf5ef75a04571dd555a3ee049c2d187bee273
+2025/12/29 12:21:45  info unpack layer: sha256:6df2061a4b25a23a8ce041d4d50acd702b9d9bd09b6c72a2debd8645a2128f16
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:36  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libBLT.2.dylib} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libBLT.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libBLTlite.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libtcl.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libtcl8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libtix.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libtix8.1.8.3.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libtk.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libtk8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:22:37  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 12:33:46  info unpack layer: sha256:a362bcc86052dbc9087e4883ac2435b2c1649757d916614d788646e38e5b16d9
+2025/12/29 12:33:46  info unpack layer: sha256:ad94d2567a7e38552ec2d9c752f580982fc3f245df47033bb77c4cbad5249313
+2025/12/29 12:33:46  info unpack layer: sha256:a4c54a9658171229b4c3d9345d7bf5c1a830ee9a77df2edb71b6255ce2be7b06
+2025/12/29 12:33:46  info unpack layer: sha256:fc33afb70e6a663054bda143f16ca2d6af730f417b845aa167d3e2362e1dd767
+2025/12/29 12:33:46  info unpack layer: sha256:393f1fe3dfeb0782c2af3ff7854fc531ee20d052874f3738699843739745f0de
+2025/12/29 12:33:46  info unpack layer: sha256:be8ae1ee9d217d295d7ac5abe70dc11b73217fc6085915703f7362447adf55fd
+2025/12/29 12:34:52  info unpack layer: sha256:0069cc60971a4016dc2dcf02975c0f5c182de92be00fd9f139c3596615da1cff
+2025/12/29 12:34:52  info unpack layer: sha256:12c068f23319b7642737acdf129acf6cab5beb24018e1ac9283989bae198baa7
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 13:12:07  info unpack layer: sha256:ebed137c7c18cb1906fb8314eabc10611ddf49a281f8c1b5eab987a7137f749f
+2025/12/29 13:12:10  info unpack layer: sha256:c2e76af9483f2d17a3e370639403df2c53a3da1480d533116a8694cd91f15d5a
+2025/12/29 13:12:11  info unpack layer: sha256:37f838b71c6b82c581b7543a313255b8c99c23cc9d96c1ad6f9f5f208c942553
+2025/12/29 13:12:14  info unpack layer: sha256:873a4c80287477653c01b20948fc34bb1bacf0f826bcc2ddc3bd2fe25b342d45
+2025/12/29 13:12:22  info unpack layer: sha256:86a35ac8b270ca99af023e0ff50e0672c9df7e779fa4796d3706986d07d887bd
+2025/12/29 13:12:22  info unpack layer: sha256:d66dc9ad63eaa47f27dd94917491a2d7bd77aa6cf7a84dd341dbbcbe563ca7cc
+2025/12/29 13:12:24  info unpack layer: sha256:95c430539c3de38c84abb47a72004fd7aed816794dbd8e2cae41a9e2ab2ace24
+2025/12/29 13:12:24  info unpack layer: sha256:0e61ecf87f1ff4d9e7a52a5f89450c40cfc306aa41548aaed68f89bc9bf0140b
+2025/12/29 13:12:24  info unpack layer: sha256:349a862fff0d861db51709ce2ccfffd7a298cc6c6d8a20668e68f456d413f40b
+2025/12/29 13:12:24  info unpack layer: sha256:0dcbe77f460cc77da48bfcac976f1a52e575fff0cc763421c595199f764db459
+2025/12/29 13:12:29  info unpack layer: sha256:0804d5197f8bb346ff1d8f98b6131d90d0daccb137e9972b3b60c116e1d77e9d
+2025/12/29 13:12:29  info unpack layer: sha256:6355ffba7cdb99d201b639bb848d5777d77e9f77b0c23edc0d6de78e3de2ad4d
+2025/12/29 13:12:29  info unpack layer: sha256:1fcf177d49946edcbb27c5979077dc740d7c32760eaca9fd5d31d7769f70b1bb
+2025/12/29 13:12:29  info unpack layer: sha256:3438c7ccbb8cf70d9e3216e0faa6133c288b360fe6dc13cab2aeaf90c70b9999
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DAnimation.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DCore.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DExtras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DInput.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DLogic.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DQuickScene2D.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt53DRender.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Concurrent.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Core.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5DBus.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFSDeviceIntegration.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5EglFsKmsSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gamepad.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Gui.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Multimedia.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5MultimediaQuick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Network.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5NetworkAuth.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5OpenGL.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5PrintSupport.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:20  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Qml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Quick.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Sql.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Test.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5VirtualKeyboard.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Widgets.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5X11Extras.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XcbQpa.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5Xml.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/qt/lib/libQt5XmlPatterns.so.5.12} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libBLT.2.dylib} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libBLT.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libBLTlite.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libMapReduceMPI.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libmpistubs.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libtcl.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libtcl8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libtix.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libtix8.1.8.3.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libtk.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libtk8.4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkCommon.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkCommonTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkDICOMParser.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFiltering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGenericFilteringTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphics.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkGraphicsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkHybrid.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkHybridTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkIO.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:21  warn rootless{opt/freesurfer/lib/tktools/libvtkIOTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkImaging.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkImagingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkNetCDF.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRendering.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkVolumeRenderingTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgets.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkWidgetsTCL.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkalglib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkexoIIc.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkftgl.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtklibxml2.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkmetaio.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkpng.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkproj4.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtksqlite.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtksys.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkverdict.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:13:22  warn rootless{opt/freesurfer/lib/tktools/libvtkzlib.so.5.6} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/29 13:23:21  info unpack layer: sha256:33a61bc0cb960066045973e34b5b147b1d819d32f5d0db10251f8ad11cbf63c5
+2025/12/29 13:23:21  info unpack layer: sha256:98e97cab2a17298b2187bf8324d29ae2da7d715aab85801aa8c8e392c30cfd60
+2025/12/29 13:23:21  info unpack layer: sha256:fa1e286a3735275c61a017f0d7c959afecf610c2480e3467b8e8ff92eef76c0d
+2025/12/29 13:23:21  info unpack layer: sha256:14890fe79f14b20f0f498102e6f5477888fee49c66f229cd370137fa30d03593
+2025/12/29 13:23:21  info unpack layer: sha256:7ab5fd4be9e5060d3b4e01b4978dddd01b29e7643f11e5feb5b102f7481abc83
+2025/12/29 13:23:26  info unpack layer: sha256:db20d7e7795cb299eb53669c5c61b6e6e2c51b7201081e2931c75ddf400c76f6
+2025/12/29 13:24:28  info unpack layer: sha256:6548c233ee338ca1634678846f606a27c6db39a362c48a1a7dda13bfc2804b00
+2025/12/29 13:24:28  info unpack layer: sha256:fc8b1b7907d6a6b882e3536b26dfe86503d6bc906bd080d39b1770155096a063
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/29 13:59:08  info unpack layer: sha256:a404e54162968593b8d92b571f3cdd673e4c9eab5d9be28d7c494595c0aa6682
+2025/12/29 13:59:09  info unpack layer: sha256:391d07dd0009f93d13fb7b13dab2078ad0686953b6b398f66688c7204466df48
+2025/12/29 13:59:09  info unpack layer: sha256:cb7a4dc5cae35387c4323a9d9855171616e61cd95711ce2b411ce03a03f349e6
+2025/12/29 13:59:10  info unpack layer: sha256:3f77a3e2807d8cb8690b749c26d19e6e462743141b750330d311916f3c4857e9
+2025/12/29 13:59:10  info unpack layer: sha256:0f0ed9680ff1f69ce856414b2c9cd4482d37b24147c07821faba7ae51d862a6d
+2025/12/29 13:59:10  info unpack layer: sha256:e2250e4b9e6414e7df5d1f97abaa9fdfb5b5a97cef526f9bdf91b6623b076b6a
+2025/12/29 13:59:41  info unpack layer: sha256:9cf40c59065f805dd01d0a204a6817daa6acf7034abaf92e9d950c73d7b4cb11
+2025/12/29 13:59:41  info unpack layer: sha256:c5e52760f1c70eacb3e607638a8f776cd8655bf52a5f8615678bfd807c6acfca
+2025/12/29 13:59:44  info unpack layer: sha256:b9fd34d8863bf1713fafe94f686f62e574c2eb6e9f0390d0248f8652f0f5eeb0
+2025/12/29 13:59:45  info unpack layer: sha256:78769ee1b3578fa3f9970ee88f5b13ece894a44bb09bd4a8739061960dee7106
+2025/12/29 13:59:47  info unpack layer: sha256:8312abaef3e995e9b59152b193274ec1cd7e141ac21f55ba0a5235610b87a934
+2025/12/29 13:59:57  info unpack layer: sha256:9a9345c90f3c91a4d5328e4fe6b45e2d52e6ca3aae538c8a7b9ee0edf9633520
+2025/12/29 13:59:57  info unpack layer: sha256:b0d97f560a7d30fce0381f12b8e69571c1cde95b91acb612e65c6a42d0287fdd
+2025/12/29 13:59:58  info unpack layer: sha256:074a5a00f2af093d81a34f8ad1228455c106baaeb0f7818e75e7f00f6e2963e3
+2025/12/29 13:59:59  info unpack layer: sha256:3587f39d96fa2eed42216bcd4dff9bb1818b3e3ca783814dfe8fa631e3bf4ec3
+2025/12/29 13:59:59  info unpack layer: sha256:f28f949dd2fcb50be21f3f6c621df27a990d437f019ab35009db6fdc5fd010db
+2025/12/29 14:00:04  info unpack layer: sha256:6cfbca7b2e1ec144ad56cd184a52f892fdd810364295a731e2a72bc4b11f8d56
+2025/12/29 14:00:04  info unpack layer: sha256:234597a902d5e6f8a0eff5a7d6be3dd87a2ac8ba27a52e5398db444a01986668
+2025/12/29 14:00:04  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/29 14:00:04  info unpack layer: sha256:d862b51f5ac9a18095a7ec678e85d6511edfc94f9ddd081f47447482de743760
+2025/12/29 14:01:55  info unpack layer: sha256:762bb6f6d46c5e657759a7a6c6b5546765e5ed80520b82677698f650ea701ae8
+2025/12/29 14:01:58  info unpack layer: sha256:d3d50361eebb7a733aa2599631e5127ff2b945a34d83954dc199880ec3b678a2
+2025/12/29 14:02:02  info unpack layer: sha256:96473caed059b1774724e5353cd2e879fd8c9791a5a53402e1cbb821894b57f3
+2025/12/29 14:02:04  info unpack layer: sha256:a3b648bab22a42192a95865b2590d0cadc1d91b32e082cd1ffee24f18213bff7
+2025/12/29 14:02:13  info unpack layer: sha256:d3645d253dfdb3e60fdca8963a465c5a1284d018abbd0505883ee5cb20ac52cc
+2025/12/29 14:02:14  info unpack layer: sha256:e08086c4b02e5b23c4189f16a97c57779e6c017f0097649f5073b61bec9c1549
+2025/12/29 14:02:22  info unpack layer: sha256:b10fb511f1eda12ffebc886376a89ae07e0374d2f7dda36d682e9ebec0cf4789
+2025/12/29 14:02:24  info unpack layer: sha256:30e724f5c7ef63225720f726d3c118a34c69866943b22b2b483c1ae5e56bf2ab
+2025/12/29 14:02:26  info unpack layer: sha256:0df894ba7bcd995ff4e16de2cd82728b1685da401215c91aaf7189294e8bf82b
+2025/12/29 14:02:26  info unpack layer: sha256:152605c65f2fe36fdd7a1d30567d94b6c03ea6a9b51dc41f1c468df37219f528
+2025/12/29 14:02:27  info unpack layer: sha256:de2102865535e665073e49b8724716702f6b53ec06ff29f109938f65df1a18e9
+2025/12/29 14:02:27  info unpack layer: sha256:8f434876df8581e46f1a651c0be65b6275fd49f63e3d19647c391c8a5f7cdd2c
+2025/12/29 14:02:27  info unpack layer: sha256:4cfdcd4bceefbecf04749930371ad6714d58aca81be7fca6bf10d8c5a736f503
+2025/12/29 14:02:28  info unpack layer: sha256:7e60ad74120338116ddf9c930b766437637ce38289de651787785ecd7387c9f4
+2025/12/29 14:02:30  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/29 14:02:30  info unpack layer: sha256:b675c10dc9825fb05bcfd4eb5318c9a4acd7840d43ceb19e751252336ae08111
+2025/12/29 14:02:30  info unpack layer: sha256:1a81b03ca1b80b8ee8bae93f3c2f86c18f96f605fde2dabcb26a037054be9836
+2025/12/29 14:02:30  info unpack layer: sha256:304e93661cd77d2878c987cd1a11646e6732a5c8a730f371b8619cd5de1b914d
+2025/12/29 14:02:31  info unpack layer: sha256:91587503bac8febcf9953fc14fe162bff079b67cca47b12d767cbfb2a182a6fa
+2025/12/29 14:02:31  info unpack layer: sha256:b254863b69bab3148a2b750879b0c56aa7a5066369b544e4bba5c6b8c9491e98
+2025/12/29 14:02:31  info unpack layer: sha256:2d9fda8fc1b2fc6b4775c9427c6569124240c73354d0f40e405930e09b07a578
+2025/12/29 14:02:31  info unpack layer: sha256:632f14bef7338423ca7463f89c4500912d9a265676de8a629ce4cc0027d7fdf5
+2025/12/29 14:02:31  info unpack layer: sha256:f32f2cdd63ab26f2caee1752ad3e50b521078a722cda45458684d7e4991d5a16
+2025/12/29 14:02:31  info unpack layer: sha256:fadc2449c48b7f9384943038995d18785d7777e5f1639a2e6556f67693a3f932
+2025/12/29 14:02:31  info unpack layer: sha256:41a9b9ae6616fb9cd08d61c53a342c2fb2addfc7e1b4026dda4b3465e8784b5f
+2025/12/29 14:02:31  info unpack layer: sha256:a581f32d9f2f0e3c0750d37290102e3d55bee3c4fd5b6c40d3e9305d5e39d3a8
+2025/12/29 14:02:31  info unpack layer: sha256:b078b6cc04848dc885cce35128ba8b54b6bd6f3b0d4879f485cb771fe7c4984b
+2025/12/29 14:02:31  info unpack layer: sha256:35dde6df494c75bd2ed8da7fd659289e25fd4fa61ad52ddf664e2f526ff44985
+2025/12/29 14:02:31  info unpack layer: sha256:33fdf7e0b0b53dbed2c03f93e43e6fbc1cde0dc04206f7eac084e6ce78ced7ce
+2025/12/29 14:02:32  info unpack layer: sha256:a459911f790013d055fdf6870c3e6b3b16c6b557740ad072deaa4a743d8808ef
+2025/12/29 14:02:32  info unpack layer: sha256:2dfe708e548ec8725fa6649d6520212a95adbc8cfb318a1d96aa5028981c7005
+2025/12/29 14:02:33  info unpack layer: sha256:1d8bb5b3b5e29199b3aba2c799c1bd195ad15e1bf5908423322532fbea39eb5a
+2025/12/29 14:02:39  info unpack layer: sha256:ad16741d1616744296ad98d7562a89952564fb34fb20293b2faadd37ee2ab643
+2025/12/29 14:02:39  info unpack layer: sha256:5e938bd3d8c9848700d59b132b2a0ea20c2af60c030e50568fe259c4ff628707
+2025/12/29 14:02:43  info unpack layer: sha256:16508425d532bfc151d9e476b23979c6f1ad8a456edb0185872794daac993b39
+2025/12/29 14:02:43  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...

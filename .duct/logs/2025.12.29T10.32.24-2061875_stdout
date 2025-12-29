@@ -1,0 +1,209 @@
+Processing: images/bids/bids-mrtrix3-connectome--0.6.0.sing
+  -> New SIF: images/bids/bids-mrtrix3-connectome--0.6.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-mrtrix3-connectome--0.6.0
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-mrtrix3-connectome--0.6.0 - skipping
+Processing: images/bids/bids-nibabies--25.0.0.sing
+  -> New SIF: images/bids/bids-nibabies--25.0.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.0
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.0 - skipping
+Processing: images/bids/bids-nibabies--25.0.1.sing
+  -> New SIF: images/bids/bids-nibabies--25.0.1.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.1
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.1 - skipping
+Processing: images/bids/bids-nibabies--25.0.2.sing
+  -> New SIF: images/bids/bids-nibabies--25.0.2.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.2
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.2 - skipping
+Processing: images/bids/bids-nibabies--25.1.0.sing
+  -> New SIF: images/bids/bids-nibabies--25.1.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.0
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.0 - skipping
+Processing: images/bids/bids-nibabies--25.1.1.sing
+  -> New SIF: images/bids/bids-nibabies--25.1.1.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.1
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.1 - skipping
+Processing: images/bids/bids-nibabies--25.1.2.sing
+  -> New SIF: images/bids/bids-nibabies--25.1.2.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.2
+  WARNING: Recipe file not found: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.2 - skipping
+Processing: images/bids/bids-nibabies--25.2.0.sing
+  -> New SIF: images/bids/bids-nibabies--25.2.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.2.0
+  -> Docker URI: docker://nipreps/nibabies:25.2.0
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.2.0.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.2.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.2.0.sif 
+  lastchanged=2025-12-29@15-37-13
+  original-uri=docker://nipreps/nibabies:25.2.0
+  original-uri-lastchanged=2025-12-29@15-37-13
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.2.0
+  NOTE: images/bids/bids-nibabies--25.2.0.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.2.0.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.2.0
+rm 'images/bids/Singularity.bids-nibabies--25.2.0'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.2.0
+  Done processing images/bids/bids-nibabies--25.2.0.sing
+
+Processing: images/bids/bids-nibabies--25.2.1.sing
+  -> New SIF: images/bids/bids-nibabies--25.2.1.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.2.1
+  -> Docker URI: docker://nipreps/nibabies:25.2.1
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.2.1.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.2.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.2.1.sif 
+  lastchanged=2025-12-29@15-42-12
+  original-uri=docker://nipreps/nibabies:25.2.1
+  original-uri-lastchanged=2025-12-29@15-42-12
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.2.1
+  Updating .datalad/config...
+  Config updated: images/bids/bids-nibabies--25.2.1.sing -> images/bids/bids-nibabies--25.2.1.sif
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.2.1.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.2.1
+rm 'images/bids/Singularity.bids-nibabies--25.2.1'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.2.1
+  Done processing images/bids/bids-nibabies--25.2.1.sing
+
+Processing: images/bids/bids-petdeface--0.2.1a.sing
+  -> New SIF: images/bids/bids-petdeface--0.2.1a.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.2.1a
+  -> Docker URI: docker://openneuropet/petdeface:0.2.1a
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-petdeface--0.2.1a.sif
+  Setting git-annex metadata...
+add images/bids/bids-petdeface--0.2.1a.sif ok
+(recording state in git...)
+metadata images/bids/bids-petdeface--0.2.1a.sif 
+  lastchanged=2025-12-29@16-30-39
+  original-uri=docker://openneuropet/petdeface:0.2.1a
+  original-uri-lastchanged=2025-12-29@16-30-39
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://openneuropet/petdeface:0.2.1a
+  NOTE: images/bids/bids-petdeface--0.2.1a.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-petdeface--0.2.1a.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-petdeface--0.2.1a
+rm 'images/bids/Singularity.bids-petdeface--0.2.1a'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.2.1a
+  Done processing images/bids/bids-petdeface--0.2.1a.sing
+
+Processing: images/bids/bids-petdeface--0.2.2.sing
+  -> New SIF: images/bids/bids-petdeface--0.2.2.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.2.2
+  -> Docker URI: docker://openneuropet/petdeface:0.2.2
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-petdeface--0.2.2.sif
+  Setting git-annex metadata...
+add images/bids/bids-petdeface--0.2.2.sif ok
+(recording state in git...)
+metadata images/bids/bids-petdeface--0.2.2.sif 
+  lastchanged=2025-12-29@17-18-43
+  original-uri=docker://openneuropet/petdeface:0.2.2
+  original-uri-lastchanged=2025-12-29@17-18-43
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://openneuropet/petdeface:0.2.2
+  NOTE: images/bids/bids-petdeface--0.2.2.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-petdeface--0.2.2.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-petdeface--0.2.2
+rm 'images/bids/Singularity.bids-petdeface--0.2.2'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.2.2
+  Done processing images/bids/bids-petdeface--0.2.2.sing
+
+Processing: images/bids/bids-petdeface--0.2.3.sing
+  -> New SIF: images/bids/bids-petdeface--0.2.3.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.2.3
+  -> Docker URI: docker://openneuropet/petdeface:0.2.3
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-petdeface--0.2.3.sif
+  Setting git-annex metadata...
+add images/bids/bids-petdeface--0.2.3.sif ok
+(recording state in git...)
+metadata images/bids/bids-petdeface--0.2.3.sif 
+  lastchanged=2025-12-29@18-08-59
+  original-uri=docker://openneuropet/petdeface:0.2.3
+  original-uri-lastchanged=2025-12-29@18-08-59
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://openneuropet/petdeface:0.2.3
+  NOTE: images/bids/bids-petdeface--0.2.3.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-petdeface--0.2.3.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-petdeface--0.2.3
+rm 'images/bids/Singularity.bids-petdeface--0.2.3'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.2.3
+  Done processing images/bids/bids-petdeface--0.2.3.sing
+
+Processing: images/bids/bids-petdeface--0.3.0.sing
+  -> New SIF: images/bids/bids-petdeface--0.3.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.3.0
+  -> Docker URI: docker://openneuropet/petdeface:0.3.0
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-petdeface--0.3.0.sif
+  Setting git-annex metadata...
+add images/bids/bids-petdeface--0.3.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-petdeface--0.3.0.sif 
+  lastchanged=2025-12-29@18-57-34
+  original-uri=docker://openneuropet/petdeface:0.3.0
+  original-uri-lastchanged=2025-12-29@18-57-34
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://openneuropet/petdeface:0.3.0
+  Updating .datalad/config...
+  Config updated: images/bids/bids-petdeface--0.3.0.sing -> images/bids/bids-petdeface--0.3.0.sif
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-petdeface--0.3.0.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-petdeface--0.3.0
+rm 'images/bids/Singularity.bids-petdeface--0.3.0'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-petdeface--0.3.0
+  Done processing images/bids/bids-petdeface--0.3.0.sing
+
+Processing: images/bids/bids-qsirecon--1.0.0.sing
+  -> New SIF: images/bids/bids-qsirecon--1.0.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-qsirecon--1.0.0
+  -> Docker URI: docker://pennlinc/qsirecon:1.0.0
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-qsirecon--1.0.0.sif
+  Setting git-annex metadata...
+add images/bids/bids-qsirecon--1.0.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-qsirecon--1.0.0.sif 
+  lastchanged=2025-12-29@19-15-10
+  original-uri=docker://pennlinc/qsirecon:1.0.0
+  original-uri-lastchanged=2025-12-29@19-15-10
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://pennlinc/qsirecon:1.0.0
+  NOTE: images/bids/bids-qsirecon--1.0.0.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-qsirecon--1.0.0.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-qsirecon--1.0.0
+rm 'images/bids/Singularity.bids-qsirecon--1.0.0'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-qsirecon--1.0.0
+  Done processing images/bids/bids-qsirecon--1.0.0.sing
+
+All done. Remember to:
+  1. Review changes with 'git status' and 'git diff'
+  2. Commit changes: git commit -m 'Convert images with no runscript to .sif via docker pull'
+  3. Clean up tmp directory if no longer needed: rm -rf /home/yoh/proj/repronim/containers/tmp
