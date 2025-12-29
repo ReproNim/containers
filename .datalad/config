@@ -12,7 +12,7 @@
 	image = images/bids/bids-antscorticalthickness--2.2.0-1.sif
 [datalad "containers.bids-baracus"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-baracus--1.1.4.sing
+	image = images/bids/bids-baracus--1.1.4.sif
 [datalad "containers.bids-brainiak-srm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-brainiak-srm--latest.sing
