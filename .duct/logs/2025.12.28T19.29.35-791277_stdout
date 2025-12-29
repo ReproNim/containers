@@ -1,0 +1,181 @@
+Processing: images/bids/bids-mrtrix3-connectome--0.6.0.sing
+  -> New SIF: images/bids/bids-mrtrix3-connectome--0.6.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-mrtrix3-connectome--0.6.0
+  -> Docker URI: docker://bids/mrtrix3_connectome:0.6.0
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-mrtrix3-connectome--0.6.0.sif
+  Setting git-annex metadata...
+add images/bids/bids-mrtrix3-connectome--0.6.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-mrtrix3-connectome--0.6.0.sif 
+  lastchanged=2025-12-29@00-51-07
+  original-uri=docker://bids/mrtrix3_connectome:0.6.0
+  original-uri-lastchanged=2025-12-29@00-51-07
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://bids/mrtrix3_connectome:0.6.0
+  Updating .datalad/config...
+  Config updated: images/bids/bids-mrtrix3-connectome--0.6.0.sing -> images/bids/bids-mrtrix3-connectome--0.6.0.sif
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-mrtrix3-connectome--0.6.0.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-mrtrix3-connectome--0.6.0
+rm 'images/bids/Singularity.bids-mrtrix3-connectome--0.6.0'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-mrtrix3-connectome--0.6.0
+  Done processing images/bids/bids-mrtrix3-connectome--0.6.0.sing
+
+Processing: images/bids/bids-nibabies--25.0.0.sing
+  -> New SIF: images/bids/bids-nibabies--25.0.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.0
+  -> Docker URI: docker://nipreps/nibabies:25.0.0
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.0.0.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.0.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.0.0.sif 
+  lastchanged=2025-12-29@01-49-12
+  original-uri=docker://nipreps/nibabies:25.0.0
+  original-uri-lastchanged=2025-12-29@01-49-12
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.0.0
+  NOTE: images/bids/bids-nibabies--25.0.0.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.0.0.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.0.0
+rm 'images/bids/Singularity.bids-nibabies--25.0.0'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.0
+  Done processing images/bids/bids-nibabies--25.0.0.sing
+
+Processing: images/bids/bids-nibabies--25.0.1.sing
+  -> New SIF: images/bids/bids-nibabies--25.0.1.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.1
+  -> Docker URI: docker://nipreps/nibabies:25.0.1
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.0.1.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.0.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.0.1.sif 
+  lastchanged=2025-12-29@02-47-04
+  original-uri=docker://nipreps/nibabies:25.0.1
+  original-uri-lastchanged=2025-12-29@02-47-04
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.0.1
+  NOTE: images/bids/bids-nibabies--25.0.1.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.0.1.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.0.1
+rm 'images/bids/Singularity.bids-nibabies--25.0.1'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.1
+  Done processing images/bids/bids-nibabies--25.0.1.sing
+
+Processing: images/bids/bids-nibabies--25.0.2.sing
+  -> New SIF: images/bids/bids-nibabies--25.0.2.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.2
+  -> Docker URI: docker://nipreps/nibabies:25.0.2
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.0.2.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.0.2.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.0.2.sif 
+  lastchanged=2025-12-29@03-43-13
+  original-uri=docker://nipreps/nibabies:25.0.2
+  original-uri-lastchanged=2025-12-29@03-43-13
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.0.2
+  NOTE: images/bids/bids-nibabies--25.0.2.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.0.2.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.0.2
+rm 'images/bids/Singularity.bids-nibabies--25.0.2'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.0.2
+  Done processing images/bids/bids-nibabies--25.0.2.sing
+
+Processing: images/bids/bids-nibabies--25.1.0.sing
+  -> New SIF: images/bids/bids-nibabies--25.1.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.0
+  -> Docker URI: docker://nipreps/nibabies:25.1.0
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.1.0.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.1.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.1.0.sif 
+  lastchanged=2025-12-29@03-56-50
+  original-uri=docker://nipreps/nibabies:25.1.0
+  original-uri-lastchanged=2025-12-29@03-56-50
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.1.0
+  NOTE: images/bids/bids-nibabies--25.1.0.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.1.0.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.1.0
+rm 'images/bids/Singularity.bids-nibabies--25.1.0'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.0
+  Done processing images/bids/bids-nibabies--25.1.0.sing
+
+Processing: images/bids/bids-nibabies--25.1.1.sing
+  -> New SIF: images/bids/bids-nibabies--25.1.1.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.1
+  -> Docker URI: docker://nipreps/nibabies:25.1.1
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.1.1.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.1.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.1.1.sif 
+  lastchanged=2025-12-29@04-08-12
+  original-uri=docker://nipreps/nibabies:25.1.1
+  original-uri-lastchanged=2025-12-29@04-08-12
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.1.1
+  NOTE: images/bids/bids-nibabies--25.1.1.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.1.1.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.1.1
+rm 'images/bids/Singularity.bids-nibabies--25.1.1'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.1
+  Done processing images/bids/bids-nibabies--25.1.1.sing
+
+Processing: images/bids/bids-nibabies--25.1.2.sing
+  -> New SIF: images/bids/bids-nibabies--25.1.2.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.2
+  -> Docker URI: docker://nipreps/nibabies:25.1.2
+  Pulling new .sif image...
+  Pull successful: images/bids/bids-nibabies--25.1.2.sif
+  Setting git-annex metadata...
+add images/bids/bids-nibabies--25.1.2.sif ok
+(recording state in git...)
+metadata images/bids/bids-nibabies--25.1.2.sif 
+  lastchanged=2025-12-29@04-13-46
+  original-uri=docker://nipreps/nibabies:25.1.2
+  original-uri-lastchanged=2025-12-29@04-13-46
+ok
+(recording state in git...)
+  Metadata set: original-uri=docker://nipreps/nibabies:25.1.2
+  NOTE: images/bids/bids-nibabies--25.1.2.sing not found in .datalad/config (may not be registered)
+  Removing old .sing file with git rm...
+rm 'images/bids/bids-nibabies--25.1.2.sing'
+  Removing Singularity recipe file...
+images/bids/Singularity.bids-nibabies--25.1.2
+rm 'images/bids/Singularity.bids-nibabies--25.1.2'
+  Recipe file removed: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.1.2
+  Done processing images/bids/bids-nibabies--25.1.2.sing
+
+Processing: images/bids/bids-nibabies--25.2.0.sing
+  -> New SIF: images/bids/bids-nibabies--25.2.0.sif
+  -> Recipe: /home/yoh/proj/repronim/containers/images/bids/Singularity.bids-nibabies--25.2.0
+  -> Docker URI: docker://nipreps/nibabies:25.2.0
+  Pulling new .sif image...

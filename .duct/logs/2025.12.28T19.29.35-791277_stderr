@@ -1,0 +1,334 @@
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 19:30:47  info unpack layer: sha256:41af1b5f0f51947706ae712999cf098bef968a7799e7cb4bb2268829e62a6ab3
+2025/12/28 19:30:49  info unpack layer: sha256:46b56a3ee69dc867927808ff90e57d6fc514fab45f903df1047435788e612a28
+2025/12/28 19:30:57  info unpack layer: sha256:f79ccf026ee3b1c6a4a4a42f6466050ab514092487f37b8972f1d861cbd18172
+2025/12/28 19:31:00  info unpack layer: sha256:836d122670ff08a35f41662568b88df18485845dbd964dddd56f4dcac4930e09
+2025/12/28 19:31:00  info unpack layer: sha256:2facc90ed25e81a99e5416df6840d8cd8b99dc8bfd9c3d5f6d219d91f5562eb5
+2025/12/28 19:31:00  info unpack layer: sha256:6f641e41c37707aeb6fbd74ced8b924bbdc6028c7e1fecca2755431186f10bdb
+2025/12/28 19:31:00  info unpack layer: sha256:3a1ebd848018f1c520acbe8d99fec3b49663562d699b26255388432262052835
+2025/12/28 19:31:37  warn rootless{opt/freesurfer/lib/tktools/libtcl.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:31:37  warn rootless{opt/freesurfer/lib/tktools/libtk.so.0} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:31:40  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:32:00  info unpack layer: sha256:d0ec675e2e05b3de051148767b6eed76e7413864b89bc549e6814a5f1e2a0835
+2025/12/28 19:32:00  info unpack layer: sha256:1a89e2f62d5c87dcfacedd4c45a9a9c0febe565bab0878e414a6f022c5c4f834
+2025/12/28 19:32:03  info unpack layer: sha256:e957456c71ec00ef50d3d71f41c6759e4560c9eb461e9b69700b0c7436805f29
+2025/12/28 19:34:40  info unpack layer: sha256:8e6a45a75e2537bb84ba78b23692152a4a85251a2045893122a7da1ef87f716d
+2025/12/28 19:34:42  info unpack layer: sha256:339e2749f4ecae309384ddd637f630594d82f7dfcf74c7f0246d1f8af670ef76
+2025/12/28 19:34:57  info unpack layer: sha256:8b61d3d7c7bdd5627c2b463e5341f7425a6c93cbbe37ae72608425671af735c9
+2025/12/28 19:34:57  info unpack layer: sha256:c235e729d50759b8ddd6ef3469d48511c5a669f7232c274535fef3b39e33aeb0
+2025/12/28 19:34:57  info unpack layer: sha256:487bd8a453a719a79bc52c8272574180cbf5b65d817d8fa4694b7c69ce9a9271
+2025/12/28 19:34:57  info unpack layer: sha256:fcbdb88842bb1660ea51bf45cec8417fa2b09415caa131f51609ccddec3223db
+2025/12/28 19:34:57  info unpack layer: sha256:9946224fd3b3025ae425101e95b5840f3dd9de4946ebb2532cec56716100ac2a
+2025/12/28 19:34:57  info unpack layer: sha256:f5e15f07a3095876ba0fd0f046691b00864bd6d404a56b9fa6324f04b5e154b2
+2025/12/28 19:34:58  info unpack layer: sha256:5cd55c337efc85a63257bd7f0f6d5aef4f6244ab9d74843178c2ff37fd659313
+2025/12/28 19:34:58  info unpack layer: sha256:26dc2870647565826e4572fd9a2e60be200e38f8a3052c2ab8c50526ac765e96
+2025/12/28 19:34:59  info unpack layer: sha256:2942a5c6fe30c76e0803711e5bda1b6f34657a80d19be5caf1e72a7d8455b106
+2025/12/28 19:34:59  info unpack layer: sha256:4e78c1cd6b340123836c2ed28d81683ff0a06d6f0d2c3d7aa49b6a8b64224199
+2025/12/28 19:34:59  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 19:34:59  info unpack layer: sha256:fa6203b31aa47ca094bde66515514f0ca0f5052e11c986fdc6a23334d86f00bf
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 19:52:08  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/28 19:52:09  info unpack layer: sha256:83fec5a28f1b648e2eb329a715bc8bd7856275e9d7ab689e775b3fad507fc540
+2025/12/28 19:52:25  info unpack layer: sha256:bf0bdee55887203c5bbb343ef0090c7ae44590df834a9a5402c643907dd1a965
+2025/12/28 19:52:25  info unpack layer: sha256:16b2d9a908c6dfd4e8c476753829d29968884270482f628230d48fd6076c9087
+2025/12/28 19:52:25  info unpack layer: sha256:ae3b27e708cc3aa55c72de819479070d063eec1bb095cbf0c8b5891a72d7300c
+2025/12/28 19:52:25  info unpack layer: sha256:cb6355f5212b06b463efe3e0106ac400564ff6abce90243be7c75880102b64bb
+2025/12/28 19:52:45  info unpack layer: sha256:dae570931b47e8f0fcaa22b6d55da62f40094c0381f517622f05d31653bfdefa
+2025/12/28 19:52:47  info unpack layer: sha256:f58704e63ae09eace152933bab389fe6110b1d9fed621a9d83ef913d0f906a24
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:49  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:52:57  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 19:53:07  info unpack layer: sha256:c8eb4fc887658ba38c035708cde2a15fd746ade87c4cfc2bbbc1bf9e53b9ec54
+2025/12/28 19:53:16  info unpack layer: sha256:4bd23f8c575337a63ffda88ded58d5c1a607be772ca5b15ec5933b8a3b9d5799
+2025/12/28 19:53:21  info unpack layer: sha256:d3863322df4409af710d2239f3fc00fa5119713207ac33234d1161031b9aacec
+2025/12/28 19:53:21  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 19:53:21  info unpack layer: sha256:95537b7df1ea3a73aab87fd0eba6758c37994cd60c166df1ec38e856eaa4b62c
+2025/12/28 19:53:21  info unpack layer: sha256:7e1283ef6a66db89f7eba10aedae984c496c0613cfbb44e46102ddcb0c783b7e
+2025/12/28 19:54:33  info unpack layer: sha256:8efcd4aa940d8cd504596f6487cf9792030c7a65b0a21f7fb8ca0ad4226ce55f
+2025/12/28 19:54:33  info unpack layer: sha256:c742f0289a509d7616697c7cf79f4ec57a5ee61f44283cc09ef46dff102a1ece
+2025/12/28 19:54:33  info unpack layer: sha256:aae7c4b260320da3f955052aef3d3a5e3aa3e72da4ab6801a5b45ab24f4bd2d6
+2025/12/28 19:54:35  info unpack layer: sha256:bd4e16b331ffcb348fd5de825d376080693720d7d1431ba86b3601c3b755b678
+2025/12/28 19:54:35  info unpack layer: sha256:e430ba67307148987097f2c0ec64839c84592b3b1db0e8b289a2e172a01ca54f
+2025/12/28 19:54:35  info unpack layer: sha256:18069f30ab98ca9049da88790438198eda1d901eadc4670e9bed9fc03dc4c392
+2025/12/28 19:54:35  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 20:50:44  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/28 20:50:46  info unpack layer: sha256:b3ff268759a28ce0127474d226fb568cfc71e75ee4999d96e6199265c4e24f9d
+2025/12/28 20:51:01  info unpack layer: sha256:d9a9d3b34e8415804fa813e78ecc9b551bc4cd8178e8acc71a0ae7f5519aae35
+2025/12/28 20:51:01  info unpack layer: sha256:838cf948af489afe2873625ca830f62529366f9d50aa1c284d3188e57dc96d49
+2025/12/28 20:51:01  info unpack layer: sha256:10433b45f928b09f5f1d804eefa9e625c571b82acd5385030f8a67f9a0ccebeb
+2025/12/28 20:51:02  info unpack layer: sha256:9fc3070e73415a8146fdb509860d631fac06e893c596adb2f736aac0b208fe35
+2025/12/28 20:51:22  info unpack layer: sha256:ae8c71fd0b9b7d0f884bfd8939a039d527ade91534240896749759690ee0bfe3
+2025/12/28 20:51:24  info unpack layer: sha256:86b39d7758611b154c6c1736de578efd4ddaa1abbde45db74425af19d91cc4bf
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:26  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:34  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 20:51:44  info unpack layer: sha256:786ed4c8088e01e022a69d195abfbeb2eee85b2b50409113709c66caa61b220c
+2025/12/28 20:51:53  info unpack layer: sha256:59b2d1ea45714ed24ff9c1252d7167ff13311bb4f05c6da1a15a18b7745b2bae
+2025/12/28 20:51:58  info unpack layer: sha256:a70bc14668f97f6796f8cfb18f342a07e949ee586a856ac59e9ceb8e9d1492ee
+2025/12/28 20:51:58  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 20:51:58  info unpack layer: sha256:3c3a01ee7feeed1f0ce715b81f2bb5859c680734ed8469fc9ba32be41ce5d144
+2025/12/28 20:51:58  info unpack layer: sha256:a445eca55c7ac6ba7d3c29fd0a9416b20addc4ce404526b1f463ad6af3fcf323
+2025/12/28 20:53:10  info unpack layer: sha256:c31f897526aae7a51145460fd714d435bfdb4e86feeaab1a4167deaff7872a32
+2025/12/28 20:53:10  info unpack layer: sha256:2b242be7bacc2d0c5df78568d5d677a0c63c86d0fb74d673fed05fffc358b084
+2025/12/28 20:53:10  info unpack layer: sha256:79d835e0406b64c58832e9def48fe52b49233cbb42ee8af86d0250bc4e543e51
+2025/12/28 20:53:12  info unpack layer: sha256:2f2289501879b75564fb63c6e9436d842300b88b198334781e11373d5fa8f248
+2025/12/28 20:53:12  info unpack layer: sha256:d63882e12308cb2642a2f93fd07d693c2569b8740572a09eb30db5bf933ea125
+2025/12/28 20:53:13  info unpack layer: sha256:701cc28fa1ae942cb41a051db7a155e4b5eca89436ac85ed9945aa1d1a42e9d0
+2025/12/28 20:53:13  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 21:48:00  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/28 21:48:02  info unpack layer: sha256:77250f4825f7606475b8d63c61b45797d11851173b280b521cd73173e9901b5e
+2025/12/28 21:48:17  info unpack layer: sha256:bf289f84bd5bcd4a509c97d003e9ddf5b967e8ffd3b5c36d382ff0d96d06fe14
+2025/12/28 21:48:17  info unpack layer: sha256:2d08698289624c44665b36276c48bb4d4f394f554ab4f76cb419aa5519460837
+2025/12/28 21:48:18  info unpack layer: sha256:7a81d3004e657972ce409ede3493caed5238a01b31c0e76453f183d35f80cb05
+2025/12/28 21:48:18  info unpack layer: sha256:523f7b191fa94fb1dbfb7cc8dea6b7213ff28e09cbb6d15c8cadc713e8e1b91d
+2025/12/28 21:48:39  info unpack layer: sha256:569270341519f3af45413df7bd0afe515230abd1f9be235d960949dd3a38b40d
+2025/12/28 21:48:41  info unpack layer: sha256:aff7b5eff118bd3b604d69facc91043273a20e8245162ebf8194f626db46934e
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:43  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:48:51  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 21:49:00  info unpack layer: sha256:8b12e43bed285a4e89cae9988313ed0cff79714a258103c04e68dd99419ab474
+2025/12/28 21:49:10  info unpack layer: sha256:aa901fc48c661a55d8434c9baa9a02b12d84509aace3124113fd80398d079b76
+2025/12/28 21:49:15  info unpack layer: sha256:64d6bcfd859b35481d3b13e4c92e95268bfaf084ba2e1bcccf7402222903ec8f
+2025/12/28 21:49:15  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 21:49:15  info unpack layer: sha256:07b14f2614960b27ec6811970d370ddeb5f47046d5f1af1471efc746fc99c3f9
+2025/12/28 21:49:15  info unpack layer: sha256:22cfb24cb76210eb98ab7b1127d891078750eec8ea81bc799b05d8dca539ddf9
+2025/12/28 21:50:24  info unpack layer: sha256:bfed8dac40e8e6c7eacd15bb9b1e536edf585024546be82001c54ea8788dd718
+2025/12/28 21:50:24  info unpack layer: sha256:1c62ce17fd4b75ca5164250fd597fed32f7907ffd63d7dc763bfd29795f88ec7
+2025/12/28 21:50:24  info unpack layer: sha256:d7174c363c170ba6d21645b70b171f203a69f526ef09461796b97ea737a2587a
+2025/12/28 21:50:26  info unpack layer: sha256:9ea5140ba9803d30540b1fdcf657d5eb875bc0af37e2a9a3c0ad01bd184f72dc
+2025/12/28 21:50:26  info unpack layer: sha256:cb035f2895898b65de7e1464b5f11d5cb2752927a30252d902524ba6f8aa0081
+2025/12/28 21:50:26  info unpack layer: sha256:2f170987b18adbfb63c980857cae0710045dd5549b6c588b8f0c415f25e3168c
+2025/12/28 21:50:26  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 22:44:31  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/28 22:44:32  info unpack layer: sha256:9d26760dba88085bc2efa0741fd05e47fe840ace3051b2c53596aa8c6f3aa202
+2025/12/28 22:44:47  info unpack layer: sha256:74398111322a1e8b12b69aa8ded3755778f0288ed79986d45b0a1dacc7b29be1
+2025/12/28 22:44:47  info unpack layer: sha256:ee28add8cd0f6adf811627f60eac64bfe0db9250f93a73c85d9b88f1f8eaf77e
+2025/12/28 22:44:48  info unpack layer: sha256:3c15be34851130497d8a42105fa8fca35c073d98b47de78980edab9674729d7d
+2025/12/28 22:44:48  info unpack layer: sha256:3b4f71b3baeb9b210e7828b9e5927631025f8b3b91770436350bee3900b16226
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:50  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:44:58  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:45:08  info unpack layer: sha256:dacabf355439aafd32b097b1c8dda39a8228d38cfa6ce53a115c1250855a7ded
+2025/12/28 22:45:16  info unpack layer: sha256:6d0200a5439ae7ceef88c9692cd0feac4d9a982c39fa9cd21f2330e8b8904cdb
+2025/12/28 22:45:20  info unpack layer: sha256:6e1d1d9292d5d00b98d6208b2e9f3f5de81f7f808b552a8a752698dc0511ad17
+2025/12/28 22:45:20  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 22:45:20  info unpack layer: sha256:f9a95163d86f108ad4e7932443e101c9c76f2f70de5b6b1eb07a3868c0011f30
+2025/12/28 22:45:20  info unpack layer: sha256:b4d0119a2308583ba6de7c2d77cf6d243fb4cdde95587a83b9f88ac65d1df653
+2025/12/28 22:46:19  info unpack layer: sha256:414e9fc8f89b493fcb19d8232332c12650629dcdedf80676a60030f64ade8ddf
+2025/12/28 22:46:19  info unpack layer: sha256:c45268604e96b9b728a924b18471941af5bd65b7808ba87bf644d5a2e7ec73a2
+2025/12/28 22:46:19  info unpack layer: sha256:5b6892eb841f9cdf50fc3f9018f3d177c2aed86475c066d537f965aa2d95a6ba
+2025/12/28 22:46:20  info unpack layer: sha256:49386477ec87253f588f3ba744605319b5c3036c38ab326997aa389cc1b485a0
+2025/12/28 22:46:20  info unpack layer: sha256:acc3b93ae0298ef2c3db7e9cd8c7f6902e2193b47da5a075f87768fa8bdd6ff2
+2025/12/28 22:46:20  info unpack layer: sha256:7adbb11e71324e313b498b3d6464cb2e6e86d47b1b80bf76d2e652c546778007
+2025/12/28 22:46:20  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 22:58:13  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/28 22:58:15  info unpack layer: sha256:45c89e5a12e1a5e14e5aacbca27d142e33312de9b4ee1aa3df948c9bbf9b988f
+2025/12/28 22:58:30  info unpack layer: sha256:2a5bc3a376bc7bdf87c6bb10f5281c7948fd0d3876e4008c9f5027ecb8cc532b
+2025/12/28 22:58:30  info unpack layer: sha256:8d1a5afe1ccb6155d1d1cd672ece250abd92628f2f7bab9b8d207178bb091a17
+2025/12/28 22:58:30  info unpack layer: sha256:4ddf7e753b75e9b560d67f30d91505a07fdec28862fcb912db9fb2ed7504816f
+2025/12/28 22:58:31  info unpack layer: sha256:c13ea647130e7d394481e46410ef57098de455f103e6b5ac90a1b2f167f2628c
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:32  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:33  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:40  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 22:58:50  info unpack layer: sha256:8422cb0f507b5a13a2a5716db8ae5929ef75f86df6cd59e8b347ca0d1a4881ce
+2025/12/28 22:58:59  info unpack layer: sha256:95eb6f9e00846687bb588cee630fa2ad1ffa9b5160518de17658326510fd9bfe
+2025/12/28 22:59:03  info unpack layer: sha256:b83ec34a96d07716487c9ca18600cbb3b91546009796ae3916e712f8990cdd5a
+2025/12/28 22:59:03  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 22:59:03  info unpack layer: sha256:06e72ce44904afc3256cf23f5ee714ff9e9ee405f182e7573cc63cb2411e430e
+2025/12/28 22:59:03  info unpack layer: sha256:677c422783bfd05fd43f747d9d765aa958117b885579fd52c0c28e7caa8b4aa6
+2025/12/28 23:00:05  info unpack layer: sha256:1ed141185a5e2585e2deb9c60bbd1b7fe1dd6b11314b78ab8cd6c8a6a2314ca7
+2025/12/28 23:00:05  info unpack layer: sha256:4f3f8ef1f2d5f8b2e69f251cc9347d310c494c06977b415f2250c3fcb90c9c54
+2025/12/28 23:00:05  info unpack layer: sha256:5f9d62faa6478e8b4937d305bcefbf233c39aeefb535743d102ba023de1f8548
+2025/12/28 23:00:07  info unpack layer: sha256:5ae30180ae7366ada9908ea299dd4b7237910d9d92eddc96bb9b110df0c5ba76
+2025/12/28 23:00:07  info unpack layer: sha256:b6aec34027d23fd831e89ef94ed37c412a62f1013fb62f8da206484f4e6481e4
+2025/12/28 23:00:07  info unpack layer: sha256:9864ff8be1e4f472e88f29e18056951e9e618126a1fa7391496fa58b4dd51339
+2025/12/28 23:00:07  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+2025/12/28 23:08:55  info unpack layer: sha256:7021d1b70935851c95c45ed18156980b5024eda29b99564429025ea04f5ec109
+2025/12/28 23:08:57  info unpack layer: sha256:8e235174c6690a55b568d6d840fae6877c952304ac4807ca53a7d87ca5859839
+2025/12/28 23:09:12  info unpack layer: sha256:522998ea9101ff4d943d7ccb14535264a316116c977d169fff4699394a3aebe6
+2025/12/28 23:09:12  info unpack layer: sha256:b43beda5faa20851cbe1f459d731635bbc49ee7bea11dde2a7ee052fa8d5c4ff
+2025/12/28 23:09:13  info unpack layer: sha256:08a15ff4fa72472be3a19a2d886cf74b65d67ce93f8404b3dddb98747d62731b
+2025/12/28 23:09:13  info unpack layer: sha256:bf2ec06f3c37ea0ba76041cb53b5ad1cc35e9596e9d63683cd712637884e6962
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template1/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template10/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template11/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template12/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template13/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template14/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template15/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template16/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template17/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template18/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template19/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template2/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template20/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template21/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template22/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template23/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template24/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template25/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template26/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template3/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template4/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template5/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template6/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template7/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template8/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:15  warn rootless{opt/freesurfer/average/CNYBCH/Template9/manualseg.nii.gz} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:23  warn rootless{opt/freesurfer/python/lib/libpython3.6m.a} ignoring (usually) harmless EPERM on setxattr "user.rootlesscontainers"
+2025/12/28 23:09:33  info unpack layer: sha256:a38c755cbb817c754f35ce36aa8f4be3de454514408229be730be5e0cc8e4cc7
+2025/12/28 23:09:42  info unpack layer: sha256:dde24371d15e2473b03d85db437ebbd53f1717e3dd11e70a91b16a79abe67ebd
+2025/12/28 23:09:46  info unpack layer: sha256:c6caff98fc5bc3efc04f337247bb288a0261722e37cd9e41ccda77cfdc7a3826
+2025/12/28 23:09:46  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+2025/12/28 23:09:46  info unpack layer: sha256:7820df9186eef63f002b34d7dc9ac485c41e3d7e4572d388f486538c8d1ba11e
+2025/12/28 23:09:47  info unpack layer: sha256:a4992954199dc222255e97468838640d032b308548a8f3f8229abd51a712be19
+2025/12/28 23:10:47  info unpack layer: sha256:9255a9b135bd4b81d12c1cb4c1471ae11860b54ab07cd3a2c16ab623735ffcac
+2025/12/28 23:10:47  info unpack layer: sha256:a0da682f6c8c5e102d6a66e2d813726f6d28d239324c8fdaa79bbaaf23915974
+2025/12/28 23:10:47  info unpack layer: sha256:7d13ce9d1c985867068dd4eea36d66e3e3ce8323cdd4f47e354d4600bc1eeae6
+2025/12/28 23:10:49  info unpack layer: sha256:cfde3c326277e00bcbec40f781c51798ac3a87cd982aa889132920b5affbb6cd
+2025/12/28 23:10:49  info unpack layer: sha256:872b36ff99d64f2d2d14f3259b7980312458780f04c7302cab4deb9c730fc51c
+2025/12/28 23:10:49  info unpack layer: sha256:fdd0a080e535aaa714fcf0937a48695ff9410856e9c75b2c8bbade2d58639d89
+2025/12/28 23:10:49  info unpack layer: sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1
+INFO:    Creating SIF file...
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+FATAL:   While making image from oci registry: error fetching image to cache: while building SIF from layers: conveyor failed to get: writing blob: happened during read: unexpected EOF
+  ERROR: Pull failed for images/bids/bids-nibabies--25.2.0.sing
