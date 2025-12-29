@@ -18,7 +18,7 @@
 	image = images/bids/bids-brainiak-srm--latest.sing
 [datalad "containers.bids-broccoli"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-broccoli--1.0.1.sing
+	image = images/bids/bids-broccoli--1.0.1.sif
 [datalad "containers.bids-cpac"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-cpac--1.1.0_14.sing
