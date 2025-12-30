@@ -84,7 +84,7 @@
 	image = images/neuronets/neuronets-kwyk--0.5.0-gpu.sing
 [datalad "containers.poldracklab-ds003-example"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sing
+	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sif
 [datalad "containers.repronim-reproin"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/repronim/repronim-reproin--0.13.1.sing
