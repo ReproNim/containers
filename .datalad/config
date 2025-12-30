@@ -87,7 +87,7 @@
 	image = images/poldracklab/poldracklab-ds003-example--0.0.3.sif
 [datalad "containers.repronim-reproin"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/repronim/repronim-reproin--0.13.1.sing
+	image = images/repronim/repronim-reproin--0.13.1.sif
 [datalad "containers.repronim-simple-workflow"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/repronim/repronim-simple-workflow--1.1.0.sing
