@@ -90,7 +90,7 @@
 	image = images/repronim/repronim-reproin--0.13.1.sif
 [datalad "containers.repronim-simple-workflow"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/repronim/repronim-simple-workflow--1.1.0.sing
+	image = images/repronim/repronim-simple-workflow--1.1.0.sif
 [datalad "dataset"]
 	id = b02e63c2-62c1-11e9-82b0-52540040489c
 [datalad "containers.repronim-containers"]
