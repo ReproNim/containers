@@ -100,7 +100,7 @@
 	image = images/bids/bids-qsiprep--1.0.2.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-pymvpa"]
-	image = images/bids/bids-pymvpa--4.0.4.sing
+	image = images/bids/bids-pymvpa--4.0.4.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-bidsonym"]
 	image = images/bids/bids-bidsonym--0.0.4.sing
