@@ -163,7 +163,7 @@
 	image = images/brainiak/brainiak-rtcloudxl--1.4.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.brainiak-rttoolsxl"]
-	image = images/brainiak/brainiak-rttoolsxl--1.4.sing
+	image = images/brainiak/brainiak-rttoolsxl--1.4.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.brainiak-rttoolslite"]
 	image = images/brainiak/brainiak-rttoolslite--1.4.sing
