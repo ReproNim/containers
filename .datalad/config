@@ -54,7 +54,7 @@
 	image = images/bids/bids-mrtrix3-connectome--0.6.0.sif
 [datalad "containers.bids-ndmg"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-ndmg--0.1.0.sing
+	image = images/bids/bids-ndmg--0.1.0.sif
 [datalad "containers.bids-niak"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-niak--latest.sing
