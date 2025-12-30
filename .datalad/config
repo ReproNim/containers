@@ -621,3 +621,6 @@
 [datalad "containers.bids-fmripost-aroma"]
 	image = images/bids/bids-fmripost-aroma--0.0.12.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-fmripost-phase"]
+	image = images/bids/bids-fmripost-phase--main.sif
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
