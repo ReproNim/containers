@@ -30,7 +30,7 @@
 	image = images/bids/bids-example--0.0.7.sif
 [datalad "containers.bids-fibredensityandcrosssection"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-fibredensityandcrosssection--0.0.1.sing
+	image = images/bids/bids-fibredensityandcrosssection--0.0.1.sif
 [datalad "containers.bids-fmriprep"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-fmriprep--25.2.3.sing
