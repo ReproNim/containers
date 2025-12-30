@@ -63,7 +63,7 @@
 	image = images/bids/bids-nipypelines--0.3.0.sif
 [datalad "containers.bids-oppni"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-oppni--0.7.0-1.sing
+	image = images/bids/bids-oppni--0.7.0-1.sif
 [datalad "containers.bids-rshrf"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-rshrf--1.5.8.sing
