@@ -39,7 +39,7 @@
 	image = images/bids/bids-freesurfer--7.4.1-unstable.sif
 [datalad "containers.bids-hcppipelines"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-hcppipelines--4.3.0-3.sing
+	image = images/bids/bids-hcppipelines--4.3.0-3.sif
 [datalad "containers.bids-magetbrain"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-magetbrain--0.3.1.sing
