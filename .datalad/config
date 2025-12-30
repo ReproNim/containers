@@ -178,7 +178,7 @@
 	image = images/bids/bids-bidsmreye--0.5.0.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-fitlins"]
-	image = images/bids/bids-fitlins--0.11.0.sing
+	image = images/bids/bids-fitlins--0.11.0.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-vesselapp"]
 	image = images/neurodesk/neurodesk-vesselapp--0.3.1.simg
