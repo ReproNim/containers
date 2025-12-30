@@ -1,0 +1,1292 @@
+# WTF
+## datalad 
+  - version: 1.1.5
+## dependencies 
+  - annexremote: 1.6.6
+  - boto3: 1.37.9
+  - cmd:7z: 25.01
+  - cmd:annex: 10.20250416
+  - cmd:bundled-git: UNKNOWN
+  - cmd:git: 2.47.3
+  - cmd:ssh: 10.2p1
+  - cmd:system-git: 2.47.3
+  - cmd:system-ssh: 10.2p1
+  - git: 3.1.44
+  - gitdb: 4.0.12
+  - humanize: 4.12.1
+  - iso8601: 2.1.0
+  - keyring: 25.6.0
+  - keyrings.alt: UNKNOWN
+  - msgpack: 1.0.3
+  - platformdirs: 4.3.7
+  - requests: 2.32.3
+## extensions 
+  - container: 
+    - description: Containerized environments
+    - entrypoints: 
+      - datalad_container.containers_add.ContainersAdd: 
+        - class: ContainersAdd
+        - module: datalad_container.containers_add
+        - names: 
+          - containers-add
+          - containers_add
+      - datalad_container.containers_list.ContainersList: 
+        - class: ContainersList
+        - module: datalad_container.containers_list
+        - names: 
+          - containers-list
+          - containers_list
+      - datalad_container.containers_remove.ContainersRemove: 
+        - class: ContainersRemove
+        - module: datalad_container.containers_remove
+        - names: 
+          - containers-remove
+          - containers_remove
+      - datalad_container.containers_run.ContainersRun: 
+        - class: ContainersRun
+        - module: datalad_container.containers_run
+        - names: 
+          - containers-run
+          - containers_run
+    - module: datalad_container
+    - version: 1.2.6
+add images/bids/bids-afni-proc--0.0.2.sif ok
+(recording state in git...)
+metadata images/bids/bids-afni-proc--0.0.2.sif 
+  lastchanged=2025-12-29@22-54-30
+  original-uri=docker://bids/afni_proc:v0.0.2
+  original-uri-lastchanged=2025-12-29@22-54-30
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-afni-proc--0.0.2.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-antscorticalthickness--2.2.0-1.sif ok
+(recording state in git...)
+metadata images/bids/bids-antscorticalthickness--2.2.0-1.sif 
+  lastchanged=2025-12-29@22-55-56
+  original-uri=docker://bids/antscorticalthickness:v2.2.0-1
+  original-uri-lastchanged=2025-12-29@22-55-56
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-antscorticalthickness--2.2.0-1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-baracus--1.1.4.sif ok
+(recording state in git...)
+metadata images/bids/bids-baracus--1.1.4.sif 
+  lastchanged=2025-12-29@23-01-06
+  original-uri=docker://bids/baracus:v1.1.4
+  original-uri-lastchanged=2025-12-29@23-01-06
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-baracus--1.1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-broccoli--1.0.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-broccoli--1.0.1.sif 
+  lastchanged=2025-12-29@23-06-19
+  original-uri=docker://bids/broccoli:v1.0.1
+  original-uri-lastchanged=2025-12-29@23-06-19
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-broccoli--1.0.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-cpac--1.1.0_14.sif ok
+(recording state in git...)
+metadata images/bids/bids-cpac--1.1.0_14.sif 
+  lastchanged=2025-12-29@23-10-04
+  original-uri=docker://bids/cpac:v1.1.0_14
+  original-uri-lastchanged=2025-12-29@23-10-04
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-cpac--1.1.0_14.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-cvrmap--4.0.3.sif ok
+(recording state in git...)
+metadata images/bids/bids-cvrmap--4.0.3.sif 
+  lastchanged=2025-12-29@23-11-09
+  original-uri=docker://arovai/cvrmap:4.0.3
+  original-uri-lastchanged=2025-12-29@23-11-09
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-cvrmap--4.0.3.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-dparsf--4.3.12.sif ok
+(recording state in git...)
+metadata images/bids/bids-dparsf--4.3.12.sif 
+  lastchanged=2025-12-29@23-14-24
+  original-uri=docker://bids/dparsf:v4.3.12
+  original-uri-lastchanged=2025-12-29@23-14-24
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-dparsf--4.3.12.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-example--0.0.7.sif ok
+(recording state in git...)
+metadata images/bids/bids-example--0.0.7.sif 
+  lastchanged=2025-12-29@23-15-41
+  original-uri=docker://bids/example:0.0.7
+  original-uri-lastchanged=2025-12-29@23-15-41
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-example--0.0.7.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-freesurfer--7.4.1-unstable.sif ok
+(recording state in git...)
+metadata images/bids/bids-freesurfer--7.4.1-unstable.sif 
+  lastchanged=2025-12-29@23-36-02
+  original-uri=docker://bids/freesurfer:7.4.1-unstable
+  original-uri-lastchanged=2025-12-29@23-36-02
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-freesurfer--7.4.1-unstable.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-hcppipelines--4.3.0-3.sif ok
+(recording state in git...)
+metadata images/bids/bids-hcppipelines--4.3.0-3.sif 
+  lastchanged=2025-12-30@00-34-40
+  original-uri=docker://bids/hcppipelines:v4.3.0-3
+  original-uri-lastchanged=2025-12-30@00-34-40
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-hcppipelines--4.3.0-3.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-magetbrain--0.3.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-magetbrain--0.3.1.sif 
+  lastchanged=2025-12-30@00-41-23
+  original-uri=docker://bids/magetbrain:v0.3.1
+  original-uri-lastchanged=2025-12-30@00-41-23
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-magetbrain--0.3.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-mindboggle--0.0.4-1.sif ok
+(recording state in git...)
+metadata images/bids/bids-mindboggle--0.0.4-1.sif 
+  lastchanged=2025-12-30@00-45-42
+  original-uri=docker://bids/mindboggle:0.0.4-1
+  original-uri-lastchanged=2025-12-30@00-45-42
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-mindboggle--0.0.4-1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-ndmg--0.1.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-ndmg--0.1.0.sif 
+  lastchanged=2025-12-30@00-47-48
+  original-uri=docker://bids/ndmg:v0.1.0
+  original-uri-lastchanged=2025-12-30@00-47-48
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-ndmg--0.1.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-nipypelines--0.3.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-nipypelines--0.3.0.sif 
+  lastchanged=2025-12-30@00-49-32
+  original-uri=docker://bids/nipypelines:0.3.0
+  original-uri-lastchanged=2025-12-30@00-49-32
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-nipypelines--0.3.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-oppni--0.7.0-1.sif ok
+(recording state in git...)
+metadata images/bids/bids-oppni--0.7.0-1.sif 
+  lastchanged=2025-12-30@00-54-09
+  original-uri=docker://bids/oppni:v0.7.0-1
+  original-uri-lastchanged=2025-12-30@00-54-09
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-oppni--0.7.0-1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-pymvpa--4.0.4.sif ok
+(recording state in git...)
+metadata images/bids/bids-pymvpa--4.0.4.sif 
+  lastchanged=2025-12-30@00-56-48
+  original-uri=docker://bids/pymvpa:v4.0.4
+  original-uri-lastchanged=2025-12-30@00-56-48
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-pymvpa--4.0.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-rshrf--1.5.8.sif ok
+(recording state in git...)
+metadata images/bids/bids-rshrf--1.5.8.sif 
+  lastchanged=2025-12-30@00-57-22
+  original-uri=docker://bids/rshrf:1.5.8
+  original-uri-lastchanged=2025-12-30@00-57-22
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-rshrf--1.5.8.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-spm--0.0.20.sif ok
+(recording state in git...)
+metadata images/bids/bids-spm--0.0.20.sif 
+  lastchanged=2025-12-30@01-03-34
+  original-uri=docker://bids/spm:v0.0.20
+  original-uri-lastchanged=2025-12-30@01-03-34
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-spm--0.0.20.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-tracula--6.0.0.beta-0.sif ok
+(recording state in git...)
+metadata images/bids/bids-tracula--6.0.0.beta-0.sif 
+  lastchanged=2025-12-30@01-10-56
+  original-uri=docker://bids/tracula:v6.0.0.beta-0
+  original-uri-lastchanged=2025-12-30@01-10-56
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-tracula--6.0.0.beta-0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-aa--0.2.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-aa--0.2.0.sif 
+  lastchanged=2025-12-30@01-22-44
+  original-uri=docker://bids/aa:v0.2.0
+  original-uri-lastchanged=2025-12-30@01-22-44
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-aa--0.2.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fibredensityandcrosssection--0.0.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-fibredensityandcrosssection--0.0.1.sif 
+  lastchanged=2025-12-30@01-24-28
+  original-uri=docker://bids/fibredensityandcrosssection:v0.0.1
+  original-uri-lastchanged=2025-12-30@01-24-28
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fibredensityandcrosssection--0.0.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-niak--latest.sif ok
+(recording state in git...)
+metadata images/bids/bids-niak--latest.sif 
+  lastchanged=2025-12-30@01-28-46
+  original-uri=docker://bids/niak:latest
+  original-uri-lastchanged=2025-12-30@01-28-46
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-niak--latest.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-rs-signal-extract--0.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-rs-signal-extract--0.1.sif 
+  lastchanged=2025-12-30@01-30-02
+  original-uri=docker://bids/rs_signal_extract:0.1
+  original-uri-lastchanged=2025-12-30@01-30-02
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-rs-signal-extract--0.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-bidsmreye--0.5.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-bidsmreye--0.5.0.sif 
+  lastchanged=2025-12-30@01-34-21
+  original-uri=docker://cpplab/bidsmreye:0.5.0
+  original-uri-lastchanged=2025-12-30@01-34-21
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-bidsmreye--0.5.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-bidspm--4.0.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-bidspm--4.0.0.sif 
+  lastchanged=2025-12-30@01-36-03
+  original-uri=docker://cpplab/bidspm:4.0.0
+  original-uri-lastchanged=2025-12-30@01-36-03
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-bidspm--4.0.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fmriprep-fake--0.1.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-fmriprep-fake--0.1.0.sif 
+  lastchanged=2025-12-30@01-36-54
+  original-uri=docker://djarecka/fmriprep_fake:0.1.0
+  original-uri-lastchanged=2025-12-30@01-36-54
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmriprep-fake--0.1.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-gift-bids--4.0.5.3.sif ok
+(recording state in git...)
+metadata images/bids/bids-gift-bids--4.0.5.3.sif 
+  lastchanged=2025-12-30@01-44-46
+  original-uri=docker://trends/gift-bids:v4.0.5.3
+  original-uri-lastchanged=2025-12-30@01-44-46
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-gift-bids--4.0.5.3.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-hippunfold--1.5.2.sif ok
+(recording state in git...)
+metadata images/bids/bids-hippunfold--1.5.2.sif 
+  lastchanged=2025-12-30@01-48-59
+  original-uri=docker://khanlab/hippunfold:v1.5.2
+  original-uri-lastchanged=2025-12-30@01-48-59
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-hippunfold--1.5.2.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fmriprep--25.2.3.sif ok
+(recording state in git...)
+metadata images/bids/bids-fmriprep--25.2.3.sif 
+  lastchanged=2025-12-30@01-53-01
+  original-uri=docker://nipreps/fmriprep:25.2.3
+  original-uri-lastchanged=2025-12-30@01-53-01
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmriprep--25.2.3.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-dmriprep--0.5.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-dmriprep--0.5.0.sif 
+  lastchanged=2025-12-30@02-01-12
+  original-uri=docker://nipreps/dmriprep:0.5.0
+  original-uri-lastchanged=2025-12-30@02-01-12
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-dmriprep--0.5.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-mriqc--24.0.2.sif ok
+(recording state in git...)
+metadata images/bids/bids-mriqc--24.0.2.sif 
+  lastchanged=2025-12-30@02-08-53
+  original-uri=docker://nipreps/mriqc:24.0.2
+  original-uri-lastchanged=2025-12-30@02-08-53
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-mriqc--24.0.2.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-nirodents--0.2.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-nirodents--0.2.1.sif 
+  lastchanged=2025-12-30@02-12-22
+  original-uri=docker://nipreps/nirodents:0.2.1
+  original-uri-lastchanged=2025-12-30@02-12-22
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-nirodents--0.2.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fmripost-aroma--0.0.12.sif ok
+(recording state in git...)
+metadata images/bids/bids-fmripost-aroma--0.0.12.sif 
+  lastchanged=2025-12-30@02-16-12
+  original-uri=docker://nipreps/fmripost-aroma:0.0.12
+  original-uri-lastchanged=2025-12-30@02-16-12
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmripost-aroma--0.0.12.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fmripost-phase--main.sif ok
+(recording state in git...)
+metadata images/bids/bids-fmripost-phase--main.sif 
+  lastchanged=2025-12-30@02-20-27
+  original-uri=docker://nipreps/fmripost-phase:main
+  original-uri-lastchanged=2025-12-30@02-20-27
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmripost-phase--main.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fmripost-rapidtide--main.sif ok
+(recording state in git...)
+metadata images/bids/bids-fmripost-rapidtide--main.sif 
+  lastchanged=2025-12-30@02-25-24
+  original-uri=docker://nipreps/fmripost-rapidtide:main
+  original-uri-lastchanged=2025-12-30@02-25-24
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fmripost-rapidtide--main.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-bidsonym--0.0.4.sif ok
+(recording state in git...)
+metadata images/bids/bids-bidsonym--0.0.4.sif 
+  lastchanged=2025-12-30@02-29-04
+  original-uri=docker://peerherholz/bidsonym:v0.0.4
+  original-uri-lastchanged=2025-12-30@02-29-04
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-bidsonym--0.0.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-aslprep--25.1.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-aslprep--25.1.0.sif 
+  lastchanged=2025-12-30@02-33-38
+  original-uri=docker://pennlinc/aslprep:25.1.0
+  original-uri-lastchanged=2025-12-30@02-33-38
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-aslprep--25.1.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-fitlins--0.11.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-fitlins--0.11.0.sif 
+  lastchanged=2025-12-30@02-36-55
+  original-uri=docker://poldracklab/fitlins:0.11.0
+  original-uri-lastchanged=2025-12-30@02-36-55
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-fitlins--0.11.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-reproa--0.2.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-reproa--0.2.1.sif 
+  lastchanged=2025-12-30@02-41-35
+  original-uri=docker://reprostat/reproa:0.2.1
+  original-uri-lastchanged=2025-12-30@02-41-35
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-reproa--0.2.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-connectomemapper-bidsapp--3.2.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-connectomemapper-bidsapp--3.2.0.sif 
+  lastchanged=2025-12-30@03-02-18
+  original-uri=docker://sebastientourbier/connectomemapper-bidsapp:v3.2.0
+  original-uri-lastchanged=2025-12-30@03-02-18
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-connectomemapper-bidsapp--3.2.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-multiscalebrainparcellator--1.1.1.sif ok
+(recording state in git...)
+metadata images/bids/bids-multiscalebrainparcellator--1.1.1.sif 
+  lastchanged=2025-12-30@03-20-40
+  original-uri=docker://sebastientourbier/multiscalebrainparcellator:v1.1.1
+  original-uri-lastchanged=2025-12-30@03-20-40
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-multiscalebrainparcellator--1.1.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-mialsuperresolutiontoolkit--2.1.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-mialsuperresolutiontoolkit--2.1.0.sif 
+  lastchanged=2025-12-30@03-27-41
+  original-uri=docker://sebastientourbier/mialsuperresolutiontoolkit:v2.1.0
+  original-uri-lastchanged=2025-12-30@03-27-41
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-mialsuperresolutiontoolkit--2.1.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/bids/bids-bibsnet--3.6.0.sif ok
+(recording state in git...)
+metadata images/bids/bids-bibsnet--3.6.0.sif 
+  lastchanged=2025-12-30@04-39-36
+  original-uri=docker://dcanumn/bibsnet:release-3.6.0
+  original-uri-lastchanged=2025-12-30@04-39-36
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/bids/bids-bibsnet--3.6.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/poldracklab/poldracklab-ds003-example--0.0.3.sif ok
+(recording state in git...)
+metadata images/poldracklab/poldracklab-ds003-example--0.0.3.sif 
+  lastchanged=2025-12-30@04-42-12
+  original-uri=docker://poldracklab/ds003-example:0.0.3
+  original-uri-lastchanged=2025-12-30@04-42-12
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/poldracklab/poldracklab-ds003-example--0.0.3.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/repronim/repronim-reproin--0.13.1.sif ok
+(recording state in git...)
+metadata images/repronim/repronim-reproin--0.13.1.sif 
+  lastchanged=2025-12-30@04-43-54
+  original-uri=docker://repronim/reproin:0.13.1
+  original-uri-lastchanged=2025-12-30@04-43-54
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/repronim/repronim-reproin--0.13.1.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/repronim/repronim-reprostim--0.7.23.sif ok
+(recording state in git...)
+metadata images/repronim/repronim-reprostim--0.7.23.sif 
+  lastchanged=2025-12-30@04-46-34
+  original-uri=docker://repronim/reprostim:0.7.23
+  original-uri-lastchanged=2025-12-30@04-46-34
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/repronim/repronim-reprostim--0.7.23.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/nipy/nipy-heudiconv--1.3.4.sif ok
+(recording state in git...)
+metadata images/nipy/nipy-heudiconv--1.3.4.sif 
+  lastchanged=2025-12-30@04-48-01
+  original-uri=docker://nipy/heudiconv:1.3.4
+  original-uri-lastchanged=2025-12-30@04-48-01
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/nipy/nipy-heudiconv--1.3.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/repronim/repronim-simple-workflow--1.1.0.sif ok
+(recording state in git...)
+metadata images/repronim/repronim-simple-workflow--1.1.0.sif 
+  lastchanged=2025-12-30@04-50-38
+  original-uri=docker://repronim/simple_workflow:1.1.0
+  original-uri-lastchanged=2025-12-30@04-50-38
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/repronim/repronim-simple-workflow--1.1.0.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/neuronets/neuronets-kwyk--0.5.0-gpu.sif ok
+(recording state in git...)
+metadata images/neuronets/neuronets-kwyk--0.5.0-gpu.sif 
+  lastchanged=2025-12-30@04-52-26
+  original-uri=docker://neuronets/kwyk:0.5.0-gpu
+  original-uri-lastchanged=2025-12-30@04-52-26
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/neuronets/neuronets-kwyk--0.5.0-gpu.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rtcloud--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rtcloud--1.4.sif 
+  lastchanged=2025-12-30@04-58-06
+  original-uri=docker://brainiak/rtcloud:1.4
+  original-uri-lastchanged=2025-12-30@04-58-06
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rtcloud--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rttools--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rttools--1.4.sif 
+  lastchanged=2025-12-30@05-21-27
+  original-uri=docker://brainiak/rttools:1.4
+  original-uri-lastchanged=2025-12-30@05-21-27
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rttools--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rtconda--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rtconda--1.4.sif 
+  lastchanged=2025-12-30@05-24-36
+  original-uri=docker://brainiak/rtconda:1.4
+  original-uri-lastchanged=2025-12-30@05-24-36
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rtconda--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rtcloudxl--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rtcloudxl--1.4.sif 
+  lastchanged=2025-12-30@06-20-39
+  original-uri=docker://brainiak/rtcloudxl:1.4
+  original-uri-lastchanged=2025-12-30@06-20-39
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rtcloudxl--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rttoolsxl--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rttoolsxl--1.4.sif 
+  lastchanged=2025-12-30@07-18-49
+  original-uri=docker://brainiak/rttoolsxl:1.4
+  original-uri-lastchanged=2025-12-30@07-18-49
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rttoolsxl--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rttoolslite--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rttoolslite--1.4.sif 
+  lastchanged=2025-12-30@07-21-50
+  original-uri=docker://brainiak/rttoolslite:1.4
+  original-uri-lastchanged=2025-12-30@07-21-50
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rttoolslite--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+add images/brainiak/brainiak-rtcloudlite--1.4.sif ok
+(recording state in git...)
+metadata images/brainiak/brainiak-rtcloudlite--1.4.sif 
+  lastchanged=2025-12-30@07-25-02
+  original-uri=docker://brainiak/rtcloudlite:1.4
+  original-uri-lastchanged=2025-12-30@07-25-02
+ok
+(recording state in git...)
+save(ok): . (dataset)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+action summary:
+  add (ok: 1)
+  save (ok: 1)
+add(ok): .datalad/config (file)
+save(ok): . (dataset)
+containers_add(ok): /home/yoh/proj/repronim/containers/images/brainiak/brainiak-rtcloudlite--1.4.sif (file)
+action summary:
+  add (ok: 1)
+  containers_add (ok: 1)
+  save (ok: 1)
+Already up to date.
+copy(ok): images/bids/bids-antscorticalthickness--2.2.0-1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-afni-proc--0.0.2.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-dparsf--4.3.12.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-cvrmap--4.0.3.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-bidspm--4.0.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-baracus--1.1.4.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-aslprep--25.1.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-example--0.0.7.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fibredensityandcrosssection--0.0.1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-bidsonym--0.0.4.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-aa--0.2.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-broccoli--1.0.1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fmripost-phase--main.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fmriprep-fake--0.1.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-connectomemapper-bidsapp--3.2.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fmriprep--25.2.3.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-dmriprep--0.5.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fitlins--0.11.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fmripost-aroma--0.0.12.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-bidsmreye--0.5.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-fmripost-rapidtide--main.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-hippunfold--1.5.2.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-bibsnet--3.6.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-mindboggle--0.0.4-1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-gift-bids--4.0.5.3.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-cpac--1.1.0_14.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-niak--latest.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-nipypelines--0.3.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-freesurfer--7.4.1-unstable.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-ndmg--0.1.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-magetbrain--0.3.1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-mriqc--24.0.2.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-rs-signal-extract--0.1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-rshrf--1.5.8.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-mialsuperresolutiontoolkit--2.1.0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-multiscalebrainparcellator--1.1.1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-oppni--0.7.0-1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-tracula--6.0.0.beta-0.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-pymvpa--4.0.4.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-spm--0.0.20.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-nirodents--0.2.1.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-reproa--0.2.1.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rtcloudlite--1.4.sif (file) [to datalad-public...]
+copy(ok): images/neuronets/neuronets-kwyk--0.5.0-gpu.sif (file) [to datalad-public...]
+copy(ok): images/repronim/repronim-reproin--0.13.1.sif (file) [to datalad-public...]
+copy(ok): images/nipy/nipy-heudiconv--1.3.4.sif (file) [to datalad-public...]
+copy(ok): images/poldracklab/poldracklab-ds003-example--0.0.3.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rtconda--1.4.sif (file) [to datalad-public...]
+copy(ok): images/repronim/repronim-reprostim--0.7.23.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rttools--1.4.sif (file) [to datalad-public...]
+copy(ok): images/bids/bids-hcppipelines--4.3.0-3.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rttoolslite--1.4.sif (file) [to datalad-public...]
+copy(ok): images/repronim/repronim-simple-workflow--1.1.0.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rtcloud--1.4.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rtcloudxl--1.4.sif (file) [to datalad-public...]
+copy(ok): images/brainiak/brainiak-rttoolsxl--1.4.sif (file) [to datalad-public...]
+publish(ok): . (dataset) [refs/heads/git-annex->datalad-public:refs/heads/git-annex 6e98dd97..4b5b9597]
+publish(ok): . (dataset) [refs/heads/master->datalad-public:refs/heads/master 809825c1..6d6f0f4d]
+publish(ok): . (dataset) [refs/heads/git-annex->origin:refs/heads/git-annex 41d63915..4b5b9597]
+publish(ok): . (dataset) [refs/heads/master->origin:refs/heads/master 809825c1..6d6f0f4d]
+action summary:
+  copy (ok: 56)
+  publish (ok: 4)
