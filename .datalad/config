@@ -624,3 +624,6 @@
 [datalad "containers.bids-fmripost-phase"]
 	image = images/bids/bids-fmripost-phase--main.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-fmripost-rapidtide"]
+	image = images/bids/bids-fmripost-rapidtide--main.sif
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
