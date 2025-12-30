@@ -69,7 +69,7 @@
 	image = images/bids/bids-rshrf--1.5.8.sif
 [datalad "containers.bids-rs-signal-extract"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-rs-signal-extract--0.1.sing
+	image = images/bids/bids-rs-signal-extract--0.1.sif
 [datalad "containers.bids-spm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-spm--0.0.20.sif
