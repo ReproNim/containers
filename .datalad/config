@@ -72,7 +72,7 @@
 	image = images/bids/bids-rs-signal-extract--0.1.sing
 [datalad "containers.bids-spm"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-spm--0.0.20.sing
+	image = images/bids/bids-spm--0.0.20.sif
 [datalad "containers.bids-tracula"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-tracula--6.0.0.beta-0.sing
