@@ -3,7 +3,7 @@
 	image = scripts/tests/arg-test.simg
 [datalad "containers.bids-aa"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
-	image = images/bids/bids-aa--0.2.0.sing
+	image = images/bids/bids-aa--0.2.0.sif
 [datalad "containers.bids-afni-proc"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-afni-proc--0.0.2.sif
