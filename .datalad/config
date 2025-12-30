@@ -615,3 +615,6 @@
 [datalad "containers.neurodesk-brainager"]
 	image = images/neurodesk/neurodesk-brainager--2.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-fmriprep-fake"]
+	image = images/bids/bids-fmriprep-fake--0.1.0.sif
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
