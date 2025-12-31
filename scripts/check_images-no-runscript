@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#
+# Inspired by  https://github.com/ReproNim/containers/issues/137#issuecomment-2877505303
+#
+git annex find --in here | grep '\.si*' | sponge | while read -r f; do
+    echo "D: inspecting $f"
+    singularity inspect --runscript "$f" | grep -q 'There is no runscript' && echo "$f: no runscript"
+done
