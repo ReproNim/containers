@@ -124,10 +124,21 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
         echo "  Will still try to pull new .sif and update config"
     fi
 
-    # Pull new .sif image
+    # Check if .sif already exists
+    sif_exists=0
+    if [ -f "$full_sif_path" ] || git ls-files --error-unmatch "$full_sif_path" 2>/dev/null; then
+        sif_exists=1
+        echo "  NOTE: .sif file already exists: $sif_file"
+    fi
+
+    # Pull new .sif image (or skip if exists)
     if [ "$DRY_RUN" -eq 1 ]; then
-        echo "  [DRY RUN] Would pull: singularity pull --disable-cache $full_sif_path $docker_uri"
-        echo "  [DRY RUN] Would set metadata: git annex metadata --set original-uri='$docker_uri' $full_sif_path"
+        if [ "$sif_exists" -eq 1 ]; then
+            echo "  [DRY RUN] Would skip pull (.sif already exists)"
+        else
+            echo "  [DRY RUN] Would pull: singularity pull --disable-cache $full_sif_path $docker_uri"
+            echo "  [DRY RUN] Would set metadata: git annex metadata --set original-uri='$docker_uri' $full_sif_path"
+        fi
 
         # Check what config update would happen
         if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
@@ -152,48 +163,52 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
 
         echo "  [DRY RUN] Done (no changes made)"
     else
-        echo "  Pulling new .sif image..."
-        if singularity pull --disable-cache "$full_sif_path" "$docker_uri"; then
-            echo "  Pull successful: $sif_file"
-
-            # Set git-annex metadata with original URI
-            echo "  Setting git-annex metadata..."
-            git annex add "$full_sif_path"
-            git annex metadata --set "original-uri=$docker_uri" "$full_sif_path"
-            echo "  Metadata set: original-uri=$docker_uri"
-
-            # Update .datalad/config to use new .sif instead of .sing
-            # The config has lines like: image = images/bids/bids-giga-connectome--0.6.0.sing
-            if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
-                echo "  Updating .datalad/config..."
-                sed -i "s|image = $sing_file|image = $sif_file|g" "$DATALAD_CONFIG"
-                echo "  Config updated: $sing_file -> $sif_file"
-            else
-                echo "  NOTE: $sing_file not found in .datalad/config (may not be registered)"
-            fi
-
-            # Remove old .sing file with git rm
-            if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
-                echo "  Removing old .sing file with git rm..."
-                git rm -f "$full_sing_path"
-            else
-                echo "  NOTE: Old .sing file not tracked in git"
-            fi
-
-            # Remove the Singularity recipe file (no longer needed)
-            echo "  Removing Singularity recipe file..."
-            if git ls-files --error-unmatch "$recipe_file" 2>/dev/null; then
-                git rm "$recipe_file"
-            else
-                rm "$recipe_file"
-            fi
-            echo "  Recipe file removed: $recipe_file"
-
-            echo "  Done processing $sing_file"
+        if [ "$sif_exists" -eq 1 ]; then
+            echo "  Skipping pull (.sif already exists)"
         else
-            echo "  ERROR: Pull failed for $sing_file" >&2
-            exit 1
+            echo "  Pulling new .sif image..."
+            if singularity pull --disable-cache "$full_sif_path" "$docker_uri"; then
+                echo "  Pull successful: $sif_file"
+
+                # Set git-annex metadata with original URI
+                echo "  Setting git-annex metadata..."
+                git annex add "$full_sif_path"
+                git annex metadata --set "original-uri=$docker_uri" "$full_sif_path"
+                echo "  Metadata set: original-uri=$docker_uri"
+            else
+                echo "  ERROR: Pull failed for $sing_file" >&2
+                exit 1
+            fi
         fi
+
+        # Update .datalad/config to use new .sif instead of .sing
+        # The config has lines like: image = images/bids/bids-giga-connectome--0.6.0.sing
+        if grep -q "image = $sing_file" "$DATALAD_CONFIG"; then
+            echo "  Updating .datalad/config..."
+            sed -i "s|image = $sing_file|image = $sif_file|g" "$DATALAD_CONFIG"
+            echo "  Config updated: $sing_file -> $sif_file"
+        else
+            echo "  NOTE: $sing_file not found in .datalad/config (may not be registered)"
+        fi
+
+        # Remove old .sing file with git rm
+        if [ -f "$full_sing_path" ] || git ls-files --error-unmatch "$full_sing_path" 2>/dev/null; then
+            echo "  Removing old .sing file with git rm..."
+            git rm -f "$full_sing_path"
+        else
+            echo "  NOTE: Old .sing file not tracked in git"
+        fi
+
+        # Remove the Singularity recipe file (no longer needed)
+        echo "  Removing Singularity recipe file..."
+        if git ls-files --error-unmatch "$recipe_file" 2>/dev/null; then
+            git rm "$recipe_file"
+        else
+            rm "$recipe_file"
+        fi
+        echo "  Recipe file removed: $recipe_file"
+
+        echo "  Done processing $sing_file"
     fi
 
     echo ""
