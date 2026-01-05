@@ -51,6 +51,7 @@ export SINGULARITY_TMPDIR="$TMPDIR"
 if [ -z "$STDERR_LOG" ]; then
     DUCT_LOGS_DIR="$REPO_DIR/.duct/logs"
     if [ -d "$DUCT_LOGS_DIR" ]; then
+        # shellcheck disable=SC2012
         STDERR_LOG=$(ls -t "$DUCT_LOGS_DIR"/*_stderr 2>/dev/null | head -1)
     fi
     if [ -z "$STDERR_LOG" ]; then
@@ -114,6 +115,7 @@ grep ": no runscript$" "$STDERR_LOG" | while IFS=: read -r sing_file _rest; do
         continue
     fi
     # Extract the image reference (e.g., "nipreps/fmriprep:25.2.3")
+    # shellcheck disable=SC2001
     docker_image=$(echo "$from_line" | sed 's/^From:[[:space:]]*//')
     docker_uri="docker://$docker_image"
     echo "  -> Docker URI: $docker_uri"
