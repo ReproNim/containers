@@ -97,7 +97,7 @@
 	image = images/repronim/repronim-ptb-3--3.0.15.20190401.dfsg1-1+nd100.sing
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-qsiprep"]
-	image = images/bids/bids-qsiprep--1.1.0.sif
+	image = images/bids/bids-qsiprep--1.1.1.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-pymvpa"]
 	image = images/bids/bids-pymvpa--4.0.4.sif
