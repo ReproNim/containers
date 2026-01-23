@@ -630,3 +630,6 @@
 [datalad "containers.neurodesk-dicompare"]
 	image = images/neurodesk/neurodesk-dicompare--0.1.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-nibabies"]
+	image = images/neurodesk/neurodesk-nibabies--24.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
