@@ -424,7 +424,7 @@
 	image = images/neurodesk/neurodesk-hmri--0.6.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-xcp-d"]
-	image = images/bids/bids-xcp-d--0.14.0.sif
+	image = images/bids/bids-xcp-d--0.14.1.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-aslprep"]
 	image = images/bids/bids-aslprep--25.1.0.sif
