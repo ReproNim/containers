@@ -5,5 +5,20 @@
 #
 git annex find --in here | grep '\.si*' | while read -r f; do
     echo "D: testing $f"
-    { singularity run "$f" --help 2>&1 && echo "$f: ok" || echo "$f: failed to execute --help" >&2; } | grep -q "no runscript" && echo "$f: no runscript" >&2 || :; 
+
+    # Capture output and exit code
+    output=$(singularity run "$f" --help 2>&1)
+    exit_code=$?
+
+    # Check execution success
+    if [ $exit_code -eq 0 ]; then
+        echo "$f: ok"
+    else
+        echo "$f: failed to execute --help" >&2
+    fi
+
+    # Check for "no runscript" message
+    if echo "$output" | grep -q "no runscript"; then
+        echo "$f: no runscript" >&2
+    fi
 done
