@@ -386,13 +386,54 @@ class DockerImage:
         """
         if not self.imagefile.exists() and not self.imagefile.is_symlink():
             tmpfile = self.imagefile.with_suffix(".sif.tmp")
-            builder.runcmd(
-                "singularity",
-                "pull",
-                "--disable-cache",
-                str(tmpfile),
-                self.docker_uri,
-            )
+
+            # Retry singularity pull on fatal errors (exit 255) with exponential backoff
+            # These are typically network-related issues (EOF, timeouts, etc.)
+            max_attempts = 3
+            sleepiter = exp_wait(attempts=max_attempts)
+            attempt = 0
+            while True:
+                attempt += 1
+                try:
+                    builder.runcmd(
+                        "singularity",
+                        "pull",
+                        "--disable-cache",
+                        str(tmpfile),
+                        self.docker_uri,
+                    )
+                    break  # Success, exit retry loop
+                except subprocess.CalledProcessError as e:
+                    # Retry on exit code 255 (singularity's code for fatal errors,
+                    # often network-related: EOF, timeout, connection issues)
+                    if e.returncode == 255:
+                        # Clean up partial download if it exists
+                        if tmpfile.exists():
+                            tmpfile.unlink()
+
+                        if (wait := next(sleepiter, None)) is not None:
+                            log.warning(
+                                "Singularity pull of %s failed on attempt %d/%d (exit %d); "
+                                "sleeping for %f seconds and retrying",
+                                self.docker_uri,
+                                attempt,
+                                max_attempts,
+                                e.returncode,
+                                wait,
+                            )
+                            sleep(wait)
+                        else:
+                            # Out of retries
+                            log.error(
+                                "Singularity pull of %s failed after %d attempts",
+                                self.docker_uri,
+                                attempt,
+                            )
+                            raise e
+                    else:
+                        # Non-255 exit code, don't retry
+                        raise e
+
             # Use cp with reflink to avoid permission issues
             builder.runcmd("cp", "--reflink=auto", str(tmpfile), str(self.imagefile))
             tmpfile.unlink()
