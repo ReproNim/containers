@@ -427,7 +427,7 @@
 	image = images/bids/bids-xcp-d--0.14.1.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-aslprep"]
-	image = images/bids/bids-aslprep--25.1.0.sif
+	image = images/bids/bids-aslprep--25.2.0.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-vesselboost"]
 	image = images/neurodesk/neurodesk-vesselboost--1.0.0.simg
