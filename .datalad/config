@@ -592,7 +592,7 @@
 	image = images/neurodesk/neurodesk-spmpython--25.1.2.post1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-petprep"]
-	image = images/bids/bids-petprep--0.0.3.sif
+	image = images/bids/bids-petprep--0.0.4.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-apptainer"]
 	image = images/neurodesk/neurodesk-apptainer--1.4.4.simg
