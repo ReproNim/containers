@@ -651,3 +651,6 @@
 [datalad "containers.neurodesk-spant"]
 	image = images/neurodesk/neurodesk-spant--3.7.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-totalsegmentator"]
+	image = images/neurodesk/neurodesk-totalsegmentator--2.5.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
