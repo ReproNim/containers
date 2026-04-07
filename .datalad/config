@@ -77,7 +77,7 @@
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 	image = images/bids/bids-tracula--6.0.0.beta-0.sif
 [datalad "containers.bids-validator"]
-	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+	cmdexec = {img_dspath}/scripts/singularity_cmd exec {img} deno run -A /src/bids-validator.js {cmd}
 	image = images/bids/bids-validator--2.5.6.sif
 [datalad "containers.neuronets-kwyk"]
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}

@@ -128,6 +128,9 @@ fi
 # fix non-writable matplotlib cache dir in apptainer https://github.com/ReproNim/containers/issues/97
 export SINGULARITYENV_MPLCONFIGDIR=/tmp/mpl-config
 export APPTAINERENV_MPLCONFIGDIR=/tmp/mpl-config
+# and also for deno to overcome issues like https://github.com/bids-standard/bids-validator/issues/373
+export SINGULARITYENV_DENO_DIR=/tmp/deno
+export APPTAINERENV_DENO_DIR=/tmp/deno
 
 # singularity bind mounts system /tmp, which might result in side-effects
 # Create a dedicated temporary directory to be removed upon completion
