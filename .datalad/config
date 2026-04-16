@@ -646,7 +646,7 @@
 	image = images/neurodesk/neurodesk-blender--5.0.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-musclemap"]
-	image = images/neurodesk/neurodesk-musclemap--1.3.6.simg
+	image = images/neurodesk/neurodesk-musclemap--1.3.10.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-spant"]
 	image = images/neurodesk/neurodesk-spant--3.7.0.simg
