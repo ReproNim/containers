@@ -91,6 +91,7 @@ class Builder:
     def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         versions = [cast(str, res["name"]) for res in r.json()["results"]]
+
         if version_regex:
             versions = [v for v in versions if re.search(version_regex, v)]
         if len(versions) > 1 or (versions and only_good_versions):
@@ -114,6 +115,50 @@ class Builder:
                 return None
         elif not versions:
             log.info(" %s no version. Tags: %s", dh, " ".join(versions))
+            return None
+        else:
+            return (versions[0], versions[0])
+
+    @staticmethod
+    def get_last_ghcr_version_tag(image: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
+        """Get the last version tag for a GitHub Container Registry (ghcr.io) image.
+
+        Args:
+            image: Image path without the registry prefix, e.g. "unfmontreal/skullduggery"
+                   (the part after "ghcr.io/")
+        """
+        # Obtain an anonymous Bearer token for public GHCR images
+        token_r = retry_get(
+            f"https://ghcr.io/token?scope=repository:{image}:pull&service=ghcr.io"
+        )
+        token = token_r.json().get("token") or token_r.json().get("access_token", "")
+
+        r = retry_get(
+            f"https://ghcr.io/v2/{image}/tags/list",
+            headers={"Authorization": f"Bearer {token}"},
+        )
+        versions: list[str] = r.json().get("tags") or []
+
+        if version_regex:
+            versions = [v for v in versions if re.search(version_regex, v)]
+        if len(versions) > 1 or (versions and only_good_versions):
+            good_versions: dict[str, str] = {}
+            for v in versions:
+                if not (
+                    re.search(r"[ab][0-9]+$", v)
+                    or re.search(r"rc[0-9]*$", v)
+                    or "master" in v
+                ):
+                    m = re.match(r"(([Vv]|version-|release-|)([0-9]{1,10}\..*))", v)
+                    if m:
+                        good_versions[m[3]] = m[1]
+            if good_versions:
+                k = max(good_versions, key=version_key)
+                return (k, good_versions[k])
+            else:
+                return None
+        elif not versions:
+            log.info(" %s no version. Tags: %s", image, " ".join(versions))
             return None
         else:
             return (versions[0], versions[0])
@@ -340,9 +385,15 @@ class Builder:
                                               familysuf: Optional[str]=None,
                                               ) \
             -> None:
+        is_ghcr = githubid.startswith("ghcr.io/")
         dockerhubid = githubid.lower()
         if not family:
-            family = dockerhubid.split('/', 1)[0]
+            if is_ghcr:
+                # For ghcr.io/owner/image, use owner as the family
+                parts = dockerhubid.split('/')
+                family = parts[1] if len(parts) > 1 else dockerhubid
+            else:
+                family = dockerhubid.split('/', 1)[0]
         if self.githubids and githubid not in self.githubids:
             log.info("skip %s", githubid)
             return
@@ -350,9 +401,15 @@ class Builder:
         #    log.info("TEMP TODO skip %s due to odd OCI issue ATM with old singularity", dockerhubid)
         #    return
         log.info("%s <- docker %s", family, dockerhubid)
-        last_version = self.get_last_docker_version_tag(
-            dockerhubid, only_good_versions=only_good_versions,
-            version_regex=version_regex)
+        if is_ghcr:
+            ghcr_image = dockerhubid[len("ghcr.io/"):]
+            last_version = self.get_last_ghcr_version_tag(
+                ghcr_image, only_good_versions=only_good_versions,
+                version_regex=version_regex)
+        else:
+            last_version = self.get_last_docker_version_tag(
+                dockerhubid, only_good_versions=only_good_versions,
+                version_regex=version_regex)
         if last_version is not None:
             last_version_pure, last_version_tag = last_version
             # print(dockerhubid, last_version)
@@ -460,7 +517,7 @@ def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:
 
 # Use familysuf to add smth like "LTS" or alike
 def get_familyname(repoid: str, family: str, familysuf: Optional[str]=None) -> str:
-    name = re.sub(r"^[^/]*/", "", repoid)
+    name = re.sub(r".*/", "", repoid)  # take only the last path segment (handles ghcr.io/owner/image)
     # sanitize for datalad not allowing _ in the container names
     name = name.replace("_", "-")
     familyname = f"{family}-{name}"
@@ -562,6 +619,9 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         # Docker image for simple_workflow
         builder.generate_singularity_for_docker_image("ReproNim/simple_workflow")
 
+    if should_build('repronim', 'ghcr.io/unfmontreal/skullduggery'):
+        builder.generate_singularity_for_docker_image("ghcr.io/unfmontreal/skullduggery", "repronim")
+
     # neuronets
     if should_build('neuronets', 'neuronets/kwyk'):
         builder.generate_singularity_for_docker_image("neuronets/kwyk")
@@ -588,11 +648,11 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
-def retry_get(url: str) -> requests.Response:
+def retry_get(url: str, headers: Optional[dict[str, str]] = None) -> requests.Response:
     sleepiter = exp_wait(attempts=10)
     while True:
         try:
-            r = requests.get(url)
+            r = requests.get(url, headers=headers)
             r.raise_for_status()
             return r
         except (requests.ConnectionError, requests.HTTPError, requests.Timeout) as e:
