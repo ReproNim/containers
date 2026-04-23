@@ -88,12 +88,17 @@ class Builder:
         return subprocess.run(args, **kwargs)
 
     @staticmethod
-    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
-        r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
-        versions = [cast(str, res["name"]) for res in r.json()["results"]]
+    def _select_best_version(versions: list[str], image: str, only_good_versions: bool=False) -> Optional[tuple[str, str]]:
+        """Select the best version tag from a list of tags.
 
-        if version_regex:
-            versions = [v for v in versions if re.search(version_regex, v)]
+        Args:
+            versions: List of version tag strings (already filtered by version_regex if needed)
+            image: Image identifier used only for logging
+            only_good_versions: If True, require a semver-style version even when only one tag exists
+
+        Returns:
+            A tuple (version_pure, version_tag) for the best version, or None if none qualify.
+        """
         if len(versions) > 1 or (versions and only_good_versions):
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
@@ -114,10 +119,19 @@ class Builder:
             else:
                 return None
         elif not versions:
-            log.info(" %s no version. Tags: %s", dh, " ".join(versions))
+            log.info(" %s no version. Tags: %s", image, " ".join(versions))
             return None
         else:
             return (versions[0], versions[0])
+
+    @staticmethod
+    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
+        r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
+        versions = [cast(str, res["name"]) for res in r.json()["results"]]
+
+        if version_regex:
+            versions = [v for v in versions if re.search(version_regex, v)]
+        return Builder._select_best_version(versions, dh, only_good_versions)
 
     @staticmethod
     def get_last_ghcr_version_tag(image: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
@@ -126,6 +140,11 @@ class Builder:
         Args:
             image: Image path without the registry prefix, e.g. "unfmontreal/skullduggery"
                    (the part after "ghcr.io/")
+            only_good_versions: If True, require a semver-style version even when only one tag exists
+            version_regex: If set, only consider tags matching this regex
+
+        Returns:
+            A tuple (version_pure, version_tag) for the best version, or None if none qualify.
         """
         # Obtain an anonymous Bearer token for public GHCR images
         token_r = retry_get(
@@ -141,27 +160,7 @@ class Builder:
 
         if version_regex:
             versions = [v for v in versions if re.search(version_regex, v)]
-        if len(versions) > 1 or (versions and only_good_versions):
-            good_versions: dict[str, str] = {}
-            for v in versions:
-                if not (
-                    re.search(r"[ab][0-9]+$", v)
-                    or re.search(r"rc[0-9]*$", v)
-                    or "master" in v
-                ):
-                    m = re.match(r"(([Vv]|version-|release-|)([0-9]{1,10}\..*))", v)
-                    if m:
-                        good_versions[m[3]] = m[1]
-            if good_versions:
-                k = max(good_versions, key=version_key)
-                return (k, good_versions[k])
-            else:
-                return None
-        elif not versions:
-            log.info(" %s no version. Tags: %s", image, " ".join(versions))
-            return None
-        else:
-            return (versions[0], versions[0])
+        return Builder._select_best_version(versions, image, only_good_versions)
 
     @staticmethod
     def get_docker_repositories(namespace: str, full:bool = True) -> Generator[str, None, None]:
