@@ -79,7 +79,7 @@ class TestOCIRegistryListTags:
             tags = reg.list_tags(repo)
         assert tags == ["dev", "main"]
         # check the auth header was forwarded
-        _, tags_call_kwargs = mock_get.call_args
+        tags_call_kwargs = mock_get.call_args.kwargs
         assert "headers" in tags_call_kwargs
         assert tags_call_kwargs["headers"]["Authorization"] == "Bearer tok123"
 

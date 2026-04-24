@@ -110,14 +110,25 @@ class OCIRegistry:
             f"https://{self.auth_host}/token"
             f"?service={self.service}&scope=repository:{repo}:pull"
         ).json()
-        token = tok.get("token") or tok.get("access_token", "")
+        token: str = tok.get("token") or tok.get("access_token") or ""
+        if not token:
+            raise ValueError(
+                f"No bearer token received from {self.auth_host} for {repo}. "
+                "Check that the image is public and the registry is accessible."
+            )
         headers = {"Authorization": f"Bearer {token}"}
 
         # TODO: handle Link-header pagination for very large tag lists
         # (the OCI Distribution Spec allows servers to page results via a
         # "Link: <url>; rel=next" response header).
         r = retry_get(f"https://{self.host}/v2/{repo}/tags/list", headers=headers)
-        return r.json().get("tags") or []
+        data = r.json()
+        if "tags" not in data:
+            raise ValueError(
+                f"Unexpected response from {self.host} for {repo}: "
+                f"'tags' field missing. Response keys: {list(data.keys())}"
+            )
+        return data["tags"] or []
 
 
 @dataclass
