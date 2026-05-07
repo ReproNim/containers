@@ -580,7 +580,8 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
     # Custom: neurodesk singularity images
     # TODO: update URLs for all existing to not have oraclecloud.com ones and only new
     # https://d15yxasja65rk8.cloudfront.net ones
-    if should_build('neurodesk'):
+    # TEMP: disabled since DNS seems to be failing -- emailed Stefen
+    if False: # should_build('neurodesk'):
         builder.add_neurodesk_singularity_images()
 
     if push:
