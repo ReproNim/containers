@@ -658,7 +658,7 @@
 	image = images/neurodesk/neurodesk-mipview--0.1.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-rshrf"]
-	image = images/neurodesk/neurodesk-rshrf--1.5.8.simg
+	image = images/neurodesk/neurodesk-rshrf--1.7.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-xcpd"]
 	image = images/neurodesk/neurodesk-xcpd--0.10.7.simg
