@@ -209,10 +209,15 @@ class Builder:
                     log.info("URLs for %s have changed, unregistering old URLs", img.container)
                     key = whereis_data.get('key')
                     if key:
+                        commit_msg = (
+                            f"neurodesk: unregister stale URL(s) for {img.container}"
+                            f" (image rebuilt or URL scheme changed)"
+                        )
                         for old_url in web_urls:
                             self.runcmd(
                                 "git", "annex", "unregisterurl",
                                 "-c", "annex.alwayscommit=false",
+                                "-c", f"annex.commitmessage={commit_msg}",
                                 key, old_url
                             )
                     to_download = True
@@ -231,9 +236,12 @@ class Builder:
                     overwrite=True,
                 )
                 key = ds.repo.add(str(imagefile))['key']
+                commit_msg = f"neurodesk: register URL(s) for {img.container}"
                 for url in img.urls:
                     self.runcmd(
-                        "git", "annex", "registerurl", "-c", "annex.alwayscommit=false",
+                        "git", "annex", "registerurl",
+                        "-c", "annex.alwayscommit=false",
+                        "-c", f"annex.commitmessage={commit_msg}",
                         key, url
                     )
                 added.append(str(imagefile))
@@ -439,9 +447,15 @@ class DockerImage:
             tmpfile.unlink()
 
             # Add to git-annex and set metadata with original URI
-            builder.runcmd("git", "annex", "add", str(self.imagefile))
+            commit_msg = f"Add container image built from {self.docker_uri}"
+            builder.runcmd(
+                "git", "annex", "add",
+                "-c", f"annex.commitmessage={commit_msg}",
+                str(self.imagefile),
+            )
             builder.runcmd(
                 "git", "annex", "metadata",
+                "-c", f"annex.commitmessage=Set original-uri={self.docker_uri}",
                 "--set", f"original-uri={self.docker_uri}",
                 str(self.imagefile),
             )

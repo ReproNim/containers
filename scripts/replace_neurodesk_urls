@@ -27,14 +27,16 @@ set -ue
 OLD_HOST="d15yxasja65rk8.cloudfront.net"
 NEW_HOST="neurocontainers.neurodesk.workers.dev"
 
-# git-annex-branch commits will use git-annex's default "update" message
-# (annex.commitmessage does not take effect in current git-annex versions
-# for these auto-generated commits). The `annex.alwayscommit=false` flag
-# still keeps the commit count down — one final commit via `annex merge`
-# at the end of the run. Provenance for the operation itself lives in
-# the wrapping datalad-run / duct commit on master.
+# Batch git-annex-branch writes into a single trailing commit via
+# `annex.alwayscommit=false` + `annex merge` at the end, and label that
+# commit via `annex.commitmessage` so the git-annex branch log points
+# back at this migration. (annex.commitmessage was silently ignored in
+# git-annex 10.20260421; fixed by 10.20260624.)
+COMMIT_MSG="Adjusting neurodesk URLs to new workers.dev endpoint. See https://github.com/ReproNim/containers/issues/162"
 gac() {
-    git -c annex.alwayscommit=false annex "$@"
+    git -c annex.alwayscommit=false \
+        -c "annex.commitmessage=$COMMIT_MSG" \
+        annex "$@"
 }
 
 # Space-separated list of web-remote URLs for $1 whose host matches $2.
