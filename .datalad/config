@@ -681,3 +681,6 @@
 [datalad "containers.neurodesk-startrack"]
 	image = images/neurodesk/neurodesk-startrack--20250920.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-spm12bi"]
+	image = images/neurodesk/neurodesk-spm12bi--latest.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
