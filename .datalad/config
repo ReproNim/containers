@@ -672,3 +672,6 @@
 [datalad "containers.neurodesk-terastitcher"]
 	image = images/neurodesk/neurodesk-terastitcher--1.11.10.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-synthstroke"]
+	image = images/neurodesk/neurodesk-synthstroke--0.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
