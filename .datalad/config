@@ -711,3 +711,6 @@
 [datalad "containers.neurodesk-openadscpu"]
 	image = images/neurodesk/neurodesk-openadscpu--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-openads"]
+	image = images/neurodesk/neurodesk-openads--1.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
