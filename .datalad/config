@@ -753,3 +753,6 @@
 [datalad "containers.neurodesk-lipsia"]
 	image = images/neurodesk/neurodesk-lipsia--3.1.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-libreoffice"]
+	image = images/neurodesk/neurodesk-libreoffice--26.2.4.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
