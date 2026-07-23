@@ -669,3 +669,6 @@
 [datalad "containers.neurodesk-vertexwiser"]
 	image = images/neurodesk/neurodesk-vertexwiser--1.5.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-terastitcher"]
+	image = images/neurodesk/neurodesk-terastitcher--1.11.10.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
