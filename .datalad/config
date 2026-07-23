@@ -675,3 +675,6 @@
 [datalad "containers.neurodesk-synthstroke"]
 	image = images/neurodesk/neurodesk-synthstroke--0.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-svrtk"]
+	image = images/neurodesk/neurodesk-svrtk--20260626.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
