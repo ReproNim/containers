@@ -696,3 +696,6 @@
 [datalad "containers.neurodesk-rapidtide"]
 	image = images/neurodesk/neurodesk-rapidtide--3.1.11.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-prequal"]
+	image = images/neurodesk/neurodesk-prequal--1.1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
