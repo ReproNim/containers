@@ -690,3 +690,6 @@
 [datalad "containers.neurodesk-segmentator"]
 	image = images/neurodesk/neurodesk-segmentator--1.6.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-samri"]
+	image = images/neurodesk/neurodesk-samri--0.5.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
