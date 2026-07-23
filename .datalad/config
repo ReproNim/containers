@@ -660,3 +660,6 @@
 [datalad "containers.neurodesk-rshrf"]
 	image = images/neurodesk/neurodesk-rshrf--1.5.8.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-xcpd"]
+	image = images/neurodesk/neurodesk-xcpd--0.10.7.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
