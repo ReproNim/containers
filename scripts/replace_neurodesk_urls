@@ -1,54 +1,122 @@
 #!/bin/bash
 #
-# A fix up script to register new CDN urls and remove old ones for neurodesk
+# A fix up script to register new URLs and remove old ones for neurodesk.
 #
+# Round 3 (2026-07): CloudFront (d15yxasja65rk8.cloudfront.net) is being
+# retired; new "forever" prefix per ReproNim/containers#162 is
+# https://neurocontainers.neurodesk.workers.dev/ .
+#
+# Prior rounds — see git log of this file:
+#   - Round 1 (2023-04): shub:// / oraclecloud -> plain web remote
+#     (scripts/utils/get-rid-of-datalad-remote.sh)
+#   - Round 2 (2024-05): oraclecloud -> d15yxasja65rk8.cloudfront.net
+#
+# Behavior:
+#   - For each images/neurodesk/*.simg with an OLD_HOST URL registered on
+#     the web remote, HEAD the corresponding NEW_HOST URL.
+#   - Require HTTP 200 AND Content-Length matching the annex key size
+#     before adding the new URL. Only then remove the old one.
+#   - If the new URL 4xx's or the size mismatches, leave the file alone
+#     with a warning. Those need separate handling (rebuild-under-new-date
+#     or removal + rebuilder re-download).
+#   - `annex.alwayscommit=false` throughout so we get a single
+#     git-annex-branch commit at the end via `annex merge`.
 
 set -ue
 
-function geturls() {
-	git -c annex.alwayscommit=false annex whereis --json "$1" | jq '.whereis[] | select(.description == "web") | .urls' | sed -e "s|[\"',]||g" | grep "$2" || :
+OLD_HOST="d15yxasja65rk8.cloudfront.net"
+NEW_HOST="neurocontainers.neurodesk.workers.dev"
+
+# git-annex-branch commits will use git-annex's default "update" message
+# (annex.commitmessage does not take effect in current git-annex versions
+# for these auto-generated commits). The `annex.alwayscommit=false` flag
+# still keeps the commit count down — one final commit via `annex merge`
+# at the end of the run. Provenance for the operation itself lives in
+# the wrapping datalad-run / duct commit on master.
+gac() {
+    git -c annex.alwayscommit=false annex "$@"
 }
+
+# Space-separated list of web-remote URLs for $1 whose host matches $2.
+function geturls() {
+    gac whereis --json "$1" \
+        | jq -r --arg host "$2" \
+            '.whereis[] | select(.description == "web") | .urls[] | select(contains($host))'
+}
+
+# Extract the annex-key byte size from a symlink target: MD5E-s<SIZE>--...
+function key_size() {
+    readlink "$1" | sed -n 's|.*/MD5E-s\([0-9]\+\)--.*|\1|p'
+}
+
+migrated=0
+skipped_done=0
+skipped_missing=0
 
 for f in images/neurodesk/*.simg ; do
     echo "INFO: file $f"
     # shellcheck disable=SC2207
-    oracleurls=( $(geturls "$f" oraclecloud) )
+    oldurls=( $(geturls "$f" "$OLD_HOST") )
     # shellcheck disable=SC2207
-    cloudfronturls=( $(geturls "$f" cloudfront) )
-    if [ -z "${oracleurls[*]}" ]; then
-        if [ -n "${cloudfronturls[*]}" ]; then
-            echo "INFO:  no oracleurls for $f and have cloudfront already -- skipping entirely"
-            continue
-        else
-            echo "ERROR:  no oracleurls for $f and no cloudfronts!"
-            exit 1
-        fi
+    newurls=( $(geturls "$f" "$NEW_HOST") )
+
+    if [ -n "${newurls[*]}" ]; then
+        echo "INFO:  already has $NEW_HOST url (${newurls[*]}) -- skipping"
+        skipped_done=$((skipped_done+1))
+        continue
     fi
+
+    if [ -z "${oldurls[*]}" ]; then
+        echo "WARNING: no $OLD_HOST URL for $f and no $NEW_HOST URL either -- skipping"
+        skipped_missing=$((skipped_missing+1))
+        continue
+    fi
+
+    # All old URLs share the same trailing filename (host-only differs).
     # shellcheck disable=SC2001
-    img=$(echo "${oracleurls[*]}" | sed -e 's,.*/,,g' )
+    img=$(echo "${oldurls[0]}" | sed -e 's,.*/,,g')
     if [ -z "$img" ]; then
-        echo "ERROR: Got empty image from ${oracleurls[*]}"
+        echo "ERROR: got empty image name from ${oldurls[0]}"
         exit 1
     fi
-    newurl="https://d15yxasja65rk8.cloudfront.net/$img"
-    # let's verify that it is not 404
-    ret=$(curl -o /dev/null -s -I -w "%{http_code}" "$newurl")
-    if [ "$ret" != 200 ]; then
-        echo "ERROR: $newurl - could not verify presence: $ret . Will not be added" >&2
-        #exit 1
-    else
-        echo "OK: $newurl" >&2
-        if [ -n "${cloudfronturls[*]}" ]; then
-            echo " INFO: cloudfront url seems to be already known -- ${cloudfronturls[*]} . Not adding"
-        else
-            echo " INFO: adding $newurl to $f"
-            git -c annex.alwayscommit=false annex addurl "--file=$f" "$newurl"
-        fi
+
+    newurl="https://$NEW_HOST/$img"
+
+    # HEAD the new URL: check status and Content-Length vs annex key size.
+    headers=$(curl -sI "$newurl" || :)
+    http=$(echo "$headers" | head -n1 | awk '{print $2}')
+    remote_size=$(echo "$headers" \
+        | awk 'tolower($1)=="content-length:" {gsub(/\r/,"",$2); print $2}')
+    local_size=$(key_size "$f")
+
+    if [ "$http" != 200 ]; then
+        echo "WARNING: $newurl - HTTP $http; NOT migrating (leaving old URL intact)" >&2
+        skipped_missing=$((skipped_missing+1))
+        continue
     fi
-    echo " INFO: removing ${#oracleurls[@]} oracle urls"
-    for url in "${oracleurls[@]}"; do
-        git -c annex.alwayscommit=false annex rmurl "$f" "$url"
+    if [ -z "$local_size" ]; then
+        echo "ERROR: could not determine annex key size for $f" >&2
+        exit 1
+    fi
+    if [ "$remote_size" != "$local_size" ]; then
+        echo "WARNING: $newurl - Content-Length $remote_size != key size $local_size; NOT migrating" >&2
+        skipped_missing=$((skipped_missing+1))
+        continue
+    fi
+
+    echo "OK: $newurl (size $remote_size)"
+    echo " INFO: adding $newurl to $f"
+    gac addurl "--file=$f" "$newurl"
+
+    echo " INFO: removing ${#oldurls[@]} $OLD_HOST url(s)"
+    for url in "${oldurls[@]}"; do
+        gac rmurl "$f" "$url"
     done
+    migrated=$((migrated+1))
 done
-# Trigger git-annex commit
-git -c annex.commitmessage="Updating URLs for neurodesk" annex merge
+
+echo
+echo "SUMMARY: migrated=$migrated  already_done=$skipped_done  skipped_missing=$skipped_missing"
+
+# Flush any remaining journal entries into a single trailing commit.
+gac merge
