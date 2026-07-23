@@ -765,3 +765,6 @@
 [datalad "containers.neurodesk-hcpasl"]
 	image = images/neurodesk/neurodesk-hcpasl--0.2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-gouhfi"]
+	image = images/neurodesk/neurodesk-gouhfi--0.0.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
