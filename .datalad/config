@@ -777,3 +777,6 @@
 [datalad "containers.neurodesk-fetalsynthseg"]
 	image = images/neurodesk/neurodesk-fetalsynthseg--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-fetalsegmentation"]
+	image = images/neurodesk/neurodesk-fetalsegmentation--20241116.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
