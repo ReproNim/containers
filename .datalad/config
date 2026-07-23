@@ -705,3 +705,6 @@
 [datalad "containers.neurodesk-pals"]
 	image = images/neurodesk/neurodesk-pals--2.0.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-openrefine"]
+	image = images/neurodesk/neurodesk-openrefine--3.10.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
