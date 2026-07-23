@@ -699,3 +699,6 @@
 [datalad "containers.neurodesk-prequal"]
 	image = images/neurodesk/neurodesk-prequal--1.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-petprep"]
+	image = images/neurodesk/neurodesk-petprep--0.0.5.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
