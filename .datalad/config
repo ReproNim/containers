@@ -771,3 +771,6 @@
 [datalad "containers.neurodesk-functionnectome"]
 	image = images/neurodesk/neurodesk-functionnectome--2.5.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-fitlins"]
+	image = images/neurodesk/neurodesk-fitlins--0.11.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
