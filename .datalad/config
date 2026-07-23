@@ -666,3 +666,6 @@
 [datalad "containers.neurodesk-wftfi"]
 	image = images/neurodesk/neurodesk-wftfi--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-vertexwiser"]
+	image = images/neurodesk/neurodesk-vertexwiser--1.5.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
