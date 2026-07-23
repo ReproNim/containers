@@ -726,3 +726,6 @@
 [datalad "containers.neurodesk-mrsimetabolicconnectome"]
 	image = images/neurodesk/neurodesk-mrsimetabolicconnectome--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-mipav"]
+	image = images/neurodesk/neurodesk-mipav--11.3.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
