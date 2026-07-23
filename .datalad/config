@@ -747,3 +747,6 @@
 [datalad "containers.neurodesk-lstai"]
 	image = images/neurodesk/neurodesk-lstai--1.2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-lqt"]
+	image = images/neurodesk/neurodesk-lqt--0.1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
