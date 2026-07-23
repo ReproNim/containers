@@ -152,7 +152,7 @@ class Builder:
                 version=version,
                 date=date,
                 urls=[
-                    f'https://d15yxasja65rk8.cloudfront.net/{container}.simg'
+                    f'https://neurocontainers.neurodesk.workers.dev/{container}.simg'
                 ]
             )
 
@@ -550,7 +550,7 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         # TODO: figure out who would build those now that shub is gone?!
         # ATM: built locally and pushed to docker hub... so let's build from those
         builder.generate_singularity_for_docker_image("repronim/reproin")
-    
+
     if should_build('repronim', 'repronim/reprostim'):
         builder.generate_singularity_for_docker_image("repronim/reprostim")
 
@@ -578,10 +578,7 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         builder.generate_singularity_for_docker_namespace("brainiak", only_good_versions=True)
 
     # Custom: neurodesk singularity images
-    # TODO: update URLs for all existing to not have oraclecloud.com ones and only new
-    # https://d15yxasja65rk8.cloudfront.net ones
-    # TEMP: disabled since DNS seems to be failing -- emailed Stefen
-    if False: # should_build('neurodesk'):
+    if should_build('neurodesk'):
         builder.add_neurodesk_singularity_images()
 
     if push:
