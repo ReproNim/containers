@@ -684,3 +684,6 @@
 [datalad "containers.neurodesk-spm12bi"]
 	image = images/neurodesk/neurodesk-spm12bi--latest.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-soopct"]
+	image = images/neurodesk/neurodesk-soopct--0.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
