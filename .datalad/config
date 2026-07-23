@@ -484,7 +484,7 @@
 	image = images/neurodesk/neurodesk-qmrlab--2.4.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-niimath"]
-	image = images/neurodesk/neurodesk-niimath--1.0.20250804.simg
+	image = images/neurodesk/neurodesk-niimath--1.0.20260703.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.bids-qsirecon"]
 	image = images/bids/bids-qsirecon--26.0.0.sif
