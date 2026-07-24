@@ -813,3 +813,6 @@
 [datalad "containers.neurodesk-cpac"]
 	image = images/neurodesk/neurodesk-cpac--1.8.7.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-cosmomvpa"]
+	image = images/neurodesk/neurodesk-cosmomvpa--1.1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
