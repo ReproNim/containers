@@ -62,6 +62,76 @@ log = logging.getLogger(__name__)
 
 
 @dataclass
+class OCIRegistry:
+    """Represents an OCI-compatible container registry.
+
+    All major registries (Docker Hub, GHCR, Quay.io, ...) implement the OCI
+    Distribution Spec v2 ``/v2/{repo}/tags/list`` endpoint behind a token
+    handshake with the same response shape.  This class encapsulates the
+    per-registry parameters so a single code path covers them all.
+    """
+    host: str        # e.g. "registry-1.docker.io", "ghcr.io", "quay.io"
+    auth_host: str   # token endpoint host
+    service: str     # ``service=`` param for the token request
+
+    @classmethod
+    def for_image(cls, image_id: str) -> tuple["OCIRegistry", str]:
+        """Return (registry, repo) for a fully-qualified or Docker Hub image ID.
+
+        Args:
+            image_id: e.g. "nipreps/fmriprep", "ghcr.io/owner/img", "quay.io/org/img"
+
+        Returns:
+            A (OCIRegistry, repo) pair where repo is the path used for the
+            OCI ``/v2/{repo}/tags/list`` call.
+        """
+        if image_id.startswith("ghcr.io/"):
+            return cls("ghcr.io", "ghcr.io", "ghcr.io"), image_id[len("ghcr.io/"):]
+        if image_id.startswith("quay.io/"):
+            return cls("quay.io", "quay.io", "quay.io"), image_id[len("quay.io/"):]
+        # Docker Hub: bare "owner/image" or just "image" (official library images)
+        repo = image_id if "/" in image_id else f"library/{image_id}"
+        return cls("registry-1.docker.io", "auth.docker.io", "registry.docker.io"), repo
+
+    def list_tags(self, repo: str) -> list[str]:
+        """Return all tags for *repo* on this registry.
+
+        Follows ``Link`` header pagination as required by the OCI Distribution
+        Spec so that registries which paginate large tag lists are handled
+        correctly.
+
+        Args:
+            repo: Repository path, e.g. "nipreps/fmriprep" or "unfmontreal/skullduggery"
+
+        Returns:
+            Flat list of all tag strings.
+        """
+        tok = retry_get(
+            f"https://{self.auth_host}/token"
+            f"?service={self.service}&scope=repository:{repo}:pull"
+        ).json()
+        token: str = tok.get("token") or tok.get("access_token") or ""
+        if not token:
+            raise ValueError(
+                f"No bearer token received from {self.auth_host} for {repo}. "
+                "Check that the image is public and the registry is accessible."
+            )
+        headers = {"Authorization": f"Bearer {token}"}
+
+        # TODO: handle Link-header pagination for very large tag lists
+        # (the OCI Distribution Spec allows servers to page results via a
+        # "Link: <url>; rel=next" response header).
+        r = retry_get(f"https://{self.host}/v2/{repo}/tags/list", headers=headers)
+        data = r.json()
+        if "tags" not in data:
+            raise ValueError(
+                f"Unexpected response from {self.host} for {repo}: "
+                f"'tags' field missing. Response keys: {list(data.keys())}"
+            )
+        return data["tags"] or []
+
+
+@dataclass
 class NeuroDeskSingularityImage:
     container: str
     name: str
@@ -88,11 +158,29 @@ class Builder:
         return subprocess.run(args, **kwargs)
 
     @staticmethod
-    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
-        r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
-        versions = [cast(str, res["name"]) for res in r.json()["results"]]
-        if version_regex:
-            versions = [v for v in versions if re.search(version_regex, v)]
+    def _select_best_version(
+        versions: list[str],
+        image: str,
+        only_good_versions: bool = False,
+        version_regex: Optional[str] = None,
+    ) -> Optional[tuple[str, str]]:
+        """Select the best version tag from a list of tags.
+
+        Prefers the highest semver-style version.  When *version_regex* is
+        explicitly provided and no semver tag matches, falls back to returning
+        the first tag that matched the regex as-is (e.g. ``dev`` or ``main``),
+        provided *only_good_versions* is False.
+
+        Args:
+            versions: List of version tag strings (already filtered by version_regex if needed)
+            image: Image identifier used only for logging
+            only_good_versions: If True, require a semver-style version even when only one tag exists
+            version_regex: The regex that was used to pre-filter *versions* (used only to
+                determine whether a non-semver fallback is appropriate)
+
+        Returns:
+            A tuple (version_pure, version_tag) for the best version, or None if none qualify.
+        """
         if len(versions) > 1 or (versions and only_good_versions):
             # select only the ones which seems to be semantic and/or
             # master/latest.  Some release alpha releases, so probably would
@@ -110,13 +198,47 @@ class Builder:
             if good_versions:
                 k = max(good_versions, key=version_key)
                 return (k, good_versions[k])
+            elif version_regex and not only_good_versions:
+                # An explicit regex was given but matched no semver tags.
+                # Return the first matching tag verbatim so callers like
+                # ``version_regex=r'^(dev|main)$'`` are honoured.
+                return (versions[0], versions[0])
             else:
                 return None
         elif not versions:
-            log.info(" %s no version. Tags: %s", dh, " ".join(versions))
+            log.info(" %s no version. Tags: %s", image, " ".join(versions))
             return None
         else:
             return (versions[0], versions[0])
+
+    @staticmethod
+    def get_last_version_tag(
+        image_id: str,
+        only_good_versions: bool = False,
+        version_regex: Optional[str] = None,
+    ) -> Optional[tuple[str, str]]:
+        """Return the best version tag for any OCI-compatible registry image.
+
+        Supports Docker Hub (``owner/image``), GHCR (``ghcr.io/owner/image``),
+        Quay.io (``quay.io/org/image``), and any other registry that implements
+        the OCI Distribution Spec ``/v2/{repo}/tags/list`` endpoint.
+
+        Args:
+            image_id: Fully-qualified image ID, e.g. ``nipreps/fmriprep``,
+                ``ghcr.io/unfmontreal/skullduggery``, or ``quay.io/org/image``
+            only_good_versions: Require a semver-style tag even when only one is available
+            version_regex: If set, only consider tags matching this regex
+
+        Returns:
+            A ``(version_pure, version_tag)`` tuple, or ``None`` if no suitable tag is found.
+        """
+        registry, repo = OCIRegistry.for_image(image_id)
+        versions = registry.list_tags(repo)
+        if version_regex:
+            versions = [v for v in versions if re.search(version_regex, v)]
+        return Builder._select_best_version(
+            versions, image_id, only_good_versions, version_regex=version_regex
+        )
 
     @staticmethod
     def get_docker_repositories(namespace: str, full:bool = True) -> Generator[str, None, None]:
@@ -340,9 +462,26 @@ class Builder:
                                               familysuf: Optional[str]=None,
                                               ) \
             -> None:
+        """Build a Singularity image from any OCI-compatible registry image.
+
+        Supported image ID forms:
+        - ``owner/image``               → Docker Hub
+        - ``ghcr.io/owner/image``       → GitHub Container Registry
+        - ``quay.io/org/image``         → Quay.io (and other OCI-compliant registries)
+
+        When *family* is not given it defaults to the owner/org segment of the
+        image ID (e.g. ``unfmontreal`` for ``ghcr.io/unfmontreal/skullduggery``).
+        Callers that want images grouped under a different family — for example
+        under ``repronim`` instead of ``unfmontreal`` — should pass *family*
+        explicitly.
+        """
         dockerhubid = githubid.lower()
         if not family:
-            family = dockerhubid.split('/', 1)[0]
+            # Take the last-but-one path segment as the family so that both
+            # Docker Hub "owner/image" and "registry.io/owner/image" give the
+            # same owner-based default.
+            parts = dockerhubid.split('/')
+            family = parts[-2] if len(parts) >= 2 else dockerhubid
         if self.githubids and githubid not in self.githubids:
             log.info("skip %s", githubid)
             return
@@ -350,7 +489,7 @@ class Builder:
         #    log.info("TEMP TODO skip %s due to odd OCI issue ATM with old singularity", dockerhubid)
         #    return
         log.info("%s <- docker %s", family, dockerhubid)
-        last_version = self.get_last_docker_version_tag(
+        last_version = self.get_last_version_tag(
             dockerhubid, only_good_versions=only_good_versions,
             version_regex=version_regex)
         if last_version is not None:
@@ -460,7 +599,7 @@ def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:
 
 # Use familysuf to add smth like "LTS" or alike
 def get_familyname(repoid: str, family: str, familysuf: Optional[str]=None) -> str:
-    name = re.sub(r"^[^/]*/", "", repoid)
+    name = re.sub(r".*/", "", repoid)  # take only the last path segment (handles ghcr.io/owner/image)
     # sanitize for datalad not allowing _ in the container names
     name = name.replace("_", "-")
     familyname = f"{family}-{name}"
@@ -562,6 +701,13 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         # Docker image for simple_workflow
         builder.generate_singularity_for_docker_image("ReproNim/simple_workflow")
 
+    if should_build('repronim', 'ghcr.io/unfmontreal/skullduggery'):
+        # ghcr.io/unfmontreal/skullduggery has no semver releases yet; track
+        # the "main" branch image until versioned releases are published.
+        builder.generate_singularity_for_docker_image(
+            "ghcr.io/unfmontreal/skullduggery", "repronim",
+            version_regex=r"^main$")
+
     # neuronets
     if should_build('neuronets', 'neuronets/kwyk'):
         builder.generate_singularity_for_docker_image("neuronets/kwyk")
@@ -589,11 +735,11 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
-def retry_get(url: str) -> requests.Response:
+def retry_get(url: str, headers: Optional[dict[str, str]] = None) -> requests.Response:
     sleepiter = exp_wait(attempts=10)
     while True:
         try:
-            r = requests.get(url)
+            r = requests.get(url, headers=headers)
             r.raise_for_status()
             return r
         except (requests.ConnectionError, requests.HTTPError, requests.Timeout) as e:
