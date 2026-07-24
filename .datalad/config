@@ -807,3 +807,6 @@
 [datalad "containers.neurodesk-deepdisco"]
 	image = images/neurodesk/neurodesk-deepdisco--20251008.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-dafne"]
+	image = images/neurodesk/neurodesk-dafne--1.8a4.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
