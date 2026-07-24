@@ -831,3 +831,6 @@
 [datalad "containers.neurodesk-brainsuite"]
 	image = images/neurodesk/neurodesk-brainsuite--23a.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brainlesion"]
+	image = images/neurodesk/neurodesk-brainlesion--1.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
