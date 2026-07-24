@@ -819,3 +819,6 @@
 [datalad "containers.neurodesk-connectomemapper3"]
 	image = images/neurodesk/neurodesk-connectomemapper3--3.2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-condaenvs"]
+	image = images/neurodesk/neurodesk-condaenvs--1.0.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
