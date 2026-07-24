@@ -6,10 +6,11 @@
 #     "requests",
 #     "datalad",
 #     "datalad-container",
+#     "git-annex",
 # ]
 # ///
 #
-# COPYRIGHT: ReproNim/containers Team 2018-2025
+# COPYRIGHT: ReproNim/containers Team 2018-2026
 #
 # LICENSE: MIT
 #
