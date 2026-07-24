@@ -786,3 +786,6 @@
 [datalad "containers.neurodesk-esilpd"]
 	image = images/neurodesk/neurodesk-esilpd--0.0.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-emuses"]
+	image = images/neurodesk/neurodesk-emuses--1.3.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
