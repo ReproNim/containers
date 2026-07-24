@@ -178,6 +178,32 @@ class Builder:
                 "Expected at least 100 NeuroDesk images, got %d" % len(all_imgs)
             )
 
+        # Deduplicate: neurodesk's log.txt occasionally lists both a dated
+        # entry (e.g. mrtrix3src_latest_20260527) and a moving "_latest_latest"
+        # alias for the same (name, version).  Both map to the same imagefile
+        # (imagename uses name+version, not date), so registering both URLs
+        # causes flip-flop across runs, and the moving _latest.simg URL is
+        # unstable long-term (git-annex checksums won't match once neurodesk
+        # rebuilds).  Prefer the dated entry; fall back to the moving alias
+        # only when no dated entry exists.
+        deduped: dict[tuple[str, str], NeuroDeskSingularityImage] = {}
+        for img in all_imgs:
+            key = (img.name, img.version)
+            existing = deduped.get(key)
+            if existing is None:
+                deduped[key] = img
+            elif existing.date == 'latest' and img.date != 'latest':
+                log.info("prefer dated %s over moving alias %s",
+                         img.container, existing.container)
+                deduped[key] = img
+            elif img.date == 'latest' and existing.date != 'latest':
+                log.info("skip moving alias %s in favor of dated %s",
+                         img.container, existing.container)
+            else:
+                log.warning("duplicate neurodesk entry %s already seen as %s;"
+                            " keeping first", img.container, existing.container)
+        all_imgs = list(deduped.values())
+
         ds = dl.Dataset(self.repo_dir)
         outdir = self.images_dir / 'neurodesk'
         outdir.mkdir(parents=True, exist_ok=True)
