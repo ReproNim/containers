@@ -798,3 +798,6 @@
 [datalad "containers.neurodesk-dhcpstructuralpipeline"]
 	image = images/neurodesk/neurodesk-dhcpstructuralpipeline--1.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-deepsif"]
+	image = images/neurodesk/neurodesk-deepsif--0.0.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
