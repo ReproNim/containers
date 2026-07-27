@@ -855,3 +855,6 @@
 [datalad "containers.neurodesk-deeplabcut"]
 	image = images/neurodesk/neurodesk-deeplabcut--2.3.11.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-clinicadl"]
+	image = images/neurodesk/neurodesk-clinicadl--1.6.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
