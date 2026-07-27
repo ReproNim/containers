@@ -846,3 +846,6 @@
 [datalad "containers.neurodesk-bcbtoolkit"]
 	image = images/neurodesk/neurodesk-bcbtoolkit--0.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-voreen"]
+	image = images/neurodesk/neurodesk-voreen--5.3.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
