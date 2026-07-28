@@ -4,6 +4,9 @@ set -eu
 
 export PS4=+
 
+# for 'uv'
+export PATH=/usr/local/bin/:$PATH
+
 datalad wtf -S datalad -S dependencies -S extensions
 
 # verify that datalad-container is available in the environment
