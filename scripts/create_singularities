@@ -562,6 +562,14 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
     if should_build('bids-apps', 'bids/validator'):
         builder.generate_singularity_for_docker_image("bids/validator")
 
+    # simbids is a BIDS App, but it is not in the bids-website catalog scraped
+    # above -- it simulates BIDS data for CI testing rather than analyzing it,
+    # and is used as a fast stand-in app by babs/mechababs.  Hence an explicit
+    # entry here rather than auto-discovery.
+    # TODO: if we decide to register this as an official bids-app this can go away
+    if should_build('bids-apps', 'pennlinc/simbids'):
+        builder.generate_singularity_for_docker_image("pennlinc/simbids", family="bids")
+
     # Additional ones from Poldrack
     if should_build('poldrack', 'poldracklab/ds003-example'):
         builder.generate_singularity_for_docker_image("poldracklab/ds003-example")
