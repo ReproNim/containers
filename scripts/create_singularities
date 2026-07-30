@@ -508,7 +508,7 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
 
     # Use local dedicated "tmp/" directory since any other might be too small
     topdir = Path(__file__).parent.parent
-    topdir.mkdir(parents=True, exist_ok=True)
+    (topdir / "tmp").mkdir(parents=True, exist_ok=True)
     builder = Builder(
         repo_dir=topdir,
         images_dir=topdir / "images",
