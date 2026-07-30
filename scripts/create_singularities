@@ -502,8 +502,19 @@ def get_imagename(repoid: str, family: str, versiontag: str, familysuf: Optional
 @click.option("--push", is_flag=True, show_default=True, default=False, help="Push upon completion.")
 @click.option("--image-groups", "-i", multiple=True, help="Specific image groups or individual images to build. Can be used multiple times.")
 @click.option("--no-singularity-check", is_flag=True, show_default=True, default=False, help="Disable checking the version of singularity.")
+@click.option("--pdb", "use_pdb", is_flag=True, show_default=True, default=False, help="Drop into pdb on unhandled exception.")
 @click.argument("githubids", nargs=-1, default=None)
-def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, githubids: list[str]|None) -> None:
+def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, use_pdb: bool, githubids: list[str]|None) -> None:
+    if use_pdb:
+        import pdb
+        import traceback
+
+        def _pdb_excepthook(exc_type: type, exc_value: BaseException, exc_tb: Any) -> None:
+            traceback.print_exception(exc_type, exc_value, exc_tb)
+            pdb.post_mortem(exc_tb)
+
+        sys.excepthook = _pdb_excepthook
+
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
 
     # Use local dedicated "tmp/" directory since any other might be too small
