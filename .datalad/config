@@ -873,3 +873,6 @@
 [datalad "containers.neurodesk-flames"]
 	image = images/neurodesk/neurodesk-flames--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-synthseg"]
+	image = images/neurodesk/neurodesk-synthseg--8.2.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
