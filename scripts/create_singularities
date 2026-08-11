@@ -155,7 +155,13 @@ class Builder:
         # for now we disregard the metadata
         for l in r.text.splitlines():
             container = l.split()[0]
-            name, version, date = container.split('_')
+            parts = container.split('_')
+            if len(parts) != 3:
+                raise ValueError(
+                    f"Expected 3 '_'-separated parts (name, version, date) "
+                    f"but got {len(parts)} in {container!r} from line {l!r}"
+                )
+            name, version, date = parts
             yield NeuroDeskSingularityImage(
                 container=container,
                 name=name,
