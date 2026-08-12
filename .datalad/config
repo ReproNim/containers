@@ -882,3 +882,6 @@
 [datalad "containers.neurodesk-neurodesktop-lite"]
 	image = images/neurodesk/neurodesk-neurodesktop-lite--20260428.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brainles-preprocessing"]
+	image = images/neurodesk/neurodesk-brainles-preprocessing--0.6.10.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
