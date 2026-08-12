@@ -78,6 +78,7 @@ class NeuroDeskSingularityImage:
     version: str
     date: str
     urls: list[str]
+    arch: Optional[str] = None
 
 
 @dataclass
@@ -156,15 +157,17 @@ class Builder:
         for l in r.text.splitlines():
             container = l.split()[0]
             parts = container.split('_')
-            if len(parts) >= 2 and parts[1] == 'arm64':
-                lgr.debug("Skipping arm64 image: %s", container)
-                continue
-            if len(parts) != 3:
+            arch = None
+            if len(parts) == 4 and parts[1] == 'arm64':
+                name, arch, version, date = parts
+            elif len(parts) == 3:
+                name, version, date = parts
+            else:
                 raise ValueError(
                     f"Expected 3 '_'-separated parts (name, version, date) "
+                    f"or 4 with arch (name, arch, version, date) "
                     f"but got {len(parts)} in {container!r} from line {l!r}"
                 )
-            name, version, date = parts
             yield NeuroDeskSingularityImage(
                 container=container,
                 name=name,
@@ -172,7 +175,8 @@ class Builder:
                 date=date,
                 urls=[
                     f'https://neurocontainers.neurodesk.workers.dev/{container}.simg'
-                ]
+                ],
+                arch=arch,
             )
 
     def add_neurodesk_singularity_images(
@@ -197,7 +201,10 @@ class Builder:
         added, registered = [], 0
         for img in all_imgs:
             log.info("neurodesk <- singularity %s", img.container)
-            imagefile = Path(str(outdir / get_imagename(img.name, 'neurodesk', img.version)) + ".simg")
+            imgname = get_imagename(img.name, 'neurodesk', img.version)
+            if img.arch:
+                imgname += f"_{img.arch}"
+            imagefile = Path(str(outdir / imgname) + ".simg")
             known_img_files.append(imagefile)
 
             to_download = False
@@ -266,7 +273,11 @@ class Builder:
                 added.append(str(imagefile))
 
                 # Register container with datalad if this is the first/latest version of this image
-                if img.name != prior_img:
+                # TODO: register arch-specific images too once singularity_cmd
+                # supports selecting the appropriate architecture image
+                if img.arch:
+                    pass  # skip datalad containers-add for non-default arch
+                elif img.name != prior_img:
                     prior_img = img.name
                     registered += 1
                     log.info(" <- register %s %s", img.name, img.version)

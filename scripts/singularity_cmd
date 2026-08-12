@@ -2,6 +2,10 @@
 #emacs: -*- mode: shell-script; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- 
 #ex: set sts=4 ts=4 sw=4 noet:
 #
+# TODO: support selecting architecture-specific image (e.g. _arm64 suffix)
+#  when running on non-x86_64 hosts.  See images/neurodesk/ for arch-suffixed
+#  .simg files.
+#
 # A helper to run/exec singularity images with sanitization:
 #  - fake HOME with minimalistic .bashrc and .gitconfig
 #  - dedicated /tmp /var/tmp
