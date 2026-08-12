@@ -156,6 +156,9 @@ class Builder:
         for l in r.text.splitlines():
             container = l.split()[0]
             parts = container.split('_')
+            if len(parts) >= 2 and parts[1] == 'arm64':
+                lgr.debug("Skipping arm64 image: %s", container)
+                continue
             if len(parts) != 3:
                 raise ValueError(
                     f"Expected 3 '_'-separated parts (name, version, date) "
