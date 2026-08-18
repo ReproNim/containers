@@ -903,3 +903,6 @@
 [datalad "containers.neurodesk-gliomoda"]
 	image = images/neurodesk/neurodesk-gliomoda--0.0.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-petu"]
+	image = images/neurodesk/neurodesk-petu--0.0.7.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
