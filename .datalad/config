@@ -891,3 +891,6 @@
 [datalad "containers.neurodesk-openmsk"]
 	image = images/neurodesk/neurodesk-openmsk--0.1.11.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-meganorm"]
+	image = images/neurodesk/neurodesk-meganorm--0.2.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
