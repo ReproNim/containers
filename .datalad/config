@@ -900,3 +900,6 @@
 [datalad "containers.neurodesk-deep-quality-estimation"]
 	image = images/neurodesk/neurodesk-deep-quality-estimation--0.0.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-gliomoda"]
+	image = images/neurodesk/neurodesk-gliomoda--0.0.4.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
