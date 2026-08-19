@@ -909,3 +909,6 @@
 [datalad "containers.neurodesk-hypermapp3r"]
 	image = images/neurodesk/neurodesk-hypermapp3r--0.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brainles-aurora"]
+	image = images/neurodesk/neurodesk-brainles-aurora--0.2.7.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
