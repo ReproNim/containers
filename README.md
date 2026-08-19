@@ -141,6 +141,10 @@ establish "reproducible interactive sessions" with the help of that script.
 Singularity image files have [`.sif` extension](https://github.com/apptainer/sif)
 (older ones created using Singularity < 3, will have `.sing`).
 
+## Adding a container
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 # A typical YODA workflow
 
 Lets summarize YODA principles as a possible workflow:
