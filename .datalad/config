@@ -915,3 +915,6 @@
 [datalad "containers.neurodesk-modsort"]
 	image = images/neurodesk/neurodesk-modsort--0.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brats"]
+	image = images/neurodesk/neurodesk-brats--0.1.8.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
