@@ -1,3 +1,3 @@
 [codespell]
-skip = .git,.nox,.mypy_cache,populate_shub_urls.py
+skip = .git,.nox,.mypy_cache,populate_shub_urls.py,venvs,.venv,pics
 #ignore-words-list = aks,postgressql,filterin,ser,ist,respone,classe
