@@ -233,8 +233,8 @@ for arg in args.images:
         with os.fdopen(fd, "w", encoding="utf-8") as outfp:
             frozen_entries = 0
             cfg_file = topd / ".datalad" / "config"
-            with (cfg_file).open(encoding="utf-8") as infp:
-                for line in infp:
+            with (cfg_file).open(encoding="utf-8") as cfg_file_p:
+                for line in cfg_file_p:
                     line = line.rstrip("\n")
                     new_line = re.sub(
                         rf"{re.escape(str(imgpath))}(?:[ \t].*)*$",
