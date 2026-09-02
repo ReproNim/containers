@@ -927,3 +927,6 @@
 [datalad "containers.neurodesk-enigma-pd-wml"]
 	image = images/neurodesk/neurodesk-enigma-pd-wml--1.1.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-metabody"]
+	image = images/neurodesk/neurodesk-metabody--1.0.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
