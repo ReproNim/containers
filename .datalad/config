@@ -921,3 +921,6 @@
 [datalad "containers.bids-simbids"]
 	image = images/bids/bids-simbids--0.0.3.sif
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-topofit"]
+	image = images/neurodesk/neurodesk-topofit--0.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
