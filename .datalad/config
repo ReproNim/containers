@@ -924,3 +924,6 @@
 [datalad "containers.neurodesk-topofit"]
 	image = images/neurodesk/neurodesk-topofit--0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-enigma-pd-wml"]
+	image = images/neurodesk/neurodesk-enigma-pd-wml--1.1.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
