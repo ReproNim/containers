@@ -1,5 +1,6 @@
 # ReproNim/containers - containerized environments for reproducible neuroimaging
 
+[![repronim/containers DOI](https://zenodo.org/badge/182005926.svg)](https://zenodo.org/badge/latestdoi/182005926)
 [![CI Status](https://github.com/ReproNim/containers/actions/workflows/base-tests.yaml/badge.svg)](https://github.com/ReproNim/containers/actions/workflows/base-tests.yaml)
 [![Additional tests](https://github.com/ReproNim/containers/workflows/Additional%20tests/badge.svg)](https://github.com/ReproNim/containers/actions?query=workflow%3A%22Additional+tests%22)
 
