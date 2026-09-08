@@ -930,3 +930,6 @@
 [datalad "containers.neurodesk-metabody"]
 	image = images/neurodesk/neurodesk-metabody--1.0.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-spinalcordtoolbox-gpu"]
+	image = images/neurodesk/neurodesk-spinalcordtoolbox--7.3.3_gpu.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
