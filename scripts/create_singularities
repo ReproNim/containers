@@ -71,6 +71,35 @@ import datalad.api as dl
 log = logging.getLogger(__name__)
 
 
+# NeuroDesk singularity image names come in the form
+#     name[_flavor...]_version_date
+# where the optional "flavor" part(s) between the name and the version
+# describe a variant of the "default" (amd64, CPU-only) build, e.g.:
+#     spinalcordtoolbox_gpu_7.3.3_20260904            (flavor="gpu")
+#     neurodesktop-lite_arm64_20260428_20260813       (flavor="arm64")
+# We do not try to enumerate every possible flavor up front (new ones keep
+# showing up) -- we just record whatever is there as an opaque string and
+# decide elsewhere whether we know how to handle/register it.
+#
+# Flavor modifiers we know do not change the CPU architecture of the image
+# (so we can still run/register them via our generic call-fmt) -- anything
+# else in a flavor string is assumed to denote a non-default architecture,
+# which `singularity_cmd` cannot yet select among, so such images are
+# downloaded/kept but not registered as datalad containers (see TODO below).
+KNOWN_RUNNABLE_FLAVOR_MODIFIERS = frozenset({"gpu"})
+
+
+def is_runnable_flavor(flavor: Optional[str]) -> bool:
+    """Whether NeuroDesk images with this flavor can be run/registered
+    as a datalad container using our generic (architecture-agnostic)
+    call-fmt, i.e. the flavor is either the default (None) or consists
+    solely of known non-arch modifiers such as "gpu".
+    """
+    if not flavor:
+        return True
+    return all(tok in KNOWN_RUNNABLE_FLAVOR_MODIFIERS for tok in flavor.split("_"))
+
+
 @dataclass
 class NeuroDeskSingularityImage:
     container: str
@@ -78,7 +107,9 @@ class NeuroDeskSingularityImage:
     version: str
     date: str
     urls: list[str]
-    arch: Optional[str] = None
+    # None for the default (amd64, no modifiers) build; otherwise an
+    # underscore-joined string of flavor parts, e.g. "gpu" or "arm64".
+    flavor: Optional[str] = None
 
 
 @dataclass
@@ -157,17 +188,16 @@ class Builder:
         for l in r.text.splitlines():
             container = l.split()[0]
             parts = container.split('_')
-            arch = None
-            if len(parts) == 4 and parts[1] == 'arm64':
-                name, arch, version, date = parts
-            elif len(parts) == 3:
-                name, version, date = parts
-            else:
+            if len(parts) < 3:
                 raise ValueError(
-                    f"Expected 3 '_'-separated parts (name, version, date) "
-                    f"or 4 with arch (name, arch, version, date) "
+                    f"Expected at least 3 '_'-separated parts (name, version, date), "
+                    f"optionally with one or more flavor parts in between "
+                    f"(name[_flavor...]_version_date), "
                     f"but got {len(parts)} in {container!r} from line {l!r}"
                 )
+            name = parts[0]
+            version, date = parts[-2], parts[-1]
+            flavor = "_".join(parts[1:-2]) or None
             yield NeuroDeskSingularityImage(
                 container=container,
                 name=name,
@@ -176,7 +206,7 @@ class Builder:
                 urls=[
                     f'https://neurocontainers.neurodesk.workers.dev/{container}.simg'
                 ],
-                arch=arch,
+                flavor=flavor,
             )
 
     def add_neurodesk_singularity_images(
@@ -197,13 +227,15 @@ class Builder:
 
         existing_img_files = list(outdir.glob("*.simg"))
         known_img_files = []
-        prior_img = None
+        # (name, flavor) combos already registered (latest version wins,
+        # since all_imgs is in latest-to-oldest order for a given combo)
+        prior_imgs: set[tuple[str, Optional[str]]] = set()
         added, registered = [], 0
         for img in all_imgs:
             log.info("neurodesk <- singularity %s", img.container)
             imgname = get_imagename(img.name, 'neurodesk', img.version)
-            if img.arch:
-                imgname += f"_{img.arch}"
+            if img.flavor:
+                imgname += f"_{img.flavor}"
             imagefile = Path(str(outdir / imgname) + ".simg")
             known_img_files.append(imagefile)
 
@@ -272,19 +304,25 @@ class Builder:
                     )
                 added.append(str(imagefile))
 
-                # Register container with datalad if this is the first/latest version of this image
+                # Register container with datalad if this is the first/latest
+                # version of this (name, flavor) combo. A "gpu" flavor gets
+                # registered under its own name (e.g. neurodesk-toolbox-gpu),
+                # alongside the default (cpu) one, so both are usable.
                 # TODO: register arch-specific images too once singularity_cmd
                 # supports selecting the appropriate architecture image
-                if img.arch:
+                if not is_runnable_flavor(img.flavor):
                     pass  # skip datalad containers-add for non-default arch
-                elif img.name != prior_img:
-                    prior_img = img.name
+                elif (key := (img.name, img.flavor)) not in prior_imgs:
+                    prior_imgs.add(key)
                     registered += 1
-                    log.info(" <- register %s %s", img.name, img.version)
+                    log.info(" <- register %s %s (flavor=%s)", img.name, img.version, img.flavor)
                     self.runcmd(
                         "datalad",
                         "containers-add",
-                        get_familyname(img.name, 'neurodesk'),
+                        get_familyname(
+                            img.name, 'neurodesk',
+                            familysuf=img.flavor.replace("_", "-") if img.flavor else None,
+                        ),
                         "-i",
                         str(imagefile),
                         "--update",
