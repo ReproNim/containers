@@ -573,7 +573,11 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
 
         sys.excepthook = _pdb_excepthook
 
-    logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=logging.INFO)
+    logging.basicConfig(
+        format="%(asctime)s [%(levelname)-8s] %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S%z",
+        level=logging.INFO,
+    )
 
     # Use local dedicated "tmp/" directory since any other might be too small
     topdir = Path(__file__).parent.parent
