@@ -294,6 +294,8 @@ class Builder:
                 # observed to coincide with the target filesystem running low on
                 # space, so log free space alongside each failure to make that
                 # diagnosable from the logs after the fact.
+                # TODO: remove custom handling whenever download_url handles it
+                # https://github.com/ReproNim/containers/issues/169
                 max_attempts = 3
                 sleepiter = exp_wait(attempts=max_attempts)
                 attempt = 0
