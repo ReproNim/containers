@@ -598,7 +598,7 @@
 	image = images/neurodesk/neurodesk-apptainer--1.4.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-fastsurfer"]
-	image = images/neurodesk/neurodesk-fastsurfer--2.4.2.simg
+	image = images/neurodesk/neurodesk-fastsurfer--2.5.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-spm25"]
 	image = images/neurodesk/neurodesk-spm25--25.01.02.simg
