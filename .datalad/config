@@ -942,3 +942,6 @@
 [datalad "containers.neurodesk-arfiproc"]
 	image = images/neurodesk/neurodesk-arfiproc--1.0.0.post1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-afib1"]
+	image = images/neurodesk/neurodesk-afib1--1.6.0.post1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
