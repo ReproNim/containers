@@ -954,3 +954,6 @@
 [datalad "containers.neurodesk-openreconacsrss"]
 	image = images/neurodesk/neurodesk-openreconacsrss--0.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-cbsb0stats"]
+	image = images/neurodesk/neurodesk-cbsb0stats--1.4.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
