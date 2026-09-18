@@ -826,7 +826,7 @@
 	image = images/neurodesk/neurodesk-cartool--5.06.05.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-brainvisa"]
-	image = images/neurodesk/neurodesk-brainvisa--6.0.38.simg
+	image = images/neurodesk/neurodesk-brainvisa--6.0.40.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-brainsuite"]
 	image = images/neurodesk/neurodesk-brainsuite--23a.simg
