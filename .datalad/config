@@ -957,3 +957,6 @@
 [datalad "containers.neurodesk-cbsb0stats"]
 	image = images/neurodesk/neurodesk-cbsb0stats--1.4.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-blochsiegertb1mapping"]
+	image = images/neurodesk/neurodesk-blochsiegertb1mapping--1.1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
