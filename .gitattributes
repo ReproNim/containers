@@ -1,3 +1,7 @@
 * annex.backend=MD5E
 * annex.largefiles=(not(mimetype=text/*)and(largerthan=0))
 **/.git* annex.largefiles=nothing
+
+# artwork copied from the artwork/ submodule -- must stay in git so that
+# GitHub renders it in README.md without requiring a datalad get
+repronim-containers-1-single-wide.svg annex.largefiles=nothing
