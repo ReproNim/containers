@@ -1,4 +1,4 @@
-# ReproNim/containers - containerized environments for reproducible neuroimaging
+[![# ReproNim/containers - containerized environments for reproducible neuroimaging](pics/repronim-containers-1-single-wide.svg)](https://github.com/ReproNim/containers)
 
 [![repronim/containers DOI](https://zenodo.org/badge/182005926.svg)](https://zenodo.org/badge/latestdoi/182005926)
 [![CI Status](https://github.com/ReproNim/containers/actions/workflows/base-tests.yaml/badge.svg)](https://github.com/ReproNim/containers/actions/workflows/base-tests.yaml)
@@ -423,6 +423,13 @@ license for `fmriprep`).
 
 Based on the artwork Copyright 2018-2019 Michael Hanke, from
 [myyoda/poster](https://github.com/myyoda/poster), distributed under [CC BY](https://creativecommons.org/licenses/by/4.0/).
+
+### `pics/repronim-containers-1-single-wide.svg`
+
+A copy of `artwork/logos/repronim-containers-1-single-wide.svg` from the
+[ReproNim/containers-artwork](https://github.com/ReproNim/containers-artwork)
+submodule, kept in this repository (and in git, not git-annex) so that it
+renders in this README without fetching the submodule.
 
 # References
 
