@@ -640,7 +640,7 @@
 	image = images/neurodesk/neurodesk-qsmbly--0.11.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-datalad"]
-	image = images/neurodesk/neurodesk-datalad--1.6.2.simg
+	image = images/neurodesk/neurodesk-datalad--1.6.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-blender"]
 	image = images/neurodesk/neurodesk-blender--5.2.2.simg
