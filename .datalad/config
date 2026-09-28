@@ -963,3 +963,6 @@
 [datalad "containers.neurodesk-acsrss"]
 	image = images/neurodesk/neurodesk-acsrss--0.1.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-maestro"]
+	image = images/neurodesk/neurodesk-maestro--20260803.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
