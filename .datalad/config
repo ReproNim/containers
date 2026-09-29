@@ -541,7 +541,7 @@
 	image = images/neurodesk/neurodesk-tractseg--2.9.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-halfpipe"]
-	image = images/neurodesk/neurodesk-halfpipe--1.2.3.simg
+	image = images/neurodesk/neurodesk-halfpipe--1.3.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-pcntoolkit"]
 	image = images/neurodesk/neurodesk-pcntoolkit--1.3.0.simg
