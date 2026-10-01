@@ -969,3 +969,6 @@
 [datalad "containers.neurodesk-deepcombat"]
 	image = images/neurodesk/neurodesk-deepcombat--0.0.0.9000.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-alpaca"]
+	image = images/neurodesk/neurodesk-alpaca--1.1.4.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
