@@ -975,3 +975,6 @@
 [datalad "containers.neurodesk-openreconi2iexample"]
 	image = images/neurodesk/neurodesk-openreconi2iexample--1.0.89.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-frisgo"]
+	image = images/neurodesk/neurodesk-frisgo--2.10.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
