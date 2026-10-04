@@ -999,3 +999,6 @@
 [datalad "containers.neurodesk-skan"]
 	image = images/neurodesk/neurodesk-skan--0.13.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-quantiphyse"]
+	image = images/neurodesk/neurodesk-quantiphyse--0.9.10.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
