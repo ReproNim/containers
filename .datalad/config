@@ -990,3 +990,6 @@
 [datalad "containers.neurodesk-epu-group-afis"]
 	image = images/neurodesk/neurodesk-epu-group-afis--0.3.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-cmtk"]
+	image = images/neurodesk/neurodesk-cmtk--3.4.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
