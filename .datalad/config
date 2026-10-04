@@ -1002,3 +1002,6 @@
 [datalad "containers.neurodesk-quantiphyse"]
 	image = images/neurodesk/neurodesk-quantiphyse--0.9.10.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-loftcbf"]
+	image = images/neurodesk/neurodesk-loftcbf--3.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
