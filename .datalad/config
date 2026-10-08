@@ -1014,3 +1014,6 @@
 [datalad "containers.neurodesk-frisgokspace"]
 	image = images/neurodesk/neurodesk-frisgokspace--0.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-kspacefilter"]
+	image = images/neurodesk/neurodesk-kspacefilter--0.1.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
