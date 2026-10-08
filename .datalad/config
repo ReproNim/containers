@@ -979,7 +979,7 @@
 	image = images/neurodesk/neurodesk-frisgo--2.10.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-b0mapromeo"]
-	image = images/neurodesk/neurodesk-b0mapromeo--1.1.0.simg
+	image = images/neurodesk/neurodesk-b0mapromeo--1.2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-nobrainer"]
 	image = images/neurodesk/neurodesk-nobrainer--1.2.1.simg
