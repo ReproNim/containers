@@ -1020,3 +1020,6 @@
 [datalad "containers.neurodesk-shim-toolbox"]
 	image = images/neurodesk/neurodesk-shim-toolbox--1.5.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-vessynth"]
+	image = images/neurodesk/neurodesk-vessynth--2026.10.9.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
