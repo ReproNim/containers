@@ -1023,3 +1023,6 @@
 [datalad "containers.neurodesk-vessynth"]
 	image = images/neurodesk/neurodesk-vessynth--2026.10.9.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-xmipp"]
+	image = images/neurodesk/neurodesk-xmipp--6.0.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
