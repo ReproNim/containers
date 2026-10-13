@@ -1038,3 +1038,6 @@
 [datalad "containers.neurodesk-motioncor3"]
 	image = images/neurodesk/neurodesk-motioncor3--1.2.4.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-gautomatch"]
+	image = images/neurodesk/neurodesk-gautomatch--0.56.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
