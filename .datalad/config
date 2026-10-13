@@ -736,7 +736,7 @@
 	image = images/neurodesk/neurodesk-meica--4.0.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-megnet"]
-	image = images/neurodesk/neurodesk-megnet--1.0.1.simg
+	image = images/neurodesk/neurodesk-megnet--1.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mede"]
 	image = images/neurodesk/neurodesk-mede--0.0.12.simg
