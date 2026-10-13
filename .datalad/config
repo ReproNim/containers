@@ -1050,3 +1050,6 @@
 [datalad "containers.neurodesk-cryosparc"]
 	image = images/neurodesk/neurodesk-cryosparc--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-template"]
+	image = images/neurodesk/neurodesk-template--1.1.5.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
