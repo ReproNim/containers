@@ -520,7 +520,7 @@
 	image = images/neurodesk/neurodesk-neurodock--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-dicomtools"]
-	image = images/neurodesk/neurodesk-dicomtools--1.0.0.simg
+	image = images/neurodesk/neurodesk-dicomtools--1.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-synthstrip"]
 	image = images/neurodesk/neurodesk-synthstrip--8.2.0.simg
