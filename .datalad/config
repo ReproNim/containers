@@ -259,7 +259,7 @@
 	image = images/neurodesk/neurodesk-mriqc--24.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mricron"]
-	image = images/neurodesk/neurodesk-mricron--1.0.20190902.simg
+	image = images/neurodesk/neurodesk-mricron--1.2.20211006.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-mricrogl"]
 	image = images/neurodesk/neurodesk-mricrogl--1.2.20220720.simg
