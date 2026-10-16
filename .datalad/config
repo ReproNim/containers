@@ -562,7 +562,7 @@
 	image = images/neurodesk/neurodesk-nftsim--1.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-lesymap"]
-	image = images/neurodesk/neurodesk-lesymap--0.0.0.9222.simg
+	image = images/neurodesk/neurodesk-lesymap--0.0.0.9221.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-qupath"]
 	image = images/neurodesk/neurodesk-qupath--0.7.0.simg
