@@ -1060,7 +1060,7 @@
 	image = images/neurodesk/neurodesk-neurocommand--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-prostatefiducialseg"]
-	image = images/neurodesk/neurodesk-prostatefiducialseg--8.0.1.simg
+	image = images/neurodesk/neurodesk-prostatefiducialseg--8.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-ep3d"]
 	image = images/neurodesk/neurodesk-ep3d--1.0.0.simg
