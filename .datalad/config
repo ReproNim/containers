@@ -1054,7 +1054,7 @@
 	image = images/neurodesk/neurodesk-template--1.1.5.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-whitematterlesions"]
-	image = images/neurodesk/neurodesk-whitematterlesions--0.3.20261015.simg
+	image = images/neurodesk/neurodesk-whitematterlesions--0.5.20261022.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-neurocommand"]
 	image = images/neurodesk/neurodesk-neurocommand--1.0.0.simg
