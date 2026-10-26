@@ -1077,3 +1077,6 @@
 [datalad "containers.neurodesk-openreconexample"]
 	image = images/neurodesk/neurodesk-openreconexample--1.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-arfirecon"]
+	image = images/neurodesk/neurodesk-arfirecon--1.0.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
