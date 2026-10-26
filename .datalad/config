@@ -1071,3 +1071,6 @@
 [datalad "containers.neurodesk-sodiumnufft"]
 	image = images/neurodesk/neurodesk-sodiumnufft--0.1.10.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-sodiumgridding"]
+	image = images/neurodesk/neurodesk-sodiumgridding--0.1.6.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
