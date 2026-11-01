@@ -1083,3 +1083,6 @@
 [datalad "containers.neurodesk-arfimapping"]
 	image = images/neurodesk/neurodesk-arfimapping--1.0.12.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-brainqcnet"]
+	image = images/neurodesk/neurodesk-brainqcnet--1.0.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
