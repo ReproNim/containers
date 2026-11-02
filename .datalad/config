@@ -754,7 +754,7 @@
 	image = images/neurodesk/neurodesk-lipsia--4.1.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-libreoffice"]
-	image = images/neurodesk/neurodesk-libreoffice--26.2.4.simg
+	image = images/neurodesk/neurodesk-libreoffice--26.8.2.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-jidt"]
 	image = images/neurodesk/neurodesk-jidt--1.6.1.simg
