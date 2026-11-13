@@ -664,7 +664,7 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
             m = re.match(r" *dh:\s+(\S+)", line.rstrip("\n\r"))
             if m:
                 dockerhubid = re.sub(r"[\"']", "", m[1])
-                if "micalab/micapipe" not in dockerhubid:
+                if dockerhubid not in {"micalab/micapipe", "peerherholz/bidsonym"}:
                     builder.generate_singularity_for_docker_image(dockerhubid, "bids")
 
         # LTS releases for some bids-apps. TODO later may be: check for having ALL versions
