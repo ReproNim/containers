@@ -105,6 +105,31 @@ MRIQC_TAGS = [
             {"version_regex": r"^v?20\.2\.[0-9]+$"},
             ("20.2.7", "20.2.7"),
         ),
+        # version_regex is matched against the tag without architecture
+        (
+            [tag("20.2.7-amd64"), tag("20.2.7-arm64"), tag("20.2.6")],
+            {"version_regex": r"^v?20\.2\.[0-9]+$"},
+            ("20.2.7", "20.2.7-amd64"),
+        ),
+        # multi-arch tag lacks our architecture, but there is explicit one
+        ([tag("1.1", "arm64"), tag("1.1-amd64", "amd64")], {}, ("1.1", "1.1-amd64")),
+        ([tag("1.1-amd64", "amd64"), tag("1.1", "arm64")], {}, ("1.1", "1.1-amd64")),
+        # architecture not in the suffix, but Docker Hub tells
+        ([tag("2.0-arm64-gpu", "arm64"), tag("1.0", "amd64")], {}, ("1.0", "1.0")),
+        # single tag with architecture
+        ([tag("1.0-amd64", "amd64")], {}, ("1.0", "1.0-amd64")),
+        ([tag("latest"), tag("2.0-arm64")], {}, None),
+        # only Linux images count
+        (
+            [
+                {"name": "2.0", "images": [{"architecture": "amd64", "os": "windows"}]},
+                tag("1.0", "amd64"),
+            ],
+            {},
+            ("1.0", "1.0"),
+        ),
+        # no information on images
+        ([{"name": "1.1", "images": None}, {"name": "1.0"}], {}, ("1.1", "1.1")),
         # unknown architecture alone does not disqualify
         ([tag("1.1", "unknown"), tag("1.0", "amd64")], {}, ("1.1", "1.1")),
     ],

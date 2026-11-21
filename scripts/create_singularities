@@ -166,15 +166,19 @@ def split_arch_suffix(tag: str) -> tuple[str, Optional[str]]:
     return tag[: m.start()], ARCH_ALIASES[m["arch"].lower()]
 
 
-def get_tag_archs(tag_record: dict[str, Any]) -> set[str]:
-    """Architectures of the images behind a tag, as reported by Docker Hub
-    in a record for the tag.  Empty set if not known."""
-    archs = set()
+def get_tag_archs(tag_record: dict[str, Any]) -> Optional[set[str]]:
+    """Architectures of the Linux images behind a tag, as reported by
+    Docker Hub in a record for the tag.  None if not known."""
+    archs: Optional[set[str]] = None
     for image in tag_record.get("images") or []:
-        arch = image.get("architecture")
+        arch = (image.get("architecture") or "").lower()
         # "unknown" is used e.g. for attestation manifests
-        if arch and arch != "unknown":
-            archs.add(ARCH_ALIASES.get(arch.lower(), arch.lower()))
+        if not arch or arch == "unknown":
+            continue
+        if archs is None:
+            archs = set()
+        if (image.get("os") or "linux").lower() == "linux":
+            archs.add(ARCH_ALIASES.get(arch, arch))
     return archs
 
 
@@ -634,17 +638,21 @@ def select_last_version_tag(
     `dh` as returned by Docker Hub.
 
     Tags which are for an architecture other than `arch` -- judging by
-    their suffix (e.g. 26.1.1-arm64) or by the architectures of the images
-    Docker Hub lists for them -- are not considered at all: we would rather
-    stay with an older version than switch to another architecture.
+    their suffix (e.g. 26.1.1-arm64) or by the architectures of the Linux
+    images Docker Hub lists for them -- are not considered at all: we would
+    rather stay with an older version than switch to another architecture.
+    If Docker Hub lists no images for a tag, only the suffix is judged.
 
     Returns a tuple of the "pure" version (to be used in the name of our
     image) and the tag to pull, or None if there is no suitable tag.
     """
     all_versions = [cast(str, res["name"]) for res in tag_records]
     if version_regex:
+        # matched against the tag without architecture suffix
         tag_records = [
-            res for res in tag_records if re.search(version_regex, res["name"])
+            res
+            for res in tag_records
+            if re.search(version_regex, split_arch_suffix(res["name"])[0])
         ]
     # tag without architecture suffix -> (rank, tag as on Docker Hub),
     # where rank is to prefer (multi-arch) tag without architecture suffix
@@ -657,10 +665,10 @@ def select_last_version_tag(
             log.debug(" %s skip tag %s: for %s, not %s", dh, tag, tag_arch, arch)
             continue
         archs = get_tag_archs(res)
-        if archs and arch not in archs:
+        if archs is not None and arch not in archs:
             log.info(
-                " %s skip tag %s: has images only for %s, not %s",
-                dh, tag, ", ".join(sorted(archs)), arch,
+                " %s skip tag %s: has Linux images only for %s, not %s",
+                dh, tag, ", ".join(sorted(archs)) or "none", arch,
             )
             continue
         rank = 0 if tag_arch is None else 1
