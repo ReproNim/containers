@@ -102,6 +102,82 @@ def is_runnable_flavor(flavor: Optional[str]) -> bool:
     return all(tok in KNOWN_RUNNABLE_FLAVOR_MODIFIERS for tok in flavor.split("_"))
 
 
+# Architecture we build/register images for.  Unless explicitly aiming for
+# something else (e.g. flavors of NeuroDesk images above), we want only
+# images which could run on this architecture, and should not "upgrade" to
+# a release which (so far) provides images only for other architecture(s).
+DEFAULT_ARCH = "amd64"
+
+# Aliases for the names of architectures as they could be encountered in
+# the suffixes of the tags on Docker Hub, mapped to how Docker Hub (Go)
+# names them.
+ARCH_ALIASES = {
+    "amd64": "amd64",
+    "x86_64": "amd64",
+    "x86-64": "amd64",
+    "arm64": "arm64",
+    "arm64v8": "arm64",
+    "aarch64": "arm64",
+    "arm": "arm",
+    "arm32v6": "arm",
+    "arm32v7": "arm",
+    "armv6": "arm",
+    "armv7": "arm",
+    "armhf": "arm",
+    "armel": "arm",
+    "386": "386",
+    "i386": "386",
+    "ppc64le": "ppc64le",
+    "s390x": "s390x",
+    "riscv64": "riscv64",
+    "mips64le": "mips64le",
+}
+
+# Some projects (e.g. nipreps/mriqc) tag the multi-arch image as VERSION
+# and per-architecture ones as VERSION-ARCH, e.g. 26.1.1, 26.1.1-amd64,
+# 26.1.1-arm64.
+# Purely numeric "386" is not considered as a suffix since it could as
+# well be a component of a version.
+ARCH_SUFFIX_REGEX = re.compile(
+    r"[-_](?P<arch>%s)$"
+    % "|".join(
+        re.escape(a)
+        for a in sorted(ARCH_ALIASES, key=len, reverse=True)
+        if not a.isdigit()
+    ),
+    flags=re.IGNORECASE,
+)
+
+
+def split_arch_suffix(tag: str) -> tuple[str, Optional[str]]:
+    """Split a tag into the tag without architecture suffix, and the
+    (normalized) architecture that suffix denotes, or None if there is none.
+
+    >>> split_arch_suffix("26.1.1")
+    ('26.1.1', None)
+    >>> split_arch_suffix("26.1.1-arm64")
+    ('26.1.1', 'arm64')
+    >>> split_arch_suffix("v1.0_x86_64")
+    ('v1.0', 'amd64')
+    """
+    m = ARCH_SUFFIX_REGEX.search(tag)
+    if not m:
+        return tag, None
+    return tag[: m.start()], ARCH_ALIASES[m["arch"].lower()]
+
+
+def get_tag_archs(tag_record: dict[str, Any]) -> set[str]:
+    """Architectures of the images behind a tag, as reported by Docker Hub
+    in a record for the tag.  Empty set if not known."""
+    archs = set()
+    for image in tag_record.get("images") or []:
+        arch = image.get("architecture")
+        # "unknown" is used e.g. for attestation manifests
+        if arch and arch != "unknown":
+            archs.add(ARCH_ALIASES.get(arch.lower(), arch.lower()))
+    return archs
+
+
 @dataclass
 class NeuroDeskSingularityImage:
     container: str
@@ -134,33 +210,9 @@ class Builder:
     @staticmethod
     def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
-        versions = [cast(str, res["name"]) for res in r.json()["results"]]
-        if version_regex:
-            versions = [v for v in versions if re.search(version_regex, v)]
-        if len(versions) > 1 or (versions and only_good_versions):
-            # select only the ones which seems to be semantic and/or
-            # master/latest.  Some release alpha releases, so probably would
-            # skip those for now
-            good_versions: dict[str, str] = {}
-            for v in versions:
-                if not (
-                    re.search(r"[ab][0-9]+$", v)
-                    or re.search(r"rc[0-9]*$", v)
-                    or "master" in v
-                ):
-                    m = re.match(r"(([Vv]|version-|release-|)([0-9]{1,10}\..*))", v)
-                    if m:
-                        good_versions[m[3]] = m[1]
-            if good_versions:
-                k = max(good_versions, key=version_key)
-                return (k, good_versions[k])
-            else:
-                return None
-        elif not versions:
-            log.info(" %s no version. Tags: %s", dh, " ".join(versions))
-            return None
-        else:
-            return (versions[0], versions[0])
+        return select_last_version_tag(
+            r.json()["results"], dh,
+            only_good_versions=only_good_versions, version_regex=version_regex)
 
     @staticmethod
     def get_docker_repositories(namespace: str, full:bool = True) -> Generator[str, None, None]:
@@ -569,6 +621,79 @@ class DockerImage:
             return self.imagefile
         else:
             return None
+
+
+def select_last_version_tag(
+    tag_records: list[dict[str, Any]],
+    dh: str,
+    only_good_versions: bool = False,
+    version_regex: Optional[str] = None,
+    arch: str = DEFAULT_ARCH,
+) -> Optional[tuple[str, str]]:
+    """Select the tag of the last version among records for the tags of
+    `dh` as returned by Docker Hub.
+
+    Tags which are for an architecture other than `arch` -- judging by
+    their suffix (e.g. 26.1.1-arm64) or by the architectures of the images
+    Docker Hub lists for them -- are not considered at all: we would rather
+    stay with an older version than switch to another architecture.
+
+    Returns a tuple of the "pure" version (to be used in the name of our
+    image) and the tag to pull, or None if there is no suitable tag.
+    """
+    all_versions = [cast(str, res["name"]) for res in tag_records]
+    if version_regex:
+        tag_records = [
+            res for res in tag_records if re.search(version_regex, res["name"])
+        ]
+    # tag without architecture suffix -> (rank, tag as on Docker Hub),
+    # where rank is to prefer (multi-arch) tag without architecture suffix
+    # over the one with an explicit suffix for our architecture
+    versions: dict[str, tuple[int, str]] = {}
+    for res in tag_records:
+        tag = cast(str, res["name"])
+        base, tag_arch = split_arch_suffix(tag)
+        if tag_arch not in (None, arch):
+            log.debug(" %s skip tag %s: for %s, not %s", dh, tag, tag_arch, arch)
+            continue
+        archs = get_tag_archs(res)
+        if archs and arch not in archs:
+            log.info(
+                " %s skip tag %s: has images only for %s, not %s",
+                dh, tag, ", ".join(sorted(archs)), arch,
+            )
+            continue
+        rank = 0 if tag_arch is None else 1
+        if base not in versions or rank < versions[base][0]:
+            versions[base] = (rank, tag)
+
+    if len(tag_records) > 1 or (tag_records and only_good_versions):
+        # select only the ones which seems to be semantic and/or
+        # master/latest.  Some release alpha releases, so probably would
+        # skip those for now
+        good_versions: dict[str, str] = {}
+        for v, (_, tag) in versions.items():
+            if not (
+                re.search(r"[ab][0-9]+$", v)
+                or re.search(r"rc[0-9]*$", v)
+                or "master" in v
+            ):
+                m = re.match(r"(([Vv]|version-|release-|)([0-9]{1,10}\..*))", v)
+                if m:
+                    good_versions[m[3]] = tag
+        if good_versions:
+            k = max(good_versions, key=version_key)
+            return (k, good_versions[k])
+        else:
+            return None
+    elif not versions:
+        log.info(
+            " %s no version for %s. Tags: %s", dh, arch, " ".join(all_versions)
+        )
+        return None
+    else:
+        ((v, (_, tag)),) = versions.items()
+        return (v, tag)
 
 
 def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:

@@ -1,4 +1,4 @@
-name: Type-check Python code
+name: Type-check and test Python code
 
 on:
   push:
@@ -23,6 +23,10 @@ jobs:
 
       - name: Type-check
         run: nox -e typing
+        working-directory: scripts
+
+      - name: Test Python code
+        run: nox -e test
         working-directory: scripts
 
 # vim:set et sts=2:
