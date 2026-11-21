@@ -1092,3 +1092,6 @@
 [datalad "containers.neurodesk-pycortex"]
 	image = images/neurodesk/neurodesk-pycortex--1.4.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-diffusiontoolkit"]
+	image = images/neurodesk/neurodesk-diffusiontoolkit--0.6.4.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
