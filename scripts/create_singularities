@@ -212,11 +212,10 @@ class Builder:
         return subprocess.run(args, **kwargs)
 
     @staticmethod
-    def get_last_docker_version_tag(dh: str, only_good_versions: bool=False, version_regex: Optional[str]=None) -> Optional[tuple[str, str]]:
+    def get_docker_tag_records(dh: str) -> list[dict[str, Any]]:
+        """Return records for the (most recent) tags of `dh` on Docker Hub"""
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
-        return select_last_version_tag(
-            r.json()["results"], dh,
-            only_good_versions=only_good_versions, version_regex=version_regex)
+        return cast("list[dict[str, Any]]", r.json()["results"])
 
     @staticmethod
     def get_docker_repositories(namespace: str, full:bool = True) -> Generator[str, None, None]:
@@ -465,7 +464,11 @@ class Builder:
         family: str,
         origrepoid: Optional[str] = None,
         familysuf: Optional[str]=None,
+        register: bool = True,
     ) -> None:
+        # register=False is to only add the image file without registering
+        # it as a datalad container, e.g. for images of non-default
+        # architectures
         # If image repo id is different (e.g. ReproNim/containers) from
         # original repoid where we are getting image for (e.g. generating
         # Singularity containers from Docker images) -- specify it as 4th arg
@@ -481,6 +484,8 @@ class Builder:
                 f"Adding image for {docker_image.imagename} from {docker_image.docker_uri}",
                 str(imagefile),
             )
+            if not register:
+                return
             base_opts = ' '
             if familyname == 'bids-mriqc':
                 # need to explicitly specify option to avoid use of datalad inside
@@ -521,8 +526,9 @@ class Builder:
         #    log.info("TEMP TODO skip %s due to odd OCI issue ATM with old singularity", dockerhubid)
         #    return
         log.info("%s <- docker %s", family, dockerhubid)
-        last_version = self.get_last_docker_version_tag(
-            dockerhubid, only_good_versions=only_good_versions,
+        tag_records = self.get_docker_tag_records(dockerhubid)
+        last_version = select_last_version_tag(
+            tag_records, dockerhubid, only_good_versions=only_good_versions,
             version_regex=version_regex)
         if last_version is not None:
             last_version_pure, last_version_tag = last_version
@@ -533,6 +539,23 @@ class Builder:
             self.add_singularity_versioned_image(
                 docker_image, "ReproNim/containers", family, dockerhubid, familysuf=familysuf,
             )
+            # Images explicitly tagged for other architectures of the very
+            # same version: similarly to non-default flavors of NeuroDesk
+            # images we get/keep them, with architecture as the suffix of
+            # the version, but do not register as datalad containers.
+            # TODO: register them too (or make singularity_cmd choose) --
+            # https://github.com/ReproNim/containers/issues/175
+            for arch, tag in select_other_arch_tags(
+                tag_records, last_version_tag
+            ).items():
+                log.info(" %s also has %s for %s", dockerhubid, tag, arch)
+                docker_image = self.prepare_docker_image(
+                    dockerhubid, tag, f"{last_version_pure}-{arch}", family
+                )
+                self.add_singularity_versioned_image(
+                    docker_image, "ReproNim/containers", family, dockerhubid,
+                    familysuf=familysuf, register=False,
+                )
 
     def generate_singularity_for_docker_namespace(self, namespace: str, family: Optional[str]=None,
                                                   only_good_versions: bool=False) -> None:
@@ -639,8 +662,9 @@ def select_last_version_tag(
 
     Tags which are for an architecture other than `arch` -- judging by
     their suffix (e.g. 26.1.1-arm64) or by the architectures of the Linux
-    images Docker Hub lists for them -- are not considered at all: we would
-    rather stay with an older version than switch to another architecture.
+    images Docker Hub lists for them -- are not considered here at all: we
+    would rather stay with an older version than switch to another
+    architecture.  See `select_other_arch_tags` for getting those.
     If Docker Hub lists no images for a tag, only the suffix is judged.
 
     Returns a tuple of the "pure" version (to be used in the name of our
@@ -702,6 +726,36 @@ def select_last_version_tag(
     else:
         ((v, (_, tag)),) = versions.items()
         return (v, tag)
+
+
+def select_other_arch_tags(
+    tag_records: list[dict[str, Any]],
+    version_tag: str,
+    arch: str = DEFAULT_ARCH,
+) -> dict[str, str]:
+    """Given `version_tag` selected by `select_last_version_tag`, find the
+    tags of the very same version explicitly for the architectures other
+    than `arch`, e.g. 26.1.1-arm64 for 26.1.1 (or for 26.1.1-amd64).
+
+    Returns a mapping from the (normalized) architecture to the tag.
+    """
+    version_base = split_arch_suffix(version_tag)[0]
+    tags: dict[str, str] = {}
+    for res in tag_records:
+        tag = cast(str, res["name"])
+        base, tag_arch = split_arch_suffix(tag)
+        if base != version_base or tag_arch in (None, arch):
+            continue
+        assert tag_arch is not None  # for mypy
+        archs = get_tag_archs(res)
+        if archs is not None and tag_arch not in archs:
+            log.warning(
+                " skip tag %s: has Linux images for %s, not %s as its name tells",
+                tag, ", ".join(sorted(archs)) or "none", tag_arch,
+            )
+            continue
+        tags.setdefault(tag_arch, tag)
+    return tags
 
 
 def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:

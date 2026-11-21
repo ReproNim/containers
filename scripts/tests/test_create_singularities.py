@@ -140,3 +140,32 @@ def test_select_last_version_tag(
     expected: Optional[tuple[str, str]],
 ) -> None:
     assert cs.select_last_version_tag(tags, "some/image", **kwargs) == expected
+
+
+@pytest.mark.parametrize(
+    "tags,version_tag,kwargs,expected",
+    [
+        (MRIQC_TAGS, "26.1.1", {}, {"arm64": "26.1.1-arm64"}),
+        (MRIQC_TAGS, "26.1.0", {}, {"arm64": "26.1.0-arm64"}),
+        (MRIQC_TAGS, "26.1.1-amd64", {}, {"arm64": "26.1.1-arm64"}),
+        (MRIQC_TAGS, "26.1.1", {"arch": "arm64"}, {"amd64": "26.1.1-amd64"}),
+        (MRIQC_TAGS, "latest", {}, {}),
+        # only explicitly tagged ones, and only of the same version
+        ([tag("1.0", "amd64", "arm64"), tag("0.9-arm64", "arm64")], "1.0", {}, {}),
+        (
+            [tag("v1.0"), tag("v1.0-aarch64"), tag("v1.0_arm64"), tag("v1.0-s390x")],
+            "v1.0",
+            {},
+            {"arm64": "v1.0-aarch64", "s390x": "v1.0-s390x"},
+        ),
+        # name of the tag does not match what Docker Hub tells
+        ([tag("1.0", "amd64"), tag("1.0-arm64", "amd64")], "1.0", {}, {}),
+    ],
+)
+def test_select_other_arch_tags(
+    tags: list[dict[str, Any]],
+    version_tag: str,
+    kwargs: dict[str, Any],
+    expected: dict[str, str],
+) -> None:
+    assert cs.select_other_arch_tags(tags, version_tag, **kwargs) == expected
