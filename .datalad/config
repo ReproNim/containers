@@ -1098,3 +1098,6 @@
 [datalad "containers.neurodesk-smartscope"]
 	image = images/neurodesk/neurodesk-smartscope--0.10.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-postgresanalytics"]
+	image = images/neurodesk/neurodesk-postgresanalytics--18.7.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
