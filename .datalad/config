@@ -1101,3 +1101,6 @@
 [datalad "containers.neurodesk-postgresanalytics"]
 	image = images/neurodesk/neurodesk-postgresanalytics--18.7.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-nextpyp"]
+	image = images/neurodesk/neurodesk-nextpyp--0.7.3.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
