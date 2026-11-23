@@ -454,7 +454,7 @@
 	image = images/neurodesk/neurodesk-glmsingle--1.2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-topaz"]
-	image = images/neurodesk/neurodesk-topaz--0.3.20.simg
+	image = images/neurodesk/neurodesk-topaz--0.3.21.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
 [datalad "containers.neurodesk-relion"]
 	image = images/neurodesk/neurodesk-relion--5.1.1.simg
