@@ -1110,3 +1110,6 @@
 [datalad "containers.neurodesk-pymol"]
 	image = images/neurodesk/neurodesk-pymol--3.1.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-icy"]
+	image = images/neurodesk/neurodesk-icy--2.5.4.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
