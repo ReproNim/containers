@@ -1146,3 +1146,6 @@
 [datalad "containers.neurodesk-nextflow"]
 	image = images/neurodesk/neurodesk-nextflow--26.10.7.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-moosez"]
+	image = images/neurodesk/neurodesk-moosez--3.2.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
