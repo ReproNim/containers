@@ -1131,3 +1131,6 @@
 [datalad "containers.neurodesk-pypet2bids"]
 	image = images/neurodesk/neurodesk-pypet2bids--1.6.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-plantseg"]
+	image = images/neurodesk/neurodesk-plantseg--2.2.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
