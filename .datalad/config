@@ -1125,3 +1125,6 @@
 [datalad "containers.neurodesk-tissuumaps"]
 	image = images/neurodesk/neurodesk-tissuumaps--3.2.1.14.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-rclone"]
+	image = images/neurodesk/neurodesk-rclone--1.76.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
