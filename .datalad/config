@@ -1116,3 +1116,6 @@
 [datalad "containers.neurodesk-fiji"]
 	image = images/neurodesk/neurodesk-fiji--20261112-1517.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-cellprofiler"]
+	image = images/neurodesk/neurodesk-cellprofiler--4.2.8.1.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
