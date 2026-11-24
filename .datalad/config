@@ -1104,3 +1104,6 @@
 [datalad "containers.neurodesk-nextpyp"]
 	image = images/neurodesk/neurodesk-nextpyp--0.7.3.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-webknossos"]
+	image = images/neurodesk/neurodesk-webknossos--4.4.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
