@@ -1113,3 +1113,6 @@
 [datalad "containers.neurodesk-icy"]
 	image = images/neurodesk/neurodesk-icy--2.5.4.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-fiji"]
+	image = images/neurodesk/neurodesk-fiji--20261112-1517.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
