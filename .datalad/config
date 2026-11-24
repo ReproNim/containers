@@ -1134,3 +1134,6 @@
 [datalad "containers.neurodesk-plantseg"]
 	image = images/neurodesk/neurodesk-plantseg--2.2.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-petpvc"]
+	image = images/neurodesk/neurodesk-petpvc--1.2.12.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
