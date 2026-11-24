@@ -1119,3 +1119,6 @@
 [datalad "containers.neurodesk-cellprofiler"]
 	image = images/neurodesk/neurodesk-cellprofiler--4.2.8.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-tpcclib"]
+	image = images/neurodesk/neurodesk-tpcclib--0.8.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
