@@ -173,6 +173,7 @@ def test_select_other_arch_tags(
     assert cs.select_other_arch_tags(tags, version_tag, **kwargs) == expected
 
 
+@pytest.mark.ai_generated
 @pytest.mark.parametrize(
     "repoid,expected",
     [
@@ -194,6 +195,7 @@ def response(url: str, status: int, body: Any = None, **headers: str) -> request
     return r
 
 
+@pytest.mark.ai_generated
 @pytest.mark.parametrize("auth", [True, False])
 def test_get_oci_tag_records(monkeypatch: pytest.MonkeyPatch, auth: bool) -> None:
     pages = {
