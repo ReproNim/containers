@@ -4,11 +4,13 @@ Run with `nox -e test` under scripts/ .
 """
 from importlib.machinery import SourceFileLoader
 from importlib.util import module_from_spec, spec_from_loader
+import json
 from pathlib import Path
 import sys
 from typing import Any, Optional
 
 import pytest
+import requests
 
 SCRIPT = Path(__file__).parent.parent / "create_singularities"
 loader = SourceFileLoader("create_singularities", str(SCRIPT))
@@ -169,3 +171,47 @@ def test_select_other_arch_tags(
     expected: dict[str, str],
 ) -> None:
     assert cs.select_other_arch_tags(tags, version_tag, **kwargs) == expected
+
+
+@pytest.mark.parametrize(
+    "repoid,expected",
+    [
+        ("nipreps/fmriprep", "bids-fmriprep--1.0"),
+        ("pennlinc/toy_bids_app", "bids-toy-bids-app--1.0"),
+        ("ghcr.io/unfmontreal/skullduggery", "bids-skullduggery--1.0"),
+        ("afni", "bids-afni--1.0"),
+    ],
+)
+def test_get_imagename(repoid: str, expected: str) -> None:
+    assert cs.get_imagename(repoid, "bids", "1.0") == expected
+
+
+def response(url: str, status: int, body: Any = None, **headers: str) -> requests.Response:
+    r = requests.Response()
+    r.url, r.status_code = url, status
+    r._content = json.dumps(body).encode()
+    r.headers.update(headers)
+    return r
+
+
+@pytest.mark.parametrize("auth", [True, False])
+def test_get_oci_tag_records(monkeypatch: pytest.MonkeyPatch, auth: bool) -> None:
+    pages = {
+        "": ({"tags": ["1.0", "latest"]}, '</v2/o/i/tags/list?last=latest&n=2>; rel="next"'),
+        "?last=latest&n=2": ({"tags": ["1.1-arm64"]}, ""),
+    }
+
+    def get(url: str, headers: Any = None, params: Any = None) -> requests.Response:
+        if url == "https://ghcr.io/token":
+            assert params == {"service": "ghcr.io", "scope": "repository:o/i:pull"}
+            return response(url, 200, {"token": "T"})
+        if auth and headers != {"Authorization": "Bearer T"}:
+            challenge = 'Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:o/i:pull"'
+            return response(url, 401, **{"www-authenticate": challenge})
+        body, link = pages[url.removeprefix("https://ghcr.io/v2/o/i/tags/list")]
+        return response(url, 200, body, link=link)
+
+    monkeypatch.setattr(cs.requests, "get", get)
+    tags = cs.Builder.get_docker_tag_records("ghcr.io/o/i")
+    assert tags == [{"name": "1.0"}, {"name": "latest"}, {"name": "1.1-arm64"}]
+    assert cs.select_last_version_tag(tags, "ghcr.io/o/i") == ("1.0", "1.0")

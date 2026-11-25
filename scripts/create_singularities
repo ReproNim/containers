@@ -40,7 +40,9 @@
 #    scripts/create_singularities poldracklab/ds003-example bids/validator
 #
 #    will consider only two images - one for poldracklab and another one
-#    bids/validator, the other ones will be reported skipped
+#    bids/validator, the other ones will be reported skipped.
+#    Images from registries other than Docker Hub are specified with the
+#    registry, e.g. ghcr.io/unfmontreal/skullduggery
 #
 #  - you can use --image-groups/-i to specify specific groups or images to build:
 #
@@ -65,6 +67,7 @@ import subprocess
 import sys
 from time import sleep
 from typing import Any, Optional, cast
+from urllib.parse import urljoin
 import requests
 
 import datalad.api as dl
@@ -213,7 +216,11 @@ class Builder:
 
     @staticmethod
     def get_docker_tag_records(dh: str) -> list[dict[str, Any]]:
-        """Return records for the (most recent) tags of `dh` on Docker Hub"""
+        """Return records for the (most recent) tags of `dh` on Docker Hub,
+        or for all the tags if `dh` is in another registry (see below)"""
+        # as docker does, take first component with "." for a registry
+        if "." in dh.split("/", 1)[0]:
+            return get_oci_tag_records(dh)
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
         return cast("list[dict[str, Any]]", r.json()["results"])
 
@@ -518,7 +525,8 @@ class Builder:
             -> None:
         dockerhubid = githubid.lower()
         if not family:
-            family = dockerhubid.split('/', 1)[0]
+            # owner, also for the ones with registry (e.g. ghcr.io/owner/name)
+            family = dockerhubid.rsplit('/', 1)[0].rsplit('/', 1)[-1]
         if self.githubids and githubid not in self.githubids:
             log.info("skip %s", githubid)
             return
@@ -768,7 +776,7 @@ def version_key(vstr: str) -> tuple[int, tuple[int, ...], str]:
 
 # Use familysuf to add smth like "LTS" or alike
 def get_familyname(repoid: str, family: str, familysuf: Optional[str]=None) -> str:
-    name = re.sub(r"^[^/]*/", "", repoid)
+    name = repoid.rsplit("/", 1)[-1]
     # sanitize for datalad not allowing _ in the container names
     name = name.replace("_", "-")
     familyname = f"{family}-{name}"
@@ -857,6 +865,10 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         # LTS releases for some bids-apps. TODO later may be: check for having ALL versions
         builder.generate_singularity_for_docker_image("nipreps/fmriprep", version_regex=r"^v?20\.2\.[0-9]+$", family="bids", familysuf="20-2")
 
+    # BIDS apps not on Docker Hub, thus not (yet) listed in apps.yml above
+    if should_build('bids-apps', 'ghcr.io/unfmontreal/skullduggery'):
+        builder.generate_singularity_for_docker_image("ghcr.io/unfmontreal/skullduggery", "bids")
+
     # validator is not bids-app but we will stick it along with bids
     if should_build('bids-apps', 'bids/validator'):
         builder.generate_singularity_for_docker_image("bids/validator")
@@ -909,11 +921,35 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
         builder.runcmd("datalad", "push", "--data=auto")  # so we share with the world
 
 
-def retry_get(url: str) -> requests.Response:
+def get_oci_tag_records(ref: str) -> list[dict[str, Any]]:
+    """Return records for all tags of `ref` (e.g. ghcr.io/owner/name) in an
+    OCI registry.  They tell no architectures, so those are judged only by
+    the suffixes of the tags."""
+    registry, repo = ref.split("/", 1)
+    url = f"https://{registry}/v2/{repo}/tags/list"
+    headers = {}
+    try:
+        r = retry_get(url)
+    except requests.HTTPError as e:
+        if e.response is None or e.response.status_code != 401:
+            raise
+        # get anonymous token as the registry (e.g. ghcr.io) instructs
+        params = dict(re.findall(r'(\w+)="([^"]*)"', e.response.headers["www-authenticate"]))
+        token = retry_get(params.pop("realm"), params=params).json()["token"]
+        headers["Authorization"] = f"Bearer {token}"
+        r = retry_get(url, headers=headers)
+    tags: list[str] = r.json()["tags"] or []
+    while "next" in r.links:  # could be relative
+        r = retry_get(urljoin(r.url or url, r.links["next"]["url"]), headers=headers)
+        tags += r.json()["tags"] or []
+    return [{"name": t} for t in tags]
+
+
+def retry_get(url: str, **kwargs: Any) -> requests.Response:
     sleepiter = exp_wait(attempts=10)
     while True:
         try:
-            r = requests.get(url)
+            r = requests.get(url, **kwargs)
             r.raise_for_status()
             return r
         except (requests.ConnectionError, requests.HTTPError, requests.Timeout) as e:
