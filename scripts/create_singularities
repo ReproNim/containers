@@ -873,6 +873,10 @@ def main(push: bool, image_groups: tuple[str, ...], no_singularity_check: bool, 
     if should_build('bids-apps', 'bids/validator'):
         builder.generate_singularity_for_docker_image("bids/validator")
 
+    # converter, so not a bids-app either
+    if should_build('bids-apps', 'ghcr.io/physiopy/phys2bids'):
+        builder.generate_singularity_for_docker_image("ghcr.io/physiopy/phys2bids", "bids")
+
     # Additional ones from Poldrack
     if should_build('poldrack', 'poldracklab/ds003-example'):
         builder.generate_singularity_for_docker_image("poldracklab/ds003-example")
