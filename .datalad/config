@@ -1161,3 +1161,6 @@
 [datalad "containers.neurodesk-amide"]
 	image = images/neurodesk/neurodesk-amide--1.0.6.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.bids-skullduggery"]
+	image = images/bids/bids-skullduggery--0.0.7.sif
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
