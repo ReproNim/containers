@@ -217,8 +217,8 @@ class Builder:
     @staticmethod
     def get_docker_tag_records(dh: str) -> list[dict[str, Any]]:
         """Return records for the (most recent) tags of `dh` on Docker Hub,
-        or for all the tags if `dh` is in another registry (see below)"""
-        # as docker does, take first component with "." for a registry
+        or for all tags of `dh` in another registry (e.g. ghcr.io/owner/name)"""
+        # registry host (e.g. ghcr.io) if first component has "."
         if "." in dh.split("/", 1)[0]:
             return get_oci_tag_records(dh)
         r = retry_get(f"https://registry.hub.docker.com/v2/repositories/{dh}/tags")
@@ -940,7 +940,7 @@ def get_oci_tag_records(ref: str) -> list[dict[str, Any]]:
         r = retry_get(url, headers=headers)
     tags: list[str] = r.json()["tags"] or []
     while "next" in r.links:  # could be relative
-        r = retry_get(urljoin(r.url or url, r.links["next"]["url"]), headers=headers)
+        r = retry_get(urljoin(r.url, r.links["next"]["url"]), headers=headers)
         tags += r.json()["tags"] or []
     return [{"name": t} for t in tags]
 
