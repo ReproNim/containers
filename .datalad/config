@@ -1233,3 +1233,6 @@
 [datalad "containers.neurodesk-cloudcompare"]
 	image = images/neurodesk/neurodesk-cloudcompare--2.13.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-bioformats2raw"]
+	image = images/neurodesk/neurodesk-bioformats2raw--0.14.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
