@@ -1203,3 +1203,6 @@
 [datalad "containers.neurodesk-labelme"]
 	image = images/neurodesk/neurodesk-labelme--7.11.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-isic-cli"]
+	image = images/neurodesk/neurodesk-isic-cli--12.8.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
