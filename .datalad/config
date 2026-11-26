@@ -1215,3 +1215,6 @@
 [datalad "containers.neurodesk-histoqc"]
 	image = images/neurodesk/neurodesk-histoqc--2.0.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-dicom-validator"]
+	image = images/neurodesk/neurodesk-dicom-validator--0.9.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
