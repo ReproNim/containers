@@ -1209,3 +1209,6 @@
 [datalad "containers.neurodesk-instanseg"]
 	image = images/neurodesk/neurodesk-instanseg--0.1.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-hyperspy"]
+	image = images/neurodesk/neurodesk-hyperspy--2.5.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
