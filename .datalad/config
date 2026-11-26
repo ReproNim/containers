@@ -1182,3 +1182,6 @@
 [datalad "containers.neurodesk-slideflow"]
 	image = images/neurodesk/neurodesk-slideflow--3.0.2.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-phasorpy"]
+	image = images/neurodesk/neurodesk-phasorpy--0.13.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
