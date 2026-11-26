@@ -1224,3 +1224,6 @@
 [datalad "containers.neurodesk-darktable"]
 	image = images/neurodesk/neurodesk-darktable--5.4.1.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-colour-science"]
+	image = images/neurodesk/neurodesk-colour-science--0.4.7.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
