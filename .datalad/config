@@ -1230,3 +1230,6 @@
 [datalad "containers.neurodesk-colmap"]
 	image = images/neurodesk/neurodesk-colmap--3.12.6.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-cloudcompare"]
+	image = images/neurodesk/neurodesk-cloudcompare--2.13.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
