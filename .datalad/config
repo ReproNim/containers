@@ -1218,3 +1218,6 @@
 [datalad "containers.neurodesk-dicom-validator"]
 	image = images/neurodesk/neurodesk-dicom-validator--0.9.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-dentateseg"]
+	image = images/neurodesk/neurodesk-dentateseg--0.3.2.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
