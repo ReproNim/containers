@@ -1188,3 +1188,6 @@
 [datalad "containers.neurodesk-open3d"]
 	image = images/neurodesk/neurodesk-open3d--0.20.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-octproz"]
+	image = images/neurodesk/neurodesk-octproz--1.8.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
