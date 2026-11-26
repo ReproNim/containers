@@ -1167,3 +1167,6 @@
 [datalad "containers.neurodesk-wsidicomizer"]
 	image = images/neurodesk/neurodesk-wsidicomizer--0.32.0.simg
 	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
+[datalad "containers.neurodesk-valis"]
+	image = images/neurodesk/neurodesk-valis--1.2.0.simg
+	cmdexec = {img_dspath}/scripts/singularity_cmd run {img} {cmd}
